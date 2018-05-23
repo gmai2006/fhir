@@ -38,7 +38,7 @@ public interface MeasureReportDao {
   public MeasureReport create(MeasureReport e);
 
   public MeasureReport update(MeasureReport e);
-  public void delete(MeasureReport e);
+  public void delete(String id);
 
   public List<MeasureReport> findByField(QueryBuilder queryBuilder);
 

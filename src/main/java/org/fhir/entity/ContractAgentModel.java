@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="contractagent")
 public class ContractAgentModel  implements Serializable {
-	private static final long serialVersionUID = 151910893723858489L;
+	private static final long serialVersionUID = 151967883177090065L;
   /**
   * Description: "Who or what parties are assigned roles in this Contract."
   */
@@ -46,7 +46,7 @@ public class ContractAgentModel  implements Serializable {
   private String actor_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="actor_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="actor_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> actor;
 
   /**
@@ -57,7 +57,7 @@ public class ContractAgentModel  implements Serializable {
   private String role_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="role_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="role_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> role;
 
   /**
@@ -96,23 +96,23 @@ public class ContractAgentModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ContractAgentModel() {
   }
 
-  public ContractAgentModel(ContractAgent o, String parentId) {
-  	this.parent_id = parentId;
+  public ContractAgentModel(ContractAgent o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getActor() ) {
-    	this.actor_id = "actor" + this.parent_id;
+    	this.actor_id = "actor" + this.id;
     	this.actor = ReferenceHelper.toModel(o.getActor(), this.actor_id);
     }
     if (null != o.getRole() && !o.getRole().isEmpty()) {
-    	this.role_id = "role" + this.parent_id;
+    	this.role_id = "role" + this.id;
     	this.role = CodeableConceptHelper.toModelFromArray(o.getRole(), this.role_id);
     }
     if (null != o.getModifierExtension()) {
@@ -153,11 +153,11 @@ public class ContractAgentModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -167,7 +167,7 @@ public class ContractAgentModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -179,7 +179,7 @@ public class ContractAgentModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

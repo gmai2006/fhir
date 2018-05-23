@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="patientanimal")
 public class PatientAnimalModel  implements Serializable {
-	private static final long serialVersionUID = 15191089372478799L;
+	private static final long serialVersionUID = 151967883177477152L;
   /**
   * Description: "Identifies the high level taxonomic categorization of the kind of animal."
   */
@@ -46,7 +46,7 @@ public class PatientAnimalModel  implements Serializable {
   private String species_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="species_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="species_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> species;
 
   /**
@@ -57,7 +57,7 @@ public class PatientAnimalModel  implements Serializable {
   private String breed_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="breed_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="breed_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> breed;
 
   /**
@@ -68,7 +68,7 @@ public class PatientAnimalModel  implements Serializable {
   private String genderstatus_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="genderstatus_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="genderstatus_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> genderStatus;
 
   /**
@@ -107,27 +107,27 @@ public class PatientAnimalModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public PatientAnimalModel() {
   }
 
-  public PatientAnimalModel(PatientAnimal o, String parentId) {
-  	this.parent_id = parentId;
+  public PatientAnimalModel(PatientAnimal o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getSpecies() ) {
-    	this.species_id = "species" + this.parent_id;
+    	this.species_id = "species" + this.id;
     	this.species = CodeableConceptHelper.toModel(o.getSpecies(), this.species_id);
     }
     if (null != o.getBreed() ) {
-    	this.breed_id = "breed" + this.parent_id;
+    	this.breed_id = "breed" + this.id;
     	this.breed = CodeableConceptHelper.toModel(o.getBreed(), this.breed_id);
     }
     if (null != o.getGenderStatus() ) {
-    	this.genderstatus_id = "genderstatus" + this.parent_id;
+    	this.genderstatus_id = "genderstatus" + this.id;
     	this.genderStatus = CodeableConceptHelper.toModel(o.getGenderStatus(), this.genderstatus_id);
     }
     if (null != o.getModifierExtension()) {
@@ -174,11 +174,11 @@ public class PatientAnimalModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -188,7 +188,7 @@ public class PatientAnimalModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -201,7 +201,7 @@ public class PatientAnimalModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

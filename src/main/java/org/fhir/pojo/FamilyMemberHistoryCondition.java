@@ -95,6 +95,9 @@ public class FamilyMemberHistoryCondition  extends BackboneElement  {
     if (null != o.getOnsetString()) {
       this.onsetString = o.getOnsetString();
     }
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
+    }
   }
 
   public void setCode( CodeableConcept value) {

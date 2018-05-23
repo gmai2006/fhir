@@ -36,7 +36,7 @@ public interface ProvenanceService {
   public List<Provenance> selectAll();
   public Provenance create(Provenance bean);
   public Provenance update(Provenance bean);
-  public void delete(Provenance bean);
+  public void delete(String id);
   public List<Provenance> findByField(QueryBuilder queryBuilder);
   public List<Provenance> findByTarget(QueryBuilder queryBuilder);
   public List<Provenance> findByLocation(QueryBuilder queryBuilder);

@@ -38,7 +38,7 @@ public interface MessageHeaderDao {
   public MessageHeader create(MessageHeader e);
 
   public MessageHeader update(MessageHeader e);
-  public void delete(MessageHeader e);
+  public void delete(String id);
 
   public List<MessageHeader> findByField(QueryBuilder queryBuilder);
 

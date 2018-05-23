@@ -36,7 +36,7 @@ public interface PlanDefinitionService {
   public List<PlanDefinition> selectAll();
   public PlanDefinition create(PlanDefinition bean);
   public PlanDefinition update(PlanDefinition bean);
-  public void delete(PlanDefinition bean);
+  public void delete(String id);
   public List<PlanDefinition> findByField(QueryBuilder queryBuilder);
   public List<PlanDefinition> findByType(QueryBuilder queryBuilder);
   public List<PlanDefinition> findByUseContext(QueryBuilder queryBuilder);

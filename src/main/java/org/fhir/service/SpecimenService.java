@@ -36,7 +36,7 @@ public interface SpecimenService {
   public List<Specimen> selectAll();
   public Specimen create(Specimen bean);
   public Specimen update(Specimen bean);
-  public void delete(Specimen bean);
+  public void delete(String id);
   public List<Specimen> findByField(QueryBuilder queryBuilder);
   public List<Specimen> findByType(QueryBuilder queryBuilder);
   public List<Specimen> findBySubject(QueryBuilder queryBuilder);

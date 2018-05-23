@@ -90,9 +90,9 @@ public class ClaimResponseDaoImpl implements ClaimResponseDao {
   }
   @Override
   @Transactional
-  public void delete(ClaimResponse e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ClaimResponseModel removed = em.find(ClaimResponseModel.class, e.getId());
+      final ClaimResponseModel removed = em.find(ClaimResponseModel.class, id);
       em.remove(removed);
   }
 

@@ -90,9 +90,9 @@ public class MessageDefinitionDaoImpl implements MessageDefinitionDao {
   }
   @Override
   @Transactional
-  public void delete(MessageDefinition e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final MessageDefinitionModel removed = em.find(MessageDefinitionModel.class, e.getId());
+      final MessageDefinitionModel removed = em.find(MessageDefinitionModel.class, id);
       em.remove(removed);
   }
 

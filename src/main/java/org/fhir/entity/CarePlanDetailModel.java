@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="careplandetail")
 public class CarePlanDetailModel  implements Serializable {
-	private static final long serialVersionUID = 151910893763772491L;
+	private static final long serialVersionUID = 151967883218058229L;
   /**
   * Description: "High-level categorization of the type of activity in a care plan."
   */
@@ -46,7 +46,7 @@ public class CarePlanDetailModel  implements Serializable {
   private String category_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> category;
 
   /**
@@ -57,7 +57,7 @@ public class CarePlanDetailModel  implements Serializable {
   private String definition_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="definition_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="definition_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> definition;
 
   /**
@@ -68,7 +68,7 @@ public class CarePlanDetailModel  implements Serializable {
   private String code_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> code;
 
   /**
@@ -79,7 +79,7 @@ public class CarePlanDetailModel  implements Serializable {
   private String reasoncode_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasoncode_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="reasoncode_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> reasonCode;
 
   /**
@@ -90,7 +90,7 @@ public class CarePlanDetailModel  implements Serializable {
   private String reasonreference_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasonreference_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="reasonreference_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> reasonReference;
 
   /**
@@ -101,7 +101,7 @@ public class CarePlanDetailModel  implements Serializable {
   private String goal_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="goal_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="goal_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> goal;
 
   /**
@@ -158,7 +158,7 @@ public class CarePlanDetailModel  implements Serializable {
   private String location_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="location_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="location_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> location;
 
   /**
@@ -169,7 +169,7 @@ public class CarePlanDetailModel  implements Serializable {
   private String performer_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="performer_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="performer_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> performer;
 
   /**
@@ -180,7 +180,7 @@ public class CarePlanDetailModel  implements Serializable {
   private String productcodeableconcept_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="productcodeableconcept_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="productcodeableconcept_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> productCodeableConcept;
 
   /**
@@ -191,7 +191,7 @@ public class CarePlanDetailModel  implements Serializable {
   private String productreference_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="productreference_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="productreference_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> productReference;
 
   /**
@@ -202,7 +202,7 @@ public class CarePlanDetailModel  implements Serializable {
   private String dailyamount_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="dailyamount_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="dailyamount_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> dailyAmount;
 
   /**
@@ -213,7 +213,7 @@ public class CarePlanDetailModel  implements Serializable {
   private String quantity_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="quantity_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="quantity_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> quantity;
 
   /**
@@ -259,39 +259,39 @@ public class CarePlanDetailModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public CarePlanDetailModel() {
   }
 
-  public CarePlanDetailModel(CarePlanDetail o, String parentId) {
-  	this.parent_id = parentId;
+  public CarePlanDetailModel(CarePlanDetail o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getCategory() ) {
-    	this.category_id = "category" + this.parent_id;
+    	this.category_id = "category" + this.id;
     	this.category = CodeableConceptHelper.toModel(o.getCategory(), this.category_id);
     }
     if (null != o.getDefinition() ) {
-    	this.definition_id = "definition" + this.parent_id;
+    	this.definition_id = "definition" + this.id;
     	this.definition = ReferenceHelper.toModel(o.getDefinition(), this.definition_id);
     }
     if (null != o.getCode() ) {
-    	this.code_id = "code" + this.parent_id;
+    	this.code_id = "code" + this.id;
     	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
     }
     if (null != o.getReasonCode() && !o.getReasonCode().isEmpty()) {
-    	this.reasoncode_id = "reasoncode" + this.parent_id;
+    	this.reasoncode_id = "reasoncode" + this.id;
     	this.reasonCode = CodeableConceptHelper.toModelFromArray(o.getReasonCode(), this.reasoncode_id);
     }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
-    	this.reasonreference_id = "reasonreference" + this.parent_id;
+    	this.reasonreference_id = "reasonreference" + this.id;
     	this.reasonReference = ReferenceHelper.toModelFromArray(o.getReasonReference(), this.reasonreference_id);
     }
     if (null != o.getGoal() && !o.getGoal().isEmpty()) {
-    	this.goal_id = "goal" + this.parent_id;
+    	this.goal_id = "goal" + this.id;
     	this.goal = ReferenceHelper.toModelFromArray(o.getGoal(), this.goal_id);
     }
     this.status = o.getStatus();
@@ -305,27 +305,27 @@ public class CarePlanDetailModel  implements Serializable {
     }
     this.scheduledString = o.getScheduledString();
     if (null != o.getLocation() ) {
-    	this.location_id = "location" + this.parent_id;
+    	this.location_id = "location" + this.id;
     	this.location = ReferenceHelper.toModel(o.getLocation(), this.location_id);
     }
     if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
-    	this.performer_id = "performer" + this.parent_id;
+    	this.performer_id = "performer" + this.id;
     	this.performer = ReferenceHelper.toModelFromArray(o.getPerformer(), this.performer_id);
     }
     if (null != o.getProductCodeableConcept() ) {
-    	this.productcodeableconcept_id = "productcodeableconcept" + this.parent_id;
+    	this.productcodeableconcept_id = "productcodeableconcept" + this.id;
     	this.productCodeableConcept = CodeableConceptHelper.toModel(o.getProductCodeableConcept(), this.productcodeableconcept_id);
     }
     if (null != o.getProductReference() ) {
-    	this.productreference_id = "productreference" + this.parent_id;
+    	this.productreference_id = "productreference" + this.id;
     	this.productReference = ReferenceHelper.toModel(o.getProductReference(), this.productreference_id);
     }
     if (null != o.getDailyAmount() ) {
-    	this.dailyamount_id = "dailyamount" + this.parent_id;
+    	this.dailyamount_id = "dailyamount" + this.id;
     	this.dailyAmount = QuantityHelper.toModel(o.getDailyAmount(), this.dailyamount_id);
     }
     if (null != o.getQuantity() ) {
-    	this.quantity_id = "quantity" + this.parent_id;
+    	this.quantity_id = "quantity" + this.id;
     	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
     }
     this.description = o.getDescription();
@@ -469,11 +469,11 @@ public class CarePlanDetailModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -490,7 +490,7 @@ public class CarePlanDetailModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -519,7 +519,7 @@ public class CarePlanDetailModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

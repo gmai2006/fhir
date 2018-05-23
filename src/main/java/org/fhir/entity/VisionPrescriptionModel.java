@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="visionprescription")
 public class VisionPrescriptionModel  implements Serializable {
-	private static final long serialVersionUID = 151910893774611871L;
+	private static final long serialVersionUID = 151967883229788192L;
   /**
   * Description: "This is a VisionPrescription resource"
   */
@@ -71,7 +71,7 @@ public class VisionPrescriptionModel  implements Serializable {
   private String patient_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="patient_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="patient_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> patient;
 
   /**
@@ -82,7 +82,7 @@ public class VisionPrescriptionModel  implements Serializable {
   private String encounter_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="encounter_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="encounter_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> encounter;
 
   /**
@@ -101,7 +101,7 @@ public class VisionPrescriptionModel  implements Serializable {
   private String prescriber_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="prescriber_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="prescriber_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> prescriber;
 
   /**
@@ -112,7 +112,7 @@ public class VisionPrescriptionModel  implements Serializable {
   private String reasoncodeableconcept_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasoncodeableconcept_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="reasoncodeableconcept_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> reasonCodeableConcept;
 
   /**
@@ -123,7 +123,7 @@ public class VisionPrescriptionModel  implements Serializable {
   private String reasonreference_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasonreference_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="reasonreference_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> reasonReference;
 
   /**
@@ -134,7 +134,7 @@ public class VisionPrescriptionModel  implements Serializable {
   private String dispense_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="dispense_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="dispense_id", insertable=false, updatable=false)
   private java.util.List<VisionPrescriptionDispenseModel> dispense;
 
   /**
@@ -146,7 +146,7 @@ public class VisionPrescriptionModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -200,7 +200,7 @@ public class VisionPrescriptionModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

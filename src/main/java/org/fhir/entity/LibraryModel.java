@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="library")
 public class LibraryModel  implements Serializable {
-	private static final long serialVersionUID = 15191089374324206L;
+	private static final long serialVersionUID = 151967883197753899L;
   /**
   * Description: "This is a Library resource"
   */
@@ -105,7 +105,7 @@ public class LibraryModel  implements Serializable {
   private String type_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> type;
 
   /**
@@ -177,7 +177,7 @@ public class LibraryModel  implements Serializable {
   private String usecontext_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="usecontext_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="usecontext_id", insertable=false, updatable=false)
   private java.util.List<UsageContextModel> useContext;
 
   /**
@@ -188,7 +188,7 @@ public class LibraryModel  implements Serializable {
   private String jurisdiction_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="jurisdiction_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="jurisdiction_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> jurisdiction;
 
   /**
@@ -199,7 +199,7 @@ public class LibraryModel  implements Serializable {
   private String topic_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="topic_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="topic_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> topic;
 
   /**
@@ -210,7 +210,7 @@ public class LibraryModel  implements Serializable {
   private String contributor_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="contributor_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="contributor_id", insertable=false, updatable=false)
   private java.util.List<ContributorModel> contributor;
 
   /**
@@ -221,7 +221,7 @@ public class LibraryModel  implements Serializable {
   private String contact_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="contact_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="contact_id", insertable=false, updatable=false)
   private java.util.List<ContactDetailModel> contact;
 
   /**
@@ -239,7 +239,7 @@ public class LibraryModel  implements Serializable {
   private String relatedartifact_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="relatedartifact_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="relatedartifact_id", insertable=false, updatable=false)
   private java.util.List<RelatedArtifactModel> relatedArtifact;
 
   /**
@@ -259,7 +259,7 @@ public class LibraryModel  implements Serializable {
   private String datarequirement_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="datarequirement_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="datarequirement_id", insertable=false, updatable=false)
   private java.util.List<DataRequirementModel> dataRequirement;
 
   /**
@@ -280,7 +280,7 @@ public class LibraryModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -334,7 +334,7 @@ public class LibraryModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

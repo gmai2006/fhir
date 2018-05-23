@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class BodySiteResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public BodySite create(BodySite obj) {
-		return this.service.create(obj);
+	public BodySite createOrUpdate(BodySite obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing BodySite
+   * @param obj - instance of BodySite
+   * @return BodySite
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public BodySite update( BodySite obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing BodySite
+   * @param obj - instance of BodySite
+   * @return BodySite
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get BodySite by its ID
+   * @param id - instance of BodySite
+   * @return BodySite
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class BodySiteResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all BodySite with limit of returned records
+   * @param max - number of records
+   * @return a list BodySite
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class BodySiteResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query BodySite based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of BodySite
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class BodySiteResource {
   }
 
   /**
-  * Descr: Patient to whom bodysite belongs
-  * Type: reference
+   * Query BodySite by composite fields
+   * Descr: Patient to whom bodysite belongs
+   * Type: reference
   */
   @GET
   @Path("patient")

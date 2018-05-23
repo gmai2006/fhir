@@ -184,8 +184,17 @@ public class Patient  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getActive()) {
       this.active = o.getActive();
+    }
+    if (o.getName() != null) {
+    	this.name = org.fhir.utils.JsonUtils.json2Array(o.getName());
+    }
+    if (o.getTelecom() != null) {
+    	this.telecom = org.fhir.utils.JsonUtils.json2Array(o.getTelecom());
     }
     if (null != o.getGender()) {
       this.gender = o.getGender();
@@ -210,6 +219,9 @@ public class Patient  extends DomainResource  {
     }
     if (null != o.getMultipleBirthInteger()) {
       this.multipleBirthInteger = o.getMultipleBirthInteger();
+    }
+    if (o.getPhoto() != null) {
+    	this.photo = org.fhir.utils.JsonUtils.json2Array(o.getPhoto());
     }
     if (null != o.getContact() && !o.getContact().isEmpty()) {
     	this.contact = PatientContactHelper.fromArray2Array(o.getContact());

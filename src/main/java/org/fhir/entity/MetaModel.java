@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="meta")
 public class MetaModel  implements Serializable {
-	private static final long serialVersionUID = 151910893728586516L;
+	private static final long serialVersionUID = 151967883181871436L;
   /**
   * Description: "The version specific identifier, as it appears in the version portion of the URL. This values changes when the resource is created, updated, or deleted."
   */
@@ -68,7 +68,7 @@ public class MetaModel  implements Serializable {
   private String security_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="security_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="security_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> security;
 
   /**
@@ -79,7 +79,7 @@ public class MetaModel  implements Serializable {
   private String tag_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="tag_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="tag_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> tag;
 
   /**
@@ -106,14 +106,14 @@ public class MetaModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public MetaModel() {
   }
 
-  public MetaModel(Meta o, String parentId) {
-  	this.parent_id = parentId;
+  public MetaModel(Meta o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -121,11 +121,11 @@ public class MetaModel  implements Serializable {
     this.lastUpdated = o.getLastUpdated();
     this.profile = org.fhir.utils.JsonUtils.toJson(o.getProfile());
     if (null != o.getSecurity() && !o.getSecurity().isEmpty()) {
-    	this.security_id = "security" + this.parent_id;
+    	this.security_id = "security" + this.id;
     	this.security = CodingHelper.toModelFromArray(o.getSecurity(), this.security_id);
     }
     if (null != o.getTag() && !o.getTag().isEmpty()) {
-    	this.tag_id = "tag" + this.parent_id;
+    	this.tag_id = "tag" + this.id;
     	this.tag = CodingHelper.toModelFromArray(o.getTag(), this.tag_id);
     }
     if (null != o.getExtension()) {
@@ -175,11 +175,11 @@ public class MetaModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -191,7 +191,7 @@ public class MetaModel  implements Serializable {
      builder.append("profile" + "->" + this.profile + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -205,7 +205,7 @@ public class MetaModel  implements Serializable {
      builder.append("tag" + "->" + this.tag + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

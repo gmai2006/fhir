@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="contractterm")
 public class ContractTermModel  implements Serializable {
-	private static final long serialVersionUID = 151910893740351448L;
+	private static final long serialVersionUID = 15196788319458687L;
   /**
   * Description: "Unique identifier for this particular Contract Provision."
   * Actual type: String;
@@ -72,7 +72,7 @@ public class ContractTermModel  implements Serializable {
   private String type_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> type;
 
   /**
@@ -83,7 +83,7 @@ public class ContractTermModel  implements Serializable {
   private String subtype_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subtype_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="subtype_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> subType;
 
   /**
@@ -94,7 +94,7 @@ public class ContractTermModel  implements Serializable {
   private String topic_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="topic_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="topic_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> topic;
 
   /**
@@ -105,7 +105,7 @@ public class ContractTermModel  implements Serializable {
   private String action_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="action_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="action_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> action;
 
   /**
@@ -116,7 +116,7 @@ public class ContractTermModel  implements Serializable {
   private String actionreason_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="actionreason_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="actionreason_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> actionReason;
 
   /**
@@ -127,7 +127,7 @@ public class ContractTermModel  implements Serializable {
   private String securitylabel_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="securitylabel_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="securitylabel_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> securityLabel;
 
   /**
@@ -138,7 +138,7 @@ public class ContractTermModel  implements Serializable {
   private String agent_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="agent_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="agent_id", insertable=false, updatable=false)
   private java.util.List<ContractAgent1Model> agent;
 
   /**
@@ -156,7 +156,7 @@ public class ContractTermModel  implements Serializable {
   private String valueditem_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valueditem_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="valueditem_id", insertable=false, updatable=false)
   private java.util.List<ContractValuedItem1Model> valuedItem;
 
   /**
@@ -167,7 +167,7 @@ public class ContractTermModel  implements Serializable {
   private String group_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="group_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="group_id", insertable=false, updatable=false)
   private java.util.List<ContractTermModel> group;
 
   /**
@@ -206,14 +206,14 @@ public class ContractTermModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ContractTermModel() {
   }
 
-  public ContractTermModel(ContractTerm o, String parentId) {
-  	this.parent_id = parentId;
+  public ContractTermModel(ContractTerm o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -225,40 +225,40 @@ public class ContractTermModel  implements Serializable {
     	this.applies = JsonUtils.toJson(o.getApplies());
     }
     if (null != o.getType() ) {
-    	this.type_id = "type" + this.parent_id;
+    	this.type_id = "type" + this.id;
     	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
     }
     if (null != o.getSubType() ) {
-    	this.subtype_id = "subtype" + this.parent_id;
+    	this.subtype_id = "subtype" + this.id;
     	this.subType = CodeableConceptHelper.toModel(o.getSubType(), this.subtype_id);
     }
     if (null != o.getTopic() && !o.getTopic().isEmpty()) {
-    	this.topic_id = "topic" + this.parent_id;
+    	this.topic_id = "topic" + this.id;
     	this.topic = ReferenceHelper.toModelFromArray(o.getTopic(), this.topic_id);
     }
     if (null != o.getAction() && !o.getAction().isEmpty()) {
-    	this.action_id = "action" + this.parent_id;
+    	this.action_id = "action" + this.id;
     	this.action = CodeableConceptHelper.toModelFromArray(o.getAction(), this.action_id);
     }
     if (null != o.getActionReason() && !o.getActionReason().isEmpty()) {
-    	this.actionreason_id = "actionreason" + this.parent_id;
+    	this.actionreason_id = "actionreason" + this.id;
     	this.actionReason = CodeableConceptHelper.toModelFromArray(o.getActionReason(), this.actionreason_id);
     }
     if (null != o.getSecurityLabel() && !o.getSecurityLabel().isEmpty()) {
-    	this.securitylabel_id = "securitylabel" + this.parent_id;
+    	this.securitylabel_id = "securitylabel" + this.id;
     	this.securityLabel = CodingHelper.toModelFromArray(o.getSecurityLabel(), this.securitylabel_id);
     }
     if (null != o.getAgent() && !o.getAgent().isEmpty()) {
-    	this.agent_id = "agent" + this.parent_id;
+    	this.agent_id = "agent" + this.id;
     	this.agent = ContractAgent1Helper.toModelFromArray(o.getAgent(), this.agent_id);
     }
     this.text = o.getText();
     if (null != o.getValuedItem() && !o.getValuedItem().isEmpty()) {
-    	this.valueditem_id = "valueditem" + this.parent_id;
+    	this.valueditem_id = "valueditem" + this.id;
     	this.valuedItem = ContractValuedItem1Helper.toModelFromArray(o.getValuedItem(), this.valueditem_id);
     }
     if (null != o.getGroup() && !o.getGroup().isEmpty()) {
-    	this.group_id = "group" + this.parent_id;
+    	this.group_id = "group" + this.id;
     	this.group = ContractTermHelper.toModelFromArray(o.getGroup(), this.group_id);
     }
     if (null != o.getModifierExtension()) {
@@ -365,11 +365,11 @@ public class ContractTermModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -383,7 +383,7 @@ public class ContractTermModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -406,7 +406,7 @@ public class ContractTermModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

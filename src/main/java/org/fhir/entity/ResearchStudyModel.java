@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="researchstudy")
 public class ResearchStudyModel  implements Serializable {
-	private static final long serialVersionUID = 151910893764280328L;
+	private static final long serialVersionUID = 151967883218513372L;
   /**
   * Description: "This is a ResearchStudy resource"
   */
@@ -70,7 +70,7 @@ public class ResearchStudyModel  implements Serializable {
   private String protocol_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="protocol_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="protocol_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> protocol;
 
   /**
@@ -81,7 +81,7 @@ public class ResearchStudyModel  implements Serializable {
   private String partof_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="partof_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="partof_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> partOf;
 
   /**
@@ -99,7 +99,7 @@ public class ResearchStudyModel  implements Serializable {
   private String category_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> category;
 
   /**
@@ -110,7 +110,7 @@ public class ResearchStudyModel  implements Serializable {
   private String focus_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="focus_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="focus_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> focus;
 
   /**
@@ -121,7 +121,7 @@ public class ResearchStudyModel  implements Serializable {
   private String contact_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="contact_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="contact_id", insertable=false, updatable=false)
   private java.util.List<ContactDetailModel> contact;
 
   /**
@@ -132,7 +132,7 @@ public class ResearchStudyModel  implements Serializable {
   private String relatedartifact_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="relatedartifact_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="relatedartifact_id", insertable=false, updatable=false)
   private java.util.List<RelatedArtifactModel> relatedArtifact;
 
   /**
@@ -143,7 +143,7 @@ public class ResearchStudyModel  implements Serializable {
   private String keyword_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="keyword_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="keyword_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> keyword;
 
   /**
@@ -154,7 +154,7 @@ public class ResearchStudyModel  implements Serializable {
   private String jurisdiction_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="jurisdiction_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="jurisdiction_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> jurisdiction;
 
   /**
@@ -172,7 +172,7 @@ public class ResearchStudyModel  implements Serializable {
   private String enrollment_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="enrollment_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="enrollment_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> enrollment;
 
   /**
@@ -192,7 +192,7 @@ public class ResearchStudyModel  implements Serializable {
   private String sponsor_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="sponsor_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="sponsor_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> sponsor;
 
   /**
@@ -203,7 +203,7 @@ public class ResearchStudyModel  implements Serializable {
   private String principalinvestigator_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="principalinvestigator_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="principalinvestigator_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> principalInvestigator;
 
   /**
@@ -214,7 +214,7 @@ public class ResearchStudyModel  implements Serializable {
   private String site_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="site_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="site_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> site;
 
   /**
@@ -225,7 +225,7 @@ public class ResearchStudyModel  implements Serializable {
   private String reasonstopped_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasonstopped_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="reasonstopped_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> reasonStopped;
 
   /**
@@ -245,7 +245,7 @@ public class ResearchStudyModel  implements Serializable {
   private String arm_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="arm_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="arm_id", insertable=false, updatable=false)
   private java.util.List<ResearchStudyArmModel> arm;
 
   /**
@@ -257,7 +257,7 @@ public class ResearchStudyModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -311,7 +311,7 @@ public class ResearchStudyModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

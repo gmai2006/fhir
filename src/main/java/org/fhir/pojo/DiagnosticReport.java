@@ -163,6 +163,9 @@ public class DiagnosticReport  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getBasedOn() && !o.getBasedOn().isEmpty()) {
     	this.basedOn = ReferenceHelper.fromArray2Array(o.getBasedOn());
     }
@@ -208,6 +211,9 @@ public class DiagnosticReport  extends DomainResource  {
     }
     if (null != o.getCodedDiagnosis() && !o.getCodedDiagnosis().isEmpty()) {
     	this.codedDiagnosis = CodeableConceptHelper.fromArray2Array(o.getCodedDiagnosis());
+    }
+    if (o.getPresentedForm() != null) {
+    	this.presentedForm = org.fhir.utils.JsonUtils.json2Array(o.getPresentedForm());
     }
   }
 

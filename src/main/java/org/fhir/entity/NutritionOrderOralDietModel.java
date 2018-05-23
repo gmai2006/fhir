@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="nutritionorderoraldiet")
 public class NutritionOrderOralDietModel  implements Serializable {
-	private static final long serialVersionUID = 151910893739711945L;
+	private static final long serialVersionUID = 151967883193940352L;
   /**
   * Description: "The kind of diet or dietary restriction such as fiber restricted diet or diabetic diet."
   */
@@ -46,7 +46,7 @@ public class NutritionOrderOralDietModel  implements Serializable {
   private String type_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> type;
 
   /**
@@ -66,7 +66,7 @@ public class NutritionOrderOralDietModel  implements Serializable {
   private String nutrient_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="nutrient_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="nutrient_id", insertable=false, updatable=false)
   private java.util.List<NutritionOrderNutrientModel> nutrient;
 
   /**
@@ -77,7 +77,7 @@ public class NutritionOrderOralDietModel  implements Serializable {
   private String texture_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="texture_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="texture_id", insertable=false, updatable=false)
   private java.util.List<NutritionOrderTextureModel> texture;
 
   /**
@@ -88,7 +88,7 @@ public class NutritionOrderOralDietModel  implements Serializable {
   private String fluidconsistencytype_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="fluidconsistencytype_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="fluidconsistencytype_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> fluidConsistencyType;
 
   /**
@@ -134,34 +134,34 @@ public class NutritionOrderOralDietModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public NutritionOrderOralDietModel() {
   }
 
-  public NutritionOrderOralDietModel(NutritionOrderOralDiet o, String parentId) {
-  	this.parent_id = parentId;
+  public NutritionOrderOralDietModel(NutritionOrderOralDiet o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getType() && !o.getType().isEmpty()) {
-    	this.type_id = "type" + this.parent_id;
+    	this.type_id = "type" + this.id;
     	this.type = CodeableConceptHelper.toModelFromArray(o.getType(), this.type_id);
     }
     if (null != o.getSchedule()) {
     	this.schedule = JsonUtils.toJson(o.getSchedule());
     }
     if (null != o.getNutrient() && !o.getNutrient().isEmpty()) {
-    	this.nutrient_id = "nutrient" + this.parent_id;
+    	this.nutrient_id = "nutrient" + this.id;
     	this.nutrient = NutritionOrderNutrientHelper.toModelFromArray(o.getNutrient(), this.nutrient_id);
     }
     if (null != o.getTexture() && !o.getTexture().isEmpty()) {
-    	this.texture_id = "texture" + this.parent_id;
+    	this.texture_id = "texture" + this.id;
     	this.texture = NutritionOrderTextureHelper.toModelFromArray(o.getTexture(), this.texture_id);
     }
     if (null != o.getFluidConsistencyType() && !o.getFluidConsistencyType().isEmpty()) {
-    	this.fluidconsistencytype_id = "fluidconsistencytype" + this.parent_id;
+    	this.fluidconsistencytype_id = "fluidconsistencytype" + this.id;
     	this.fluidConsistencyType = CodeableConceptHelper.toModelFromArray(o.getFluidConsistencyType(), this.fluidconsistencytype_id);
     }
     this.instruction = o.getInstruction();
@@ -227,11 +227,11 @@ public class NutritionOrderOralDietModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -243,7 +243,7 @@ public class NutritionOrderOralDietModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -259,7 +259,7 @@ public class NutritionOrderOralDietModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

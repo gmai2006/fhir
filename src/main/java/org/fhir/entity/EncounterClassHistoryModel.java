@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="encounterclasshistory")
 public class EncounterClassHistoryModel  implements Serializable {
-	private static final long serialVersionUID = 151910893745083021L;
+	private static final long serialVersionUID = 151967883199631033L;
   /**
   * Description: "inpatient | outpatient | ambulatory | emergency +."
   */
@@ -46,7 +46,7 @@ public class EncounterClassHistoryModel  implements Serializable {
   private String fhirclass_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="fhirclass_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="fhirclass_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> FHIRclass;
 
   /**
@@ -95,19 +95,19 @@ public class EncounterClassHistoryModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public EncounterClassHistoryModel() {
   }
 
-  public EncounterClassHistoryModel(EncounterClassHistory o, String parentId) {
-  	this.parent_id = parentId;
+  public EncounterClassHistoryModel(EncounterClassHistory o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getFHIRclass() ) {
-    	this.fhirclass_id = "fhirclass" + this.parent_id;
+    	this.fhirclass_id = "fhirclass" + this.id;
     	this.FHIRclass = CodingHelper.toModel(o.getFHIRclass(), this.fhirclass_id);
     }
     if (null != o.getPeriod()) {
@@ -151,11 +151,11 @@ public class EncounterClassHistoryModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -166,7 +166,7 @@ public class EncounterClassHistoryModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -178,7 +178,7 @@ public class EncounterClassHistoryModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

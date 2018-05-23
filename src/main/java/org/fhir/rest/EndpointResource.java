@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class EndpointResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Endpoint create(Endpoint obj) {
-		return this.service.create(obj);
+	public Endpoint createOrUpdate(Endpoint obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing Endpoint
+   * @param obj - instance of Endpoint
+   * @return Endpoint
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public Endpoint update( Endpoint obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing Endpoint
+   * @param obj - instance of Endpoint
+   * @return Endpoint
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get Endpoint by its ID
+   * @param id - instance of Endpoint
+   * @return Endpoint
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class EndpointResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all Endpoint with limit of returned records
+   * @param max - number of records
+   * @return a list Endpoint
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class EndpointResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query Endpoint based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of Endpoint
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class EndpointResource {
   }
 
   /**
-  * Descr: The organization that is managing the endpoint
-  * Type: reference
+   * Query Endpoint by composite fields
+   * Descr: The organization that is managing the endpoint
+   * Type: reference
   */
   @GET
   @Path("organization")
@@ -167,8 +208,9 @@ public class EndpointResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The type of content that may be used at this endpoint (e.g. XDS Discharge summaries)
-  * Type: token
+   * Query Endpoint by composite fields
+   * Descr: The type of content that may be used at this endpoint (e.g. XDS Discharge summaries)
+   * Type: token
   */
   @GET
   @Path("payloadtype")

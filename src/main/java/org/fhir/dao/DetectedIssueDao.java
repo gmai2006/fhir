@@ -38,7 +38,7 @@ public interface DetectedIssueDao {
   public DetectedIssue create(DetectedIssue e);
 
   public DetectedIssue update(DetectedIssue e);
-  public void delete(DetectedIssue e);
+  public void delete(String id);
 
   public List<DetectedIssue> findByField(QueryBuilder queryBuilder);
 

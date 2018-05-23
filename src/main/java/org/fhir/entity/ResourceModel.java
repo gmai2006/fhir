@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="resource")
 public class ResourceModel  implements Serializable {
-	private static final long serialVersionUID = 151910893753975304L;
+	private static final long serialVersionUID = 15196788320859437L;
   /**
   * Description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
   */
@@ -55,7 +55,7 @@ public class ResourceModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

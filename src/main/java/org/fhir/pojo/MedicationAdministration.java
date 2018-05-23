@@ -178,6 +178,9 @@ public class MedicationAdministration  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
     	this.definition = ReferenceHelper.fromArray2Array(o.getDefinition());
     }
@@ -229,6 +232,9 @@ public class MedicationAdministration  extends DomainResource  {
     }
     if (null != o.getDevice() && !o.getDevice().isEmpty()) {
     	this.device = ReferenceHelper.fromArray2Array(o.getDevice());
+    }
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
     }
     if (null != o.getDosage() && !o.getDosage().isEmpty()) {
       this.dosage = new MedicationAdministrationDosage(o.getDosage().get(0));

@@ -97,12 +97,9 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
 
   @Override
   @Transactional
-  public void delete(CommunicationRequest bean) {
-  	requireNonNull(bean);
-    logger.info("delete(CommunicationRequest={}) - entered bean");
-
-    dao.delete(bean);
-
+  public void delete(String id) {
+    logger.info("delete(CommunicationRequest={}) - entered id " + id);
+    dao.delete(id);
     logger.info("delete(CommunicationRequest) - exited - return value={} result ");
   }
 

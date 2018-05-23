@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class AuditEventResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public AuditEvent create(AuditEvent obj) {
-		return this.service.create(obj);
+	public AuditEvent createOrUpdate(AuditEvent obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing AuditEvent
+   * @param obj - instance of AuditEvent
+   * @return AuditEvent
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public AuditEvent update( AuditEvent obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing AuditEvent
+   * @param obj - instance of AuditEvent
+   * @return AuditEvent
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get AuditEvent by its ID
+   * @param id - instance of AuditEvent
+   * @return AuditEvent
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class AuditEventResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all AuditEvent with limit of returned records
+   * @param max - number of records
+   * @return a list AuditEvent
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class AuditEventResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query AuditEvent based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of AuditEvent
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class AuditEventResource {
   }
 
   /**
-  * Descr: Type/identifier of event
-  * Type: token
+   * Query AuditEvent by composite fields
+   * Descr: Type/identifier of event
+   * Type: token
   */
   @GET
   @Path("type")
@@ -167,8 +208,9 @@ public class AuditEventResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: More specific type/id for the event
-  * Type: token
+   * Query AuditEvent by composite fields
+   * Descr: More specific type/id for the event
+   * Type: token
   */
   @GET
   @Path("subtype")

@@ -38,7 +38,7 @@ public interface QuestionnaireResponseDao {
   public QuestionnaireResponse create(QuestionnaireResponse e);
 
   public QuestionnaireResponse update(QuestionnaireResponse e);
-  public void delete(QuestionnaireResponse e);
+  public void delete(String id);
 
   public List<QuestionnaireResponse> findByField(QueryBuilder queryBuilder);
 

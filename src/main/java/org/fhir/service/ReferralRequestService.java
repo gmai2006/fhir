@@ -36,7 +36,7 @@ public interface ReferralRequestService {
   public List<ReferralRequest> selectAll();
   public ReferralRequest create(ReferralRequest bean);
   public ReferralRequest update(ReferralRequest bean);
-  public void delete(ReferralRequest bean);
+  public void delete(String id);
   public List<ReferralRequest> findByField(QueryBuilder queryBuilder);
   public List<ReferralRequest> findByDefinition(QueryBuilder queryBuilder);
   public List<ReferralRequest> findByBasedOn(QueryBuilder queryBuilder);

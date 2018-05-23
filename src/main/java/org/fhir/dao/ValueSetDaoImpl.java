@@ -90,9 +90,9 @@ public class ValueSetDaoImpl implements ValueSetDao {
   }
   @Override
   @Transactional
-  public void delete(ValueSet e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ValueSetModel removed = em.find(ValueSetModel.class, e.getId());
+      final ValueSetModel removed = em.find(ValueSetModel.class, id);
       em.remove(removed);
   }
 

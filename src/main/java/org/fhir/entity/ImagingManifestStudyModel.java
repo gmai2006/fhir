@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="imagingmanifeststudy")
 public class ImagingManifestStudyModel  implements Serializable {
-	private static final long serialVersionUID = 151910893759795284L;
+	private static final long serialVersionUID = 151967883214116791L;
   /**
   * Description: "Study instance UID of the SOP instances in the selection."
   */
@@ -54,7 +54,7 @@ public class ImagingManifestStudyModel  implements Serializable {
   private String imagingstudy_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="imagingstudy_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="imagingstudy_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> imagingStudy;
 
   /**
@@ -65,7 +65,7 @@ public class ImagingManifestStudyModel  implements Serializable {
   private String endpoint_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="endpoint_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="endpoint_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> endpoint;
 
   /**
@@ -76,7 +76,7 @@ public class ImagingManifestStudyModel  implements Serializable {
   private String series_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="series_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="series_id", insertable=false, updatable=false)
   private java.util.List<ImagingManifestSeriesModel> series;
 
   /**
@@ -115,28 +115,28 @@ public class ImagingManifestStudyModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ImagingManifestStudyModel() {
   }
 
-  public ImagingManifestStudyModel(ImagingManifestStudy o, String parentId) {
-  	this.parent_id = parentId;
+  public ImagingManifestStudyModel(ImagingManifestStudy o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     this.uid = o.getUid();
     if (null != o.getImagingStudy() ) {
-    	this.imagingstudy_id = "imagingstudy" + this.parent_id;
+    	this.imagingstudy_id = "imagingstudy" + this.id;
     	this.imagingStudy = ReferenceHelper.toModel(o.getImagingStudy(), this.imagingstudy_id);
     }
     if (null != o.getEndpoint() && !o.getEndpoint().isEmpty()) {
-    	this.endpoint_id = "endpoint" + this.parent_id;
+    	this.endpoint_id = "endpoint" + this.id;
     	this.endpoint = ReferenceHelper.toModelFromArray(o.getEndpoint(), this.endpoint_id);
     }
     if (null != o.getSeries() && !o.getSeries().isEmpty()) {
-    	this.series_id = "series" + this.parent_id;
+    	this.series_id = "series" + this.id;
     	this.series = ImagingManifestSeriesHelper.toModelFromArray(o.getSeries(), this.series_id);
     }
     if (null != o.getModifierExtension()) {
@@ -189,11 +189,11 @@ public class ImagingManifestStudyModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -204,7 +204,7 @@ public class ImagingManifestStudyModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -218,7 +218,7 @@ public class ImagingManifestStudyModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

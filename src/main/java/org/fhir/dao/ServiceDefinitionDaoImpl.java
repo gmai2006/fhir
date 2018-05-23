@@ -90,9 +90,9 @@ public class ServiceDefinitionDaoImpl implements ServiceDefinitionDao {
   }
   @Override
   @Transactional
-  public void delete(ServiceDefinition e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ServiceDefinitionModel removed = em.find(ServiceDefinitionModel.class, e.getId());
+      final ServiceDefinitionModel removed = em.find(ServiceDefinitionModel.class, id);
       em.remove(removed);
   }
 

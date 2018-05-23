@@ -120,6 +120,9 @@ public class Subscription  extends DomainResource  {
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
+    if (o.getContact() != null) {
+    	this.contact = org.fhir.utils.JsonUtils.json2Array(o.getContact());
+    }
     if (null != o.getEnd()) {
       this.end = o.getEnd();
     }

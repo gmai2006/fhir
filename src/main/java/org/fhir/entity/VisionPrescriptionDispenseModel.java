@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="visionprescriptiondispense")
 public class VisionPrescriptionDispenseModel  implements Serializable {
-	private static final long serialVersionUID = 151910893770787080L;
+	private static final long serialVersionUID = 151967883224964065L;
   /**
   * Description: "Identifies the type of vision correction product which is required for the patient."
   */
@@ -46,7 +46,7 @@ public class VisionPrescriptionDispenseModel  implements Serializable {
   private String product_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="product_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="product_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> product;
 
   /**
@@ -135,7 +135,7 @@ public class VisionPrescriptionDispenseModel  implements Serializable {
   private String duration_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="duration_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="duration_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> duration;
 
   /**
@@ -197,19 +197,19 @@ public class VisionPrescriptionDispenseModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public VisionPrescriptionDispenseModel() {
   }
 
-  public VisionPrescriptionDispenseModel(VisionPrescriptionDispense o, String parentId) {
-  	this.parent_id = parentId;
+  public VisionPrescriptionDispenseModel(VisionPrescriptionDispense o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getProduct() ) {
-    	this.product_id = "product" + this.parent_id;
+    	this.product_id = "product" + this.id;
     	this.product = CodeableConceptHelper.toModel(o.getProduct(), this.product_id);
     }
     this.eye = o.getEye();
@@ -223,7 +223,7 @@ public class VisionPrescriptionDispenseModel  implements Serializable {
     this.backCurve = o.getBackCurve();
     this.diameter = o.getDiameter();
     if (null != o.getDuration() ) {
-    	this.duration_id = "duration" + this.parent_id;
+    	this.duration_id = "duration" + this.id;
     	this.duration = QuantityHelper.toModel(o.getDuration(), this.duration_id);
     }
     this.color = o.getColor();
@@ -347,11 +347,11 @@ public class VisionPrescriptionDispenseModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -374,7 +374,7 @@ public class VisionPrescriptionDispenseModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -399,7 +399,7 @@ public class VisionPrescriptionDispenseModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

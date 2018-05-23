@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="processresponse")
 public class ProcessResponseModel  implements Serializable {
-	private static final long serialVersionUID = 151910893734745115L;
+	private static final long serialVersionUID = 151967883188945969L;
   /**
   * Description: "This is a ProcessResponse resource"
   */
@@ -79,7 +79,7 @@ public class ProcessResponseModel  implements Serializable {
   private String organization_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="organization_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="organization_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> organization;
 
   /**
@@ -90,7 +90,7 @@ public class ProcessResponseModel  implements Serializable {
   private String request_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="request_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="request_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> request;
 
   /**
@@ -101,7 +101,7 @@ public class ProcessResponseModel  implements Serializable {
   private String outcome_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="outcome_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="outcome_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> outcome;
 
   /**
@@ -119,7 +119,7 @@ public class ProcessResponseModel  implements Serializable {
   private String requestprovider_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="requestprovider_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="requestprovider_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> requestProvider;
 
   /**
@@ -130,7 +130,7 @@ public class ProcessResponseModel  implements Serializable {
   private String requestorganization_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="requestorganization_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="requestorganization_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> requestOrganization;
 
   /**
@@ -141,7 +141,7 @@ public class ProcessResponseModel  implements Serializable {
   private String form_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="form_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="form_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> form;
 
   /**
@@ -152,7 +152,7 @@ public class ProcessResponseModel  implements Serializable {
   private String processnote_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="processnote_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="processnote_id", insertable=false, updatable=false)
   private java.util.List<ProcessResponseProcessNoteModel> processNote;
 
   /**
@@ -163,7 +163,7 @@ public class ProcessResponseModel  implements Serializable {
   private String error_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="error_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="error_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> error;
 
   /**
@@ -174,7 +174,7 @@ public class ProcessResponseModel  implements Serializable {
   private String communicationrequest_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="communicationrequest_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="communicationrequest_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> communicationRequest;
 
   /**
@@ -186,7 +186,7 @@ public class ProcessResponseModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -240,7 +240,7 @@ public class ProcessResponseModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

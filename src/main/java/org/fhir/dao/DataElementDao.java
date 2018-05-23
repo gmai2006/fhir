@@ -38,7 +38,7 @@ public interface DataElementDao {
   public DataElement create(DataElement e);
 
   public DataElement update(DataElement e);
-  public void delete(DataElement e);
+  public void delete(String id);
 
   public List<DataElement> findByField(QueryBuilder queryBuilder);
 

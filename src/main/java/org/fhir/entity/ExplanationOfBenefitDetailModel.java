@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="explanationofbenefitdetail")
 public class ExplanationOfBenefitDetailModel  implements Serializable {
-	private static final long serialVersionUID = 1519108936981131L;
+	private static final long serialVersionUID = 151967883149589146L;
   /**
   * Description: "A service line number."
   */
@@ -54,7 +54,7 @@ public class ExplanationOfBenefitDetailModel  implements Serializable {
   private String type_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> type;
 
   /**
@@ -65,7 +65,7 @@ public class ExplanationOfBenefitDetailModel  implements Serializable {
   private String revenue_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="revenue_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="revenue_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> revenue;
 
   /**
@@ -76,7 +76,7 @@ public class ExplanationOfBenefitDetailModel  implements Serializable {
   private String category_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> category;
 
   /**
@@ -87,7 +87,7 @@ public class ExplanationOfBenefitDetailModel  implements Serializable {
   private String service_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="service_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="service_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> service;
 
   /**
@@ -98,7 +98,7 @@ public class ExplanationOfBenefitDetailModel  implements Serializable {
   private String modifier_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="modifier_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="modifier_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> modifier;
 
   /**
@@ -109,7 +109,7 @@ public class ExplanationOfBenefitDetailModel  implements Serializable {
   private String programcode_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="programcode_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="programcode_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> programCode;
 
   /**
@@ -120,7 +120,7 @@ public class ExplanationOfBenefitDetailModel  implements Serializable {
   private String quantity_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="quantity_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="quantity_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> quantity;
 
   /**
@@ -131,7 +131,7 @@ public class ExplanationOfBenefitDetailModel  implements Serializable {
   private String unitprice_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="unitprice_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="unitprice_id", insertable=false, updatable=false)
   private java.util.List<MoneyModel> unitPrice;
 
   /**
@@ -150,7 +150,7 @@ public class ExplanationOfBenefitDetailModel  implements Serializable {
   private String net_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="net_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="net_id", insertable=false, updatable=false)
   private java.util.List<MoneyModel> net;
 
   /**
@@ -161,7 +161,7 @@ public class ExplanationOfBenefitDetailModel  implements Serializable {
   private String udi_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="udi_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="udi_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> udi;
 
   /**
@@ -179,7 +179,7 @@ public class ExplanationOfBenefitDetailModel  implements Serializable {
   private String adjudication_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="adjudication_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="adjudication_id", insertable=false, updatable=false)
   private java.util.List<ExplanationOfBenefitAdjudicationModel> adjudication;
 
   /**
@@ -190,7 +190,7 @@ public class ExplanationOfBenefitDetailModel  implements Serializable {
   private String subdetail_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subdetail_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="subdetail_id", insertable=false, updatable=false)
   private java.util.List<ExplanationOfBenefitSubDetailModel> subDetail;
 
   /**
@@ -229,66 +229,66 @@ public class ExplanationOfBenefitDetailModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ExplanationOfBenefitDetailModel() {
   }
 
-  public ExplanationOfBenefitDetailModel(ExplanationOfBenefitDetail o, String parentId) {
-  	this.parent_id = parentId;
+  public ExplanationOfBenefitDetailModel(ExplanationOfBenefitDetail o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     this.sequence = o.getSequence();
     if (null != o.getType() ) {
-    	this.type_id = "type" + this.parent_id;
+    	this.type_id = "type" + this.id;
     	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
     }
     if (null != o.getRevenue() ) {
-    	this.revenue_id = "revenue" + this.parent_id;
+    	this.revenue_id = "revenue" + this.id;
     	this.revenue = CodeableConceptHelper.toModel(o.getRevenue(), this.revenue_id);
     }
     if (null != o.getCategory() ) {
-    	this.category_id = "category" + this.parent_id;
+    	this.category_id = "category" + this.id;
     	this.category = CodeableConceptHelper.toModel(o.getCategory(), this.category_id);
     }
     if (null != o.getService() ) {
-    	this.service_id = "service" + this.parent_id;
+    	this.service_id = "service" + this.id;
     	this.service = CodeableConceptHelper.toModel(o.getService(), this.service_id);
     }
     if (null != o.getModifier() && !o.getModifier().isEmpty()) {
-    	this.modifier_id = "modifier" + this.parent_id;
+    	this.modifier_id = "modifier" + this.id;
     	this.modifier = CodeableConceptHelper.toModelFromArray(o.getModifier(), this.modifier_id);
     }
     if (null != o.getProgramCode() && !o.getProgramCode().isEmpty()) {
-    	this.programcode_id = "programcode" + this.parent_id;
+    	this.programcode_id = "programcode" + this.id;
     	this.programCode = CodeableConceptHelper.toModelFromArray(o.getProgramCode(), this.programcode_id);
     }
     if (null != o.getQuantity() ) {
-    	this.quantity_id = "quantity" + this.parent_id;
+    	this.quantity_id = "quantity" + this.id;
     	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
     }
     if (null != o.getUnitPrice() ) {
-    	this.unitprice_id = "unitprice" + this.parent_id;
+    	this.unitprice_id = "unitprice" + this.id;
     	this.unitPrice = MoneyHelper.toModel(o.getUnitPrice(), this.unitprice_id);
     }
     this.factor = o.getFactor();
     if (null != o.getNet() ) {
-    	this.net_id = "net" + this.parent_id;
+    	this.net_id = "net" + this.id;
     	this.net = MoneyHelper.toModel(o.getNet(), this.net_id);
     }
     if (null != o.getUdi() && !o.getUdi().isEmpty()) {
-    	this.udi_id = "udi" + this.parent_id;
+    	this.udi_id = "udi" + this.id;
     	this.udi = ReferenceHelper.toModelFromArray(o.getUdi(), this.udi_id);
     }
     this.noteNumber = org.fhir.utils.JsonUtils.toJson(o.getNoteNumber());
     if (null != o.getAdjudication() && !o.getAdjudication().isEmpty()) {
-    	this.adjudication_id = "adjudication" + this.parent_id;
+    	this.adjudication_id = "adjudication" + this.id;
     	this.adjudication = ExplanationOfBenefitAdjudicationHelper.toModelFromArray(o.getAdjudication(), this.adjudication_id);
     }
     if (null != o.getSubDetail() && !o.getSubDetail().isEmpty()) {
-    	this.subdetail_id = "subdetail" + this.parent_id;
+    	this.subdetail_id = "subdetail" + this.id;
     	this.subDetail = ExplanationOfBenefitSubDetailHelper.toModelFromArray(o.getSubDetail(), this.subdetail_id);
     }
     if (null != o.getModifierExtension()) {
@@ -407,11 +407,11 @@ public class ExplanationOfBenefitDetailModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -424,7 +424,7 @@ public class ExplanationOfBenefitDetailModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -449,7 +449,7 @@ public class ExplanationOfBenefitDetailModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

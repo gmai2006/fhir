@@ -38,7 +38,7 @@ public interface ClaimDao {
   public Claim create(Claim e);
 
   public Claim update(Claim e);
-  public void delete(Claim e);
+  public void delete(String id);
 
   public List<Claim> findByField(QueryBuilder queryBuilder);
 

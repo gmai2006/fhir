@@ -90,9 +90,9 @@ public class ImmunizationRecommendationDaoImpl implements ImmunizationRecommenda
   }
   @Override
   @Transactional
-  public void delete(ImmunizationRecommendation e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ImmunizationRecommendationModel removed = em.find(ImmunizationRecommendationModel.class, e.getId());
+      final ImmunizationRecommendationModel removed = em.find(ImmunizationRecommendationModel.class, id);
       em.remove(removed);
   }
 

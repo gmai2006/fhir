@@ -90,9 +90,9 @@ public class LocationDaoImpl implements LocationDao {
   }
   @Override
   @Transactional
-  public void delete(Location e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final LocationModel removed = em.find(LocationModel.class, e.getId());
+      final LocationModel removed = em.find(LocationModel.class, id);
       em.remove(removed);
   }
 

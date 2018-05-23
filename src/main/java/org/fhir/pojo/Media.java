@@ -182,6 +182,9 @@ public class Media  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getBasedOn() && !o.getBasedOn().isEmpty()) {
     	this.basedOn = ReferenceHelper.fromArray2Array(o.getBasedOn());
     }
@@ -229,6 +232,9 @@ public class Media  extends DomainResource  {
       this.duration = o.getDuration();
     }
     this.content = AttachmentHelper.fromJson(o.getContent());
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
+    }
   }
 
   public void setResourceType( String value) {

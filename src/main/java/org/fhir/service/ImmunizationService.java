@@ -36,7 +36,7 @@ public interface ImmunizationService {
   public List<Immunization> selectAll();
   public Immunization create(Immunization bean);
   public Immunization update(Immunization bean);
-  public void delete(Immunization bean);
+  public void delete(String id);
   public List<Immunization> findByField(QueryBuilder queryBuilder);
   public List<Immunization> findByVaccineCode(QueryBuilder queryBuilder);
   public List<Immunization> findByPatient(QueryBuilder queryBuilder);

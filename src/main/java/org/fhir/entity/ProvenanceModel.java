@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="provenance")
 public class ProvenanceModel  implements Serializable {
-	private static final long serialVersionUID = 151910893763157934L;
+	private static final long serialVersionUID = 151967883217488948L;
   /**
   * Description: "This is a Provenance resource"
   */
@@ -54,7 +54,7 @@ public class ProvenanceModel  implements Serializable {
   private String target_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="target_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="target_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> target;
 
   /**
@@ -88,7 +88,7 @@ public class ProvenanceModel  implements Serializable {
   private String location_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="location_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="location_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> location;
 
   /**
@@ -99,7 +99,7 @@ public class ProvenanceModel  implements Serializable {
   private String reason_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reason_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="reason_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> reason;
 
   /**
@@ -110,7 +110,7 @@ public class ProvenanceModel  implements Serializable {
   private String activity_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="activity_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="activity_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> activity;
 
   /**
@@ -121,7 +121,7 @@ public class ProvenanceModel  implements Serializable {
   private String agent_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="agent_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="agent_id", insertable=false, updatable=false)
   private java.util.List<ProvenanceAgentModel> agent;
 
   /**
@@ -132,7 +132,7 @@ public class ProvenanceModel  implements Serializable {
   private String entity_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="entity_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="entity_id", insertable=false, updatable=false)
   private java.util.List<ProvenanceEntityModel> entity;
 
   /**
@@ -153,7 +153,7 @@ public class ProvenanceModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -207,7 +207,7 @@ public class ProvenanceModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

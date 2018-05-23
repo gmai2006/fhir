@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="provenanceagent")
 public class ProvenanceAgentModel  implements Serializable {
-	private static final long serialVersionUID = 151910893726824859L;
+	private static final long serialVersionUID = 151967883179977966L;
   /**
   * Description: "The function of the agent with respect to the activity. The security role enabling the agent with respect to the activity."
   */
@@ -46,7 +46,7 @@ public class ProvenanceAgentModel  implements Serializable {
   private String role_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="role_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="role_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> role;
 
   /**
@@ -64,7 +64,7 @@ public class ProvenanceAgentModel  implements Serializable {
   private String whoreference_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="whoreference_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="whoreference_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> whoReference;
 
   /**
@@ -82,7 +82,7 @@ public class ProvenanceAgentModel  implements Serializable {
   private String onbehalfofreference_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="onbehalfofreference_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="onbehalfofreference_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> onBehalfOfReference;
 
   /**
@@ -93,7 +93,7 @@ public class ProvenanceAgentModel  implements Serializable {
   private String relatedagenttype_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="relatedagenttype_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="relatedagenttype_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> relatedAgentType;
 
   /**
@@ -132,33 +132,33 @@ public class ProvenanceAgentModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ProvenanceAgentModel() {
   }
 
-  public ProvenanceAgentModel(ProvenanceAgent o, String parentId) {
-  	this.parent_id = parentId;
+  public ProvenanceAgentModel(ProvenanceAgent o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getRole() && !o.getRole().isEmpty()) {
-    	this.role_id = "role" + this.parent_id;
+    	this.role_id = "role" + this.id;
     	this.role = CodeableConceptHelper.toModelFromArray(o.getRole(), this.role_id);
     }
     this.whoUri = o.getWhoUri();
     if (null != o.getWhoReference() ) {
-    	this.whoreference_id = "whoreference" + this.parent_id;
+    	this.whoreference_id = "whoreference" + this.id;
     	this.whoReference = ReferenceHelper.toModel(o.getWhoReference(), this.whoreference_id);
     }
     this.onBehalfOfUri = o.getOnBehalfOfUri();
     if (null != o.getOnBehalfOfReference() ) {
-    	this.onbehalfofreference_id = "onbehalfofreference" + this.parent_id;
+    	this.onbehalfofreference_id = "onbehalfofreference" + this.id;
     	this.onBehalfOfReference = ReferenceHelper.toModel(o.getOnBehalfOfReference(), this.onbehalfofreference_id);
     }
     if (null != o.getRelatedAgentType() ) {
-    	this.relatedagenttype_id = "relatedagenttype" + this.parent_id;
+    	this.relatedagenttype_id = "relatedagenttype" + this.id;
     	this.relatedAgentType = CodeableConceptHelper.toModel(o.getRelatedAgentType(), this.relatedagenttype_id);
     }
     if (null != o.getModifierExtension()) {
@@ -223,11 +223,11 @@ public class ProvenanceAgentModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -239,7 +239,7 @@ public class ProvenanceAgentModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -255,7 +255,7 @@ public class ProvenanceAgentModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

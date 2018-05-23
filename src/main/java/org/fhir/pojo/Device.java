@@ -178,6 +178,9 @@ public class Device  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getUdi() && !o.getUdi().isEmpty()) {
       this.udi = new DeviceUdi(o.getUdi().get(0));
     }
@@ -211,11 +214,17 @@ public class Device  extends DomainResource  {
     if (null != o.getOwner() && !o.getOwner().isEmpty()) {
       this.owner = new Reference(o.getOwner().get(0));
     }
+    if (o.getContact() != null) {
+    	this.contact = org.fhir.utils.JsonUtils.json2Array(o.getContact());
+    }
     if (null != o.getLocation() && !o.getLocation().isEmpty()) {
       this.location = new Reference(o.getLocation().get(0));
     }
     if (null != o.getUrl()) {
       this.url = o.getUrl();
+    }
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
     }
     if (null != o.getSafety() && !o.getSafety().isEmpty()) {
     	this.safety = CodeableConceptHelper.fromArray2Array(o.getSafety());

@@ -90,9 +90,9 @@ public class SlotDaoImpl implements SlotDao {
   }
   @Override
   @Transactional
-  public void delete(Slot e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final SlotModel removed = em.find(SlotModel.class, e.getId());
+      final SlotModel removed = em.find(SlotModel.class, id);
       em.remove(removed);
   }
 

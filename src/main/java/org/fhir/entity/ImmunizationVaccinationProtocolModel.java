@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="immunizationvaccinationprotocol")
 public class ImmunizationVaccinationProtocolModel  implements Serializable {
-	private static final long serialVersionUID = 151910893690756654L;
+	private static final long serialVersionUID = 151967883141323913L;
   /**
   * Description: "Nominal position in a series."
   */
@@ -61,7 +61,7 @@ public class ImmunizationVaccinationProtocolModel  implements Serializable {
   private String authority_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="authority_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="authority_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> authority;
 
   /**
@@ -87,7 +87,7 @@ public class ImmunizationVaccinationProtocolModel  implements Serializable {
   private String targetdisease_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="targetdisease_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="targetdisease_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> targetDisease;
 
   /**
@@ -98,7 +98,7 @@ public class ImmunizationVaccinationProtocolModel  implements Serializable {
   private String dosestatus_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="dosestatus_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="dosestatus_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> doseStatus;
 
   /**
@@ -109,7 +109,7 @@ public class ImmunizationVaccinationProtocolModel  implements Serializable {
   private String dosestatusreason_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="dosestatusreason_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="dosestatusreason_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> doseStatusReason;
 
   /**
@@ -148,35 +148,35 @@ public class ImmunizationVaccinationProtocolModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ImmunizationVaccinationProtocolModel() {
   }
 
-  public ImmunizationVaccinationProtocolModel(ImmunizationVaccinationProtocol o, String parentId) {
-  	this.parent_id = parentId;
+  public ImmunizationVaccinationProtocolModel(ImmunizationVaccinationProtocol o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     this.doseSequence = o.getDoseSequence();
     this.description = o.getDescription();
     if (null != o.getAuthority() ) {
-    	this.authority_id = "authority" + this.parent_id;
+    	this.authority_id = "authority" + this.id;
     	this.authority = ReferenceHelper.toModel(o.getAuthority(), this.authority_id);
     }
     this.series = o.getSeries();
     this.seriesDoses = o.getSeriesDoses();
     if (null != o.getTargetDisease() && !o.getTargetDisease().isEmpty()) {
-    	this.targetdisease_id = "targetdisease" + this.parent_id;
+    	this.targetdisease_id = "targetdisease" + this.id;
     	this.targetDisease = CodeableConceptHelper.toModelFromArray(o.getTargetDisease(), this.targetdisease_id);
     }
     if (null != o.getDoseStatus() ) {
-    	this.dosestatus_id = "dosestatus" + this.parent_id;
+    	this.dosestatus_id = "dosestatus" + this.id;
     	this.doseStatus = CodeableConceptHelper.toModel(o.getDoseStatus(), this.dosestatus_id);
     }
     if (null != o.getDoseStatusReason() ) {
-    	this.dosestatusreason_id = "dosestatusreason" + this.parent_id;
+    	this.dosestatusreason_id = "dosestatusreason" + this.id;
     	this.doseStatusReason = CodeableConceptHelper.toModel(o.getDoseStatusReason(), this.dosestatusreason_id);
     }
     if (null != o.getModifierExtension()) {
@@ -253,11 +253,11 @@ public class ImmunizationVaccinationProtocolModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -271,7 +271,7 @@ public class ImmunizationVaccinationProtocolModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -289,7 +289,7 @@ public class ImmunizationVaccinationProtocolModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

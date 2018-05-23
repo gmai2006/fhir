@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="allergyintolerancereaction")
 public class AllergyIntoleranceReactionModel  implements Serializable {
-	private static final long serialVersionUID = 151910893745363714L;
+	private static final long serialVersionUID = 151967883199922351L;
   /**
   * Description: "Identification of the specific substance (or pharmaceutical product) considered to be responsible for the Adverse Reaction event. Note: the substance for a specific reaction may be different from the substance identified as the cause of the risk, but it must be consistent with it. For instance, it may be a more specific substance (e.g. a brand medication) or a composite product that includes the identified substance. It must be clinically safe to only process the 'code' and ignore the 'reaction.substance'."
   */
@@ -46,7 +46,7 @@ public class AllergyIntoleranceReactionModel  implements Serializable {
   private String substance_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="substance_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="substance_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> substance;
 
   /**
@@ -57,7 +57,7 @@ public class AllergyIntoleranceReactionModel  implements Serializable {
   private String manifestation_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="manifestation_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="manifestation_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> manifestation;
 
   /**
@@ -90,7 +90,7 @@ public class AllergyIntoleranceReactionModel  implements Serializable {
   private String exposureroute_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="exposureroute_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="exposureroute_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> exposureRoute;
 
   /**
@@ -138,30 +138,30 @@ public class AllergyIntoleranceReactionModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public AllergyIntoleranceReactionModel() {
   }
 
-  public AllergyIntoleranceReactionModel(AllergyIntoleranceReaction o, String parentId) {
-  	this.parent_id = parentId;
+  public AllergyIntoleranceReactionModel(AllergyIntoleranceReaction o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getSubstance() ) {
-    	this.substance_id = "substance" + this.parent_id;
+    	this.substance_id = "substance" + this.id;
     	this.substance = CodeableConceptHelper.toModel(o.getSubstance(), this.substance_id);
     }
     if (null != o.getManifestation() && !o.getManifestation().isEmpty()) {
-    	this.manifestation_id = "manifestation" + this.parent_id;
+    	this.manifestation_id = "manifestation" + this.id;
     	this.manifestation = CodeableConceptHelper.toModelFromArray(o.getManifestation(), this.manifestation_id);
     }
     this.description = o.getDescription();
     this.onset = o.getOnset();
     this.severity = o.getSeverity();
     if (null != o.getExposureRoute() ) {
-    	this.exposureroute_id = "exposureroute" + this.parent_id;
+    	this.exposureroute_id = "exposureroute" + this.id;
     	this.exposureRoute = CodeableConceptHelper.toModel(o.getExposureRoute(), this.exposureroute_id);
     }
     if (null != o.getNote()) {
@@ -235,11 +235,11 @@ public class AllergyIntoleranceReactionModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -253,7 +253,7 @@ public class AllergyIntoleranceReactionModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -270,7 +270,7 @@ public class AllergyIntoleranceReactionModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

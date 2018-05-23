@@ -97,12 +97,9 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
 
   @Override
   @Transactional
-  public void delete(FamilyMemberHistory bean) {
-  	requireNonNull(bean);
-    logger.info("delete(FamilyMemberHistory={}) - entered bean");
-
-    dao.delete(bean);
-
+  public void delete(String id) {
+    logger.info("delete(FamilyMemberHistory={}) - entered id " + id);
+    dao.delete(id);
     logger.info("delete(FamilyMemberHistory) - exited - return value={} result ");
   }
 

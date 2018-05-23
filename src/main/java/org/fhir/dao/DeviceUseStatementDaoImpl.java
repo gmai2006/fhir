@@ -90,9 +90,9 @@ public class DeviceUseStatementDaoImpl implements DeviceUseStatementDao {
   }
   @Override
   @Transactional
-  public void delete(DeviceUseStatement e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final DeviceUseStatementModel removed = em.find(DeviceUseStatementModel.class, e.getId());
+      final DeviceUseStatementModel removed = em.find(DeviceUseStatementModel.class, id);
       em.remove(removed);
   }
 

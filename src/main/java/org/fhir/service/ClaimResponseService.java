@@ -36,7 +36,7 @@ public interface ClaimResponseService {
   public List<ClaimResponse> selectAll();
   public ClaimResponse create(ClaimResponse bean);
   public ClaimResponse update(ClaimResponse bean);
-  public void delete(ClaimResponse bean);
+  public void delete(String id);
   public List<ClaimResponse> findByField(QueryBuilder queryBuilder);
   public List<ClaimResponse> findByPatient(QueryBuilder queryBuilder);
   public List<ClaimResponse> findByInsurer(QueryBuilder queryBuilder);

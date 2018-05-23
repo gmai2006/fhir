@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="paymentreconciliation")
 public class PaymentReconciliationModel  implements Serializable {
-	private static final long serialVersionUID = 151910893704780276L;
+	private static final long serialVersionUID = 151967883156746917L;
   /**
   * Description: "This is a PaymentReconciliation resource"
   */
@@ -88,7 +88,7 @@ public class PaymentReconciliationModel  implements Serializable {
   private String organization_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="organization_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="organization_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> organization;
 
   /**
@@ -99,7 +99,7 @@ public class PaymentReconciliationModel  implements Serializable {
   private String request_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="request_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="request_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> request;
 
   /**
@@ -110,7 +110,7 @@ public class PaymentReconciliationModel  implements Serializable {
   private String outcome_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="outcome_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="outcome_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> outcome;
 
   /**
@@ -128,7 +128,7 @@ public class PaymentReconciliationModel  implements Serializable {
   private String requestprovider_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="requestprovider_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="requestprovider_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> requestProvider;
 
   /**
@@ -139,7 +139,7 @@ public class PaymentReconciliationModel  implements Serializable {
   private String requestorganization_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="requestorganization_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="requestorganization_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> requestOrganization;
 
   /**
@@ -150,7 +150,7 @@ public class PaymentReconciliationModel  implements Serializable {
   private String detail_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="detail_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="detail_id", insertable=false, updatable=false)
   private java.util.List<PaymentReconciliationDetailModel> detail;
 
   /**
@@ -161,7 +161,7 @@ public class PaymentReconciliationModel  implements Serializable {
   private String form_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="form_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="form_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> form;
 
   /**
@@ -172,7 +172,7 @@ public class PaymentReconciliationModel  implements Serializable {
   private String total_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="total_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="total_id", insertable=false, updatable=false)
   private java.util.List<MoneyModel> total;
 
   /**
@@ -183,7 +183,7 @@ public class PaymentReconciliationModel  implements Serializable {
   private String processnote_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="processnote_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="processnote_id", insertable=false, updatable=false)
   private java.util.List<PaymentReconciliationProcessNoteModel> processNote;
 
   /**
@@ -195,7 +195,7 @@ public class PaymentReconciliationModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -249,7 +249,7 @@ public class PaymentReconciliationModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

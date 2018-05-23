@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="documentreference")
 public class DocumentReferenceModel  implements Serializable {
-	private static final long serialVersionUID = 151910893757987973L;
+	private static final long serialVersionUID = 151967883212369165L;
   /**
   * Description: "This is a DocumentReference resource"
   */
@@ -87,7 +87,7 @@ public class DocumentReferenceModel  implements Serializable {
   private String type_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> type;
 
   /**
@@ -98,7 +98,7 @@ public class DocumentReferenceModel  implements Serializable {
   private String fhirclass_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="fhirclass_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="fhirclass_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> FHIRclass;
 
   /**
@@ -109,7 +109,7 @@ public class DocumentReferenceModel  implements Serializable {
   private String subject_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subject_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="subject_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> subject;
 
   /**
@@ -135,7 +135,7 @@ public class DocumentReferenceModel  implements Serializable {
   private String author_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="author_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="author_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> author;
 
   /**
@@ -146,7 +146,7 @@ public class DocumentReferenceModel  implements Serializable {
   private String authenticator_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="authenticator_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="authenticator_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> authenticator;
 
   /**
@@ -157,7 +157,7 @@ public class DocumentReferenceModel  implements Serializable {
   private String custodian_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="custodian_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="custodian_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> custodian;
 
   /**
@@ -168,7 +168,7 @@ public class DocumentReferenceModel  implements Serializable {
   private String relatesto_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="relatesto_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="relatesto_id", insertable=false, updatable=false)
   private java.util.List<DocumentReferenceRelatesToModel> relatesTo;
 
   /**
@@ -186,7 +186,7 @@ public class DocumentReferenceModel  implements Serializable {
   private String securitylabel_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="securitylabel_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="securitylabel_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> securityLabel;
 
   /**
@@ -197,7 +197,7 @@ public class DocumentReferenceModel  implements Serializable {
   private String content_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="content_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="content_id", insertable=false, updatable=false)
   private java.util.List<DocumentReferenceContentModel> content;
 
   /**
@@ -208,7 +208,7 @@ public class DocumentReferenceModel  implements Serializable {
   private String context_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="context_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="context_id", insertable=false, updatable=false)
   private java.util.List<DocumentReferenceContextModel> context;
 
   /**
@@ -220,7 +220,7 @@ public class DocumentReferenceModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -274,7 +274,7 @@ public class DocumentReferenceModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

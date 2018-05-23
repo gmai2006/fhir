@@ -38,7 +38,7 @@ public interface AdverseEventDao {
   public AdverseEvent create(AdverseEvent e);
 
   public AdverseEvent update(AdverseEvent e);
-  public void delete(AdverseEvent e);
+  public void delete(String id);
 
   public List<AdverseEvent> findByField(QueryBuilder queryBuilder);
 

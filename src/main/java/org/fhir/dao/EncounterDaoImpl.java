@@ -90,9 +90,9 @@ public class EncounterDaoImpl implements EncounterDao {
   }
   @Override
   @Transactional
-  public void delete(Encounter e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final EncounterModel removed = em.find(EncounterModel.class, e.getId());
+      final EncounterModel removed = em.find(EncounterModel.class, id);
       em.remove(removed);
   }
 

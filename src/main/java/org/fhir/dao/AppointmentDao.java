@@ -38,7 +38,7 @@ public interface AppointmentDao {
   public Appointment create(Appointment e);
 
   public Appointment update(Appointment e);
-  public void delete(Appointment e);
+  public void delete(String id);
 
   public List<Appointment> findByField(QueryBuilder queryBuilder);
 

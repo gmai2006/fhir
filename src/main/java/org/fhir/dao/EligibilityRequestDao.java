@@ -38,7 +38,7 @@ public interface EligibilityRequestDao {
   public EligibilityRequest create(EligibilityRequest e);
 
   public EligibilityRequest update(EligibilityRequest e);
-  public void delete(EligibilityRequest e);
+  public void delete(String id);
 
   public List<EligibilityRequest> findByField(QueryBuilder queryBuilder);
 

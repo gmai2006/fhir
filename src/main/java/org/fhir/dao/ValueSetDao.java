@@ -38,7 +38,7 @@ public interface ValueSetDao {
   public ValueSet create(ValueSet e);
 
   public ValueSet update(ValueSet e);
-  public void delete(ValueSet e);
+  public void delete(String id);
 
   public List<ValueSet> findByField(QueryBuilder queryBuilder);
 

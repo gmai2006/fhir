@@ -90,9 +90,9 @@ public class MedicationRequestDaoImpl implements MedicationRequestDao {
   }
   @Override
   @Transactional
-  public void delete(MedicationRequest e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final MedicationRequestModel removed = em.find(MedicationRequestModel.class, e.getId());
+      final MedicationRequestModel removed = em.find(MedicationRequestModel.class, id);
       em.remove(removed);
   }
 

@@ -166,6 +166,9 @@ public class ResearchStudy  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getTitle()) {
       this.title = o.getTitle();
     }
@@ -214,6 +217,9 @@ public class ResearchStudy  extends DomainResource  {
     }
     if (null != o.getReasonStopped() && !o.getReasonStopped().isEmpty()) {
       this.reasonStopped = new CodeableConcept(o.getReasonStopped().get(0));
+    }
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
     }
     if (null != o.getArm() && !o.getArm().isEmpty()) {
     	this.arm = ResearchStudyArmHelper.fromArray2Array(o.getArm());

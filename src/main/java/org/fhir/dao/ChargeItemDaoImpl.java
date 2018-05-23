@@ -90,9 +90,9 @@ public class ChargeItemDaoImpl implements ChargeItemDao {
   }
   @Override
   @Transactional
-  public void delete(ChargeItem e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ChargeItemModel removed = em.find(ChargeItemModel.class, e.getId());
+      final ChargeItemModel removed = em.find(ChargeItemModel.class, id);
       em.remove(removed);
   }
 

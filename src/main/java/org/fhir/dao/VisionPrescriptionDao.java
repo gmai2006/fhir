@@ -38,7 +38,7 @@ public interface VisionPrescriptionDao {
   public VisionPrescription create(VisionPrescription e);
 
   public VisionPrescription update(VisionPrescription e);
-  public void delete(VisionPrescription e);
+  public void delete(String id);
 
   public List<VisionPrescription> findByField(QueryBuilder queryBuilder);
 

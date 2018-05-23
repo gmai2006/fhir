@@ -186,6 +186,9 @@ public class DataElement  extends DomainResource  {
     if (null != o.getUrl()) {
       this.url = o.getUrl();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getVersion()) {
       this.version = o.getVersion();
     }
@@ -224,6 +227,9 @@ public class DataElement  extends DomainResource  {
     }
     if (null != o.getMapping() && !o.getMapping().isEmpty()) {
     	this.mapping = DataElementMappingHelper.fromArray2Array(o.getMapping());
+    }
+    if (o.getElement() != null) {
+    	this.element = org.fhir.utils.JsonUtils.json2Array(o.getElement());
     }
   }
 

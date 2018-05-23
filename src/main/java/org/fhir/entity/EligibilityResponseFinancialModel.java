@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="eligibilityresponsefinancial")
 public class EligibilityResponseFinancialModel  implements Serializable {
-	private static final long serialVersionUID = 151910893702432432L;
+	private static final long serialVersionUID = 151967883154341707L;
   /**
   * Description: "Deductable, visits, benefit amount."
   */
@@ -46,7 +46,7 @@ public class EligibilityResponseFinancialModel  implements Serializable {
   private String type_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> type;
 
   /**
@@ -72,7 +72,7 @@ public class EligibilityResponseFinancialModel  implements Serializable {
   private String allowedmoney_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="allowedmoney_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="allowedmoney_id", insertable=false, updatable=false)
   private java.util.List<MoneyModel> allowedMoney;
 
   /**
@@ -91,7 +91,7 @@ public class EligibilityResponseFinancialModel  implements Serializable {
   private String usedmoney_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="usedmoney_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="usedmoney_id", insertable=false, updatable=false)
   private java.util.List<MoneyModel> usedMoney;
 
   /**
@@ -130,30 +130,30 @@ public class EligibilityResponseFinancialModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public EligibilityResponseFinancialModel() {
   }
 
-  public EligibilityResponseFinancialModel(EligibilityResponseFinancial o, String parentId) {
-  	this.parent_id = parentId;
+  public EligibilityResponseFinancialModel(EligibilityResponseFinancial o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getType() ) {
-    	this.type_id = "type" + this.parent_id;
+    	this.type_id = "type" + this.id;
     	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
     }
     this.allowedUnsignedInt = o.getAllowedUnsignedInt();
     this.allowedString = o.getAllowedString();
     if (null != o.getAllowedMoney() ) {
-    	this.allowedmoney_id = "allowedmoney" + this.parent_id;
+    	this.allowedmoney_id = "allowedmoney" + this.id;
     	this.allowedMoney = MoneyHelper.toModel(o.getAllowedMoney(), this.allowedmoney_id);
     }
     this.usedUnsignedInt = o.getUsedUnsignedInt();
     if (null != o.getUsedMoney() ) {
-    	this.usedmoney_id = "usedmoney" + this.parent_id;
+    	this.usedmoney_id = "usedmoney" + this.id;
     	this.usedMoney = MoneyHelper.toModel(o.getUsedMoney(), this.usedmoney_id);
     }
     if (null != o.getModifierExtension()) {
@@ -218,11 +218,11 @@ public class EligibilityResponseFinancialModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -235,7 +235,7 @@ public class EligibilityResponseFinancialModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -251,7 +251,7 @@ public class EligibilityResponseFinancialModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

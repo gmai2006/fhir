@@ -90,9 +90,9 @@ public class GuidanceResponseDaoImpl implements GuidanceResponseDao {
   }
   @Override
   @Transactional
-  public void delete(GuidanceResponse e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final GuidanceResponseModel removed = em.find(GuidanceResponseModel.class, e.getId());
+      final GuidanceResponseModel removed = em.find(GuidanceResponseModel.class, id);
       em.remove(removed);
   }
 

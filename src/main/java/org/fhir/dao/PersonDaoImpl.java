@@ -90,9 +90,9 @@ public class PersonDaoImpl implements PersonDao {
   }
   @Override
   @Transactional
-  public void delete(Person e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final PersonModel removed = em.find(PersonModel.class, e.getId());
+      final PersonModel removed = em.find(PersonModel.class, id);
       em.remove(removed);
   }
 

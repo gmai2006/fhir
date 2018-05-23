@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="imagingstudyseries")
 public class ImagingStudySeriesModel  implements Serializable {
-	private static final long serialVersionUID = 151910893712334260L;
+	private static final long serialVersionUID = 15196788316535642L;
   /**
   * Description: "Formal identifier for this series."
   */
@@ -62,7 +62,7 @@ public class ImagingStudySeriesModel  implements Serializable {
   private String modality_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="modality_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="modality_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> modality;
 
   /**
@@ -95,7 +95,7 @@ public class ImagingStudySeriesModel  implements Serializable {
   private String endpoint_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="endpoint_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="endpoint_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> endpoint;
 
   /**
@@ -106,7 +106,7 @@ public class ImagingStudySeriesModel  implements Serializable {
   private String bodysite_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="bodysite_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="bodysite_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> bodySite;
 
   /**
@@ -117,7 +117,7 @@ public class ImagingStudySeriesModel  implements Serializable {
   private String laterality_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="laterality_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="laterality_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> laterality;
 
   /**
@@ -136,7 +136,7 @@ public class ImagingStudySeriesModel  implements Serializable {
   private String performer_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="performer_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="performer_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> performer;
 
   /**
@@ -147,7 +147,7 @@ public class ImagingStudySeriesModel  implements Serializable {
   private String instance_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="instance_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="instance_id", insertable=false, updatable=false)
   private java.util.List<ImagingStudyInstanceModel> instance;
 
   /**
@@ -186,45 +186,45 @@ public class ImagingStudySeriesModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ImagingStudySeriesModel() {
   }
 
-  public ImagingStudySeriesModel(ImagingStudySeries o, String parentId) {
-  	this.parent_id = parentId;
+  public ImagingStudySeriesModel(ImagingStudySeries o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     this.uid = o.getUid();
     this.number = o.getNumber();
     if (null != o.getModality() ) {
-    	this.modality_id = "modality" + this.parent_id;
+    	this.modality_id = "modality" + this.id;
     	this.modality = CodingHelper.toModel(o.getModality(), this.modality_id);
     }
     this.description = o.getDescription();
     this.numberOfInstances = o.getNumberOfInstances();
     this.availability = o.getAvailability();
     if (null != o.getEndpoint() && !o.getEndpoint().isEmpty()) {
-    	this.endpoint_id = "endpoint" + this.parent_id;
+    	this.endpoint_id = "endpoint" + this.id;
     	this.endpoint = ReferenceHelper.toModelFromArray(o.getEndpoint(), this.endpoint_id);
     }
     if (null != o.getBodySite() ) {
-    	this.bodysite_id = "bodysite" + this.parent_id;
+    	this.bodysite_id = "bodysite" + this.id;
     	this.bodySite = CodingHelper.toModel(o.getBodySite(), this.bodysite_id);
     }
     if (null != o.getLaterality() ) {
-    	this.laterality_id = "laterality" + this.parent_id;
+    	this.laterality_id = "laterality" + this.id;
     	this.laterality = CodingHelper.toModel(o.getLaterality(), this.laterality_id);
     }
     this.started = o.getStarted();
     if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
-    	this.performer_id = "performer" + this.parent_id;
+    	this.performer_id = "performer" + this.id;
     	this.performer = ReferenceHelper.toModelFromArray(o.getPerformer(), this.performer_id);
     }
     if (null != o.getInstance() && !o.getInstance().isEmpty()) {
-    	this.instance_id = "instance" + this.parent_id;
+    	this.instance_id = "instance" + this.id;
     	this.instance = ImagingStudyInstanceHelper.toModelFromArray(o.getInstance(), this.instance_id);
     }
     if (null != o.getModifierExtension()) {
@@ -325,11 +325,11 @@ public class ImagingStudySeriesModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -345,7 +345,7 @@ public class ImagingStudySeriesModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -367,7 +367,7 @@ public class ImagingStudySeriesModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

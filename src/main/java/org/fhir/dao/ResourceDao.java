@@ -38,7 +38,7 @@ public interface ResourceDao {
   public Resource create(Resource e);
 
   public Resource update(Resource e);
-  public void delete(Resource e);
+  public void delete(String id);
 
   public List<Resource> findByField(QueryBuilder queryBuilder);
 

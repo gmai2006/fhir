@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="devicecomponent")
 public class DeviceComponentModel  implements Serializable {
-	private static final long serialVersionUID = 151910893725824825L;
+	private static final long serialVersionUID = 151967883178652831L;
   /**
   * Description: "This is a DeviceComponent resource"
   */
@@ -64,7 +64,7 @@ public class DeviceComponentModel  implements Serializable {
   private String type_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> type;
 
   /**
@@ -82,7 +82,7 @@ public class DeviceComponentModel  implements Serializable {
   private String source_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="source_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="source_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> source;
 
   /**
@@ -93,7 +93,7 @@ public class DeviceComponentModel  implements Serializable {
   private String parent_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="parent_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="parent_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> parent;
 
   /**
@@ -104,7 +104,7 @@ public class DeviceComponentModel  implements Serializable {
   private String operationalstatus_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="operationalstatus_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="operationalstatus_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> operationalStatus;
 
   /**
@@ -115,7 +115,7 @@ public class DeviceComponentModel  implements Serializable {
   private String parametergroup_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="parametergroup_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="parametergroup_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> parameterGroup;
 
   /**
@@ -133,7 +133,7 @@ public class DeviceComponentModel  implements Serializable {
   private String productionspecification_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="productionspecification_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="productionspecification_id", insertable=false, updatable=false)
   private java.util.List<DeviceComponentProductionSpecificationModel> productionSpecification;
 
   /**
@@ -144,7 +144,7 @@ public class DeviceComponentModel  implements Serializable {
   private String languagecode_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="languagecode_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="languagecode_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> languageCode;
 
   /**
@@ -156,7 +156,7 @@ public class DeviceComponentModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -210,7 +210,7 @@ public class DeviceComponentModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

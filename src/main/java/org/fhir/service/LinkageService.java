@@ -36,7 +36,7 @@ public interface LinkageService {
   public List<Linkage> selectAll();
   public Linkage create(Linkage bean);
   public Linkage update(Linkage bean);
-  public void delete(Linkage bean);
+  public void delete(String id);
   public List<Linkage> findByField(QueryBuilder queryBuilder);
   public List<Linkage> findByAuthor(QueryBuilder queryBuilder);
   public List<Linkage> findByItem(QueryBuilder queryBuilder);

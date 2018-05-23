@@ -117,6 +117,15 @@ public class Person  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
+    if (o.getName() != null) {
+    	this.name = org.fhir.utils.JsonUtils.json2Array(o.getName());
+    }
+    if (o.getTelecom() != null) {
+    	this.telecom = org.fhir.utils.JsonUtils.json2Array(o.getTelecom());
+    }
     if (null != o.getGender()) {
       this.gender = o.getGender();
     }

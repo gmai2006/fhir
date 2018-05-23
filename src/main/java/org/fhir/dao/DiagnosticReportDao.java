@@ -38,7 +38,7 @@ public interface DiagnosticReportDao {
   public DiagnosticReport create(DiagnosticReport e);
 
   public DiagnosticReport update(DiagnosticReport e);
-  public void delete(DiagnosticReport e);
+  public void delete(String id);
 
   public List<DiagnosticReport> findByField(QueryBuilder queryBuilder);
 

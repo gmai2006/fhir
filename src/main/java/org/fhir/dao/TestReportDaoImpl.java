@@ -90,9 +90,9 @@ public class TestReportDaoImpl implements TestReportDao {
   }
   @Override
   @Transactional
-  public void delete(TestReport e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final TestReportModel removed = em.find(TestReportModel.class, e.getId());
+      final TestReportModel removed = em.find(TestReportModel.class, id);
       em.remove(removed);
   }
 

@@ -36,7 +36,7 @@ public interface ResearchSubjectService {
   public List<ResearchSubject> selectAll();
   public ResearchSubject create(ResearchSubject bean);
   public ResearchSubject update(ResearchSubject bean);
-  public void delete(ResearchSubject bean);
+  public void delete(String id);
   public List<ResearchSubject> findByField(QueryBuilder queryBuilder);
   public List<ResearchSubject> findByStudy(QueryBuilder queryBuilder);
   public List<ResearchSubject> findByIndividual(QueryBuilder queryBuilder);

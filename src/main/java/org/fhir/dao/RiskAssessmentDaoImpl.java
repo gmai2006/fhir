@@ -90,9 +90,9 @@ public class RiskAssessmentDaoImpl implements RiskAssessmentDao {
   }
   @Override
   @Transactional
-  public void delete(RiskAssessment e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final RiskAssessmentModel removed = em.find(RiskAssessmentModel.class, e.getId());
+      final RiskAssessmentModel removed = em.find(RiskAssessmentModel.class, id);
       em.remove(removed);
   }
 

@@ -154,6 +154,9 @@ public class Goal  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
@@ -189,6 +192,9 @@ public class Goal  extends DomainResource  {
     }
     if (null != o.getAddresses() && !o.getAddresses().isEmpty()) {
     	this.addresses = ReferenceHelper.fromArray2Array(o.getAddresses());
+    }
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
     }
     if (null != o.getOutcomeCode() && !o.getOutcomeCode().isEmpty()) {
     	this.outcomeCode = CodeableConceptHelper.fromArray2Array(o.getOutcomeCode());

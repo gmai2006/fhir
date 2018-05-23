@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class ProvenanceResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Provenance create(Provenance obj) {
-		return this.service.create(obj);
+	public Provenance createOrUpdate(Provenance obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing Provenance
+   * @param obj - instance of Provenance
+   * @return Provenance
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public Provenance update( Provenance obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing Provenance
+   * @param obj - instance of Provenance
+   * @return Provenance
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get Provenance by its ID
+   * @param id - instance of Provenance
+   * @return Provenance
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class ProvenanceResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all Provenance with limit of returned records
+   * @param max - number of records
+   * @return a list Provenance
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class ProvenanceResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query Provenance based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of Provenance
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class ProvenanceResource {
   }
 
   /**
-  * Descr: Target Reference(s) (usually version specific)
-  * Type: reference
+   * Query Provenance by composite fields
+   * Descr: Target Reference(s) (usually version specific)
+   * Type: reference
   */
   @GET
   @Path("patient")
@@ -167,8 +208,9 @@ public class ProvenanceResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Where the activity occurred, if relevant
-  * Type: reference
+   * Query Provenance by composite fields
+   * Descr: Where the activity occurred, if relevant
+   * Type: reference
   */
   @GET
   @Path("location")

@@ -36,7 +36,7 @@ public interface NamingSystemService {
   public List<NamingSystem> selectAll();
   public NamingSystem create(NamingSystem bean);
   public NamingSystem update(NamingSystem bean);
-  public void delete(NamingSystem bean);
+  public void delete(String id);
   public List<NamingSystem> findByField(QueryBuilder queryBuilder);
   public List<NamingSystem> findByContact(QueryBuilder queryBuilder);
   public List<NamingSystem> findByType(QueryBuilder queryBuilder);

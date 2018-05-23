@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="task")
 public class TaskModel  implements Serializable {
-	private static final long serialVersionUID = 151910893759390835L;
+	private static final long serialVersionUID = 151967883213753493L;
   /**
   * Description: "This is a Task resource"
   */
@@ -70,7 +70,7 @@ public class TaskModel  implements Serializable {
   private String definitionreference_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="definitionreference_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="definitionreference_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> definitionReference;
 
   /**
@@ -81,7 +81,7 @@ public class TaskModel  implements Serializable {
   private String basedon_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="basedon_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="basedon_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> basedOn;
 
   /**
@@ -101,7 +101,7 @@ public class TaskModel  implements Serializable {
   private String partof_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="partof_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="partof_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> partOf;
 
   /**
@@ -119,7 +119,7 @@ public class TaskModel  implements Serializable {
   private String statusreason_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="statusreason_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="statusreason_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> statusReason;
 
   /**
@@ -130,7 +130,7 @@ public class TaskModel  implements Serializable {
   private String businessstatus_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="businessstatus_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="businessstatus_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> businessStatus;
 
   /**
@@ -157,7 +157,7 @@ public class TaskModel  implements Serializable {
   private String code_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> code;
 
   /**
@@ -175,7 +175,7 @@ public class TaskModel  implements Serializable {
   private String focus_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="focus_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="focus_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> focus;
 
   /**
@@ -186,7 +186,7 @@ public class TaskModel  implements Serializable {
   private String fhirfor_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="fhirfor_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="fhirfor_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> FHIRfor;
 
   /**
@@ -197,7 +197,7 @@ public class TaskModel  implements Serializable {
   private String context_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="context_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="context_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> context;
 
   /**
@@ -233,7 +233,7 @@ public class TaskModel  implements Serializable {
   private String requester_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="requester_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="requester_id", insertable=false, updatable=false)
   private java.util.List<TaskRequesterModel> requester;
 
   /**
@@ -244,7 +244,7 @@ public class TaskModel  implements Serializable {
   private String performertype_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="performertype_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="performertype_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> performerType;
 
   /**
@@ -255,7 +255,7 @@ public class TaskModel  implements Serializable {
   private String owner_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="owner_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="owner_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> owner;
 
   /**
@@ -266,7 +266,7 @@ public class TaskModel  implements Serializable {
   private String reason_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reason_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="reason_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> reason;
 
   /**
@@ -286,7 +286,7 @@ public class TaskModel  implements Serializable {
   private String relevanthistory_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="relevanthistory_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="relevanthistory_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> relevantHistory;
 
   /**
@@ -297,7 +297,7 @@ public class TaskModel  implements Serializable {
   private String restriction_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="restriction_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="restriction_id", insertable=false, updatable=false)
   private java.util.List<TaskRestrictionModel> restriction;
 
   /**
@@ -317,7 +317,7 @@ public class TaskModel  implements Serializable {
   private String output_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="output_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="output_id", insertable=false, updatable=false)
   private java.util.List<TaskOutputModel> output;
 
   /**
@@ -329,7 +329,7 @@ public class TaskModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -383,7 +383,7 @@ public class TaskModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

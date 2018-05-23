@@ -38,7 +38,7 @@ public interface ConceptMapDao {
   public ConceptMap create(ConceptMap e);
 
   public ConceptMap update(ConceptMap e);
-  public void delete(ConceptMap e);
+  public void delete(String id);
 
   public List<ConceptMap> findByField(QueryBuilder queryBuilder);
 

@@ -38,7 +38,7 @@ public interface ReferralRequestDao {
   public ReferralRequest create(ReferralRequest e);
 
   public ReferralRequest update(ReferralRequest e);
-  public void delete(ReferralRequest e);
+  public void delete(String id);
 
   public List<ReferralRequest> findByField(QueryBuilder queryBuilder);
 

@@ -90,9 +90,9 @@ public class CommunicationRequestDaoImpl implements CommunicationRequestDao {
   }
   @Override
   @Transactional
-  public void delete(CommunicationRequest e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final CommunicationRequestModel removed = em.find(CommunicationRequestModel.class, e.getId());
+      final CommunicationRequestModel removed = em.find(CommunicationRequestModel.class, id);
       em.remove(removed);
   }
 

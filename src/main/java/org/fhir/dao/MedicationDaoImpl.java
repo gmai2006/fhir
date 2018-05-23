@@ -90,9 +90,9 @@ public class MedicationDaoImpl implements MedicationDao {
   }
   @Override
   @Transactional
-  public void delete(Medication e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final MedicationModel removed = em.find(MedicationModel.class, e.getId());
+      final MedicationModel removed = em.find(MedicationModel.class, id);
       em.remove(removed);
   }
 

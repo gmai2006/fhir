@@ -38,7 +38,7 @@ public interface PaymentReconciliationDao {
   public PaymentReconciliation create(PaymentReconciliation e);
 
   public PaymentReconciliation update(PaymentReconciliation e);
-  public void delete(PaymentReconciliation e);
+  public void delete(String id);
 
   public List<PaymentReconciliation> findByField(QueryBuilder queryBuilder);
 

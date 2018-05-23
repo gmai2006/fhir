@@ -97,6 +97,9 @@ public class BodySite  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getActive()) {
       this.active = o.getActive();
     }
@@ -108,6 +111,9 @@ public class BodySite  extends DomainResource  {
     }
     if (null != o.getDescription()) {
       this.description = o.getDescription();
+    }
+    if (o.getImage() != null) {
+    	this.image = org.fhir.utils.JsonUtils.json2Array(o.getImage());
     }
     if (null != o.getPatient() && !o.getPatient().isEmpty()) {
       this.patient = new Reference(o.getPatient().get(0));

@@ -38,7 +38,7 @@ public interface AllergyIntoleranceDao {
   public AllergyIntolerance create(AllergyIntolerance e);
 
   public AllergyIntolerance update(AllergyIntolerance e);
-  public void delete(AllergyIntolerance e);
+  public void delete(String id);
 
   public List<AllergyIntolerance> findByField(QueryBuilder queryBuilder);
 

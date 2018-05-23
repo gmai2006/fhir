@@ -90,9 +90,9 @@ public class BodySiteDaoImpl implements BodySiteDao {
   }
   @Override
   @Transactional
-  public void delete(BodySite e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final BodySiteModel removed = em.find(BodySiteModel.class, e.getId());
+      final BodySiteModel removed = em.find(BodySiteModel.class, id);
       em.remove(removed);
   }
 

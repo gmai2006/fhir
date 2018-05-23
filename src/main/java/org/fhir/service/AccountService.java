@@ -36,7 +36,7 @@ public interface AccountService {
   public List<Account> selectAll();
   public Account create(Account bean);
   public Account update(Account bean);
-  public void delete(Account bean);
+  public void delete(String id);
   public List<Account> findByField(QueryBuilder queryBuilder);
   public List<Account> findByType(QueryBuilder queryBuilder);
   public List<Account> findBySubject(QueryBuilder queryBuilder);

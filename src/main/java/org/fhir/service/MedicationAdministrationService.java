@@ -36,7 +36,7 @@ public interface MedicationAdministrationService {
   public List<MedicationAdministration> selectAll();
   public MedicationAdministration create(MedicationAdministration bean);
   public MedicationAdministration update(MedicationAdministration bean);
-  public void delete(MedicationAdministration bean);
+  public void delete(String id);
   public List<MedicationAdministration> findByField(QueryBuilder queryBuilder);
   public List<MedicationAdministration> findByDefinition(QueryBuilder queryBuilder);
   public List<MedicationAdministration> findByPartOf(QueryBuilder queryBuilder);

@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="imagingmanifest")
 public class ImagingManifestModel  implements Serializable {
-	private static final long serialVersionUID = 151910893715457273L;
+	private static final long serialVersionUID = 151967883168119050L;
   /**
   * Description: "This is a ImagingManifest resource"
   */
@@ -63,7 +63,7 @@ public class ImagingManifestModel  implements Serializable {
   private String patient_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="patient_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="patient_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> patient;
 
   /**
@@ -82,7 +82,7 @@ public class ImagingManifestModel  implements Serializable {
   private String author_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="author_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="author_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> author;
 
   /**
@@ -100,7 +100,7 @@ public class ImagingManifestModel  implements Serializable {
   private String study_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="study_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="study_id", insertable=false, updatable=false)
   private java.util.List<ImagingManifestStudyModel> study;
 
   /**
@@ -112,7 +112,7 @@ public class ImagingManifestModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -166,7 +166,7 @@ public class ImagingManifestModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

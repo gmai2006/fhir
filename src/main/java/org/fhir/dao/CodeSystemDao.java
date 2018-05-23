@@ -38,7 +38,7 @@ public interface CodeSystemDao {
   public CodeSystem create(CodeSystem e);
 
   public CodeSystem update(CodeSystem e);
-  public void delete(CodeSystem e);
+  public void delete(String id);
 
   public List<CodeSystem> findByField(QueryBuilder queryBuilder);
 

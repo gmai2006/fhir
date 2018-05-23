@@ -90,9 +90,9 @@ public class TaskDaoImpl implements TaskDao {
   }
   @Override
   @Transactional
-  public void delete(Task e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final TaskModel removed = em.find(TaskModel.class, e.getId());
+      final TaskModel removed = em.find(TaskModel.class, id);
       em.remove(removed);
   }
 

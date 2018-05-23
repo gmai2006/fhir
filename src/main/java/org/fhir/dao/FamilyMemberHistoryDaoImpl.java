@@ -90,9 +90,9 @@ public class FamilyMemberHistoryDaoImpl implements FamilyMemberHistoryDao {
   }
   @Override
   @Transactional
-  public void delete(FamilyMemberHistory e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final FamilyMemberHistoryModel removed = em.find(FamilyMemberHistoryModel.class, e.getId());
+      final FamilyMemberHistoryModel removed = em.find(FamilyMemberHistoryModel.class, id);
       em.remove(removed);
   }
 

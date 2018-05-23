@@ -90,9 +90,9 @@ public class GoalDaoImpl implements GoalDao {
   }
   @Override
   @Transactional
-  public void delete(Goal e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final GoalModel removed = em.find(GoalModel.class, e.getId());
+      final GoalModel removed = em.find(GoalModel.class, id);
       em.remove(removed);
   }
 

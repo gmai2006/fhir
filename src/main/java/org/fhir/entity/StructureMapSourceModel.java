@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="structuremapsource")
 public class StructureMapSourceModel  implements Serializable {
-	private static final long serialVersionUID = 151910893741893039L;
+	private static final long serialVersionUID = 151967883196280834L;
   /**
   * Description: "Type or variable this rule applies to."
   */
@@ -233,7 +233,7 @@ public class StructureMapSourceModel  implements Serializable {
   private String defaultvaluenarrative_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="defaultvaluenarrative_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="defaultvaluenarrative_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> defaultValueNarrative;
 
   /**
@@ -271,7 +271,7 @@ public class StructureMapSourceModel  implements Serializable {
   private String defaultvaluecodeableconcept_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="defaultvaluecodeableconcept_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="defaultvaluecodeableconcept_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> defaultValueCodeableConcept;
 
   /**
@@ -282,7 +282,7 @@ public class StructureMapSourceModel  implements Serializable {
   private String defaultvaluecoding_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="defaultvaluecoding_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="defaultvaluecoding_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> defaultValueCoding;
 
   /**
@@ -293,7 +293,7 @@ public class StructureMapSourceModel  implements Serializable {
   private String defaultvaluequantity_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="defaultvaluequantity_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="defaultvaluequantity_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> defaultValueQuantity;
 
   /**
@@ -313,7 +313,7 @@ public class StructureMapSourceModel  implements Serializable {
   private String defaultvaluesimplequantity_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="defaultvaluesimplequantity_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="defaultvaluesimplequantity_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> defaultValueSimpleQuantity;
 
   /**
@@ -324,7 +324,7 @@ public class StructureMapSourceModel  implements Serializable {
   private String defaultvaluedistance_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="defaultvaluedistance_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="defaultvaluedistance_id", insertable=false, updatable=false)
   private java.util.List<DistanceModel> defaultValueDistance;
 
   /**
@@ -344,7 +344,7 @@ public class StructureMapSourceModel  implements Serializable {
   private String defaultvaluemoney_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="defaultvaluemoney_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="defaultvaluemoney_id", insertable=false, updatable=false)
   private java.util.List<MoneyModel> defaultValueMoney;
 
   /**
@@ -391,7 +391,7 @@ public class StructureMapSourceModel  implements Serializable {
   private String defaultvaluereference_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="defaultvaluereference_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="defaultvaluereference_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> defaultValueReference;
 
   /**
@@ -429,7 +429,7 @@ public class StructureMapSourceModel  implements Serializable {
   private String defaultvalueaddress_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="defaultvalueaddress_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="defaultvalueaddress_id", insertable=false, updatable=false)
   private java.util.List<AddressModel> defaultValueAddress;
 
   /**
@@ -458,7 +458,7 @@ public class StructureMapSourceModel  implements Serializable {
   private String defaultvaluemeta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="defaultvaluemeta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="defaultvaluemeta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> defaultValueMeta;
 
   /**
@@ -478,7 +478,7 @@ public class StructureMapSourceModel  implements Serializable {
   private String defaultvaluecontactdetail_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="defaultvaluecontactdetail_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="defaultvaluecontactdetail_id", insertable=false, updatable=false)
   private java.util.List<ContactDetailModel> defaultValueContactDetail;
 
   /**
@@ -489,7 +489,7 @@ public class StructureMapSourceModel  implements Serializable {
   private String defaultvaluecontributor_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="defaultvaluecontributor_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="defaultvaluecontributor_id", insertable=false, updatable=false)
   private java.util.List<ContributorModel> defaultValueContributor;
 
   /**
@@ -500,7 +500,7 @@ public class StructureMapSourceModel  implements Serializable {
   private String defaultvaluedosage_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="defaultvaluedosage_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="defaultvaluedosage_id", insertable=false, updatable=false)
   private java.util.List<DosageModel> defaultValueDosage;
 
   /**
@@ -511,7 +511,7 @@ public class StructureMapSourceModel  implements Serializable {
   private String defaultvaluerelatedartifact_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="defaultvaluerelatedartifact_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="defaultvaluerelatedartifact_id", insertable=false, updatable=false)
   private java.util.List<RelatedArtifactModel> defaultValueRelatedArtifact;
 
   /**
@@ -522,7 +522,7 @@ public class StructureMapSourceModel  implements Serializable {
   private String defaultvalueusagecontext_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="defaultvalueusagecontext_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="defaultvalueusagecontext_id", insertable=false, updatable=false)
   private java.util.List<UsageContextModel> defaultValueUsageContext;
 
   /**
@@ -533,7 +533,7 @@ public class StructureMapSourceModel  implements Serializable {
   private String defaultvaluedatarequirement_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="defaultvaluedatarequirement_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="defaultvaluedatarequirement_id", insertable=false, updatable=false)
   private java.util.List<DataRequirementModel> defaultValueDataRequirement;
 
   /**
@@ -553,7 +553,7 @@ public class StructureMapSourceModel  implements Serializable {
   private String defaultvaluetriggerdefinition_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="defaultvaluetriggerdefinition_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="defaultvaluetriggerdefinition_id", insertable=false, updatable=false)
   private java.util.List<TriggerDefinitionModel> defaultValueTriggerDefinition;
 
   /**
@@ -628,14 +628,14 @@ public class StructureMapSourceModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public StructureMapSourceModel() {
   }
 
-  public StructureMapSourceModel(StructureMapSource o, String parentId) {
-  	this.parent_id = parentId;
+  public StructureMapSourceModel(StructureMapSource o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -670,7 +670,7 @@ public class StructureMapSourceModel  implements Serializable {
     	this.defaultValueBackboneElement = JsonUtils.toJson(o.getDefaultValueBackboneElement());
     }
     if (null != o.getDefaultValueNarrative() ) {
-    	this.defaultvaluenarrative_id = "defaultvaluenarrative" + this.parent_id;
+    	this.defaultvaluenarrative_id = "defaultvaluenarrative" + this.id;
     	this.defaultValueNarrative = NarrativeHelper.toModel(o.getDefaultValueNarrative(), this.defaultvaluenarrative_id);
     }
     if (null != o.getDefaultValueAnnotation()) {
@@ -683,33 +683,33 @@ public class StructureMapSourceModel  implements Serializable {
     	this.defaultValueIdentifier = JsonUtils.toJson(o.getDefaultValueIdentifier());
     }
     if (null != o.getDefaultValueCodeableConcept() ) {
-    	this.defaultvaluecodeableconcept_id = "defaultvaluecodeableconcept" + this.parent_id;
+    	this.defaultvaluecodeableconcept_id = "defaultvaluecodeableconcept" + this.id;
     	this.defaultValueCodeableConcept = CodeableConceptHelper.toModel(o.getDefaultValueCodeableConcept(), this.defaultvaluecodeableconcept_id);
     }
     if (null != o.getDefaultValueCoding() ) {
-    	this.defaultvaluecoding_id = "defaultvaluecoding" + this.parent_id;
+    	this.defaultvaluecoding_id = "defaultvaluecoding" + this.id;
     	this.defaultValueCoding = CodingHelper.toModel(o.getDefaultValueCoding(), this.defaultvaluecoding_id);
     }
     if (null != o.getDefaultValueQuantity() ) {
-    	this.defaultvaluequantity_id = "defaultvaluequantity" + this.parent_id;
+    	this.defaultvaluequantity_id = "defaultvaluequantity" + this.id;
     	this.defaultValueQuantity = QuantityHelper.toModel(o.getDefaultValueQuantity(), this.defaultvaluequantity_id);
     }
     if (null != o.getDefaultValueDuration()) {
     	this.defaultValueDuration = JsonUtils.toJson(o.getDefaultValueDuration());
     }
     if (null != o.getDefaultValueSimpleQuantity() ) {
-    	this.defaultvaluesimplequantity_id = "defaultvaluesimplequantity" + this.parent_id;
+    	this.defaultvaluesimplequantity_id = "defaultvaluesimplequantity" + this.id;
     	this.defaultValueSimpleQuantity = QuantityHelper.toModel(o.getDefaultValueSimpleQuantity(), this.defaultvaluesimplequantity_id);
     }
     if (null != o.getDefaultValueDistance() ) {
-    	this.defaultvaluedistance_id = "defaultvaluedistance" + this.parent_id;
+    	this.defaultvaluedistance_id = "defaultvaluedistance" + this.id;
     	this.defaultValueDistance = DistanceHelper.toModel(o.getDefaultValueDistance(), this.defaultvaluedistance_id);
     }
     if (null != o.getDefaultValueCount()) {
     	this.defaultValueCount = JsonUtils.toJson(o.getDefaultValueCount());
     }
     if (null != o.getDefaultValueMoney() ) {
-    	this.defaultvaluemoney_id = "defaultvaluemoney" + this.parent_id;
+    	this.defaultvaluemoney_id = "defaultvaluemoney" + this.id;
     	this.defaultValueMoney = MoneyHelper.toModel(o.getDefaultValueMoney(), this.defaultvaluemoney_id);
     }
     if (null != o.getDefaultValueAge()) {
@@ -725,7 +725,7 @@ public class StructureMapSourceModel  implements Serializable {
     	this.defaultValueRatio = JsonUtils.toJson(o.getDefaultValueRatio());
     }
     if (null != o.getDefaultValueReference() ) {
-    	this.defaultvaluereference_id = "defaultvaluereference" + this.parent_id;
+    	this.defaultvaluereference_id = "defaultvaluereference" + this.id;
     	this.defaultValueReference = ReferenceHelper.toModel(o.getDefaultValueReference(), this.defaultvaluereference_id);
     }
     if (null != o.getDefaultValueSampledData()) {
@@ -738,7 +738,7 @@ public class StructureMapSourceModel  implements Serializable {
     	this.defaultValueHumanName = JsonUtils.toJson(o.getDefaultValueHumanName());
     }
     if (null != o.getDefaultValueAddress() ) {
-    	this.defaultvalueaddress_id = "defaultvalueaddress" + this.parent_id;
+    	this.defaultvalueaddress_id = "defaultvalueaddress" + this.id;
     	this.defaultValueAddress = AddressHelper.toModel(o.getDefaultValueAddress(), this.defaultvalueaddress_id);
     }
     if (null != o.getDefaultValueContactPoint()) {
@@ -748,41 +748,41 @@ public class StructureMapSourceModel  implements Serializable {
     	this.defaultValueTiming = JsonUtils.toJson(o.getDefaultValueTiming());
     }
     if (null != o.getDefaultValueMeta() ) {
-    	this.defaultvaluemeta_id = "defaultvaluemeta" + this.parent_id;
+    	this.defaultvaluemeta_id = "defaultvaluemeta" + this.id;
     	this.defaultValueMeta = MetaHelper.toModel(o.getDefaultValueMeta(), this.defaultvaluemeta_id);
     }
     if (null != o.getDefaultValueElementDefinition()) {
     	this.defaultValueElementDefinition = JsonUtils.toJson(o.getDefaultValueElementDefinition());
     }
     if (null != o.getDefaultValueContactDetail() ) {
-    	this.defaultvaluecontactdetail_id = "defaultvaluecontactdetail" + this.parent_id;
+    	this.defaultvaluecontactdetail_id = "defaultvaluecontactdetail" + this.id;
     	this.defaultValueContactDetail = ContactDetailHelper.toModel(o.getDefaultValueContactDetail(), this.defaultvaluecontactdetail_id);
     }
     if (null != o.getDefaultValueContributor() ) {
-    	this.defaultvaluecontributor_id = "defaultvaluecontributor" + this.parent_id;
+    	this.defaultvaluecontributor_id = "defaultvaluecontributor" + this.id;
     	this.defaultValueContributor = ContributorHelper.toModel(o.getDefaultValueContributor(), this.defaultvaluecontributor_id);
     }
     if (null != o.getDefaultValueDosage() ) {
-    	this.defaultvaluedosage_id = "defaultvaluedosage" + this.parent_id;
+    	this.defaultvaluedosage_id = "defaultvaluedosage" + this.id;
     	this.defaultValueDosage = DosageHelper.toModel(o.getDefaultValueDosage(), this.defaultvaluedosage_id);
     }
     if (null != o.getDefaultValueRelatedArtifact() ) {
-    	this.defaultvaluerelatedartifact_id = "defaultvaluerelatedartifact" + this.parent_id;
+    	this.defaultvaluerelatedartifact_id = "defaultvaluerelatedartifact" + this.id;
     	this.defaultValueRelatedArtifact = RelatedArtifactHelper.toModel(o.getDefaultValueRelatedArtifact(), this.defaultvaluerelatedartifact_id);
     }
     if (null != o.getDefaultValueUsageContext() ) {
-    	this.defaultvalueusagecontext_id = "defaultvalueusagecontext" + this.parent_id;
+    	this.defaultvalueusagecontext_id = "defaultvalueusagecontext" + this.id;
     	this.defaultValueUsageContext = UsageContextHelper.toModel(o.getDefaultValueUsageContext(), this.defaultvalueusagecontext_id);
     }
     if (null != o.getDefaultValueDataRequirement() ) {
-    	this.defaultvaluedatarequirement_id = "defaultvaluedatarequirement" + this.parent_id;
+    	this.defaultvaluedatarequirement_id = "defaultvaluedatarequirement" + this.id;
     	this.defaultValueDataRequirement = DataRequirementHelper.toModel(o.getDefaultValueDataRequirement(), this.defaultvaluedatarequirement_id);
     }
     if (null != o.getDefaultValueParameterDefinition()) {
     	this.defaultValueParameterDefinition = JsonUtils.toJson(o.getDefaultValueParameterDefinition());
     }
     if (null != o.getDefaultValueTriggerDefinition() ) {
-    	this.defaultvaluetriggerdefinition_id = "defaultvaluetriggerdefinition" + this.parent_id;
+    	this.defaultvaluetriggerdefinition_id = "defaultvaluetriggerdefinition" + this.id;
     	this.defaultValueTriggerDefinition = TriggerDefinitionHelper.toModel(o.getDefaultValueTriggerDefinition(), this.defaultvaluetriggerdefinition_id);
     }
     this.element = o.getElement();
@@ -1188,11 +1188,11 @@ public class StructureMapSourceModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -1247,7 +1247,7 @@ public class StructureMapSourceModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -1319,7 +1319,7 @@ public class StructureMapSourceModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

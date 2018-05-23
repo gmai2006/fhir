@@ -36,7 +36,7 @@ public interface TestReportService {
   public List<TestReport> selectAll();
   public TestReport create(TestReport bean);
   public TestReport update(TestReport bean);
-  public void delete(TestReport bean);
+  public void delete(String id);
   public List<TestReport> findByField(QueryBuilder queryBuilder);
   public List<TestReport> findByTestScript(QueryBuilder queryBuilder);
   public List<TestReport> findByParticipant(QueryBuilder queryBuilder);

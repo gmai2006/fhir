@@ -36,7 +36,7 @@ public interface AppointmentService {
   public List<Appointment> selectAll();
   public Appointment create(Appointment bean);
   public Appointment update(Appointment bean);
-  public void delete(Appointment bean);
+  public void delete(String id);
   public List<Appointment> findByField(QueryBuilder queryBuilder);
   public List<Appointment> findByServiceCategory(QueryBuilder queryBuilder);
   public List<Appointment> findByServiceType(QueryBuilder queryBuilder);

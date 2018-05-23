@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class ConditionResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Condition create(Condition obj) {
-		return this.service.create(obj);
+	public Condition createOrUpdate(Condition obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing Condition
+   * @param obj - instance of Condition
+   * @return Condition
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public Condition update( Condition obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing Condition
+   * @param obj - instance of Condition
+   * @return Condition
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get Condition by its ID
+   * @param id - instance of Condition
+   * @return Condition
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class ConditionResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all Condition with limit of returned records
+   * @param max - number of records
+   * @return a list Condition
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class ConditionResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query Condition based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of Condition
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class ConditionResource {
   }
 
   /**
-  * Descr: The category of the condition
-  * Type: token
+   * Query Condition by composite fields
+   * Descr: The category of the condition
+   * Type: token
   */
   @GET
   @Path("category")
@@ -167,8 +208,9 @@ public class ConditionResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The severity of the condition
-  * Type: token
+   * Query Condition by composite fields
+   * Descr: The severity of the condition
+   * Type: token
   */
   @GET
   @Path("severity")
@@ -193,8 +235,9 @@ public class ConditionResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Anatomical location, if relevant
-  * Type: token
+   * Query Condition by composite fields
+   * Descr: Anatomical location, if relevant
+   * Type: token
   */
   @GET
   @Path("bodysite")
@@ -219,8 +262,9 @@ public class ConditionResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Who has the condition?
-  * Type: reference
+   * Query Condition by composite fields
+   * Descr: Who has the condition?
+   * Type: reference
   */
   @GET
   @Path("subject")
@@ -245,8 +289,9 @@ public class ConditionResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Encounter or episode when condition first asserted
-  * Type: reference
+   * Query Condition by composite fields
+   * Descr: Encounter or episode when condition first asserted
+   * Type: reference
   */
   @GET
   @Path("context")
@@ -271,8 +316,9 @@ public class ConditionResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Person who asserts this condition
-  * Type: reference
+   * Query Condition by composite fields
+   * Descr: Person who asserts this condition
+   * Type: reference
   */
   @GET
   @Path("asserter")

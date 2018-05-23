@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="organizationcontact")
 public class OrganizationContactModel  implements Serializable {
-	private static final long serialVersionUID = 151910893760120321L;
+	private static final long serialVersionUID = 151967883214531628L;
   /**
   * Description: "Indicates a purpose for which the contact can be reached."
   */
@@ -46,7 +46,7 @@ public class OrganizationContactModel  implements Serializable {
   private String purpose_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="purpose_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="purpose_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> purpose;
 
   /**
@@ -75,7 +75,7 @@ public class OrganizationContactModel  implements Serializable {
   private String address_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="address_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="address_id", insertable=false, updatable=false)
   private java.util.List<AddressModel> address;
 
   /**
@@ -114,19 +114,19 @@ public class OrganizationContactModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public OrganizationContactModel() {
   }
 
-  public OrganizationContactModel(OrganizationContact o, String parentId) {
-  	this.parent_id = parentId;
+  public OrganizationContactModel(OrganizationContact o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getPurpose() ) {
-    	this.purpose_id = "purpose" + this.parent_id;
+    	this.purpose_id = "purpose" + this.id;
     	this.purpose = CodeableConceptHelper.toModel(o.getPurpose(), this.purpose_id);
     }
     if (null != o.getName()) {
@@ -136,7 +136,7 @@ public class OrganizationContactModel  implements Serializable {
     	this.telecom = JsonUtils.toJson(o.getTelecom());
     }
     if (null != o.getAddress() ) {
-    	this.address_id = "address" + this.parent_id;
+    	this.address_id = "address" + this.id;
     	this.address = AddressHelper.toModel(o.getAddress(), this.address_id);
     }
     if (null != o.getModifierExtension()) {
@@ -189,11 +189,11 @@ public class OrganizationContactModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -205,7 +205,7 @@ public class OrganizationContactModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -219,7 +219,7 @@ public class OrganizationContactModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

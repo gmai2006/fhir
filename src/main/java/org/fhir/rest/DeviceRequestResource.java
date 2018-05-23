@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class DeviceRequestResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public DeviceRequest create(DeviceRequest obj) {
-		return this.service.create(obj);
+	public DeviceRequest createOrUpdate(DeviceRequest obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing DeviceRequest
+   * @param obj - instance of DeviceRequest
+   * @return DeviceRequest
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public DeviceRequest update( DeviceRequest obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing DeviceRequest
+   * @param obj - instance of DeviceRequest
+   * @return DeviceRequest
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get DeviceRequest by its ID
+   * @param id - instance of DeviceRequest
+   * @return DeviceRequest
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class DeviceRequestResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all DeviceRequest with limit of returned records
+   * @param max - number of records
+   * @return a list DeviceRequest
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class DeviceRequestResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query DeviceRequest based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of DeviceRequest
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class DeviceRequestResource {
   }
 
   /**
-  * Descr: Protocol or definition followed by this request
-  * Type: reference
+   * Query DeviceRequest by composite fields
+   * Descr: Protocol or definition followed by this request
+   * Type: reference
   */
   @GET
   @Path("definition")
@@ -167,8 +208,9 @@ public class DeviceRequestResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Plan/proposal/order fulfilled by this request
-  * Type: reference
+   * Query DeviceRequest by composite fields
+   * Descr: Plan/proposal/order fulfilled by this request
+   * Type: reference
   */
   @GET
   @Path("basedon")
@@ -193,8 +235,9 @@ public class DeviceRequestResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Request takes the place of referenced completed or terminated requests
-  * Type: reference
+   * Query DeviceRequest by composite fields
+   * Descr: Request takes the place of referenced completed or terminated requests
+   * Type: reference
   */
   @GET
   @Path("priorrequest")
@@ -219,8 +262,9 @@ public class DeviceRequestResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: proposal | plan | original-order |reflex-order
-  * Type: token
+   * Query DeviceRequest by composite fields
+   * Descr: proposal | plan | original-order |reflex-order
+   * Type: token
   */
   @GET
   @Path("intent")
@@ -245,8 +289,9 @@ public class DeviceRequestResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Reference to resource that is being requested/ordered
-  * Type: reference
+   * Query DeviceRequest by composite fields
+   * Descr: Reference to resource that is being requested/ordered
+   * Type: reference
   */
   @GET
   @Path("device")
@@ -271,8 +316,9 @@ public class DeviceRequestResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Individual the service is ordered for
-  * Type: reference
+   * Query DeviceRequest by composite fields
+   * Descr: Individual the service is ordered for
+   * Type: reference
   */
   @GET
   @Path("subject")
@@ -297,8 +343,9 @@ public class DeviceRequestResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Desired performer for service
-  * Type: reference
+   * Query DeviceRequest by composite fields
+   * Descr: Desired performer for service
+   * Type: reference
   */
   @GET
   @Path("performer")

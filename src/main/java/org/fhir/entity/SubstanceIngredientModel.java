@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="substanceingredient")
 public class SubstanceIngredientModel  implements Serializable {
-	private static final long serialVersionUID = 151910893729159943L;
+	private static final long serialVersionUID = 151967883182612077L;
   /**
   * Description: "The amount of the ingredient in the substance - a concentration ratio."
   * Actual type: String;
@@ -55,7 +55,7 @@ public class SubstanceIngredientModel  implements Serializable {
   private String substancecodeableconcept_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="substancecodeableconcept_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="substancecodeableconcept_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> substanceCodeableConcept;
 
   /**
@@ -66,7 +66,7 @@ public class SubstanceIngredientModel  implements Serializable {
   private String substancereference_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="substancereference_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="substancereference_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> substanceReference;
 
   /**
@@ -105,14 +105,14 @@ public class SubstanceIngredientModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public SubstanceIngredientModel() {
   }
 
-  public SubstanceIngredientModel(SubstanceIngredient o, String parentId) {
-  	this.parent_id = parentId;
+  public SubstanceIngredientModel(SubstanceIngredient o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -120,11 +120,11 @@ public class SubstanceIngredientModel  implements Serializable {
     	this.quantity = JsonUtils.toJson(o.getQuantity());
     }
     if (null != o.getSubstanceCodeableConcept() ) {
-    	this.substancecodeableconcept_id = "substancecodeableconcept" + this.parent_id;
+    	this.substancecodeableconcept_id = "substancecodeableconcept" + this.id;
     	this.substanceCodeableConcept = CodeableConceptHelper.toModel(o.getSubstanceCodeableConcept(), this.substancecodeableconcept_id);
     }
     if (null != o.getSubstanceReference() ) {
-    	this.substancereference_id = "substancereference" + this.parent_id;
+    	this.substancereference_id = "substancereference" + this.id;
     	this.substanceReference = ReferenceHelper.toModel(o.getSubstanceReference(), this.substancereference_id);
     }
     if (null != o.getModifierExtension()) {
@@ -171,11 +171,11 @@ public class SubstanceIngredientModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -186,7 +186,7 @@ public class SubstanceIngredientModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -199,7 +199,7 @@ public class SubstanceIngredientModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

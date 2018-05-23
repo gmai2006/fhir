@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class HealthcareServiceResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public HealthcareService create(HealthcareService obj) {
-		return this.service.create(obj);
+	public HealthcareService createOrUpdate(HealthcareService obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing HealthcareService
+   * @param obj - instance of HealthcareService
+   * @return HealthcareService
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public HealthcareService update( HealthcareService obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing HealthcareService
+   * @param obj - instance of HealthcareService
+   * @return HealthcareService
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get HealthcareService by its ID
+   * @param id - instance of HealthcareService
+   * @return HealthcareService
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class HealthcareServiceResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all HealthcareService with limit of returned records
+   * @param max - number of records
+   * @return a list HealthcareService
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class HealthcareServiceResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query HealthcareService based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of HealthcareService
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class HealthcareServiceResource {
   }
 
   /**
-  * Descr: The organization that provides this Healthcare Service
-  * Type: reference
+   * Query HealthcareService by composite fields
+   * Descr: The organization that provides this Healthcare Service
+   * Type: reference
   */
   @GET
   @Path("organization")
@@ -167,8 +208,9 @@ public class HealthcareServiceResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Service Category of the Healthcare Service
-  * Type: token
+   * Query HealthcareService by composite fields
+   * Descr: Service Category of the Healthcare Service
+   * Type: token
   */
   @GET
   @Path("category")
@@ -193,8 +235,9 @@ public class HealthcareServiceResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The type of service provided by this healthcare service
-  * Type: token
+   * Query HealthcareService by composite fields
+   * Descr: The type of service provided by this healthcare service
+   * Type: token
   */
   @GET
   @Path("type")
@@ -219,8 +262,9 @@ public class HealthcareServiceResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The location of the Healthcare Service
-  * Type: reference
+   * Query HealthcareService by composite fields
+   * Descr: The location of the Healthcare Service
+   * Type: reference
   */
   @GET
   @Path("location")
@@ -245,8 +289,9 @@ public class HealthcareServiceResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: One of the HealthcareService's characteristics
-  * Type: token
+   * Query HealthcareService by composite fields
+   * Descr: One of the HealthcareService's characteristics
+   * Type: token
   */
   @GET
   @Path("characteristic")
@@ -271,8 +316,9 @@ public class HealthcareServiceResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Technical endpoints providing access to services operated for the location
-  * Type: reference
+   * Query HealthcareService by composite fields
+   * Descr: Technical endpoints providing access to services operated for the location
+   * Type: reference
   */
   @GET
   @Path("endpoint")

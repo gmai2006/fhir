@@ -38,7 +38,7 @@ public interface SearchParameterDao {
   public SearchParameter create(SearchParameter e);
 
   public SearchParameter update(SearchParameter e);
-  public void delete(SearchParameter e);
+  public void delete(String id);
 
   public List<SearchParameter> findByField(QueryBuilder queryBuilder);
 

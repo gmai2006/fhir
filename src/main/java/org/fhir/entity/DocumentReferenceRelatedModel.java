@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="documentreferencerelated")
 public class DocumentReferenceRelatedModel  implements Serializable {
-	private static final long serialVersionUID = 151910893725035716L;
+	private static final long serialVersionUID = 151967883177782435L;
   /**
   * Description: "Related identifier to this DocumentReference. If both id and ref are present they shall refer to the same thing."
   * Actual type: String;
@@ -55,7 +55,7 @@ public class DocumentReferenceRelatedModel  implements Serializable {
   private String ref_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="ref_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="ref_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> ref;
 
   /**
@@ -94,14 +94,14 @@ public class DocumentReferenceRelatedModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public DocumentReferenceRelatedModel() {
   }
 
-  public DocumentReferenceRelatedModel(DocumentReferenceRelated o, String parentId) {
-  	this.parent_id = parentId;
+  public DocumentReferenceRelatedModel(DocumentReferenceRelated o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -109,7 +109,7 @@ public class DocumentReferenceRelatedModel  implements Serializable {
     	this.identifier = JsonUtils.toJson(o.getIdentifier());
     }
     if (null != o.getRef() ) {
-    	this.ref_id = "ref" + this.parent_id;
+    	this.ref_id = "ref" + this.id;
     	this.ref = ReferenceHelper.toModel(o.getRef(), this.ref_id);
     }
     if (null != o.getModifierExtension()) {
@@ -150,11 +150,11 @@ public class DocumentReferenceRelatedModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -165,7 +165,7 @@ public class DocumentReferenceRelatedModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -177,7 +177,7 @@ public class DocumentReferenceRelatedModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

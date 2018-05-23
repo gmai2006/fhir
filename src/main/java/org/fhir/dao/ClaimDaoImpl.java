@@ -90,9 +90,9 @@ public class ClaimDaoImpl implements ClaimDao {
   }
   @Override
   @Transactional
-  public void delete(Claim e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ClaimModel removed = em.find(ClaimModel.class, e.getId());
+      final ClaimModel removed = em.find(ClaimModel.class, id);
       em.remove(removed);
   }
 

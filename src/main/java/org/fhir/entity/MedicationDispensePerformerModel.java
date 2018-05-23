@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="medicationdispenseperformer")
 public class MedicationDispensePerformerModel  implements Serializable {
-	private static final long serialVersionUID = 151910893712178475L;
+	private static final long serialVersionUID = 151967883165188793L;
   /**
   * Description: "The device, practitioner, etc. who performed the action.  It should be assumed that the actor is the dispenser of the medication."
   */
@@ -46,7 +46,7 @@ public class MedicationDispensePerformerModel  implements Serializable {
   private String actor_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="actor_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="actor_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> actor;
 
   /**
@@ -57,7 +57,7 @@ public class MedicationDispensePerformerModel  implements Serializable {
   private String onbehalfof_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="onbehalfof_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="onbehalfof_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> onBehalfOf;
 
   /**
@@ -96,23 +96,23 @@ public class MedicationDispensePerformerModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public MedicationDispensePerformerModel() {
   }
 
-  public MedicationDispensePerformerModel(MedicationDispensePerformer o, String parentId) {
-  	this.parent_id = parentId;
+  public MedicationDispensePerformerModel(MedicationDispensePerformer o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getActor() ) {
-    	this.actor_id = "actor" + this.parent_id;
+    	this.actor_id = "actor" + this.id;
     	this.actor = ReferenceHelper.toModel(o.getActor(), this.actor_id);
     }
     if (null != o.getOnBehalfOf() ) {
-    	this.onbehalfof_id = "onbehalfof" + this.parent_id;
+    	this.onbehalfof_id = "onbehalfof" + this.id;
     	this.onBehalfOf = ReferenceHelper.toModel(o.getOnBehalfOf(), this.onbehalfof_id);
     }
     if (null != o.getModifierExtension()) {
@@ -153,11 +153,11 @@ public class MedicationDispensePerformerModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -167,7 +167,7 @@ public class MedicationDispensePerformerModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -179,7 +179,7 @@ public class MedicationDispensePerformerModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

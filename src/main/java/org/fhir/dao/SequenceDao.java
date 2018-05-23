@@ -38,7 +38,7 @@ public interface SequenceDao {
   public Sequence create(Sequence e);
 
   public Sequence update(Sequence e);
-  public void delete(Sequence e);
+  public void delete(String id);
 
   public List<Sequence> findByField(QueryBuilder queryBuilder);
 

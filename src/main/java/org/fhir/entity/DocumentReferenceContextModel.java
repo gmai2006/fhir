@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="documentreferencecontext")
 public class DocumentReferenceContextModel  implements Serializable {
-	private static final long serialVersionUID = 151910893773437253L;
+	private static final long serialVersionUID = 151967883228271893L;
   /**
   * Description: "Describes the clinical encounter or type of care that the document content is associated with."
   */
@@ -46,7 +46,7 @@ public class DocumentReferenceContextModel  implements Serializable {
   private String encounter_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="encounter_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="encounter_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> encounter;
 
   /**
@@ -57,7 +57,7 @@ public class DocumentReferenceContextModel  implements Serializable {
   private String event_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="event_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="event_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> event;
 
   /**
@@ -77,7 +77,7 @@ public class DocumentReferenceContextModel  implements Serializable {
   private String facilitytype_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="facilitytype_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="facilitytype_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> facilityType;
 
   /**
@@ -88,7 +88,7 @@ public class DocumentReferenceContextModel  implements Serializable {
   private String practicesetting_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="practicesetting_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="practicesetting_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> practiceSetting;
 
   /**
@@ -99,7 +99,7 @@ public class DocumentReferenceContextModel  implements Serializable {
   private String sourcepatientinfo_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="sourcepatientinfo_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="sourcepatientinfo_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> sourcePatientInfo;
 
   /**
@@ -110,7 +110,7 @@ public class DocumentReferenceContextModel  implements Serializable {
   private String related_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="related_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="related_id", insertable=false, updatable=false)
   private java.util.List<DocumentReferenceRelatedModel> related;
 
   /**
@@ -149,42 +149,42 @@ public class DocumentReferenceContextModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public DocumentReferenceContextModel() {
   }
 
-  public DocumentReferenceContextModel(DocumentReferenceContext o, String parentId) {
-  	this.parent_id = parentId;
+  public DocumentReferenceContextModel(DocumentReferenceContext o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getEncounter() ) {
-    	this.encounter_id = "encounter" + this.parent_id;
+    	this.encounter_id = "encounter" + this.id;
     	this.encounter = ReferenceHelper.toModel(o.getEncounter(), this.encounter_id);
     }
     if (null != o.getEvent() && !o.getEvent().isEmpty()) {
-    	this.event_id = "event" + this.parent_id;
+    	this.event_id = "event" + this.id;
     	this.event = CodeableConceptHelper.toModelFromArray(o.getEvent(), this.event_id);
     }
     if (null != o.getPeriod()) {
     	this.period = JsonUtils.toJson(o.getPeriod());
     }
     if (null != o.getFacilityType() ) {
-    	this.facilitytype_id = "facilitytype" + this.parent_id;
+    	this.facilitytype_id = "facilitytype" + this.id;
     	this.facilityType = CodeableConceptHelper.toModel(o.getFacilityType(), this.facilitytype_id);
     }
     if (null != o.getPracticeSetting() ) {
-    	this.practicesetting_id = "practicesetting" + this.parent_id;
+    	this.practicesetting_id = "practicesetting" + this.id;
     	this.practiceSetting = CodeableConceptHelper.toModel(o.getPracticeSetting(), this.practicesetting_id);
     }
     if (null != o.getSourcePatientInfo() ) {
-    	this.sourcepatientinfo_id = "sourcepatientinfo" + this.parent_id;
+    	this.sourcepatientinfo_id = "sourcepatientinfo" + this.id;
     	this.sourcePatientInfo = ReferenceHelper.toModel(o.getSourcePatientInfo(), this.sourcepatientinfo_id);
     }
     if (null != o.getRelated() && !o.getRelated().isEmpty()) {
-    	this.related_id = "related" + this.parent_id;
+    	this.related_id = "related" + this.id;
     	this.related = DocumentReferenceRelatedHelper.toModelFromArray(o.getRelated(), this.related_id);
     }
     if (null != o.getModifierExtension()) {
@@ -255,11 +255,11 @@ public class DocumentReferenceContextModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -270,7 +270,7 @@ public class DocumentReferenceContextModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -287,7 +287,7 @@ public class DocumentReferenceContextModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

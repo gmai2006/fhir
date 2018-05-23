@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="plandefinitionaction")
 public class PlanDefinitionActionModel  implements Serializable {
-	private static final long serialVersionUID = 151910893686261319L;
+	private static final long serialVersionUID = 151967883137254545L;
   /**
   * Description: "A user-visible label for the action."
   */
@@ -74,7 +74,7 @@ public class PlanDefinitionActionModel  implements Serializable {
   private String code_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> code;
 
   /**
@@ -85,7 +85,7 @@ public class PlanDefinitionActionModel  implements Serializable {
   private String reason_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reason_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="reason_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> reason;
 
   /**
@@ -96,7 +96,7 @@ public class PlanDefinitionActionModel  implements Serializable {
   private String documentation_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="documentation_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="documentation_id", insertable=false, updatable=false)
   private java.util.List<RelatedArtifactModel> documentation;
 
   /**
@@ -114,7 +114,7 @@ public class PlanDefinitionActionModel  implements Serializable {
   private String triggerdefinition_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="triggerdefinition_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="triggerdefinition_id", insertable=false, updatable=false)
   private java.util.List<TriggerDefinitionModel> triggerDefinition;
 
   /**
@@ -125,7 +125,7 @@ public class PlanDefinitionActionModel  implements Serializable {
   private String condition_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="condition_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="condition_id", insertable=false, updatable=false)
   private java.util.List<PlanDefinitionConditionModel> condition;
 
   /**
@@ -136,7 +136,7 @@ public class PlanDefinitionActionModel  implements Serializable {
   private String input_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="input_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="input_id", insertable=false, updatable=false)
   private java.util.List<DataRequirementModel> input;
 
   /**
@@ -147,7 +147,7 @@ public class PlanDefinitionActionModel  implements Serializable {
   private String output_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="output_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="output_id", insertable=false, updatable=false)
   private java.util.List<DataRequirementModel> output;
 
   /**
@@ -158,7 +158,7 @@ public class PlanDefinitionActionModel  implements Serializable {
   private String relatedaction_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="relatedaction_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="relatedaction_id", insertable=false, updatable=false)
   private java.util.List<PlanDefinitionRelatedActionModel> relatedAction;
 
   /**
@@ -213,7 +213,7 @@ public class PlanDefinitionActionModel  implements Serializable {
   private String participant_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="participant_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="participant_id", insertable=false, updatable=false)
   private java.util.List<PlanDefinitionParticipantModel> participant;
 
   /**
@@ -224,7 +224,7 @@ public class PlanDefinitionActionModel  implements Serializable {
   private String type_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> type;
 
   /**
@@ -270,7 +270,7 @@ public class PlanDefinitionActionModel  implements Serializable {
   private String definition_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="definition_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="definition_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> definition;
 
   /**
@@ -281,7 +281,7 @@ public class PlanDefinitionActionModel  implements Serializable {
   private String transform_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="transform_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="transform_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> transform;
 
   /**
@@ -292,7 +292,7 @@ public class PlanDefinitionActionModel  implements Serializable {
   private String dynamicvalue_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="dynamicvalue_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="dynamicvalue_id", insertable=false, updatable=false)
   private java.util.List<PlanDefinitionDynamicValueModel> dynamicValue;
 
   /**
@@ -303,7 +303,7 @@ public class PlanDefinitionActionModel  implements Serializable {
   private String action_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="action_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="action_id", insertable=false, updatable=false)
   private java.util.List<PlanDefinitionActionModel> action;
 
   /**
@@ -342,14 +342,14 @@ public class PlanDefinitionActionModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public PlanDefinitionActionModel() {
   }
 
-  public PlanDefinitionActionModel(PlanDefinitionAction o, String parentId) {
-  	this.parent_id = parentId;
+  public PlanDefinitionActionModel(PlanDefinitionAction o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -358,36 +358,36 @@ public class PlanDefinitionActionModel  implements Serializable {
     this.description = o.getDescription();
     this.textEquivalent = o.getTextEquivalent();
     if (null != o.getCode() && !o.getCode().isEmpty()) {
-    	this.code_id = "code" + this.parent_id;
+    	this.code_id = "code" + this.id;
     	this.code = CodeableConceptHelper.toModelFromArray(o.getCode(), this.code_id);
     }
     if (null != o.getReason() && !o.getReason().isEmpty()) {
-    	this.reason_id = "reason" + this.parent_id;
+    	this.reason_id = "reason" + this.id;
     	this.reason = CodeableConceptHelper.toModelFromArray(o.getReason(), this.reason_id);
     }
     if (null != o.getDocumentation() && !o.getDocumentation().isEmpty()) {
-    	this.documentation_id = "documentation" + this.parent_id;
+    	this.documentation_id = "documentation" + this.id;
     	this.documentation = RelatedArtifactHelper.toModelFromArray(o.getDocumentation(), this.documentation_id);
     }
     this.goalId = org.fhir.utils.JsonUtils.toJson(o.getGoalId());
     if (null != o.getTriggerDefinition() && !o.getTriggerDefinition().isEmpty()) {
-    	this.triggerdefinition_id = "triggerdefinition" + this.parent_id;
+    	this.triggerdefinition_id = "triggerdefinition" + this.id;
     	this.triggerDefinition = TriggerDefinitionHelper.toModelFromArray(o.getTriggerDefinition(), this.triggerdefinition_id);
     }
     if (null != o.getCondition() && !o.getCondition().isEmpty()) {
-    	this.condition_id = "condition" + this.parent_id;
+    	this.condition_id = "condition" + this.id;
     	this.condition = PlanDefinitionConditionHelper.toModelFromArray(o.getCondition(), this.condition_id);
     }
     if (null != o.getInput() && !o.getInput().isEmpty()) {
-    	this.input_id = "input" + this.parent_id;
+    	this.input_id = "input" + this.id;
     	this.input = DataRequirementHelper.toModelFromArray(o.getInput(), this.input_id);
     }
     if (null != o.getOutput() && !o.getOutput().isEmpty()) {
-    	this.output_id = "output" + this.parent_id;
+    	this.output_id = "output" + this.id;
     	this.output = DataRequirementHelper.toModelFromArray(o.getOutput(), this.output_id);
     }
     if (null != o.getRelatedAction() && !o.getRelatedAction().isEmpty()) {
-    	this.relatedaction_id = "relatedaction" + this.parent_id;
+    	this.relatedaction_id = "relatedaction" + this.id;
     	this.relatedAction = PlanDefinitionRelatedActionHelper.toModelFromArray(o.getRelatedAction(), this.relatedaction_id);
     }
     this.timingDateTime = o.getTimingDateTime();
@@ -404,11 +404,11 @@ public class PlanDefinitionActionModel  implements Serializable {
     	this.timingTiming = JsonUtils.toJson(o.getTimingTiming());
     }
     if (null != o.getParticipant() && !o.getParticipant().isEmpty()) {
-    	this.participant_id = "participant" + this.parent_id;
+    	this.participant_id = "participant" + this.id;
     	this.participant = PlanDefinitionParticipantHelper.toModelFromArray(o.getParticipant(), this.participant_id);
     }
     if (null != o.getType() ) {
-    	this.type_id = "type" + this.parent_id;
+    	this.type_id = "type" + this.id;
     	this.type = CodingHelper.toModel(o.getType(), this.type_id);
     }
     this.groupingBehavior = o.getGroupingBehavior();
@@ -417,19 +417,19 @@ public class PlanDefinitionActionModel  implements Serializable {
     this.precheckBehavior = o.getPrecheckBehavior();
     this.cardinalityBehavior = o.getCardinalityBehavior();
     if (null != o.getDefinition() ) {
-    	this.definition_id = "definition" + this.parent_id;
+    	this.definition_id = "definition" + this.id;
     	this.definition = ReferenceHelper.toModel(o.getDefinition(), this.definition_id);
     }
     if (null != o.getTransform() ) {
-    	this.transform_id = "transform" + this.parent_id;
+    	this.transform_id = "transform" + this.id;
     	this.transform = ReferenceHelper.toModel(o.getTransform(), this.transform_id);
     }
     if (null != o.getDynamicValue() && !o.getDynamicValue().isEmpty()) {
-    	this.dynamicvalue_id = "dynamicvalue" + this.parent_id;
+    	this.dynamicvalue_id = "dynamicvalue" + this.id;
     	this.dynamicValue = PlanDefinitionDynamicValueHelper.toModelFromArray(o.getDynamicValue(), this.dynamicvalue_id);
     }
     if (null != o.getAction() && !o.getAction().isEmpty()) {
-    	this.action_id = "action" + this.parent_id;
+    	this.action_id = "action" + this.id;
     	this.action = PlanDefinitionActionHelper.toModelFromArray(o.getAction(), this.action_id);
     }
     if (null != o.getModifierExtension()) {
@@ -632,11 +632,11 @@ public class PlanDefinitionActionModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -661,7 +661,7 @@ public class PlanDefinitionActionModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -700,7 +700,7 @@ public class PlanDefinitionActionModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

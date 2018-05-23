@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="imagingmanifestseries")
 public class ImagingManifestSeriesModel  implements Serializable {
-	private static final long serialVersionUID = 151910893734695420L;
+	private static final long serialVersionUID = 151967883188837763L;
   /**
   * Description: "Series instance UID of the SOP instances in the selection."
   */
@@ -54,7 +54,7 @@ public class ImagingManifestSeriesModel  implements Serializable {
   private String endpoint_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="endpoint_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="endpoint_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> endpoint;
 
   /**
@@ -65,7 +65,7 @@ public class ImagingManifestSeriesModel  implements Serializable {
   private String instance_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="instance_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="instance_id", insertable=false, updatable=false)
   private java.util.List<ImagingManifestInstanceModel> instance;
 
   /**
@@ -104,24 +104,24 @@ public class ImagingManifestSeriesModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ImagingManifestSeriesModel() {
   }
 
-  public ImagingManifestSeriesModel(ImagingManifestSeries o, String parentId) {
-  	this.parent_id = parentId;
+  public ImagingManifestSeriesModel(ImagingManifestSeries o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     this.uid = o.getUid();
     if (null != o.getEndpoint() && !o.getEndpoint().isEmpty()) {
-    	this.endpoint_id = "endpoint" + this.parent_id;
+    	this.endpoint_id = "endpoint" + this.id;
     	this.endpoint = ReferenceHelper.toModelFromArray(o.getEndpoint(), this.endpoint_id);
     }
     if (null != o.getInstance() && !o.getInstance().isEmpty()) {
-    	this.instance_id = "instance" + this.parent_id;
+    	this.instance_id = "instance" + this.id;
     	this.instance = ImagingManifestInstanceHelper.toModelFromArray(o.getInstance(), this.instance_id);
     }
     if (null != o.getModifierExtension()) {
@@ -168,11 +168,11 @@ public class ImagingManifestSeriesModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -183,7 +183,7 @@ public class ImagingManifestSeriesModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -196,7 +196,7 @@ public class ImagingManifestSeriesModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

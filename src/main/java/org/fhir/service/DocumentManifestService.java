@@ -36,7 +36,7 @@ public interface DocumentManifestService {
   public List<DocumentManifest> selectAll();
   public DocumentManifest create(DocumentManifest bean);
   public DocumentManifest update(DocumentManifest bean);
-  public void delete(DocumentManifest bean);
+  public void delete(String id);
   public List<DocumentManifest> findByField(QueryBuilder queryBuilder);
   public List<DocumentManifest> findByType(QueryBuilder queryBuilder);
   public List<DocumentManifest> findBySubject(QueryBuilder queryBuilder);

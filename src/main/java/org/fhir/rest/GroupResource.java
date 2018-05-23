@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class GroupResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Group create(Group obj) {
-		return this.service.create(obj);
+	public Group createOrUpdate(Group obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing Group
+   * @param obj - instance of Group
+   * @return Group
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public Group update( Group obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing Group
+   * @param obj - instance of Group
+   * @return Group
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get Group by its ID
+   * @param id - instance of Group
+   * @return Group
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class GroupResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all Group with limit of returned records
+   * @param max - number of records
+   * @return a list Group
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class GroupResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query Group based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of Group
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class GroupResource {
   }
 
   /**
-  * Descr: The kind of resources contained
-  * Type: token
+   * Query Group by composite fields
+   * Descr: The kind of resources contained
+   * Type: token
   */
   @GET
   @Path("code")

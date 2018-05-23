@@ -36,7 +36,7 @@ public interface ActivityDefinitionService {
   public List<ActivityDefinition> selectAll();
   public ActivityDefinition create(ActivityDefinition bean);
   public ActivityDefinition update(ActivityDefinition bean);
-  public void delete(ActivityDefinition bean);
+  public void delete(String id);
   public List<ActivityDefinition> findByField(QueryBuilder queryBuilder);
   public List<ActivityDefinition> findByUseContext(QueryBuilder queryBuilder);
   public List<ActivityDefinition> findByJurisdiction(QueryBuilder queryBuilder);

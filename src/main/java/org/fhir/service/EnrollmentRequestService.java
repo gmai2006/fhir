@@ -36,7 +36,7 @@ public interface EnrollmentRequestService {
   public List<EnrollmentRequest> selectAll();
   public EnrollmentRequest create(EnrollmentRequest bean);
   public EnrollmentRequest update(EnrollmentRequest bean);
-  public void delete(EnrollmentRequest bean);
+  public void delete(String id);
   public List<EnrollmentRequest> findByField(QueryBuilder queryBuilder);
   public List<EnrollmentRequest> findByInsurer(QueryBuilder queryBuilder);
   public List<EnrollmentRequest> findByProvider(QueryBuilder queryBuilder);

@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="observationreferencerange")
 public class ObservationReferenceRangeModel  implements Serializable {
-	private static final long serialVersionUID = 151910893765711083L;
+	private static final long serialVersionUID = 151967883219954139L;
   /**
   * Description: "The value of the low bound of the reference range.  The low bound of the reference range endpoint is inclusive of the value (e.g.  reference range is >=5 - <=9).   If the low bound is omitted,  it is assumed to be meaningless (e.g. reference range is <=2.3)."
   */
@@ -46,7 +46,7 @@ public class ObservationReferenceRangeModel  implements Serializable {
   private String low_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="low_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="low_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> low;
 
   /**
@@ -57,7 +57,7 @@ public class ObservationReferenceRangeModel  implements Serializable {
   private String high_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="high_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="high_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> high;
 
   /**
@@ -68,7 +68,7 @@ public class ObservationReferenceRangeModel  implements Serializable {
   private String type_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> type;
 
   /**
@@ -79,7 +79,7 @@ public class ObservationReferenceRangeModel  implements Serializable {
   private String appliesto_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="appliesto_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="appliesto_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> appliesTo;
 
   /**
@@ -134,31 +134,31 @@ public class ObservationReferenceRangeModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ObservationReferenceRangeModel() {
   }
 
-  public ObservationReferenceRangeModel(ObservationReferenceRange o, String parentId) {
-  	this.parent_id = parentId;
+  public ObservationReferenceRangeModel(ObservationReferenceRange o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getLow() ) {
-    	this.low_id = "low" + this.parent_id;
+    	this.low_id = "low" + this.id;
     	this.low = QuantityHelper.toModel(o.getLow(), this.low_id);
     }
     if (null != o.getHigh() ) {
-    	this.high_id = "high" + this.parent_id;
+    	this.high_id = "high" + this.id;
     	this.high = QuantityHelper.toModel(o.getHigh(), this.high_id);
     }
     if (null != o.getType() ) {
-    	this.type_id = "type" + this.parent_id;
+    	this.type_id = "type" + this.id;
     	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
     }
     if (null != o.getAppliesTo() && !o.getAppliesTo().isEmpty()) {
-    	this.appliesto_id = "appliesto" + this.parent_id;
+    	this.appliesto_id = "appliesto" + this.id;
     	this.appliesTo = CodeableConceptHelper.toModelFromArray(o.getAppliesTo(), this.appliesto_id);
     }
     if (null != o.getAge()) {
@@ -227,11 +227,11 @@ public class ObservationReferenceRangeModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -243,7 +243,7 @@ public class ObservationReferenceRangeModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -259,7 +259,7 @@ public class ObservationReferenceRangeModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

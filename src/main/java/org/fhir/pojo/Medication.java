@@ -135,6 +135,9 @@ public class Medication  extends DomainResource  {
     if (null != o.getFHIRpackage() && !o.getFHIRpackage().isEmpty()) {
       this.FHIRpackage = new MedicationPackage(o.getFHIRpackage().get(0));
     }
+    if (o.getImage() != null) {
+    	this.image = org.fhir.utils.JsonUtils.json2Array(o.getImage());
+    }
   }
 
   public void setResourceType( String value) {

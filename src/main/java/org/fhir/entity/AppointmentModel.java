@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="appointment")
 public class AppointmentModel  implements Serializable {
-	private static final long serialVersionUID = 15191089376215254L;
+	private static final long serialVersionUID = 151967883216483697L;
   /**
   * Description: "This is a Appointment resource"
   */
@@ -70,7 +70,7 @@ public class AppointmentModel  implements Serializable {
   private String servicecategory_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="servicecategory_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="servicecategory_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> serviceCategory;
 
   /**
@@ -81,7 +81,7 @@ public class AppointmentModel  implements Serializable {
   private String servicetype_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="servicetype_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="servicetype_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> serviceType;
 
   /**
@@ -92,7 +92,7 @@ public class AppointmentModel  implements Serializable {
   private String specialty_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="specialty_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="specialty_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> specialty;
 
   /**
@@ -103,7 +103,7 @@ public class AppointmentModel  implements Serializable {
   private String appointmenttype_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="appointmenttype_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="appointmenttype_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> appointmentType;
 
   /**
@@ -114,7 +114,7 @@ public class AppointmentModel  implements Serializable {
   private String reason_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reason_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="reason_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> reason;
 
   /**
@@ -125,7 +125,7 @@ public class AppointmentModel  implements Serializable {
   private String indication_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="indication_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="indication_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> indication;
 
   /**
@@ -151,7 +151,7 @@ public class AppointmentModel  implements Serializable {
   private String supportinginformation_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="supportinginformation_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="supportinginformation_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> supportingInformation;
 
   /**
@@ -184,7 +184,7 @@ public class AppointmentModel  implements Serializable {
   private String slot_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="slot_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="slot_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> slot;
 
   /**
@@ -210,7 +210,7 @@ public class AppointmentModel  implements Serializable {
   private String incomingreferral_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="incomingreferral_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="incomingreferral_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> incomingReferral;
 
   /**
@@ -221,7 +221,7 @@ public class AppointmentModel  implements Serializable {
   private String participant_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="participant_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="participant_id", insertable=false, updatable=false)
   private java.util.List<AppointmentParticipantModel> participant;
 
   /**
@@ -242,7 +242,7 @@ public class AppointmentModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -296,7 +296,7 @@ public class AppointmentModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

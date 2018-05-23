@@ -97,12 +97,9 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
 
   @Override
   @Transactional
-  public void delete(ImagingManifest bean) {
-  	requireNonNull(bean);
-    logger.info("delete(ImagingManifest={}) - entered bean");
-
-    dao.delete(bean);
-
+  public void delete(String id) {
+    logger.info("delete(ImagingManifest={}) - entered id " + id);
+    dao.delete(id);
     logger.info("delete(ImagingManifest) - exited - return value={} result ");
   }
 

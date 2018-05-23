@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="auditeventagent")
 public class AuditEventAgentModel  implements Serializable {
-	private static final long serialVersionUID = 151910893713880813L;
+	private static final long serialVersionUID = 151967883166737458L;
   /**
   * Description: "The security role that the user was acting under, that come from local codes defined by the access control security system (e.g. RBAC, ABAC) used in the local context."
   */
@@ -46,7 +46,7 @@ public class AuditEventAgentModel  implements Serializable {
   private String role_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="role_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="role_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> role;
 
   /**
@@ -57,7 +57,7 @@ public class AuditEventAgentModel  implements Serializable {
   private String reference_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reference_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="reference_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> reference;
 
   /**
@@ -98,7 +98,7 @@ public class AuditEventAgentModel  implements Serializable {
   private String location_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="location_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="location_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> location;
 
   /**
@@ -116,7 +116,7 @@ public class AuditEventAgentModel  implements Serializable {
   private String media_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="media_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="media_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> media;
 
   /**
@@ -127,7 +127,7 @@ public class AuditEventAgentModel  implements Serializable {
   private String network_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="network_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="network_id", insertable=false, updatable=false)
   private java.util.List<AuditEventNetworkModel> network;
 
   /**
@@ -138,7 +138,7 @@ public class AuditEventAgentModel  implements Serializable {
   private String purposeofuse_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="purposeofuse_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="purposeofuse_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> purposeOfUse;
 
   /**
@@ -177,23 +177,23 @@ public class AuditEventAgentModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public AuditEventAgentModel() {
   }
 
-  public AuditEventAgentModel(AuditEventAgent o, String parentId) {
-  	this.parent_id = parentId;
+  public AuditEventAgentModel(AuditEventAgent o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getRole() && !o.getRole().isEmpty()) {
-    	this.role_id = "role" + this.parent_id;
+    	this.role_id = "role" + this.id;
     	this.role = CodeableConceptHelper.toModelFromArray(o.getRole(), this.role_id);
     }
     if (null != o.getReference() ) {
-    	this.reference_id = "reference" + this.parent_id;
+    	this.reference_id = "reference" + this.id;
     	this.reference = ReferenceHelper.toModel(o.getReference(), this.reference_id);
     }
     if (null != o.getUserId()) {
@@ -203,20 +203,20 @@ public class AuditEventAgentModel  implements Serializable {
     this.name = o.getName();
     this.requestor = o.getRequestor();
     if (null != o.getLocation() ) {
-    	this.location_id = "location" + this.parent_id;
+    	this.location_id = "location" + this.id;
     	this.location = ReferenceHelper.toModel(o.getLocation(), this.location_id);
     }
     this.policy = org.fhir.utils.JsonUtils.toJson(o.getPolicy());
     if (null != o.getMedia() ) {
-    	this.media_id = "media" + this.parent_id;
+    	this.media_id = "media" + this.id;
     	this.media = CodingHelper.toModel(o.getMedia(), this.media_id);
     }
     if (null != o.getNetwork() ) {
-    	this.network_id = "network" + this.parent_id;
+    	this.network_id = "network" + this.id;
     	this.network = AuditEventNetworkHelper.toModel(o.getNetwork(), this.network_id);
     }
     if (null != o.getPurposeOfUse() && !o.getPurposeOfUse().isEmpty()) {
-    	this.purposeofuse_id = "purposeofuse" + this.parent_id;
+    	this.purposeofuse_id = "purposeofuse" + this.id;
     	this.purposeOfUse = CodeableConceptHelper.toModelFromArray(o.getPurposeOfUse(), this.purposeofuse_id);
     }
     if (null != o.getModifierExtension()) {
@@ -311,11 +311,11 @@ public class AuditEventAgentModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -330,7 +330,7 @@ public class AuditEventAgentModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -351,7 +351,7 @@ public class AuditEventAgentModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

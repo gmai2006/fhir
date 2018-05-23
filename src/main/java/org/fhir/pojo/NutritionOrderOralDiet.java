@@ -80,6 +80,9 @@ public class NutritionOrderOralDiet  extends BackboneElement  {
     if (null != o.getType() && !o.getType().isEmpty()) {
     	this.type = CodeableConceptHelper.fromArray2Array(o.getType());
     }
+    if (o.getSchedule() != null) {
+    	this.schedule = org.fhir.utils.JsonUtils.json2Array(o.getSchedule());
+    }
     if (null != o.getNutrient() && !o.getNutrient().isEmpty()) {
     	this.nutrient = NutritionOrderNutrientHelper.fromArray2Array(o.getNutrient());
     }

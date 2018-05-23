@@ -38,7 +38,7 @@ public interface EpisodeOfCareDao {
   public EpisodeOfCare create(EpisodeOfCare e);
 
   public EpisodeOfCare update(EpisodeOfCare e);
-  public void delete(EpisodeOfCare e);
+  public void delete(String id);
 
   public List<EpisodeOfCare> findByField(QueryBuilder queryBuilder);
 

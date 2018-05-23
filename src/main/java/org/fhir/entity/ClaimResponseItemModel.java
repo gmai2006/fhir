@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="claimresponseitem")
 public class ClaimResponseItemModel  implements Serializable {
-	private static final long serialVersionUID = 151910893768548117L;
+	private static final long serialVersionUID = 151967883222763034L;
   /**
   * Description: "A service line number."
   */
@@ -61,7 +61,7 @@ public class ClaimResponseItemModel  implements Serializable {
   private String adjudication_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="adjudication_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="adjudication_id", insertable=false, updatable=false)
   private java.util.List<ClaimResponseAdjudicationModel> adjudication;
 
   /**
@@ -72,7 +72,7 @@ public class ClaimResponseItemModel  implements Serializable {
   private String detail_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="detail_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="detail_id", insertable=false, updatable=false)
   private java.util.List<ClaimResponseDetailModel> detail;
 
   /**
@@ -111,25 +111,25 @@ public class ClaimResponseItemModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ClaimResponseItemModel() {
   }
 
-  public ClaimResponseItemModel(ClaimResponseItem o, String parentId) {
-  	this.parent_id = parentId;
+  public ClaimResponseItemModel(ClaimResponseItem o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     this.sequenceLinkId = o.getSequenceLinkId();
     this.noteNumber = org.fhir.utils.JsonUtils.toJson(o.getNoteNumber());
     if (null != o.getAdjudication() && !o.getAdjudication().isEmpty()) {
-    	this.adjudication_id = "adjudication" + this.parent_id;
+    	this.adjudication_id = "adjudication" + this.id;
     	this.adjudication = ClaimResponseAdjudicationHelper.toModelFromArray(o.getAdjudication(), this.adjudication_id);
     }
     if (null != o.getDetail() && !o.getDetail().isEmpty()) {
-    	this.detail_id = "detail" + this.parent_id;
+    	this.detail_id = "detail" + this.id;
     	this.detail = ClaimResponseDetailHelper.toModelFromArray(o.getDetail(), this.detail_id);
     }
     if (null != o.getModifierExtension()) {
@@ -182,11 +182,11 @@ public class ClaimResponseItemModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -198,7 +198,7 @@ public class ClaimResponseItemModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -212,7 +212,7 @@ public class ClaimResponseItemModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

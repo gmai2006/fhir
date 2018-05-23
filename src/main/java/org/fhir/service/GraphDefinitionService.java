@@ -36,7 +36,7 @@ public interface GraphDefinitionService {
   public List<GraphDefinition> selectAll();
   public GraphDefinition create(GraphDefinition bean);
   public GraphDefinition update(GraphDefinition bean);
-  public void delete(GraphDefinition bean);
+  public void delete(String id);
   public List<GraphDefinition> findByField(QueryBuilder queryBuilder);
   public List<GraphDefinition> findByContact(QueryBuilder queryBuilder);
   public List<GraphDefinition> findByUseContext(QueryBuilder queryBuilder);

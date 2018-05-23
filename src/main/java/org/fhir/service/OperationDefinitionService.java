@@ -36,7 +36,7 @@ public interface OperationDefinitionService {
   public List<OperationDefinition> selectAll();
   public OperationDefinition create(OperationDefinition bean);
   public OperationDefinition update(OperationDefinition bean);
-  public void delete(OperationDefinition bean);
+  public void delete(String id);
   public List<OperationDefinition> findByField(QueryBuilder queryBuilder);
   public List<OperationDefinition> findByContact(QueryBuilder queryBuilder);
   public List<OperationDefinition> findByUseContext(QueryBuilder queryBuilder);

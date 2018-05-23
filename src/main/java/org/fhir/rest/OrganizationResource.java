@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class OrganizationResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Organization create(Organization obj) {
-		return this.service.create(obj);
+	public Organization createOrUpdate(Organization obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing Organization
+   * @param obj - instance of Organization
+   * @return Organization
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public Organization update( Organization obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing Organization
+   * @param obj - instance of Organization
+   * @return Organization
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get Organization by its ID
+   * @param id - instance of Organization
+   * @return Organization
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class OrganizationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all Organization with limit of returned records
+   * @param max - number of records
+   * @return a list Organization
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class OrganizationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query Organization based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of Organization
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class OrganizationResource {
   }
 
   /**
-  * Descr: A code for the type of organization
-  * Type: token
+   * Query Organization by composite fields
+   * Descr: A code for the type of organization
+   * Type: token
   */
   @GET
   @Path("type")
@@ -167,8 +208,9 @@ public class OrganizationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: A (part of the) address of the organization
-  * Type: string
+   * Query Organization by composite fields
+   * Descr: A (part of the) address of the organization
+   * Type: string
   */
   @GET
   @Path("address")
@@ -193,8 +235,9 @@ public class OrganizationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: An organization of which this organization forms a part
-  * Type: reference
+   * Query Organization by composite fields
+   * Descr: An organization of which this organization forms a part
+   * Type: reference
   */
   @GET
   @Path("partof")
@@ -219,8 +262,9 @@ public class OrganizationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Technical endpoints providing access to services operated for the organization
-  * Type: reference
+   * Query Organization by composite fields
+   * Descr: Technical endpoints providing access to services operated for the organization
+   * Type: reference
   */
   @GET
   @Path("endpoint")

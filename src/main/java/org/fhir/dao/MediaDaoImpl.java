@@ -90,9 +90,9 @@ public class MediaDaoImpl implements MediaDao {
   }
   @Override
   @Transactional
-  public void delete(Media e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final MediaModel removed = em.find(MediaModel.class, e.getId());
+      final MediaModel removed = em.find(MediaModel.class, id);
       em.remove(removed);
   }
 

@@ -36,7 +36,7 @@ public interface CapabilityStatementService {
   public List<CapabilityStatement> selectAll();
   public CapabilityStatement create(CapabilityStatement bean);
   public CapabilityStatement update(CapabilityStatement bean);
-  public void delete(CapabilityStatement bean);
+  public void delete(String id);
   public List<CapabilityStatement> findByField(QueryBuilder queryBuilder);
   public List<CapabilityStatement> findByContact(QueryBuilder queryBuilder);
   public List<CapabilityStatement> findByUseContext(QueryBuilder queryBuilder);

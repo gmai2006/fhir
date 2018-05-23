@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="conceptmapgroup")
 public class ConceptMapGroupModel  implements Serializable {
-	private static final long serialVersionUID = 151910893769594082L;
+	private static final long serialVersionUID = 151967883223732220L;
   /**
   * Description: "An absolute URI that identifies the Code System (if the source is a value set that crosses more than one code system)."
   */
@@ -74,7 +74,7 @@ public class ConceptMapGroupModel  implements Serializable {
   private String element_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="element_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="element_id", insertable=false, updatable=false)
   private java.util.List<ConceptMapElementModel> element;
 
   /**
@@ -85,7 +85,7 @@ public class ConceptMapGroupModel  implements Serializable {
   private String unmapped_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="unmapped_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="unmapped_id", insertable=false, updatable=false)
   private java.util.List<ConceptMapUnmappedModel> unmapped;
 
   /**
@@ -124,14 +124,14 @@ public class ConceptMapGroupModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ConceptMapGroupModel() {
   }
 
-  public ConceptMapGroupModel(ConceptMapGroup o, String parentId) {
-  	this.parent_id = parentId;
+  public ConceptMapGroupModel(ConceptMapGroup o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -140,11 +140,11 @@ public class ConceptMapGroupModel  implements Serializable {
     this.target = o.getTarget();
     this.targetVersion = o.getTargetVersion();
     if (null != o.getElement() && !o.getElement().isEmpty()) {
-    	this.element_id = "element" + this.parent_id;
+    	this.element_id = "element" + this.id;
     	this.element = ConceptMapElementHelper.toModelFromArray(o.getElement(), this.element_id);
     }
     if (null != o.getUnmapped() ) {
-    	this.unmapped_id = "unmapped" + this.parent_id;
+    	this.unmapped_id = "unmapped" + this.id;
     	this.unmapped = ConceptMapUnmappedHelper.toModel(o.getUnmapped(), this.unmapped_id);
     }
     if (null != o.getModifierExtension()) {
@@ -209,11 +209,11 @@ public class ConceptMapGroupModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -227,7 +227,7 @@ public class ConceptMapGroupModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -243,7 +243,7 @@ public class ConceptMapGroupModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

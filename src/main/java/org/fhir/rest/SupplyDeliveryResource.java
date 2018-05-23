@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class SupplyDeliveryResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public SupplyDelivery create(SupplyDelivery obj) {
-		return this.service.create(obj);
+	public SupplyDelivery createOrUpdate(SupplyDelivery obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing SupplyDelivery
+   * @param obj - instance of SupplyDelivery
+   * @return SupplyDelivery
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public SupplyDelivery update( SupplyDelivery obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing SupplyDelivery
+   * @param obj - instance of SupplyDelivery
+   * @return SupplyDelivery
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get SupplyDelivery by its ID
+   * @param id - instance of SupplyDelivery
+   * @return SupplyDelivery
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class SupplyDeliveryResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all SupplyDelivery with limit of returned records
+   * @param max - number of records
+   * @return a list SupplyDelivery
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class SupplyDeliveryResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query SupplyDelivery based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of SupplyDelivery
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class SupplyDeliveryResource {
   }
 
   /**
-  * Descr: Dispenser
-  * Type: reference
+   * Query SupplyDelivery by composite fields
+   * Descr: Dispenser
+   * Type: reference
   */
   @GET
   @Path("supplier")

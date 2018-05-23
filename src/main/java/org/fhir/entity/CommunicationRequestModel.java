@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="communicationrequest")
 public class CommunicationRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151910893715732350L;
+	private static final long serialVersionUID = 151967883168436990L;
   /**
   * Description: "This is a CommunicationRequest resource"
   */
@@ -63,7 +63,7 @@ public class CommunicationRequestModel  implements Serializable {
   private String basedon_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="basedon_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="basedon_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> basedOn;
 
   /**
@@ -74,7 +74,7 @@ public class CommunicationRequestModel  implements Serializable {
   private String replaces_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="replaces_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="replaces_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> replaces;
 
   /**
@@ -102,7 +102,7 @@ public class CommunicationRequestModel  implements Serializable {
   private String category_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> category;
 
   /**
@@ -121,7 +121,7 @@ public class CommunicationRequestModel  implements Serializable {
   private String medium_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="medium_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="medium_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> medium;
 
   /**
@@ -132,7 +132,7 @@ public class CommunicationRequestModel  implements Serializable {
   private String subject_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subject_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="subject_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> subject;
 
   /**
@@ -143,7 +143,7 @@ public class CommunicationRequestModel  implements Serializable {
   private String recipient_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="recipient_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="recipient_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> recipient;
 
   /**
@@ -154,7 +154,7 @@ public class CommunicationRequestModel  implements Serializable {
   private String topic_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="topic_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="topic_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> topic;
 
   /**
@@ -165,7 +165,7 @@ public class CommunicationRequestModel  implements Serializable {
   private String context_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="context_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="context_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> context;
 
   /**
@@ -176,7 +176,7 @@ public class CommunicationRequestModel  implements Serializable {
   private String payload_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="payload_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="payload_id", insertable=false, updatable=false)
   private java.util.List<CommunicationRequestPayloadModel> payload;
 
   /**
@@ -212,7 +212,7 @@ public class CommunicationRequestModel  implements Serializable {
   private String sender_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="sender_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="sender_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> sender;
 
   /**
@@ -223,7 +223,7 @@ public class CommunicationRequestModel  implements Serializable {
   private String requester_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="requester_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="requester_id", insertable=false, updatable=false)
   private java.util.List<CommunicationRequestRequesterModel> requester;
 
   /**
@@ -234,7 +234,7 @@ public class CommunicationRequestModel  implements Serializable {
   private String reasoncode_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasoncode_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="reasoncode_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> reasonCode;
 
   /**
@@ -245,7 +245,7 @@ public class CommunicationRequestModel  implements Serializable {
   private String reasonreference_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasonreference_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="reasonreference_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> reasonReference;
 
   /**
@@ -266,7 +266,7 @@ public class CommunicationRequestModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -320,7 +320,7 @@ public class CommunicationRequestModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

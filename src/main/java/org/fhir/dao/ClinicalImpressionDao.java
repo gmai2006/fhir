@@ -38,7 +38,7 @@ public interface ClinicalImpressionDao {
   public ClinicalImpression create(ClinicalImpression e);
 
   public ClinicalImpression update(ClinicalImpression e);
-  public void delete(ClinicalImpression e);
+  public void delete(String id);
 
   public List<ClinicalImpression> findByField(QueryBuilder queryBuilder);
 

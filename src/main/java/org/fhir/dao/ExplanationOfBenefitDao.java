@@ -38,7 +38,7 @@ public interface ExplanationOfBenefitDao {
   public ExplanationOfBenefit create(ExplanationOfBenefit e);
 
   public ExplanationOfBenefit update(ExplanationOfBenefit e);
-  public void delete(ExplanationOfBenefit e);
+  public void delete(String id);
 
   public List<ExplanationOfBenefit> findByField(QueryBuilder queryBuilder);
 

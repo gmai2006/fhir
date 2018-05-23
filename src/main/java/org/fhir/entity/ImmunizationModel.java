@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="immunization")
 public class ImmunizationModel  implements Serializable {
-	private static final long serialVersionUID = 151910893743877921L;
+	private static final long serialVersionUID = 151967883198393896L;
   /**
   * Description: "This is a Immunization resource"
   */
@@ -78,7 +78,7 @@ public class ImmunizationModel  implements Serializable {
   private String vaccinecode_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="vaccinecode_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="vaccinecode_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> vaccineCode;
 
   /**
@@ -89,7 +89,7 @@ public class ImmunizationModel  implements Serializable {
   private String patient_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="patient_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="patient_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> patient;
 
   /**
@@ -100,7 +100,7 @@ public class ImmunizationModel  implements Serializable {
   private String encounter_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="encounter_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="encounter_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> encounter;
 
   /**
@@ -126,7 +126,7 @@ public class ImmunizationModel  implements Serializable {
   private String reportorigin_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reportorigin_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="reportorigin_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> reportOrigin;
 
   /**
@@ -137,7 +137,7 @@ public class ImmunizationModel  implements Serializable {
   private String location_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="location_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="location_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> location;
 
   /**
@@ -148,7 +148,7 @@ public class ImmunizationModel  implements Serializable {
   private String manufacturer_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="manufacturer_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="manufacturer_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> manufacturer;
 
   /**
@@ -174,7 +174,7 @@ public class ImmunizationModel  implements Serializable {
   private String site_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="site_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="site_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> site;
 
   /**
@@ -185,7 +185,7 @@ public class ImmunizationModel  implements Serializable {
   private String route_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="route_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="route_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> route;
 
   /**
@@ -196,7 +196,7 @@ public class ImmunizationModel  implements Serializable {
   private String dosequantity_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="dosequantity_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="dosequantity_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> doseQuantity;
 
   /**
@@ -207,7 +207,7 @@ public class ImmunizationModel  implements Serializable {
   private String practitioner_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="practitioner_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="practitioner_id", insertable=false, updatable=false)
   private java.util.List<ImmunizationPractitionerModel> practitioner;
 
   /**
@@ -227,7 +227,7 @@ public class ImmunizationModel  implements Serializable {
   private String explanation_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="explanation_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="explanation_id", insertable=false, updatable=false)
   private java.util.List<ImmunizationExplanationModel> explanation;
 
   /**
@@ -238,7 +238,7 @@ public class ImmunizationModel  implements Serializable {
   private String reaction_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reaction_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="reaction_id", insertable=false, updatable=false)
   private java.util.List<ImmunizationReactionModel> reaction;
 
   /**
@@ -249,7 +249,7 @@ public class ImmunizationModel  implements Serializable {
   private String vaccinationprotocol_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="vaccinationprotocol_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="vaccinationprotocol_id", insertable=false, updatable=false)
   private java.util.List<ImmunizationVaccinationProtocolModel> vaccinationProtocol;
 
   /**
@@ -261,7 +261,7 @@ public class ImmunizationModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -315,7 +315,7 @@ public class ImmunizationModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

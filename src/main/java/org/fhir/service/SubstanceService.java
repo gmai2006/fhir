@@ -36,7 +36,7 @@ public interface SubstanceService {
   public List<Substance> selectAll();
   public Substance create(Substance bean);
   public Substance update(Substance bean);
-  public void delete(Substance bean);
+  public void delete(String id);
   public List<Substance> findByField(QueryBuilder queryBuilder);
   public List<Substance> findByCategory(QueryBuilder queryBuilder);
   public List<Substance> findByCode(QueryBuilder queryBuilder);

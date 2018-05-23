@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="datarequirementcodefilter")
 public class DataRequirementCodeFilterModel  implements Serializable {
-	private static final long serialVersionUID = 151910893731222771L;
+	private static final long serialVersionUID = 151967883185024821L;
   /**
   * Description: "The code-valued attribute of the filter. The specified path must be resolvable from the type of the required data. The path is allowed to contain qualifiers (.) to traverse sub-elements, as well as indexers ([x]) to traverse multiple-cardinality sub-elements. Note that the index must be an integer constant. The path must resolve to an element of type code, Coding, or CodeableConcept."
   */
@@ -60,7 +60,7 @@ public class DataRequirementCodeFilterModel  implements Serializable {
   private String valuesetreference_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuesetreference_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="valuesetreference_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> valueSetReference;
 
   /**
@@ -78,7 +78,7 @@ public class DataRequirementCodeFilterModel  implements Serializable {
   private String valuecoding_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuecoding_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="valuecoding_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> valueCoding;
 
   /**
@@ -89,7 +89,7 @@ public class DataRequirementCodeFilterModel  implements Serializable {
   private String valuecodeableconcept_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuecodeableconcept_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="valuecodeableconcept_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> valueCodeableConcept;
 
   /**
@@ -128,30 +128,30 @@ public class DataRequirementCodeFilterModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public DataRequirementCodeFilterModel() {
   }
 
-  public DataRequirementCodeFilterModel(DataRequirementCodeFilter o, String parentId) {
-  	this.parent_id = parentId;
+  public DataRequirementCodeFilterModel(DataRequirementCodeFilter o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     this.path = o.getPath();
     this.valueSetString = o.getValueSetString();
     if (null != o.getValueSetReference() ) {
-    	this.valuesetreference_id = "valuesetreference" + this.parent_id;
+    	this.valuesetreference_id = "valuesetreference" + this.id;
     	this.valueSetReference = ReferenceHelper.toModel(o.getValueSetReference(), this.valuesetreference_id);
     }
     this.valueCode = org.fhir.utils.JsonUtils.toJson(o.getValueCode());
     if (null != o.getValueCoding() && !o.getValueCoding().isEmpty()) {
-    	this.valuecoding_id = "valuecoding" + this.parent_id;
+    	this.valuecoding_id = "valuecoding" + this.id;
     	this.valueCoding = CodingHelper.toModelFromArray(o.getValueCoding(), this.valuecoding_id);
     }
     if (null != o.getValueCodeableConcept() && !o.getValueCodeableConcept().isEmpty()) {
-    	this.valuecodeableconcept_id = "valuecodeableconcept" + this.parent_id;
+    	this.valuecodeableconcept_id = "valuecodeableconcept" + this.id;
     	this.valueCodeableConcept = CodeableConceptHelper.toModelFromArray(o.getValueCodeableConcept(), this.valuecodeableconcept_id);
     }
     if (null != o.getModifierExtension()) {
@@ -216,11 +216,11 @@ public class DataRequirementCodeFilterModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -233,7 +233,7 @@ public class DataRequirementCodeFilterModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -249,7 +249,7 @@ public class DataRequirementCodeFilterModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

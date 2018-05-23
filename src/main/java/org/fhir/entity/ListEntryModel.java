@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="listentry")
 public class ListEntryModel  implements Serializable {
-	private static final long serialVersionUID = 151910893754397367L;
+	private static final long serialVersionUID = 151967883208825241L;
   /**
   * Description: "The flag allows the system constructing the list to indicate the role and significance of the item in the list."
   */
@@ -46,7 +46,7 @@ public class ListEntryModel  implements Serializable {
   private String flag_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="flag_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="flag_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> flag;
 
   /**
@@ -72,7 +72,7 @@ public class ListEntryModel  implements Serializable {
   private String item_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="item_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="item_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> item;
 
   /**
@@ -111,25 +111,25 @@ public class ListEntryModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ListEntryModel() {
   }
 
-  public ListEntryModel(ListEntry o, String parentId) {
-  	this.parent_id = parentId;
+  public ListEntryModel(ListEntry o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getFlag() ) {
-    	this.flag_id = "flag" + this.parent_id;
+    	this.flag_id = "flag" + this.id;
     	this.flag = CodeableConceptHelper.toModel(o.getFlag(), this.flag_id);
     }
     this.deleted = o.getDeleted();
     this.date = o.getDate();
     if (null != o.getItem() ) {
-    	this.item_id = "item" + this.parent_id;
+    	this.item_id = "item" + this.id;
     	this.item = ReferenceHelper.toModel(o.getItem(), this.item_id);
     }
     if (null != o.getModifierExtension()) {
@@ -182,11 +182,11 @@ public class ListEntryModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -198,7 +198,7 @@ public class ListEntryModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -212,7 +212,7 @@ public class ListEntryModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

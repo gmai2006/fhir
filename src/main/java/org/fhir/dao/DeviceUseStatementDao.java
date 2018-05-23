@@ -38,7 +38,7 @@ public interface DeviceUseStatementDao {
   public DeviceUseStatement create(DeviceUseStatement e);
 
   public DeviceUseStatement update(DeviceUseStatement e);
-  public void delete(DeviceUseStatement e);
+  public void delete(String id);
 
   public List<DeviceUseStatement> findByField(QueryBuilder queryBuilder);
 

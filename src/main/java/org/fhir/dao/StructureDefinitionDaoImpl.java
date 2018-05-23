@@ -90,9 +90,9 @@ public class StructureDefinitionDaoImpl implements StructureDefinitionDao {
   }
   @Override
   @Transactional
-  public void delete(StructureDefinition e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final StructureDefinitionModel removed = em.find(StructureDefinitionModel.class, e.getId());
+      final StructureDefinitionModel removed = em.find(StructureDefinitionModel.class, id);
       em.remove(removed);
   }
 

@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class ObservationResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Observation create(Observation obj) {
-		return this.service.create(obj);
+	public Observation createOrUpdate(Observation obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing Observation
+   * @param obj - instance of Observation
+   * @return Observation
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public Observation update( Observation obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing Observation
+   * @param obj - instance of Observation
+   * @return Observation
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get Observation by its ID
+   * @param id - instance of Observation
+   * @return Observation
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class ObservationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all Observation with limit of returned records
+   * @param max - number of records
+   * @return a list Observation
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class ObservationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query Observation based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of Observation
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class ObservationResource {
   }
 
   /**
-  * Descr: The classification of the type of observation
-  * Type: token
+   * Query Observation by composite fields
+   * Descr: The classification of the type of observation
+   * Type: token
   */
   @GET
   @Path("category")
@@ -167,8 +208,9 @@ public class ObservationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The subject that the observation is about
-  * Type: reference
+   * Query Observation by composite fields
+   * Descr: The subject that the observation is about
+   * Type: reference
   */
   @GET
   @Path("subject")
@@ -193,8 +235,9 @@ public class ObservationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Healthcare event  (Episode-of-care or Encounter) related to the observation
-  * Type: reference
+   * Query Observation by composite fields
+   * Descr: Healthcare event  (Episode-of-care or Encounter) related to the observation
+   * Type: reference
   */
   @GET
   @Path("context")
@@ -219,8 +262,9 @@ public class ObservationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Who performed the observation
-  * Type: reference
+   * Query Observation by composite fields
+   * Descr: Who performed the observation
+   * Type: reference
   */
   @GET
   @Path("performer")
@@ -245,8 +289,9 @@ public class ObservationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The value of the observation, if the value is a Quantity, or a SampledData (just search on the bounds of the values in sampled data)
-  * Type: quantity
+   * Query Observation by composite fields
+   * Descr: The value of the observation, if the value is a Quantity, or a SampledData (just search on the bounds of the values in sampled data)
+   * Type: quantity
   */
   @GET
   @Path("valuequantity")
@@ -271,8 +316,9 @@ public class ObservationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The value of the observation, if the value is a CodeableConcept
-  * Type: token
+   * Query Observation by composite fields
+   * Descr: The value of the observation, if the value is a CodeableConcept
+   * Type: token
   */
   @GET
   @Path("valueconcept")
@@ -297,8 +343,9 @@ public class ObservationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The reason why the expected value in the element Observation.value[x] is missing.
-  * Type: token
+   * Query Observation by composite fields
+   * Descr: The reason why the expected value in the element Observation.value[x] is missing.
+   * Type: token
   */
   @GET
   @Path("dataabsentreason")
@@ -323,8 +370,9 @@ public class ObservationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The method used for the observation
-  * Type: token
+   * Query Observation by composite fields
+   * Descr: The method used for the observation
+   * Type: token
   */
   @GET
   @Path("method")
@@ -349,8 +397,9 @@ public class ObservationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Specimen used for this observation
-  * Type: reference
+   * Query Observation by composite fields
+   * Descr: Specimen used for this observation
+   * Type: reference
   */
   @GET
   @Path("specimen")
@@ -375,8 +424,9 @@ public class ObservationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The Device that generated the observation data.
-  * Type: reference
+   * Query Observation by composite fields
+   * Descr: The Device that generated the observation data.
+   * Type: reference
   */
   @GET
   @Path("device")
@@ -401,8 +451,9 @@ public class ObservationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Related Observations - search on related-type and related-target together
-  * Type: composite
+   * Query Observation by composite fields
+   * Descr: Related Observations - search on related-type and related-target together
+   * Type: composite
   */
   @GET
   @Path("related")

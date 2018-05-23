@@ -90,9 +90,9 @@ public class SpecimenDaoImpl implements SpecimenDao {
   }
   @Override
   @Transactional
-  public void delete(Specimen e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final SpecimenModel removed = em.find(SpecimenModel.class, e.getId());
+      final SpecimenModel removed = em.find(SpecimenModel.class, id);
       em.remove(removed);
   }
 

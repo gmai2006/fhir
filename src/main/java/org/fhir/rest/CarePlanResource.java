@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class CarePlanResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public CarePlan create(CarePlan obj) {
-		return this.service.create(obj);
+	public CarePlan createOrUpdate(CarePlan obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing CarePlan
+   * @param obj - instance of CarePlan
+   * @return CarePlan
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public CarePlan update( CarePlan obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing CarePlan
+   * @param obj - instance of CarePlan
+   * @return CarePlan
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get CarePlan by its ID
+   * @param id - instance of CarePlan
+   * @return CarePlan
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class CarePlanResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all CarePlan with limit of returned records
+   * @param max - number of records
+   * @return a list CarePlan
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class CarePlanResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query CarePlan based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of CarePlan
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class CarePlanResource {
   }
 
   /**
-  * Descr: Protocol or definition
-  * Type: reference
+   * Query CarePlan by composite fields
+   * Descr: Protocol or definition
+   * Type: reference
   */
   @GET
   @Path("definition")
@@ -167,8 +208,9 @@ public class CarePlanResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Fulfills care plan
-  * Type: reference
+   * Query CarePlan by composite fields
+   * Descr: Fulfills care plan
+   * Type: reference
   */
   @GET
   @Path("basedon")
@@ -193,8 +235,9 @@ public class CarePlanResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: CarePlan replaced by this CarePlan
-  * Type: reference
+   * Query CarePlan by composite fields
+   * Descr: CarePlan replaced by this CarePlan
+   * Type: reference
   */
   @GET
   @Path("replaces")
@@ -219,8 +262,9 @@ public class CarePlanResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Part of referenced CarePlan
-  * Type: reference
+   * Query CarePlan by composite fields
+   * Descr: Part of referenced CarePlan
+   * Type: reference
   */
   @GET
   @Path("partof")
@@ -245,8 +289,9 @@ public class CarePlanResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Type of plan
-  * Type: token
+   * Query CarePlan by composite fields
+   * Descr: Type of plan
+   * Type: token
   */
   @GET
   @Path("category")
@@ -271,8 +316,9 @@ public class CarePlanResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Who care plan is for
-  * Type: reference
+   * Query CarePlan by composite fields
+   * Descr: Who care plan is for
+   * Type: reference
   */
   @GET
   @Path("subject")
@@ -297,8 +343,9 @@ public class CarePlanResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Created in context of
-  * Type: reference
+   * Query CarePlan by composite fields
+   * Descr: Created in context of
+   * Type: reference
   */
   @GET
   @Path("context")
@@ -323,8 +370,9 @@ public class CarePlanResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Who's involved in plan?
-  * Type: reference
+   * Query CarePlan by composite fields
+   * Descr: Who's involved in plan?
+   * Type: reference
   */
   @GET
   @Path("careteam")
@@ -349,8 +397,9 @@ public class CarePlanResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Health issues this plan addresses
-  * Type: reference
+   * Query CarePlan by composite fields
+   * Descr: Health issues this plan addresses
+   * Type: reference
   */
   @GET
   @Path("condition")
@@ -375,8 +424,9 @@ public class CarePlanResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Desired outcome of plan
-  * Type: reference
+   * Query CarePlan by composite fields
+   * Descr: Desired outcome of plan
+   * Type: reference
   */
   @GET
   @Path("goal")

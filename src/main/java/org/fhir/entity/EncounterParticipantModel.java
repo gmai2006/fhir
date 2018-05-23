@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="encounterparticipant")
 public class EncounterParticipantModel  implements Serializable {
-	private static final long serialVersionUID = 151910893747334798L;
+	private static final long serialVersionUID = 151967883202548941L;
   /**
   * Description: "Role of participant in encounter."
   */
@@ -46,7 +46,7 @@ public class EncounterParticipantModel  implements Serializable {
   private String type_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> type;
 
   /**
@@ -66,7 +66,7 @@ public class EncounterParticipantModel  implements Serializable {
   private String individual_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="individual_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="individual_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> individual;
 
   /**
@@ -105,26 +105,26 @@ public class EncounterParticipantModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public EncounterParticipantModel() {
   }
 
-  public EncounterParticipantModel(EncounterParticipant o, String parentId) {
-  	this.parent_id = parentId;
+  public EncounterParticipantModel(EncounterParticipant o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getType() && !o.getType().isEmpty()) {
-    	this.type_id = "type" + this.parent_id;
+    	this.type_id = "type" + this.id;
     	this.type = CodeableConceptHelper.toModelFromArray(o.getType(), this.type_id);
     }
     if (null != o.getPeriod()) {
     	this.period = JsonUtils.toJson(o.getPeriod());
     }
     if (null != o.getIndividual() ) {
-    	this.individual_id = "individual" + this.parent_id;
+    	this.individual_id = "individual" + this.id;
     	this.individual = ReferenceHelper.toModel(o.getIndividual(), this.individual_id);
     }
     if (null != o.getModifierExtension()) {
@@ -171,11 +171,11 @@ public class EncounterParticipantModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -186,7 +186,7 @@ public class EncounterParticipantModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -199,7 +199,7 @@ public class EncounterParticipantModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

@@ -66,6 +66,9 @@ public class ContractSigner  extends BackboneElement  {
     if (null != o.getParty() && !o.getParty().isEmpty()) {
       this.party = new Reference(o.getParty().get(0));
     }
+    if (o.getSignature() != null) {
+    	this.signature = org.fhir.utils.JsonUtils.json2Array(o.getSignature());
+    }
   }
 
   public void setType( Coding value) {

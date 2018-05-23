@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="devicecomponentproductionspecification")
 public class DeviceComponentProductionSpecificationModel  implements Serializable {
-	private static final long serialVersionUID = 151910893713434983L;
+	private static final long serialVersionUID = 151967883166398735L;
   /**
   * Description: "The specification type, such as, serial number, part number, hardware revision, software revision, etc."
   */
@@ -46,7 +46,7 @@ public class DeviceComponentProductionSpecificationModel  implements Serializabl
   private String spectype_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="spectype_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="spectype_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> specType;
 
   /**
@@ -101,19 +101,19 @@ public class DeviceComponentProductionSpecificationModel  implements Serializabl
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public DeviceComponentProductionSpecificationModel() {
   }
 
-  public DeviceComponentProductionSpecificationModel(DeviceComponentProductionSpecification o, String parentId) {
-  	this.parent_id = parentId;
+  public DeviceComponentProductionSpecificationModel(DeviceComponentProductionSpecification o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getSpecType() ) {
-    	this.spectype_id = "spectype" + this.parent_id;
+    	this.spectype_id = "spectype" + this.id;
     	this.specType = CodeableConceptHelper.toModel(o.getSpecType(), this.spectype_id);
     }
     if (null != o.getComponentId()) {
@@ -164,11 +164,11 @@ public class DeviceComponentProductionSpecificationModel  implements Serializabl
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -180,7 +180,7 @@ public class DeviceComponentProductionSpecificationModel  implements Serializabl
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -193,7 +193,7 @@ public class DeviceComponentProductionSpecificationModel  implements Serializabl
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

@@ -36,7 +36,7 @@ public interface StructureDefinitionService {
   public List<StructureDefinition> selectAll();
   public StructureDefinition create(StructureDefinition bean);
   public StructureDefinition update(StructureDefinition bean);
-  public void delete(StructureDefinition bean);
+  public void delete(String id);
   public List<StructureDefinition> findByField(QueryBuilder queryBuilder);
   public List<StructureDefinition> findByContact(QueryBuilder queryBuilder);
   public List<StructureDefinition> findByUseContext(QueryBuilder queryBuilder);

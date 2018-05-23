@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="explanationofbenefit")
 public class ExplanationOfBenefitModel  implements Serializable {
-	private static final long serialVersionUID = 151910893746567711L;
+	private static final long serialVersionUID = 151967883201659605L;
   /**
   * Description: "This is a ExplanationOfBenefit resource"
   */
@@ -70,7 +70,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String type_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> type;
 
   /**
@@ -81,7 +81,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String subtype_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subtype_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="subtype_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> subType;
 
   /**
@@ -92,7 +92,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String patient_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="patient_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="patient_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> patient;
 
   /**
@@ -120,7 +120,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String enterer_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="enterer_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="enterer_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> enterer;
 
   /**
@@ -131,7 +131,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String insurer_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="insurer_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="insurer_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> insurer;
 
   /**
@@ -142,7 +142,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String provider_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="provider_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="provider_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> provider;
 
   /**
@@ -153,7 +153,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String organization_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="organization_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="organization_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> organization;
 
   /**
@@ -164,7 +164,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String referral_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="referral_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="referral_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> referral;
 
   /**
@@ -175,7 +175,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String facility_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="facility_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="facility_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> facility;
 
   /**
@@ -186,7 +186,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String claim_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="claim_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="claim_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> claim;
 
   /**
@@ -197,7 +197,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String claimresponse_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="claimresponse_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="claimresponse_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> claimResponse;
 
   /**
@@ -208,7 +208,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String outcome_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="outcome_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="outcome_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> outcome;
 
   /**
@@ -226,7 +226,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String related_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="related_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="related_id", insertable=false, updatable=false)
   private java.util.List<ExplanationOfBenefitRelatedModel> related;
 
   /**
@@ -237,7 +237,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String prescription_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="prescription_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="prescription_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> prescription;
 
   /**
@@ -248,7 +248,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String originalprescription_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="originalprescription_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="originalprescription_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> originalPrescription;
 
   /**
@@ -259,7 +259,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String payee_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="payee_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="payee_id", insertable=false, updatable=false)
   private java.util.List<ExplanationOfBenefitPayeeModel> payee;
 
   /**
@@ -270,7 +270,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String information_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="information_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="information_id", insertable=false, updatable=false)
   private java.util.List<ExplanationOfBenefitInformationModel> information;
 
   /**
@@ -281,7 +281,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String careteam_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="careteam_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="careteam_id", insertable=false, updatable=false)
   private java.util.List<ExplanationOfBenefitCareTeamModel> careTeam;
 
   /**
@@ -292,7 +292,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String diagnosis_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="diagnosis_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="diagnosis_id", insertable=false, updatable=false)
   private java.util.List<ExplanationOfBenefitDiagnosisModel> diagnosis;
 
   /**
@@ -303,7 +303,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String procedure_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="procedure_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="procedure_id", insertable=false, updatable=false)
   private java.util.List<ExplanationOfBenefitProcedureModel> procedure;
 
   /**
@@ -322,7 +322,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String insurance_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="insurance_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="insurance_id", insertable=false, updatable=false)
   private java.util.List<ExplanationOfBenefitInsuranceModel> insurance;
 
   /**
@@ -333,7 +333,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String accident_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="accident_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="accident_id", insertable=false, updatable=false)
   private java.util.List<ExplanationOfBenefitAccidentModel> accident;
 
   /**
@@ -362,7 +362,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String item_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="item_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="item_id", insertable=false, updatable=false)
   private java.util.List<ExplanationOfBenefitItemModel> item;
 
   /**
@@ -373,7 +373,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String additem_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="additem_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="additem_id", insertable=false, updatable=false)
   private java.util.List<ExplanationOfBenefitAddItemModel> addItem;
 
   /**
@@ -384,7 +384,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String totalcost_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="totalcost_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="totalcost_id", insertable=false, updatable=false)
   private java.util.List<MoneyModel> totalCost;
 
   /**
@@ -395,7 +395,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String unallocdeductable_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="unallocdeductable_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="unallocdeductable_id", insertable=false, updatable=false)
   private java.util.List<MoneyModel> unallocDeductable;
 
   /**
@@ -406,7 +406,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String totalbenefit_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="totalbenefit_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="totalbenefit_id", insertable=false, updatable=false)
   private java.util.List<MoneyModel> totalBenefit;
 
   /**
@@ -417,7 +417,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String payment_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="payment_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="payment_id", insertable=false, updatable=false)
   private java.util.List<ExplanationOfBenefitPaymentModel> payment;
 
   /**
@@ -428,7 +428,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String form_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="form_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="form_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> form;
 
   /**
@@ -439,7 +439,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String processnote_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="processnote_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="processnote_id", insertable=false, updatable=false)
   private java.util.List<ExplanationOfBenefitProcessNoteModel> processNote;
 
   /**
@@ -450,7 +450,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String benefitbalance_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="benefitbalance_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="benefitbalance_id", insertable=false, updatable=false)
   private java.util.List<ExplanationOfBenefitBenefitBalanceModel> benefitBalance;
 
   /**
@@ -462,7 +462,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -516,7 +516,7 @@ public class ExplanationOfBenefitModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

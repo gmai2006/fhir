@@ -38,7 +38,7 @@ public interface ConsentDao {
   public Consent create(Consent e);
 
   public Consent update(Consent e);
-  public void delete(Consent e);
+  public void delete(String id);
 
   public List<Consent> findByField(QueryBuilder queryBuilder);
 

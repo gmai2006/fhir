@@ -36,7 +36,7 @@ public interface CommunicationRequestService {
   public List<CommunicationRequest> selectAll();
   public CommunicationRequest create(CommunicationRequest bean);
   public CommunicationRequest update(CommunicationRequest bean);
-  public void delete(CommunicationRequest bean);
+  public void delete(String id);
   public List<CommunicationRequest> findByField(QueryBuilder queryBuilder);
   public List<CommunicationRequest> findByBasedOn(QueryBuilder queryBuilder);
   public List<CommunicationRequest> findByReplaces(QueryBuilder queryBuilder);

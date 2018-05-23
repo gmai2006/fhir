@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class PractitionerRoleResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public PractitionerRole create(PractitionerRole obj) {
-		return this.service.create(obj);
+	public PractitionerRole createOrUpdate(PractitionerRole obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing PractitionerRole
+   * @param obj - instance of PractitionerRole
+   * @return PractitionerRole
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public PractitionerRole update( PractitionerRole obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing PractitionerRole
+   * @param obj - instance of PractitionerRole
+   * @return PractitionerRole
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get PractitionerRole by its ID
+   * @param id - instance of PractitionerRole
+   * @return PractitionerRole
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class PractitionerRoleResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all PractitionerRole with limit of returned records
+   * @param max - number of records
+   * @return a list PractitionerRole
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class PractitionerRoleResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query PractitionerRole based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of PractitionerRole
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class PractitionerRoleResource {
   }
 
   /**
-  * Descr: Practitioner that is able to provide the defined services for the organation
-  * Type: reference
+   * Query PractitionerRole by composite fields
+   * Descr: Practitioner that is able to provide the defined services for the organation
+   * Type: reference
   */
   @GET
   @Path("practitioner")
@@ -167,8 +208,9 @@ public class PractitionerRoleResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The identity of the organization the practitioner represents / acts on behalf of
-  * Type: reference
+   * Query PractitionerRole by composite fields
+   * Descr: The identity of the organization the practitioner represents / acts on behalf of
+   * Type: reference
   */
   @GET
   @Path("organization")
@@ -193,8 +235,9 @@ public class PractitionerRoleResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The practitioner can perform this role at for the organization
-  * Type: token
+   * Query PractitionerRole by composite fields
+   * Descr: The practitioner can perform this role at for the organization
+   * Type: token
   */
   @GET
   @Path("role")
@@ -219,8 +262,9 @@ public class PractitionerRoleResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The practitioner has this specialty at an organization
-  * Type: token
+   * Query PractitionerRole by composite fields
+   * Descr: The practitioner has this specialty at an organization
+   * Type: token
   */
   @GET
   @Path("specialty")
@@ -245,8 +289,9 @@ public class PractitionerRoleResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: One of the locations at which this practitioner provides care
-  * Type: reference
+   * Query PractitionerRole by composite fields
+   * Descr: One of the locations at which this practitioner provides care
+   * Type: reference
   */
   @GET
   @Path("location")
@@ -271,8 +316,9 @@ public class PractitionerRoleResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The list of healthcare services that this worker provides for this role's Organization/Location(s)
-  * Type: reference
+   * Query PractitionerRole by composite fields
+   * Descr: The list of healthcare services that this worker provides for this role's Organization/Location(s)
+   * Type: reference
   */
   @GET
   @Path("service")
@@ -297,8 +343,9 @@ public class PractitionerRoleResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Technical endpoints providing access to services operated for the practitioner with this role
-  * Type: reference
+   * Query PractitionerRole by composite fields
+   * Descr: Technical endpoints providing access to services operated for the practitioner with this role
+   * Type: reference
   */
   @GET
   @Path("endpoint")

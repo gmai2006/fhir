@@ -36,7 +36,7 @@ public interface ExplanationOfBenefitService {
   public List<ExplanationOfBenefit> selectAll();
   public ExplanationOfBenefit create(ExplanationOfBenefit bean);
   public ExplanationOfBenefit update(ExplanationOfBenefit bean);
-  public void delete(ExplanationOfBenefit bean);
+  public void delete(String id);
   public List<ExplanationOfBenefit> findByField(QueryBuilder queryBuilder);
   public List<ExplanationOfBenefit> findByType(QueryBuilder queryBuilder);
   public List<ExplanationOfBenefit> findBySubType(QueryBuilder queryBuilder);

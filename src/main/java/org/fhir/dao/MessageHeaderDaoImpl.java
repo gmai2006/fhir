@@ -90,9 +90,9 @@ public class MessageHeaderDaoImpl implements MessageHeaderDao {
   }
   @Override
   @Transactional
-  public void delete(MessageHeader e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final MessageHeaderModel removed = em.find(MessageHeaderModel.class, e.getId());
+      final MessageHeaderModel removed = em.find(MessageHeaderModel.class, id);
       em.remove(removed);
   }
 

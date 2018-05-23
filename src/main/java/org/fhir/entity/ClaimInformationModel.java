@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="claiminformation")
 public class ClaimInformationModel  implements Serializable {
-	private static final long serialVersionUID = 151910893750668085L;
+	private static final long serialVersionUID = 1519678832058822L;
   /**
   * Description: "Sequence of the information element which serves to provide a link."
   */
@@ -54,7 +54,7 @@ public class ClaimInformationModel  implements Serializable {
   private String category_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> category;
 
   /**
@@ -65,7 +65,7 @@ public class ClaimInformationModel  implements Serializable {
   private String code_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> code;
 
   /**
@@ -100,7 +100,7 @@ public class ClaimInformationModel  implements Serializable {
   private String valuequantity_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuequantity_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="valuequantity_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> valueQuantity;
 
   /**
@@ -120,7 +120,7 @@ public class ClaimInformationModel  implements Serializable {
   private String valuereference_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuereference_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="valuereference_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> valueReference;
 
   /**
@@ -131,7 +131,7 @@ public class ClaimInformationModel  implements Serializable {
   private String reason_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reason_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="reason_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> reason;
 
   /**
@@ -170,24 +170,24 @@ public class ClaimInformationModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ClaimInformationModel() {
   }
 
-  public ClaimInformationModel(ClaimInformation o, String parentId) {
-  	this.parent_id = parentId;
+  public ClaimInformationModel(ClaimInformation o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     this.sequence = o.getSequence();
     if (null != o.getCategory() ) {
-    	this.category_id = "category" + this.parent_id;
+    	this.category_id = "category" + this.id;
     	this.category = CodeableConceptHelper.toModel(o.getCategory(), this.category_id);
     }
     if (null != o.getCode() ) {
-    	this.code_id = "code" + this.parent_id;
+    	this.code_id = "code" + this.id;
     	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
     }
     this.timingDate = o.getTimingDate();
@@ -196,18 +196,18 @@ public class ClaimInformationModel  implements Serializable {
     }
     this.valueString = o.getValueString();
     if (null != o.getValueQuantity() ) {
-    	this.valuequantity_id = "valuequantity" + this.parent_id;
+    	this.valuequantity_id = "valuequantity" + this.id;
     	this.valueQuantity = QuantityHelper.toModel(o.getValueQuantity(), this.valuequantity_id);
     }
     if (null != o.getValueAttachment()) {
     	this.valueAttachment = JsonUtils.toJson(o.getValueAttachment());
     }
     if (null != o.getValueReference() ) {
-    	this.valuereference_id = "valuereference" + this.parent_id;
+    	this.valuereference_id = "valuereference" + this.id;
     	this.valueReference = ReferenceHelper.toModel(o.getValueReference(), this.valuereference_id);
     }
     if (null != o.getReason() ) {
-    	this.reason_id = "reason" + this.parent_id;
+    	this.reason_id = "reason" + this.id;
     	this.reason = CodeableConceptHelper.toModel(o.getReason(), this.reason_id);
     }
     if (null != o.getModifierExtension()) {
@@ -296,11 +296,11 @@ public class ClaimInformationModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -315,7 +315,7 @@ public class ClaimInformationModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -335,7 +335,7 @@ public class ClaimInformationModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

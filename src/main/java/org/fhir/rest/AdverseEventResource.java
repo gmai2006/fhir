@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class AdverseEventResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public AdverseEvent create(AdverseEvent obj) {
-		return this.service.create(obj);
+	public AdverseEvent createOrUpdate(AdverseEvent obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing AdverseEvent
+   * @param obj - instance of AdverseEvent
+   * @return AdverseEvent
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public AdverseEvent update( AdverseEvent obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing AdverseEvent
+   * @param obj - instance of AdverseEvent
+   * @return AdverseEvent
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get AdverseEvent by its ID
+   * @param id - instance of AdverseEvent
+   * @return AdverseEvent
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class AdverseEventResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all AdverseEvent with limit of returned records
+   * @param max - number of records
+   * @return a list AdverseEvent
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class AdverseEventResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query AdverseEvent based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of AdverseEvent
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class AdverseEventResource {
   }
 
   /**
-  * Descr: actual | potential
-  * Type: token
+   * Query AdverseEvent by composite fields
+   * Descr: actual | potential
+   * Type: token
   */
   @GET
   @Path("type")
@@ -167,8 +208,9 @@ public class AdverseEventResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Subject or group impacted by event
-  * Type: reference
+   * Query AdverseEvent by composite fields
+   * Descr: Subject or group impacted by event
+   * Type: reference
   */
   @GET
   @Path("subject")
@@ -193,8 +235,9 @@ public class AdverseEventResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Adverse Reaction Events linked to exposure to substance
-  * Type: reference
+   * Query AdverseEvent by composite fields
+   * Descr: Adverse Reaction Events linked to exposure to substance
+   * Type: reference
   */
   @GET
   @Path("reaction")
@@ -219,8 +262,9 @@ public class AdverseEventResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Location where adverse event occurred
-  * Type: reference
+   * Query AdverseEvent by composite fields
+   * Descr: Location where adverse event occurred
+   * Type: reference
   */
   @GET
   @Path("location")
@@ -245,8 +289,9 @@ public class AdverseEventResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Mild | Moderate | Severe
-  * Type: token
+   * Query AdverseEvent by composite fields
+   * Descr: Mild | Moderate | Severe
+   * Type: token
   */
   @GET
   @Path("seriousness")
@@ -271,8 +316,9 @@ public class AdverseEventResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Who recorded the adverse event
-  * Type: reference
+   * Query AdverseEvent by composite fields
+   * Descr: Who recorded the adverse event
+   * Type: reference
   */
   @GET
   @Path("recorder")
@@ -297,8 +343,9 @@ public class AdverseEventResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: AdverseEvent.study
-  * Type: reference
+   * Query AdverseEvent by composite fields
+   * Descr: AdverseEvent.study
+   * Type: reference
   */
   @GET
   @Path("study")

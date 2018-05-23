@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="codesystem")
 public class CodeSystemModel  implements Serializable {
-	private static final long serialVersionUID = 151910893737817429L;
+	private static final long serialVersionUID = 151967883192050642L;
   /**
   * Description: "This is a CodeSystem resource"
   */
@@ -120,7 +120,7 @@ public class CodeSystemModel  implements Serializable {
   private String contact_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="contact_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="contact_id", insertable=false, updatable=false)
   private java.util.List<ContactDetailModel> contact;
 
   /**
@@ -138,7 +138,7 @@ public class CodeSystemModel  implements Serializable {
   private String usecontext_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="usecontext_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="usecontext_id", insertable=false, updatable=false)
   private java.util.List<UsageContextModel> useContext;
 
   /**
@@ -149,7 +149,7 @@ public class CodeSystemModel  implements Serializable {
   private String jurisdiction_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="jurisdiction_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="jurisdiction_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> jurisdiction;
 
   /**
@@ -224,7 +224,7 @@ public class CodeSystemModel  implements Serializable {
   private String filter_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="filter_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="filter_id", insertable=false, updatable=false)
   private java.util.List<CodeSystemFilterModel> filter;
 
   /**
@@ -235,7 +235,7 @@ public class CodeSystemModel  implements Serializable {
   private String property_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="property_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="property_id", insertable=false, updatable=false)
   private java.util.List<CodeSystemPropertyModel> property;
 
   /**
@@ -246,7 +246,7 @@ public class CodeSystemModel  implements Serializable {
   private String concept_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="concept_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="concept_id", insertable=false, updatable=false)
   private java.util.List<CodeSystemConceptModel> concept;
 
   /**
@@ -258,7 +258,7 @@ public class CodeSystemModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -312,7 +312,7 @@ public class CodeSystemModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

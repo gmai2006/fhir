@@ -38,7 +38,7 @@ public interface EndpointDao {
   public Endpoint create(Endpoint e);
 
   public Endpoint update(Endpoint e);
-  public void delete(Endpoint e);
+  public void delete(String id);
 
   public List<Endpoint> findByField(QueryBuilder queryBuilder);
 

@@ -198,6 +198,9 @@ public class MedicationRequest  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
     	this.definition = ReferenceHelper.fromArray2Array(o.getDefinition());
     }
@@ -246,6 +249,9 @@ public class MedicationRequest  extends DomainResource  {
     }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
     	this.reasonReference = ReferenceHelper.fromArray2Array(o.getReasonReference());
+    }
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
     }
     if (null != o.getDosageInstruction() && !o.getDosageInstruction().isEmpty()) {
     	this.dosageInstruction = DosageHelper.fromArray2Array(o.getDosageInstruction());

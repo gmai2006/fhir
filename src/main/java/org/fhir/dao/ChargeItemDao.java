@@ -38,7 +38,7 @@ public interface ChargeItemDao {
   public ChargeItem create(ChargeItem e);
 
   public ChargeItem update(ChargeItem e);
-  public void delete(ChargeItem e);
+  public void delete(String id);
 
   public List<ChargeItem> findByField(QueryBuilder queryBuilder);
 

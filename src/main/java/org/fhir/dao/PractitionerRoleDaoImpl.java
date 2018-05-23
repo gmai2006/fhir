@@ -90,9 +90,9 @@ public class PractitionerRoleDaoImpl implements PractitionerRoleDao {
   }
   @Override
   @Transactional
-  public void delete(PractitionerRole e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final PractitionerRoleModel removed = em.find(PractitionerRoleModel.class, e.getId());
+      final PractitionerRoleModel removed = em.find(PractitionerRoleModel.class, id);
       em.remove(removed);
   }
 

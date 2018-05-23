@@ -36,7 +36,7 @@ public interface PaymentNoticeService {
   public List<PaymentNotice> selectAll();
   public PaymentNotice create(PaymentNotice bean);
   public PaymentNotice update(PaymentNotice bean);
-  public void delete(PaymentNotice bean);
+  public void delete(String id);
   public List<PaymentNotice> findByField(QueryBuilder queryBuilder);
   public List<PaymentNotice> findByRequest(QueryBuilder queryBuilder);
   public List<PaymentNotice> findByResponse(QueryBuilder queryBuilder);

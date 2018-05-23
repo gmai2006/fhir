@@ -38,7 +38,7 @@ public interface RiskAssessmentDao {
   public RiskAssessment create(RiskAssessment e);
 
   public RiskAssessment update(RiskAssessment e);
-  public void delete(RiskAssessment e);
+  public void delete(String id);
 
   public List<RiskAssessment> findByField(QueryBuilder queryBuilder);
 

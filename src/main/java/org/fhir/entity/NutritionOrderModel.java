@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="nutritionorder")
 public class NutritionOrderModel  implements Serializable {
-	private static final long serialVersionUID = 151910893721894344L;
+	private static final long serialVersionUID = 151967883174598845L;
   /**
   * Description: "This is a NutritionOrder resource"
   */
@@ -70,7 +70,7 @@ public class NutritionOrderModel  implements Serializable {
   private String patient_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="patient_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="patient_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> patient;
 
   /**
@@ -81,7 +81,7 @@ public class NutritionOrderModel  implements Serializable {
   private String encounter_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="encounter_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="encounter_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> encounter;
 
   /**
@@ -100,7 +100,7 @@ public class NutritionOrderModel  implements Serializable {
   private String orderer_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="orderer_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="orderer_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> orderer;
 
   /**
@@ -111,7 +111,7 @@ public class NutritionOrderModel  implements Serializable {
   private String allergyintolerance_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="allergyintolerance_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="allergyintolerance_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> allergyIntolerance;
 
   /**
@@ -122,7 +122,7 @@ public class NutritionOrderModel  implements Serializable {
   private String foodpreferencemodifier_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="foodpreferencemodifier_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="foodpreferencemodifier_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> foodPreferenceModifier;
 
   /**
@@ -133,7 +133,7 @@ public class NutritionOrderModel  implements Serializable {
   private String excludefoodmodifier_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="excludefoodmodifier_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="excludefoodmodifier_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> excludeFoodModifier;
 
   /**
@@ -144,7 +144,7 @@ public class NutritionOrderModel  implements Serializable {
   private String oraldiet_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="oraldiet_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="oraldiet_id", insertable=false, updatable=false)
   private java.util.List<NutritionOrderOralDietModel> oralDiet;
 
   /**
@@ -155,7 +155,7 @@ public class NutritionOrderModel  implements Serializable {
   private String supplement_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="supplement_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="supplement_id", insertable=false, updatable=false)
   private java.util.List<NutritionOrderSupplementModel> supplement;
 
   /**
@@ -166,7 +166,7 @@ public class NutritionOrderModel  implements Serializable {
   private String enteralformula_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="enteralformula_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="enteralformula_id", insertable=false, updatable=false)
   private java.util.List<NutritionOrderEnteralFormulaModel> enteralFormula;
 
   /**
@@ -178,7 +178,7 @@ public class NutritionOrderModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -232,7 +232,7 @@ public class NutritionOrderModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

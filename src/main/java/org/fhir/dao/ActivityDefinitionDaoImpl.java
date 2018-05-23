@@ -90,9 +90,9 @@ public class ActivityDefinitionDaoImpl implements ActivityDefinitionDao {
   }
   @Override
   @Transactional
-  public void delete(ActivityDefinition e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ActivityDefinitionModel removed = em.find(ActivityDefinitionModel.class, e.getId());
+      final ActivityDefinitionModel removed = em.find(ActivityDefinitionModel.class, id);
       em.remove(removed);
   }
 

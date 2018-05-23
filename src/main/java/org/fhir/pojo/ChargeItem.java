@@ -274,6 +274,9 @@ public class ChargeItem  extends DomainResource  {
     if (null != o.getAccount() && !o.getAccount().isEmpty()) {
     	this.account = ReferenceHelper.fromArray2Array(o.getAccount());
     }
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
+    }
     if (null != o.getSupportingInformation() && !o.getSupportingInformation().isEmpty()) {
     	this.supportingInformation = ReferenceHelper.fromArray2Array(o.getSupportingInformation());
     }

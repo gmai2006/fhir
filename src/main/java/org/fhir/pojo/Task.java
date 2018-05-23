@@ -230,6 +230,9 @@ public class Task  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getDefinitionUri()) {
       this.definitionUri = o.getDefinitionUri();
     }
@@ -292,11 +295,17 @@ public class Task  extends DomainResource  {
     if (null != o.getReason() && !o.getReason().isEmpty()) {
       this.reason = new CodeableConcept(o.getReason().get(0));
     }
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
+    }
     if (null != o.getRelevantHistory() && !o.getRelevantHistory().isEmpty()) {
     	this.relevantHistory = ReferenceHelper.fromArray2Array(o.getRelevantHistory());
     }
     if (null != o.getRestriction() && !o.getRestriction().isEmpty()) {
       this.restriction = new TaskRestriction(o.getRestriction().get(0));
+    }
+    if (o.getInput() != null) {
+    	this.input = org.fhir.utils.JsonUtils.json2Array(o.getInput());
     }
     if (null != o.getOutput() && !o.getOutput().isEmpty()) {
     	this.output = TaskOutputHelper.fromArray2Array(o.getOutput());

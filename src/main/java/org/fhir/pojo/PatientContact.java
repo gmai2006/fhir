@@ -86,6 +86,9 @@ public class PatientContact  extends BackboneElement  {
     	this.relationship = CodeableConceptHelper.fromArray2Array(o.getRelationship());
     }
     this.name = HumanNameHelper.fromJson(o.getName());
+    if (o.getTelecom() != null) {
+    	this.telecom = org.fhir.utils.JsonUtils.json2Array(o.getTelecom());
+    }
     if (null != o.getAddress() && !o.getAddress().isEmpty()) {
       this.address = new Address(o.getAddress().get(0));
     }

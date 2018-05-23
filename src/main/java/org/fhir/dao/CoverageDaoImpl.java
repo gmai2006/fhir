@@ -90,9 +90,9 @@ public class CoverageDaoImpl implements CoverageDao {
   }
   @Override
   @Transactional
-  public void delete(Coverage e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final CoverageModel removed = em.find(CoverageModel.class, e.getId());
+      final CoverageModel removed = em.find(CoverageModel.class, id);
       em.remove(removed);
   }
 

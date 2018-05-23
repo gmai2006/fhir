@@ -36,7 +36,7 @@ public interface ClinicalImpressionService {
   public List<ClinicalImpression> selectAll();
   public ClinicalImpression create(ClinicalImpression bean);
   public ClinicalImpression update(ClinicalImpression bean);
-  public void delete(ClinicalImpression bean);
+  public void delete(String id);
   public List<ClinicalImpression> findByField(QueryBuilder queryBuilder);
   public List<ClinicalImpression> findByCode(QueryBuilder queryBuilder);
   public List<ClinicalImpression> findBySubject(QueryBuilder queryBuilder);

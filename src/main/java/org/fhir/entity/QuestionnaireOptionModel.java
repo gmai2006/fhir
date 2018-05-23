@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="questionnaireoption")
 public class QuestionnaireOptionModel  implements Serializable {
-	private static final long serialVersionUID = 151910893736679719L;
+	private static final long serialVersionUID = 151967883190713728L;
   /**
   * Description: "A potential answer that's allowed as the answer to this question."
   */
@@ -77,7 +77,7 @@ public class QuestionnaireOptionModel  implements Serializable {
   private String valuecoding_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuecoding_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="valuecoding_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> valueCoding;
 
   /**
@@ -116,14 +116,14 @@ public class QuestionnaireOptionModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public QuestionnaireOptionModel() {
   }
 
-  public QuestionnaireOptionModel(QuestionnaireOption o, String parentId) {
-  	this.parent_id = parentId;
+  public QuestionnaireOptionModel(QuestionnaireOption o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -132,7 +132,7 @@ public class QuestionnaireOptionModel  implements Serializable {
     this.valueTime = o.getValueTime();
     this.valueString = o.getValueString();
     if (null != o.getValueCoding() ) {
-    	this.valuecoding_id = "valuecoding" + this.parent_id;
+    	this.valuecoding_id = "valuecoding" + this.id;
     	this.valueCoding = CodingHelper.toModel(o.getValueCoding(), this.valuecoding_id);
     }
     if (null != o.getModifierExtension()) {
@@ -191,11 +191,11 @@ public class QuestionnaireOptionModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -209,7 +209,7 @@ public class QuestionnaireOptionModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -224,7 +224,7 @@ public class QuestionnaireOptionModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

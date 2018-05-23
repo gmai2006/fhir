@@ -90,9 +90,9 @@ public class ImagingStudyDaoImpl implements ImagingStudyDao {
   }
   @Override
   @Transactional
-  public void delete(ImagingStudy e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ImagingStudyModel removed = em.find(ImagingStudyModel.class, e.getId());
+      final ImagingStudyModel removed = em.find(ImagingStudyModel.class, id);
       em.remove(removed);
   }
 

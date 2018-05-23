@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="paymentreconciliationdetail")
 public class PaymentReconciliationDetailModel  implements Serializable {
-	private static final long serialVersionUID = 151910893771610795L;
+	private static final long serialVersionUID = 151967883225816979L;
   /**
   * Description: "Code to indicate the nature of the payment, adjustment, funds advance, etc."
   */
@@ -46,7 +46,7 @@ public class PaymentReconciliationDetailModel  implements Serializable {
   private String type_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> type;
 
   /**
@@ -57,7 +57,7 @@ public class PaymentReconciliationDetailModel  implements Serializable {
   private String request_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="request_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="request_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> request;
 
   /**
@@ -68,7 +68,7 @@ public class PaymentReconciliationDetailModel  implements Serializable {
   private String response_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="response_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="response_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> response;
 
   /**
@@ -79,7 +79,7 @@ public class PaymentReconciliationDetailModel  implements Serializable {
   private String submitter_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="submitter_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="submitter_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> submitter;
 
   /**
@@ -90,7 +90,7 @@ public class PaymentReconciliationDetailModel  implements Serializable {
   private String payee_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="payee_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="payee_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> payee;
 
   /**
@@ -109,7 +109,7 @@ public class PaymentReconciliationDetailModel  implements Serializable {
   private String amount_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="amount_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="amount_id", insertable=false, updatable=false)
   private java.util.List<MoneyModel> amount;
 
   /**
@@ -148,40 +148,40 @@ public class PaymentReconciliationDetailModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public PaymentReconciliationDetailModel() {
   }
 
-  public PaymentReconciliationDetailModel(PaymentReconciliationDetail o, String parentId) {
-  	this.parent_id = parentId;
+  public PaymentReconciliationDetailModel(PaymentReconciliationDetail o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getType() ) {
-    	this.type_id = "type" + this.parent_id;
+    	this.type_id = "type" + this.id;
     	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
     }
     if (null != o.getRequest() ) {
-    	this.request_id = "request" + this.parent_id;
+    	this.request_id = "request" + this.id;
     	this.request = ReferenceHelper.toModel(o.getRequest(), this.request_id);
     }
     if (null != o.getResponse() ) {
-    	this.response_id = "response" + this.parent_id;
+    	this.response_id = "response" + this.id;
     	this.response = ReferenceHelper.toModel(o.getResponse(), this.response_id);
     }
     if (null != o.getSubmitter() ) {
-    	this.submitter_id = "submitter" + this.parent_id;
+    	this.submitter_id = "submitter" + this.id;
     	this.submitter = ReferenceHelper.toModel(o.getSubmitter(), this.submitter_id);
     }
     if (null != o.getPayee() ) {
-    	this.payee_id = "payee" + this.parent_id;
+    	this.payee_id = "payee" + this.id;
     	this.payee = ReferenceHelper.toModel(o.getPayee(), this.payee_id);
     }
     this.date = o.getDate();
     if (null != o.getAmount() ) {
-    	this.amount_id = "amount" + this.parent_id;
+    	this.amount_id = "amount" + this.id;
     	this.amount = MoneyHelper.toModel(o.getAmount(), this.amount_id);
     }
     if (null != o.getModifierExtension()) {
@@ -252,11 +252,11 @@ public class PaymentReconciliationDetailModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -267,7 +267,7 @@ public class PaymentReconciliationDetailModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -284,7 +284,7 @@ public class PaymentReconciliationDetailModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

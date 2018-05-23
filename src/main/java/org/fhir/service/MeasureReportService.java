@@ -36,7 +36,7 @@ public interface MeasureReportService {
   public List<MeasureReport> selectAll();
   public MeasureReport create(MeasureReport bean);
   public MeasureReport update(MeasureReport bean);
-  public void delete(MeasureReport bean);
+  public void delete(String id);
   public List<MeasureReport> findByField(QueryBuilder queryBuilder);
   public List<MeasureReport> findByMeasure(QueryBuilder queryBuilder);
   public List<MeasureReport> findByPatient(QueryBuilder queryBuilder);

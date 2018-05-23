@@ -36,7 +36,7 @@ public interface ChargeItemService {
   public List<ChargeItem> selectAll();
   public ChargeItem create(ChargeItem bean);
   public ChargeItem update(ChargeItem bean);
-  public void delete(ChargeItem bean);
+  public void delete(String id);
   public List<ChargeItem> findByField(QueryBuilder queryBuilder);
   public List<ChargeItem> findByPartOf(QueryBuilder queryBuilder);
   public List<ChargeItem> findByCode(QueryBuilder queryBuilder);

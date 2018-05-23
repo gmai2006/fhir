@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="questionnaireitem")
 public class QuestionnaireItemModel  implements Serializable {
-	private static final long serialVersionUID = 151910893748070358L;
+	private static final long serialVersionUID = 151967883203237658L;
   /**
   * Description: "An identifier that is unique within the Questionnaire allowing linkage to the equivalent item in a QuestionnaireResponse resource."
   */
@@ -60,7 +60,7 @@ public class QuestionnaireItemModel  implements Serializable {
   private String code_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> code;
 
   /**
@@ -92,7 +92,7 @@ public class QuestionnaireItemModel  implements Serializable {
   private String enablewhen_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="enablewhen_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="enablewhen_id", insertable=false, updatable=false)
   private java.util.List<QuestionnaireEnableWhenModel> enableWhen;
 
   /**
@@ -132,7 +132,7 @@ public class QuestionnaireItemModel  implements Serializable {
   private String options_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="options_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="options_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> options;
 
   /**
@@ -143,7 +143,7 @@ public class QuestionnaireItemModel  implements Serializable {
   private String option_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="option_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="option_id", insertable=false, updatable=false)
   private java.util.List<QuestionnaireOptionModel> option;
 
   /**
@@ -224,7 +224,7 @@ public class QuestionnaireItemModel  implements Serializable {
   private String initialcoding_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="initialcoding_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="initialcoding_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> initialCoding;
 
   /**
@@ -235,7 +235,7 @@ public class QuestionnaireItemModel  implements Serializable {
   private String initialquantity_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="initialquantity_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="initialquantity_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> initialQuantity;
 
   /**
@@ -246,7 +246,7 @@ public class QuestionnaireItemModel  implements Serializable {
   private String initialreference_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="initialreference_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="initialreference_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> initialReference;
 
   /**
@@ -257,7 +257,7 @@ public class QuestionnaireItemModel  implements Serializable {
   private String item_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="item_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="item_id", insertable=false, updatable=false)
   private java.util.List<QuestionnaireItemModel> item;
 
   /**
@@ -296,28 +296,28 @@ public class QuestionnaireItemModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public QuestionnaireItemModel() {
   }
 
-  public QuestionnaireItemModel(QuestionnaireItem o, String parentId) {
-  	this.parent_id = parentId;
+  public QuestionnaireItemModel(QuestionnaireItem o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     this.linkId = o.getLinkId();
     this.definition = o.getDefinition();
     if (null != o.getCode() && !o.getCode().isEmpty()) {
-    	this.code_id = "code" + this.parent_id;
+    	this.code_id = "code" + this.id;
     	this.code = CodingHelper.toModelFromArray(o.getCode(), this.code_id);
     }
     this.prefix = o.getPrefix();
     this.text = o.getText();
     this.type = o.getType();
     if (null != o.getEnableWhen() && !o.getEnableWhen().isEmpty()) {
-    	this.enablewhen_id = "enablewhen" + this.parent_id;
+    	this.enablewhen_id = "enablewhen" + this.id;
     	this.enableWhen = QuestionnaireEnableWhenHelper.toModelFromArray(o.getEnableWhen(), this.enablewhen_id);
     }
     this.required = o.getRequired();
@@ -325,11 +325,11 @@ public class QuestionnaireItemModel  implements Serializable {
     this.readOnly = o.getReadOnly();
     this.maxLength = o.getMaxLength();
     if (null != o.getOptions() ) {
-    	this.options_id = "options" + this.parent_id;
+    	this.options_id = "options" + this.id;
     	this.options = ReferenceHelper.toModel(o.getOptions(), this.options_id);
     }
     if (null != o.getOption() && !o.getOption().isEmpty()) {
-    	this.option_id = "option" + this.parent_id;
+    	this.option_id = "option" + this.id;
     	this.option = QuestionnaireOptionHelper.toModelFromArray(o.getOption(), this.option_id);
     }
     this.initialBoolean = o.getInitialBoolean();
@@ -344,19 +344,19 @@ public class QuestionnaireItemModel  implements Serializable {
     	this.initialAttachment = JsonUtils.toJson(o.getInitialAttachment());
     }
     if (null != o.getInitialCoding() ) {
-    	this.initialcoding_id = "initialcoding" + this.parent_id;
+    	this.initialcoding_id = "initialcoding" + this.id;
     	this.initialCoding = CodingHelper.toModel(o.getInitialCoding(), this.initialcoding_id);
     }
     if (null != o.getInitialQuantity() ) {
-    	this.initialquantity_id = "initialquantity" + this.parent_id;
+    	this.initialquantity_id = "initialquantity" + this.id;
     	this.initialQuantity = QuantityHelper.toModel(o.getInitialQuantity(), this.initialquantity_id);
     }
     if (null != o.getInitialReference() ) {
-    	this.initialreference_id = "initialreference" + this.parent_id;
+    	this.initialreference_id = "initialreference" + this.id;
     	this.initialReference = ReferenceHelper.toModel(o.getInitialReference(), this.initialreference_id);
     }
     if (null != o.getItem() && !o.getItem().isEmpty()) {
-    	this.item_id = "item" + this.parent_id;
+    	this.item_id = "item" + this.id;
     	this.item = QuestionnaireItemHelper.toModelFromArray(o.getItem(), this.item_id);
     }
     if (null != o.getModifierExtension()) {
@@ -541,11 +541,11 @@ public class QuestionnaireItemModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -573,7 +573,7 @@ public class QuestionnaireItemModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -609,7 +609,7 @@ public class QuestionnaireItemModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

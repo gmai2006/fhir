@@ -90,9 +90,9 @@ public class PaymentReconciliationDaoImpl implements PaymentReconciliationDao {
   }
   @Override
   @Transactional
-  public void delete(PaymentReconciliation e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final PaymentReconciliationModel removed = em.find(PaymentReconciliationModel.class, e.getId());
+      final PaymentReconciliationModel removed = em.find(PaymentReconciliationModel.class, id);
       em.remove(removed);
   }
 

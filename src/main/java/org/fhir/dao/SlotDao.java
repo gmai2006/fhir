@@ -38,7 +38,7 @@ public interface SlotDao {
   public Slot create(Slot e);
 
   public Slot update(Slot e);
-  public void delete(Slot e);
+  public void delete(String id);
 
   public List<Slot> findByField(QueryBuilder queryBuilder);
 

@@ -38,7 +38,7 @@ public interface PatientDao {
   public Patient create(Patient e);
 
   public Patient update(Patient e);
-  public void delete(Patient e);
+  public void delete(String id);
 
   public List<Patient> findByField(QueryBuilder queryBuilder);
 

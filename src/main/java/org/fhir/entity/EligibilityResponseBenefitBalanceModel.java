@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="eligibilityresponsebenefitbalance")
 public class EligibilityResponseBenefitBalanceModel  implements Serializable {
-	private static final long serialVersionUID = 151910893761688172L;
+	private static final long serialVersionUID = 151967883215961067L;
   /**
   * Description: "Dental, Vision, Medical, Pharmacy, Rehab etc."
   */
@@ -46,7 +46,7 @@ public class EligibilityResponseBenefitBalanceModel  implements Serializable {
   private String category_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> category;
 
   /**
@@ -57,7 +57,7 @@ public class EligibilityResponseBenefitBalanceModel  implements Serializable {
   private String subcategory_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subcategory_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="subcategory_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> subCategory;
 
   /**
@@ -89,7 +89,7 @@ public class EligibilityResponseBenefitBalanceModel  implements Serializable {
   private String network_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="network_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="network_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> network;
 
   /**
@@ -100,7 +100,7 @@ public class EligibilityResponseBenefitBalanceModel  implements Serializable {
   private String unit_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="unit_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="unit_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> unit;
 
   /**
@@ -111,7 +111,7 @@ public class EligibilityResponseBenefitBalanceModel  implements Serializable {
   private String term_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="term_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="term_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> term;
 
   /**
@@ -122,7 +122,7 @@ public class EligibilityResponseBenefitBalanceModel  implements Serializable {
   private String financial_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="financial_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="financial_id", insertable=false, updatable=false)
   private java.util.List<EligibilityResponseFinancialModel> financial;
 
   /**
@@ -161,42 +161,42 @@ public class EligibilityResponseBenefitBalanceModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public EligibilityResponseBenefitBalanceModel() {
   }
 
-  public EligibilityResponseBenefitBalanceModel(EligibilityResponseBenefitBalance o, String parentId) {
-  	this.parent_id = parentId;
+  public EligibilityResponseBenefitBalanceModel(EligibilityResponseBenefitBalance o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getCategory() ) {
-    	this.category_id = "category" + this.parent_id;
+    	this.category_id = "category" + this.id;
     	this.category = CodeableConceptHelper.toModel(o.getCategory(), this.category_id);
     }
     if (null != o.getSubCategory() ) {
-    	this.subcategory_id = "subcategory" + this.parent_id;
+    	this.subcategory_id = "subcategory" + this.id;
     	this.subCategory = CodeableConceptHelper.toModel(o.getSubCategory(), this.subcategory_id);
     }
     this.excluded = o.getExcluded();
     this.name = o.getName();
     this.description = o.getDescription();
     if (null != o.getNetwork() ) {
-    	this.network_id = "network" + this.parent_id;
+    	this.network_id = "network" + this.id;
     	this.network = CodeableConceptHelper.toModel(o.getNetwork(), this.network_id);
     }
     if (null != o.getUnit() ) {
-    	this.unit_id = "unit" + this.parent_id;
+    	this.unit_id = "unit" + this.id;
     	this.unit = CodeableConceptHelper.toModel(o.getUnit(), this.unit_id);
     }
     if (null != o.getTerm() ) {
-    	this.term_id = "term" + this.parent_id;
+    	this.term_id = "term" + this.id;
     	this.term = CodeableConceptHelper.toModel(o.getTerm(), this.term_id);
     }
     if (null != o.getFinancial() && !o.getFinancial().isEmpty()) {
-    	this.financial_id = "financial" + this.parent_id;
+    	this.financial_id = "financial" + this.id;
     	this.financial = EligibilityResponseFinancialHelper.toModelFromArray(o.getFinancial(), this.financial_id);
     }
     if (null != o.getModifierExtension()) {
@@ -279,11 +279,11 @@ public class EligibilityResponseBenefitBalanceModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -296,7 +296,7 @@ public class EligibilityResponseBenefitBalanceModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -315,7 +315,7 @@ public class EligibilityResponseBenefitBalanceModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

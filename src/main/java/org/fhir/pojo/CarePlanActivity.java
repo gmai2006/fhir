@@ -73,6 +73,9 @@ public class CarePlanActivity  extends BackboneElement  {
     if (null != o.getOutcomeReference() && !o.getOutcomeReference().isEmpty()) {
     	this.outcomeReference = ReferenceHelper.fromArray2Array(o.getOutcomeReference());
     }
+    if (o.getProgress() != null) {
+    	this.progress = org.fhir.utils.JsonUtils.json2Array(o.getProgress());
+    }
     if (null != o.getReference() && !o.getReference().isEmpty()) {
       this.reference = new Reference(o.getReference().get(0));
     }

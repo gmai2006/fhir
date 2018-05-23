@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="capabilitystatementsecurity")
 public class CapabilityStatementSecurityModel  implements Serializable {
-	private static final long serialVersionUID = 151910893772012547L;
+	private static final long serialVersionUID = 151967883226317779L;
   /**
   * Description: "Server adds CORS headers when responding to requests - this enables javascript applications to use the server."
   */
@@ -53,7 +53,7 @@ public class CapabilityStatementSecurityModel  implements Serializable {
   private String service_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="service_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="service_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> service;
 
   /**
@@ -71,7 +71,7 @@ public class CapabilityStatementSecurityModel  implements Serializable {
   private String certificate_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="certificate_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="certificate_id", insertable=false, updatable=false)
   private java.util.List<CapabilityStatementCertificateModel> certificate;
 
   /**
@@ -110,25 +110,25 @@ public class CapabilityStatementSecurityModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public CapabilityStatementSecurityModel() {
   }
 
-  public CapabilityStatementSecurityModel(CapabilityStatementSecurity o, String parentId) {
-  	this.parent_id = parentId;
+  public CapabilityStatementSecurityModel(CapabilityStatementSecurity o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     this.cors = o.getCors();
     if (null != o.getService() && !o.getService().isEmpty()) {
-    	this.service_id = "service" + this.parent_id;
+    	this.service_id = "service" + this.id;
     	this.service = CodeableConceptHelper.toModelFromArray(o.getService(), this.service_id);
     }
     this.description = o.getDescription();
     if (null != o.getCertificate() && !o.getCertificate().isEmpty()) {
-    	this.certificate_id = "certificate" + this.parent_id;
+    	this.certificate_id = "certificate" + this.id;
     	this.certificate = CapabilityStatementCertificateHelper.toModelFromArray(o.getCertificate(), this.certificate_id);
     }
     if (null != o.getModifierExtension()) {
@@ -181,11 +181,11 @@ public class CapabilityStatementSecurityModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -197,7 +197,7 @@ public class CapabilityStatementSecurityModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -211,7 +211,7 @@ public class CapabilityStatementSecurityModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

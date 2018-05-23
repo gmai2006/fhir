@@ -90,9 +90,9 @@ public class FlagDaoImpl implements FlagDao {
   }
   @Override
   @Transactional
-  public void delete(Flag e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final FlagModel removed = em.find(FlagModel.class, e.getId());
+      final FlagModel removed = em.find(FlagModel.class, id);
       em.remove(removed);
   }
 

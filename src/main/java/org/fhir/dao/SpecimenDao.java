@@ -38,7 +38,7 @@ public interface SpecimenDao {
   public Specimen create(Specimen e);
 
   public Specimen update(Specimen e);
-  public void delete(Specimen e);
+  public void delete(String id);
 
   public List<Specimen> findByField(QueryBuilder queryBuilder);
 

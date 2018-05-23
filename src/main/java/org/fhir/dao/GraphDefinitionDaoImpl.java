@@ -90,9 +90,9 @@ public class GraphDefinitionDaoImpl implements GraphDefinitionDao {
   }
   @Override
   @Transactional
-  public void delete(GraphDefinition e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final GraphDefinitionModel removed = em.find(GraphDefinitionModel.class, e.getId());
+      final GraphDefinitionModel removed = em.find(GraphDefinitionModel.class, id);
       em.remove(removed);
   }
 

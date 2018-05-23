@@ -36,7 +36,7 @@ public interface CarePlanService {
   public List<CarePlan> selectAll();
   public CarePlan create(CarePlan bean);
   public CarePlan update(CarePlan bean);
-  public void delete(CarePlan bean);
+  public void delete(String id);
   public List<CarePlan> findByField(QueryBuilder queryBuilder);
   public List<CarePlan> findByDefinition(QueryBuilder queryBuilder);
   public List<CarePlan> findByBasedOn(QueryBuilder queryBuilder);

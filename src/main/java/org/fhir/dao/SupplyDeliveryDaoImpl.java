@@ -90,9 +90,9 @@ public class SupplyDeliveryDaoImpl implements SupplyDeliveryDao {
   }
   @Override
   @Transactional
-  public void delete(SupplyDelivery e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final SupplyDeliveryModel removed = em.find(SupplyDeliveryModel.class, e.getId());
+      final SupplyDeliveryModel removed = em.find(SupplyDeliveryModel.class, id);
       em.remove(removed);
   }
 

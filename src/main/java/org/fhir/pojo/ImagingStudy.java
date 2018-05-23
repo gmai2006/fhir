@@ -185,6 +185,9 @@ public class ImagingStudy  extends DomainResource  {
       this.uid = o.getUid();
     }
     this.accession = IdentifierHelper.fromJson(o.getAccession());
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getAvailability()) {
       this.availability = o.getAvailability();
     }

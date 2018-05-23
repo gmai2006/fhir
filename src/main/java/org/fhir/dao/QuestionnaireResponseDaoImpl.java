@@ -90,9 +90,9 @@ public class QuestionnaireResponseDaoImpl implements QuestionnaireResponseDao {
   }
   @Override
   @Transactional
-  public void delete(QuestionnaireResponse e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final QuestionnaireResponseModel removed = em.find(QuestionnaireResponseModel.class, e.getId());
+      final QuestionnaireResponseModel removed = em.find(QuestionnaireResponseModel.class, id);
       em.remove(removed);
   }
 

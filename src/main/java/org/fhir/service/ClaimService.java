@@ -36,7 +36,7 @@ public interface ClaimService {
   public List<Claim> selectAll();
   public Claim create(Claim bean);
   public Claim update(Claim bean);
-  public void delete(Claim bean);
+  public void delete(String id);
   public List<Claim> findByField(QueryBuilder queryBuilder);
   public List<Claim> findByType(QueryBuilder queryBuilder);
   public List<Claim> findBySubType(QueryBuilder queryBuilder);

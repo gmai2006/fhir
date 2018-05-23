@@ -36,7 +36,7 @@ public interface EpisodeOfCareService {
   public List<EpisodeOfCare> selectAll();
   public EpisodeOfCare create(EpisodeOfCare bean);
   public EpisodeOfCare update(EpisodeOfCare bean);
-  public void delete(EpisodeOfCare bean);
+  public void delete(String id);
   public List<EpisodeOfCare> findByField(QueryBuilder queryBuilder);
   public List<EpisodeOfCare> findByStatusHistory(QueryBuilder queryBuilder);
   public List<EpisodeOfCare> findByType(QueryBuilder queryBuilder);

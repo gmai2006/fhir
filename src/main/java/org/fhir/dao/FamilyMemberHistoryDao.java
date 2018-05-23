@@ -38,7 +38,7 @@ public interface FamilyMemberHistoryDao {
   public FamilyMemberHistory create(FamilyMemberHistory e);
 
   public FamilyMemberHistory update(FamilyMemberHistory e);
-  public void delete(FamilyMemberHistory e);
+  public void delete(String id);
 
   public List<FamilyMemberHistory> findByField(QueryBuilder queryBuilder);
 

@@ -38,7 +38,7 @@ public interface LibraryDao {
   public Library create(Library e);
 
   public Library update(Library e);
-  public void delete(Library e);
+  public void delete(String id);
 
   public List<Library> findByField(QueryBuilder queryBuilder);
 

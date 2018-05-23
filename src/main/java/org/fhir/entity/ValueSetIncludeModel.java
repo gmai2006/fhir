@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="valuesetinclude")
 public class ValueSetIncludeModel  implements Serializable {
-	private static final long serialVersionUID = 151910893737043804L;
+	private static final long serialVersionUID = 151967883191210158L;
   /**
   * Description: "An absolute URI which is the code system from which the selected codes come from."
   */
@@ -60,7 +60,7 @@ public class ValueSetIncludeModel  implements Serializable {
   private String concept_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="concept_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="concept_id", insertable=false, updatable=false)
   private java.util.List<ValueSetConceptModel> concept;
 
   /**
@@ -71,7 +71,7 @@ public class ValueSetIncludeModel  implements Serializable {
   private String filter_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="filter_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="filter_id", insertable=false, updatable=false)
   private java.util.List<ValueSetFilterModel> filter;
 
   /**
@@ -117,25 +117,25 @@ public class ValueSetIncludeModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ValueSetIncludeModel() {
   }
 
-  public ValueSetIncludeModel(ValueSetInclude o, String parentId) {
-  	this.parent_id = parentId;
+  public ValueSetIncludeModel(ValueSetInclude o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     this.system = o.getSystem();
     this.version = o.getVersion();
     if (null != o.getConcept() && !o.getConcept().isEmpty()) {
-    	this.concept_id = "concept" + this.parent_id;
+    	this.concept_id = "concept" + this.id;
     	this.concept = ValueSetConceptHelper.toModelFromArray(o.getConcept(), this.concept_id);
     }
     if (null != o.getFilter() && !o.getFilter().isEmpty()) {
-    	this.filter_id = "filter" + this.parent_id;
+    	this.filter_id = "filter" + this.id;
     	this.filter = ValueSetFilterHelper.toModelFromArray(o.getFilter(), this.filter_id);
     }
     this.valueSet = org.fhir.utils.JsonUtils.toJson(o.getValueSet());
@@ -195,11 +195,11 @@ public class ValueSetIncludeModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -212,7 +212,7 @@ public class ValueSetIncludeModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -227,7 +227,7 @@ public class ValueSetIncludeModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

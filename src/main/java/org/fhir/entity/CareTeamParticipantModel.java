@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="careteamparticipant")
 public class CareTeamParticipantModel  implements Serializable {
-	private static final long serialVersionUID = 151910893761032784L;
+	private static final long serialVersionUID = 151967883215498390L;
   /**
   * Description: "Indicates specific responsibility of an individual within the care team, such as \"Primary care physician\", \"Trained social worker counselor\", \"Caregiver\", etc."
   */
@@ -46,7 +46,7 @@ public class CareTeamParticipantModel  implements Serializable {
   private String role_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="role_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="role_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> role;
 
   /**
@@ -57,7 +57,7 @@ public class CareTeamParticipantModel  implements Serializable {
   private String member_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="member_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="member_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> member;
 
   /**
@@ -68,7 +68,7 @@ public class CareTeamParticipantModel  implements Serializable {
   private String onbehalfof_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="onbehalfof_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="onbehalfof_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> onBehalfOf;
 
   /**
@@ -116,27 +116,27 @@ public class CareTeamParticipantModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public CareTeamParticipantModel() {
   }
 
-  public CareTeamParticipantModel(CareTeamParticipant o, String parentId) {
-  	this.parent_id = parentId;
+  public CareTeamParticipantModel(CareTeamParticipant o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getRole() ) {
-    	this.role_id = "role" + this.parent_id;
+    	this.role_id = "role" + this.id;
     	this.role = CodeableConceptHelper.toModel(o.getRole(), this.role_id);
     }
     if (null != o.getMember() ) {
-    	this.member_id = "member" + this.parent_id;
+    	this.member_id = "member" + this.id;
     	this.member = ReferenceHelper.toModel(o.getMember(), this.member_id);
     }
     if (null != o.getOnBehalfOf() ) {
-    	this.onbehalfof_id = "onbehalfof" + this.parent_id;
+    	this.onbehalfof_id = "onbehalfof" + this.id;
     	this.onBehalfOf = ReferenceHelper.toModel(o.getOnBehalfOf(), this.onbehalfof_id);
     }
     if (null != o.getPeriod()) {
@@ -192,11 +192,11 @@ public class CareTeamParticipantModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -207,7 +207,7 @@ public class CareTeamParticipantModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -221,7 +221,7 @@ public class CareTeamParticipantModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class SequenceResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Sequence create(Sequence obj) {
-		return this.service.create(obj);
+	public Sequence createOrUpdate(Sequence obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing Sequence
+   * @param obj - instance of Sequence
+   * @return Sequence
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public Sequence update( Sequence obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing Sequence
+   * @param obj - instance of Sequence
+   * @return Sequence
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get Sequence by its ID
+   * @param id - instance of Sequence
+   * @return Sequence
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class SequenceResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all Sequence with limit of returned records
+   * @param max - number of records
+   * @return a list Sequence
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class SequenceResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query Sequence based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of Sequence
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class SequenceResource {
   }
 
   /**
-  * Descr: The subject that the observation is about
-  * Type: reference
+   * Query Sequence by composite fields
+   * Descr: The subject that the observation is about
+   * Type: reference
   */
   @GET
   @Path("patient")

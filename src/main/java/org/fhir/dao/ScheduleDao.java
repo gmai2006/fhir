@@ -38,7 +38,7 @@ public interface ScheduleDao {
   public Schedule create(Schedule e);
 
   public Schedule update(Schedule e);
-  public void delete(Schedule e);
+  public void delete(String id);
 
   public List<Schedule> findByField(QueryBuilder queryBuilder);
 

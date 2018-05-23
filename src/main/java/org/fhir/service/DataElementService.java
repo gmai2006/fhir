@@ -36,7 +36,7 @@ public interface DataElementService {
   public List<DataElement> selectAll();
   public DataElement create(DataElement bean);
   public DataElement update(DataElement bean);
-  public void delete(DataElement bean);
+  public void delete(String id);
   public List<DataElement> findByField(QueryBuilder queryBuilder);
   public List<DataElement> findByContact(QueryBuilder queryBuilder);
   public List<DataElement> findByUseContext(QueryBuilder queryBuilder);

@@ -36,7 +36,7 @@ public interface DocumentReferenceService {
   public List<DocumentReference> selectAll();
   public DocumentReference create(DocumentReference bean);
   public DocumentReference update(DocumentReference bean);
-  public void delete(DocumentReference bean);
+  public void delete(String id);
   public List<DocumentReference> findByField(QueryBuilder queryBuilder);
   public List<DocumentReference> findByType(QueryBuilder queryBuilder);
   public List<DocumentReference> findByFHIRclass(QueryBuilder queryBuilder);

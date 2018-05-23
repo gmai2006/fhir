@@ -36,7 +36,7 @@ public interface ResourceService {
   public List<Resource> selectAll();
   public Resource create(Resource bean);
   public Resource update(Resource bean);
-  public void delete(Resource bean);
+  public void delete(String id);
   public List<Resource> findByField(QueryBuilder queryBuilder);
   public List<Resource> findByMeta(QueryBuilder queryBuilder);
 

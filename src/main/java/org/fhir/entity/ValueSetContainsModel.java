@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="valuesetcontains")
 public class ValueSetContainsModel  implements Serializable {
-	private static final long serialVersionUID = 15191089375627425L;
+	private static final long serialVersionUID = 151967883210680273L;
   /**
   * Description: "An absolute URI which is the code system in which the code for this item in the expansion is defined."
   */
@@ -89,7 +89,7 @@ public class ValueSetContainsModel  implements Serializable {
   private String designation_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="designation_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="designation_id", insertable=false, updatable=false)
   private java.util.List<ValueSetDesignationModel> designation;
 
   /**
@@ -100,7 +100,7 @@ public class ValueSetContainsModel  implements Serializable {
   private String contains_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="contains_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="contains_id", insertable=false, updatable=false)
   private java.util.List<ValueSetContainsModel> contains;
 
   /**
@@ -139,14 +139,14 @@ public class ValueSetContainsModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ValueSetContainsModel() {
   }
 
-  public ValueSetContainsModel(ValueSetContains o, String parentId) {
-  	this.parent_id = parentId;
+  public ValueSetContainsModel(ValueSetContains o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -157,11 +157,11 @@ public class ValueSetContainsModel  implements Serializable {
     this.code = o.getCode();
     this.display = o.getDisplay();
     if (null != o.getDesignation() && !o.getDesignation().isEmpty()) {
-    	this.designation_id = "designation" + this.parent_id;
+    	this.designation_id = "designation" + this.id;
     	this.designation = ValueSetDesignationHelper.toModelFromArray(o.getDesignation(), this.designation_id);
     }
     if (null != o.getContains() && !o.getContains().isEmpty()) {
-    	this.contains_id = "contains" + this.parent_id;
+    	this.contains_id = "contains" + this.id;
     	this.contains = ValueSetContainsHelper.toModelFromArray(o.getContains(), this.contains_id);
     }
     if (null != o.getModifierExtension()) {
@@ -238,11 +238,11 @@ public class ValueSetContainsModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -258,7 +258,7 @@ public class ValueSetContainsModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -276,7 +276,7 @@ public class ValueSetContainsModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

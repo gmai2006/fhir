@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="claimresponseinsurance")
 public class ClaimResponseInsuranceModel  implements Serializable {
-	private static final long serialVersionUID = 151910893729885977L;
+	private static final long serialVersionUID = 151967883183472057L;
   /**
   * Description: "A service line item."
   */
@@ -61,7 +61,7 @@ public class ClaimResponseInsuranceModel  implements Serializable {
   private String coverage_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="coverage_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="coverage_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> coverage;
 
   /**
@@ -86,7 +86,7 @@ public class ClaimResponseInsuranceModel  implements Serializable {
   private String claimresponse_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="claimresponse_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="claimresponse_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> claimResponse;
 
   /**
@@ -125,27 +125,27 @@ public class ClaimResponseInsuranceModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ClaimResponseInsuranceModel() {
   }
 
-  public ClaimResponseInsuranceModel(ClaimResponseInsurance o, String parentId) {
-  	this.parent_id = parentId;
+  public ClaimResponseInsuranceModel(ClaimResponseInsurance o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     this.sequence = o.getSequence();
     this.focal = o.getFocal();
     if (null != o.getCoverage() ) {
-    	this.coverage_id = "coverage" + this.parent_id;
+    	this.coverage_id = "coverage" + this.id;
     	this.coverage = ReferenceHelper.toModel(o.getCoverage(), this.coverage_id);
     }
     this.businessArrangement = o.getBusinessArrangement();
     this.preAuthRef = org.fhir.utils.JsonUtils.toJson(o.getPreAuthRef());
     if (null != o.getClaimResponse() ) {
-    	this.claimresponse_id = "claimresponse" + this.parent_id;
+    	this.claimresponse_id = "claimresponse" + this.id;
     	this.claimResponse = ReferenceHelper.toModel(o.getClaimResponse(), this.claimresponse_id);
     }
     if (null != o.getModifierExtension()) {
@@ -210,11 +210,11 @@ public class ClaimResponseInsuranceModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -228,7 +228,7 @@ public class ClaimResponseInsuranceModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -244,7 +244,7 @@ public class ClaimResponseInsuranceModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

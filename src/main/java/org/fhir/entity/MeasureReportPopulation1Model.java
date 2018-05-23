@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="measurereportpopulation1")
 public class MeasureReportPopulation1Model  implements Serializable {
-	private static final long serialVersionUID = 151910893763447834L;
+	private static final long serialVersionUID = 151967883217799215L;
   /**
   * Description: "The identifier of the population being reported, as defined by the population element of the measure."
   * Actual type: String;
@@ -55,7 +55,7 @@ public class MeasureReportPopulation1Model  implements Serializable {
   private String code_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> code;
 
   /**
@@ -74,7 +74,7 @@ public class MeasureReportPopulation1Model  implements Serializable {
   private String patients_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="patients_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="patients_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> patients;
 
   /**
@@ -113,14 +113,14 @@ public class MeasureReportPopulation1Model  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public MeasureReportPopulation1Model() {
   }
 
-  public MeasureReportPopulation1Model(MeasureReportPopulation1 o, String parentId) {
-  	this.parent_id = parentId;
+  public MeasureReportPopulation1Model(MeasureReportPopulation1 o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -128,12 +128,12 @@ public class MeasureReportPopulation1Model  implements Serializable {
     	this.identifier = JsonUtils.toJson(o.getIdentifier());
     }
     if (null != o.getCode() ) {
-    	this.code_id = "code" + this.parent_id;
+    	this.code_id = "code" + this.id;
     	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
     }
     this.count = o.getCount();
     if (null != o.getPatients() ) {
-    	this.patients_id = "patients" + this.parent_id;
+    	this.patients_id = "patients" + this.id;
     	this.patients = ReferenceHelper.toModel(o.getPatients(), this.patients_id);
     }
     if (null != o.getModifierExtension()) {
@@ -186,11 +186,11 @@ public class MeasureReportPopulation1Model  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -202,7 +202,7 @@ public class MeasureReportPopulation1Model  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -216,7 +216,7 @@ public class MeasureReportPopulation1Model  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

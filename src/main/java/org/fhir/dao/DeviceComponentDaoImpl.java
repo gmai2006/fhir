@@ -90,9 +90,9 @@ public class DeviceComponentDaoImpl implements DeviceComponentDao {
   }
   @Override
   @Transactional
-  public void delete(DeviceComponent e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final DeviceComponentModel removed = em.find(DeviceComponentModel.class, e.getId());
+      final DeviceComponentModel removed = em.find(DeviceComponentModel.class, id);
       em.remove(removed);
   }
 

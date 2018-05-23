@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="devicemetric")
 public class DeviceMetricModel  implements Serializable {
-	private static final long serialVersionUID = 151910893711199026L;
+	private static final long serialVersionUID = 151967883163972677L;
   /**
   * Description: "This is a DeviceMetric resource"
   */
@@ -64,7 +64,7 @@ public class DeviceMetricModel  implements Serializable {
   private String type_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> type;
 
   /**
@@ -75,7 +75,7 @@ public class DeviceMetricModel  implements Serializable {
   private String unit_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="unit_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="unit_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> unit;
 
   /**
@@ -86,7 +86,7 @@ public class DeviceMetricModel  implements Serializable {
   private String source_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="source_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="source_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> source;
 
   /**
@@ -97,7 +97,7 @@ public class DeviceMetricModel  implements Serializable {
   private String parent_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="parent_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="parent_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> parent;
 
   /**
@@ -138,7 +138,7 @@ public class DeviceMetricModel  implements Serializable {
   private String calibration_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="calibration_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="calibration_id", insertable=false, updatable=false)
   private java.util.List<DeviceMetricCalibrationModel> calibration;
 
   /**
@@ -150,7 +150,7 @@ public class DeviceMetricModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -204,7 +204,7 @@ public class DeviceMetricModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

@@ -38,7 +38,7 @@ public interface ObservationDao {
   public Observation create(Observation e);
 
   public Observation update(Observation e);
-  public void delete(Observation e);
+  public void delete(String id);
 
   public List<Observation> findByField(QueryBuilder queryBuilder);
 

@@ -38,7 +38,7 @@ public interface ConditionDao {
   public Condition create(Condition e);
 
   public Condition update(Condition e);
-  public void delete(Condition e);
+  public void delete(String id);
 
   public List<Condition> findByField(QueryBuilder queryBuilder);
 

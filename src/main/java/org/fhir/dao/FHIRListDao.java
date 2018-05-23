@@ -38,7 +38,7 @@ public interface FHIRListDao {
   public FHIRList create(FHIRList e);
 
   public FHIRList update(FHIRList e);
-  public void delete(FHIRList e);
+  public void delete(String id);
 
   public List<FHIRList> findByField(QueryBuilder queryBuilder);
 

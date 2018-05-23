@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="codesystemconcept")
 public class CodeSystemConceptModel  implements Serializable {
-	private static final long serialVersionUID = 151910893749644471L;
+	private static final long serialVersionUID = 151967883204863837L;
   /**
   * Description: "A code - a text symbol - that uniquely identifies the concept within the code system."
   */
@@ -68,7 +68,7 @@ public class CodeSystemConceptModel  implements Serializable {
   private String designation_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="designation_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="designation_id", insertable=false, updatable=false)
   private java.util.List<CodeSystemDesignationModel> designation;
 
   /**
@@ -79,7 +79,7 @@ public class CodeSystemConceptModel  implements Serializable {
   private String property_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="property_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="property_id", insertable=false, updatable=false)
   private java.util.List<CodeSystemProperty1Model> property;
 
   /**
@@ -90,7 +90,7 @@ public class CodeSystemConceptModel  implements Serializable {
   private String concept_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="concept_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="concept_id", insertable=false, updatable=false)
   private java.util.List<CodeSystemConceptModel> concept;
 
   /**
@@ -129,14 +129,14 @@ public class CodeSystemConceptModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public CodeSystemConceptModel() {
   }
 
-  public CodeSystemConceptModel(CodeSystemConcept o, String parentId) {
-  	this.parent_id = parentId;
+  public CodeSystemConceptModel(CodeSystemConcept o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -144,15 +144,15 @@ public class CodeSystemConceptModel  implements Serializable {
     this.display = o.getDisplay();
     this.definition = o.getDefinition();
     if (null != o.getDesignation() && !o.getDesignation().isEmpty()) {
-    	this.designation_id = "designation" + this.parent_id;
+    	this.designation_id = "designation" + this.id;
     	this.designation = CodeSystemDesignationHelper.toModelFromArray(o.getDesignation(), this.designation_id);
     }
     if (null != o.getProperty() && !o.getProperty().isEmpty()) {
-    	this.property_id = "property" + this.parent_id;
+    	this.property_id = "property" + this.id;
     	this.property = CodeSystemProperty1Helper.toModelFromArray(o.getProperty(), this.property_id);
     }
     if (null != o.getConcept() && !o.getConcept().isEmpty()) {
-    	this.concept_id = "concept" + this.parent_id;
+    	this.concept_id = "concept" + this.id;
     	this.concept = CodeSystemConceptHelper.toModelFromArray(o.getConcept(), this.concept_id);
     }
     if (null != o.getModifierExtension()) {
@@ -217,11 +217,11 @@ public class CodeSystemConceptModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -234,7 +234,7 @@ public class CodeSystemConceptModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -250,7 +250,7 @@ public class CodeSystemConceptModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

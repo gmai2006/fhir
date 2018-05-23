@@ -36,7 +36,7 @@ public interface CareTeamService {
   public List<CareTeam> selectAll();
   public CareTeam create(CareTeam bean);
   public CareTeam update(CareTeam bean);
-  public void delete(CareTeam bean);
+  public void delete(String id);
   public List<CareTeam> findByField(QueryBuilder queryBuilder);
   public List<CareTeam> findByCategory(QueryBuilder queryBuilder);
   public List<CareTeam> findBySubject(QueryBuilder queryBuilder);

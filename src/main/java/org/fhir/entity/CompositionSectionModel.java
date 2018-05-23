@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="compositionsection")
 public class CompositionSectionModel  implements Serializable {
-	private static final long serialVersionUID = 151910893710453840L;
+	private static final long serialVersionUID = 151967883163050358L;
   /**
   * Description: "The label for this particular section.  This will be part of the rendered content for the document, and is often used to build a table of contents."
   */
@@ -53,7 +53,7 @@ public class CompositionSectionModel  implements Serializable {
   private String code_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> code;
 
   /**
@@ -64,7 +64,7 @@ public class CompositionSectionModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -83,7 +83,7 @@ public class CompositionSectionModel  implements Serializable {
   private String orderedby_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="orderedby_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="orderedby_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> orderedBy;
 
   /**
@@ -94,7 +94,7 @@ public class CompositionSectionModel  implements Serializable {
   private String entry_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="entry_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="entry_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> entry;
 
   /**
@@ -105,7 +105,7 @@ public class CompositionSectionModel  implements Serializable {
   private String emptyreason_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="emptyreason_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="emptyreason_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> emptyReason;
 
   /**
@@ -116,7 +116,7 @@ public class CompositionSectionModel  implements Serializable {
   private String section_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="section_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="section_id", insertable=false, updatable=false)
   private java.util.List<CompositionSectionModel> section;
 
   /**
@@ -155,41 +155,41 @@ public class CompositionSectionModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public CompositionSectionModel() {
   }
 
-  public CompositionSectionModel(CompositionSection o, String parentId) {
-  	this.parent_id = parentId;
+  public CompositionSectionModel(CompositionSection o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     this.title = o.getTitle();
     if (null != o.getCode() ) {
-    	this.code_id = "code" + this.parent_id;
+    	this.code_id = "code" + this.id;
     	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
     }
     if (null != o.getText() ) {
-    	this.text_id = "text" + this.parent_id;
+    	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
     }
     this.mode = o.getMode();
     if (null != o.getOrderedBy() ) {
-    	this.orderedby_id = "orderedby" + this.parent_id;
+    	this.orderedby_id = "orderedby" + this.id;
     	this.orderedBy = CodeableConceptHelper.toModel(o.getOrderedBy(), this.orderedby_id);
     }
     if (null != o.getEntry() && !o.getEntry().isEmpty()) {
-    	this.entry_id = "entry" + this.parent_id;
+    	this.entry_id = "entry" + this.id;
     	this.entry = ReferenceHelper.toModelFromArray(o.getEntry(), this.entry_id);
     }
     if (null != o.getEmptyReason() ) {
-    	this.emptyreason_id = "emptyreason" + this.parent_id;
+    	this.emptyreason_id = "emptyreason" + this.id;
     	this.emptyReason = CodeableConceptHelper.toModel(o.getEmptyReason(), this.emptyreason_id);
     }
     if (null != o.getSection() && !o.getSection().isEmpty()) {
-    	this.section_id = "section" + this.parent_id;
+    	this.section_id = "section" + this.id;
     	this.section = CompositionSectionHelper.toModelFromArray(o.getSection(), this.section_id);
     }
     if (null != o.getModifierExtension()) {
@@ -266,11 +266,11 @@ public class CompositionSectionModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -282,7 +282,7 @@ public class CompositionSectionModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -300,7 +300,7 @@ public class CompositionSectionModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

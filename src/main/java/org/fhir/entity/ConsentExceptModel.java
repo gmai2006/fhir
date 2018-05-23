@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="consentexcept")
 public class ConsentExceptModel  implements Serializable {
-	private static final long serialVersionUID = 151910893736873905L;
+	private static final long serialVersionUID = 151967883191038103L;
   /**
   * Description: "Action  to take - permit or deny - when the exception conditions are met."
   */
@@ -62,7 +62,7 @@ public class ConsentExceptModel  implements Serializable {
   private String actor_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="actor_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="actor_id", insertable=false, updatable=false)
   private java.util.List<ConsentActor1Model> actor;
 
   /**
@@ -73,7 +73,7 @@ public class ConsentExceptModel  implements Serializable {
   private String action_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="action_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="action_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> action;
 
   /**
@@ -84,7 +84,7 @@ public class ConsentExceptModel  implements Serializable {
   private String securitylabel_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="securitylabel_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="securitylabel_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> securityLabel;
 
   /**
@@ -95,7 +95,7 @@ public class ConsentExceptModel  implements Serializable {
   private String purpose_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="purpose_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="purpose_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> purpose;
 
   /**
@@ -106,7 +106,7 @@ public class ConsentExceptModel  implements Serializable {
   private String fhirclass_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="fhirclass_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="fhirclass_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> FHIRclass;
 
   /**
@@ -117,7 +117,7 @@ public class ConsentExceptModel  implements Serializable {
   private String code_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> code;
 
   /**
@@ -137,7 +137,7 @@ public class ConsentExceptModel  implements Serializable {
   private String data_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="data_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="data_id", insertable=false, updatable=false)
   private java.util.List<ConsentData1Model> data;
 
   /**
@@ -176,14 +176,14 @@ public class ConsentExceptModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ConsentExceptModel() {
   }
 
-  public ConsentExceptModel(ConsentExcept o, String parentId) {
-  	this.parent_id = parentId;
+  public ConsentExceptModel(ConsentExcept o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -192,34 +192,34 @@ public class ConsentExceptModel  implements Serializable {
     	this.period = JsonUtils.toJson(o.getPeriod());
     }
     if (null != o.getActor() && !o.getActor().isEmpty()) {
-    	this.actor_id = "actor" + this.parent_id;
+    	this.actor_id = "actor" + this.id;
     	this.actor = ConsentActor1Helper.toModelFromArray(o.getActor(), this.actor_id);
     }
     if (null != o.getAction() && !o.getAction().isEmpty()) {
-    	this.action_id = "action" + this.parent_id;
+    	this.action_id = "action" + this.id;
     	this.action = CodeableConceptHelper.toModelFromArray(o.getAction(), this.action_id);
     }
     if (null != o.getSecurityLabel() && !o.getSecurityLabel().isEmpty()) {
-    	this.securitylabel_id = "securitylabel" + this.parent_id;
+    	this.securitylabel_id = "securitylabel" + this.id;
     	this.securityLabel = CodingHelper.toModelFromArray(o.getSecurityLabel(), this.securitylabel_id);
     }
     if (null != o.getPurpose() && !o.getPurpose().isEmpty()) {
-    	this.purpose_id = "purpose" + this.parent_id;
+    	this.purpose_id = "purpose" + this.id;
     	this.purpose = CodingHelper.toModelFromArray(o.getPurpose(), this.purpose_id);
     }
     if (null != o.getFHIRclass() && !o.getFHIRclass().isEmpty()) {
-    	this.fhirclass_id = "fhirclass" + this.parent_id;
+    	this.fhirclass_id = "fhirclass" + this.id;
     	this.FHIRclass = CodingHelper.toModelFromArray(o.getFHIRclass(), this.fhirclass_id);
     }
     if (null != o.getCode() && !o.getCode().isEmpty()) {
-    	this.code_id = "code" + this.parent_id;
+    	this.code_id = "code" + this.id;
     	this.code = CodingHelper.toModelFromArray(o.getCode(), this.code_id);
     }
     if (null != o.getDataPeriod()) {
     	this.dataPeriod = JsonUtils.toJson(o.getDataPeriod());
     }
     if (null != o.getData() && !o.getData().isEmpty()) {
-    	this.data_id = "data" + this.parent_id;
+    	this.data_id = "data" + this.id;
     	this.data = ConsentData1Helper.toModelFromArray(o.getData(), this.data_id);
     }
     if (null != o.getModifierExtension()) {
@@ -308,11 +308,11 @@ public class ConsentExceptModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -325,7 +325,7 @@ public class ConsentExceptModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -345,7 +345,7 @@ public class ConsentExceptModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

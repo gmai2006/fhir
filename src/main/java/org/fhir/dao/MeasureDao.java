@@ -38,7 +38,7 @@ public interface MeasureDao {
   public Measure create(Measure e);
 
   public Measure update(Measure e);
-  public void delete(Measure e);
+  public void delete(String id);
 
   public List<Measure> findByField(QueryBuilder queryBuilder);
 

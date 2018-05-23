@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class QuestionnaireResponseResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public QuestionnaireResponse create(QuestionnaireResponse obj) {
-		return this.service.create(obj);
+	public QuestionnaireResponse createOrUpdate(QuestionnaireResponse obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing QuestionnaireResponse
+   * @param obj - instance of QuestionnaireResponse
+   * @return QuestionnaireResponse
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public QuestionnaireResponse update( QuestionnaireResponse obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing QuestionnaireResponse
+   * @param obj - instance of QuestionnaireResponse
+   * @return QuestionnaireResponse
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get QuestionnaireResponse by its ID
+   * @param id - instance of QuestionnaireResponse
+   * @return QuestionnaireResponse
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class QuestionnaireResponseResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all QuestionnaireResponse with limit of returned records
+   * @param max - number of records
+   * @return a list QuestionnaireResponse
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class QuestionnaireResponseResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query QuestionnaireResponse based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of QuestionnaireResponse
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class QuestionnaireResponseResource {
   }
 
   /**
-  * Descr: Plan/proposal/order fulfilled by this questionnaire response
-  * Type: reference
+   * Query QuestionnaireResponse by composite fields
+   * Descr: Plan/proposal/order fulfilled by this questionnaire response
+   * Type: reference
   */
   @GET
   @Path("basedon")
@@ -167,8 +208,9 @@ public class QuestionnaireResponseResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Procedure or observation this questionnaire response was performed as a part of
-  * Type: reference
+   * Query QuestionnaireResponse by composite fields
+   * Descr: Procedure or observation this questionnaire response was performed as a part of
+   * Type: reference
   */
   @GET
   @Path("parent")
@@ -193,8 +235,9 @@ public class QuestionnaireResponseResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The questionnaire the answers are provided for
-  * Type: reference
+   * Query QuestionnaireResponse by composite fields
+   * Descr: The questionnaire the answers are provided for
+   * Type: reference
   */
   @GET
   @Path("questionnaire")
@@ -219,8 +262,9 @@ public class QuestionnaireResponseResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The patient that is the subject of the questionnaire response
-  * Type: reference
+   * Query QuestionnaireResponse by composite fields
+   * Descr: The patient that is the subject of the questionnaire response
+   * Type: reference
   */
   @GET
   @Path("patient")
@@ -245,8 +289,9 @@ public class QuestionnaireResponseResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Encounter or episode associated with the questionnaire response
-  * Type: reference
+   * Query QuestionnaireResponse by composite fields
+   * Descr: Encounter or episode associated with the questionnaire response
+   * Type: reference
   */
   @GET
   @Path("context")
@@ -271,8 +316,9 @@ public class QuestionnaireResponseResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The individual providing the information reflected in the questionnaire respose
-  * Type: reference
+   * Query QuestionnaireResponse by composite fields
+   * Descr: The individual providing the information reflected in the questionnaire respose
+   * Type: reference
   */
   @GET
   @Path("source")

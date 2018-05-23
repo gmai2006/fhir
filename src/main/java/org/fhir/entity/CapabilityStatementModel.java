@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="capabilitystatement")
 public class CapabilityStatementModel  implements Serializable {
-	private static final long serialVersionUID = 151910893740713224L;
+	private static final long serialVersionUID = 151967883195038779L;
   /**
   * Description: "This is a CapabilityStatement resource"
   */
@@ -111,7 +111,7 @@ public class CapabilityStatementModel  implements Serializable {
   private String contact_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="contact_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="contact_id", insertable=false, updatable=false)
   private java.util.List<ContactDetailModel> contact;
 
   /**
@@ -129,7 +129,7 @@ public class CapabilityStatementModel  implements Serializable {
   private String usecontext_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="usecontext_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="usecontext_id", insertable=false, updatable=false)
   private java.util.List<UsageContextModel> useContext;
 
   /**
@@ -140,7 +140,7 @@ public class CapabilityStatementModel  implements Serializable {
   private String jurisdiction_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="jurisdiction_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="jurisdiction_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> jurisdiction;
 
   /**
@@ -179,7 +179,7 @@ public class CapabilityStatementModel  implements Serializable {
   private String software_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="software_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="software_id", insertable=false, updatable=false)
   private java.util.List<CapabilityStatementSoftwareModel> software;
 
   /**
@@ -190,7 +190,7 @@ public class CapabilityStatementModel  implements Serializable {
   private String implementation_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="implementation_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="implementation_id", insertable=false, updatable=false)
   private java.util.List<CapabilityStatementImplementationModel> implementation;
 
   /**
@@ -237,7 +237,7 @@ public class CapabilityStatementModel  implements Serializable {
   private String profile_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="profile_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="profile_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> profile;
 
   /**
@@ -248,7 +248,7 @@ public class CapabilityStatementModel  implements Serializable {
   private String rest_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="rest_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="rest_id", insertable=false, updatable=false)
   private java.util.List<CapabilityStatementRestModel> rest;
 
   /**
@@ -259,7 +259,7 @@ public class CapabilityStatementModel  implements Serializable {
   private String messaging_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="messaging_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="messaging_id", insertable=false, updatable=false)
   private java.util.List<CapabilityStatementMessagingModel> messaging;
 
   /**
@@ -270,7 +270,7 @@ public class CapabilityStatementModel  implements Serializable {
   private String document_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="document_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="document_id", insertable=false, updatable=false)
   private java.util.List<CapabilityStatementDocumentModel> document;
 
   /**
@@ -282,7 +282,7 @@ public class CapabilityStatementModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -336,7 +336,7 @@ public class CapabilityStatementModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

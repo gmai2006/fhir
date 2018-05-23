@@ -83,6 +83,9 @@ public class NutritionOrderSupplement  extends BackboneElement  {
     if (null != o.getProductName()) {
       this.productName = o.getProductName();
     }
+    if (o.getSchedule() != null) {
+    	this.schedule = org.fhir.utils.JsonUtils.json2Array(o.getSchedule());
+    }
     if (null != o.getQuantity() && !o.getQuantity().isEmpty()) {
       this.quantity = new Quantity(o.getQuantity().get(0));
     }

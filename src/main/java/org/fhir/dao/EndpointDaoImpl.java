@@ -90,9 +90,9 @@ public class EndpointDaoImpl implements EndpointDao {
   }
   @Override
   @Transactional
-  public void delete(Endpoint e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final EndpointModel removed = em.find(EndpointModel.class, e.getId());
+      final EndpointModel removed = em.find(EndpointModel.class, id);
       em.remove(removed);
   }
 

@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="structuremapgroup")
 public class StructureMapGroupModel  implements Serializable {
-	private static final long serialVersionUID = 151910893747751922L;
+	private static final long serialVersionUID = 151967883202987629L;
   /**
   * Description: "A unique name for the group for the convenience of human readers."
   */
@@ -76,7 +76,7 @@ public class StructureMapGroupModel  implements Serializable {
   private String input_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="input_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="input_id", insertable=false, updatable=false)
   private java.util.List<StructureMapInputModel> input;
 
   /**
@@ -87,7 +87,7 @@ public class StructureMapGroupModel  implements Serializable {
   private String rule_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="rule_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="rule_id", insertable=false, updatable=false)
   private java.util.List<StructureMapRuleModel> rule;
 
   /**
@@ -126,14 +126,14 @@ public class StructureMapGroupModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public StructureMapGroupModel() {
   }
 
-  public StructureMapGroupModel(StructureMapGroup o, String parentId) {
-  	this.parent_id = parentId;
+  public StructureMapGroupModel(StructureMapGroup o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -142,11 +142,11 @@ public class StructureMapGroupModel  implements Serializable {
     this.typeMode = o.getTypeMode();
     this.documentation = o.getDocumentation();
     if (null != o.getInput() && !o.getInput().isEmpty()) {
-    	this.input_id = "input" + this.parent_id;
+    	this.input_id = "input" + this.id;
     	this.input = StructureMapInputHelper.toModelFromArray(o.getInput(), this.input_id);
     }
     if (null != o.getRule() && !o.getRule().isEmpty()) {
-    	this.rule_id = "rule" + this.parent_id;
+    	this.rule_id = "rule" + this.id;
     	this.rule = StructureMapRuleHelper.toModelFromArray(o.getRule(), this.rule_id);
     }
     if (null != o.getModifierExtension()) {
@@ -211,11 +211,11 @@ public class StructureMapGroupModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -229,7 +229,7 @@ public class StructureMapGroupModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -245,7 +245,7 @@ public class StructureMapGroupModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

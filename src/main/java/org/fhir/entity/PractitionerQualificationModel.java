@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="practitionerqualification")
 public class PractitionerQualificationModel  implements Serializable {
-	private static final long serialVersionUID = 15191089369262344L;
+	private static final long serialVersionUID = 151967883143232409L;
   /**
   * Description: "An identifier that applies to this person's qualification in this role."
   * Actual type: List<String>;
@@ -55,7 +55,7 @@ public class PractitionerQualificationModel  implements Serializable {
   private String code_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> code;
 
   /**
@@ -75,7 +75,7 @@ public class PractitionerQualificationModel  implements Serializable {
   private String issuer_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="issuer_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="issuer_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> issuer;
 
   /**
@@ -114,14 +114,14 @@ public class PractitionerQualificationModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public PractitionerQualificationModel() {
   }
 
-  public PractitionerQualificationModel(PractitionerQualification o, String parentId) {
-  	this.parent_id = parentId;
+  public PractitionerQualificationModel(PractitionerQualification o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -129,14 +129,14 @@ public class PractitionerQualificationModel  implements Serializable {
     	this.identifier = JsonUtils.toJson(o.getIdentifier());
     }
     if (null != o.getCode() ) {
-    	this.code_id = "code" + this.parent_id;
+    	this.code_id = "code" + this.id;
     	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
     }
     if (null != o.getPeriod()) {
     	this.period = JsonUtils.toJson(o.getPeriod());
     }
     if (null != o.getIssuer() ) {
-    	this.issuer_id = "issuer" + this.parent_id;
+    	this.issuer_id = "issuer" + this.id;
     	this.issuer = ReferenceHelper.toModel(o.getIssuer(), this.issuer_id);
     }
     if (null != o.getModifierExtension()) {
@@ -189,11 +189,11 @@ public class PractitionerQualificationModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -205,7 +205,7 @@ public class PractitionerQualificationModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -219,7 +219,7 @@ public class PractitionerQualificationModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

@@ -36,7 +36,7 @@ public interface RequestGroupService {
   public List<RequestGroup> selectAll();
   public RequestGroup create(RequestGroup bean);
   public RequestGroup update(RequestGroup bean);
-  public void delete(RequestGroup bean);
+  public void delete(String id);
   public List<RequestGroup> findByField(QueryBuilder queryBuilder);
   public List<RequestGroup> findByDefinition(QueryBuilder queryBuilder);
   public List<RequestGroup> findByBasedOn(QueryBuilder queryBuilder);

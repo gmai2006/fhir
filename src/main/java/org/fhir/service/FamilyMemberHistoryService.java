@@ -36,7 +36,7 @@ public interface FamilyMemberHistoryService {
   public List<FamilyMemberHistory> selectAll();
   public FamilyMemberHistory create(FamilyMemberHistory bean);
   public FamilyMemberHistory update(FamilyMemberHistory bean);
-  public void delete(FamilyMemberHistory bean);
+  public void delete(String id);
   public List<FamilyMemberHistory> findByField(QueryBuilder queryBuilder);
   public List<FamilyMemberHistory> findByDefinition(QueryBuilder queryBuilder);
   public List<FamilyMemberHistory> findByNotDoneReason(QueryBuilder queryBuilder);

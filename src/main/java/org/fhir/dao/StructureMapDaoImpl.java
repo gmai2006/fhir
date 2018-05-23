@@ -90,9 +90,9 @@ public class StructureMapDaoImpl implements StructureMapDao {
   }
   @Override
   @Transactional
-  public void delete(StructureMap e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final StructureMapModel removed = em.find(StructureMapModel.class, e.getId());
+      final StructureMapModel removed = em.find(StructureMapModel.class, id);
       em.remove(removed);
   }
 

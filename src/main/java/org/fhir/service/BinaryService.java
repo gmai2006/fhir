@@ -36,7 +36,7 @@ public interface BinaryService {
   public List<Binary> selectAll();
   public Binary create(Binary bean);
   public Binary update(Binary bean);
-  public void delete(Binary bean);
+  public void delete(String id);
   public List<Binary> findByField(QueryBuilder queryBuilder);
   public List<Binary> findBySecurityContext(QueryBuilder queryBuilder);
   public List<Binary> findByMeta(QueryBuilder queryBuilder);

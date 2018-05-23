@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="triggerdefinition")
 public class TriggerDefinitionModel  implements Serializable {
-	private static final long serialVersionUID = 151910893742489120L;
+	private static final long serialVersionUID = 151967883196959491L;
   /**
   * Description: "The type of triggering event."
   */
@@ -69,7 +69,7 @@ public class TriggerDefinitionModel  implements Serializable {
   private String eventtimingreference_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="eventtimingreference_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="eventtimingreference_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> eventTimingReference;
 
   /**
@@ -96,7 +96,7 @@ public class TriggerDefinitionModel  implements Serializable {
   private String eventdata_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="eventdata_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="eventdata_id", insertable=false, updatable=false)
   private java.util.List<DataRequirementModel> eventData;
 
   /**
@@ -123,14 +123,14 @@ public class TriggerDefinitionModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public TriggerDefinitionModel() {
   }
 
-  public TriggerDefinitionModel(TriggerDefinition o, String parentId) {
-  	this.parent_id = parentId;
+  public TriggerDefinitionModel(TriggerDefinition o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -140,13 +140,13 @@ public class TriggerDefinitionModel  implements Serializable {
     	this.eventTimingTiming = JsonUtils.toJson(o.getEventTimingTiming());
     }
     if (null != o.getEventTimingReference() ) {
-    	this.eventtimingreference_id = "eventtimingreference" + this.parent_id;
+    	this.eventtimingreference_id = "eventtimingreference" + this.id;
     	this.eventTimingReference = ReferenceHelper.toModel(o.getEventTimingReference(), this.eventtimingreference_id);
     }
     this.eventTimingDate = o.getEventTimingDate();
     this.eventTimingDateTime = o.getEventTimingDateTime();
     if (null != o.getEventData() ) {
-    	this.eventdata_id = "eventdata" + this.parent_id;
+    	this.eventdata_id = "eventdata" + this.id;
     	this.eventData = DataRequirementHelper.toModel(o.getEventData(), this.eventdata_id);
     }
     if (null != o.getExtension()) {
@@ -208,11 +208,11 @@ public class TriggerDefinitionModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -226,7 +226,7 @@ public class TriggerDefinitionModel  implements Serializable {
      builder.append("eventTimingDateTime" + "->" + this.eventTimingDateTime + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -242,7 +242,7 @@ public class TriggerDefinitionModel  implements Serializable {
      builder.append("eventData" + "->" + this.eventData + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

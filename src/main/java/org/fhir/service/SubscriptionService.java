@@ -36,7 +36,7 @@ public interface SubscriptionService {
   public List<Subscription> selectAll();
   public Subscription create(Subscription bean);
   public Subscription update(Subscription bean);
-  public void delete(Subscription bean);
+  public void delete(String id);
   public List<Subscription> findByField(QueryBuilder queryBuilder);
   public List<Subscription> findByChannel(QueryBuilder queryBuilder);
   public List<Subscription> findByTag(QueryBuilder queryBuilder);

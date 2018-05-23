@@ -90,9 +90,9 @@ public class NamingSystemDaoImpl implements NamingSystemDao {
   }
   @Override
   @Transactional
-  public void delete(NamingSystem e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final NamingSystemModel removed = em.find(NamingSystemModel.class, e.getId());
+      final NamingSystemModel removed = em.find(NamingSystemModel.class, id);
       em.remove(removed);
   }
 

@@ -90,9 +90,9 @@ public class ProcessRequestDaoImpl implements ProcessRequestDao {
   }
   @Override
   @Transactional
-  public void delete(ProcessRequest e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ProcessRequestModel removed = em.find(ProcessRequestModel.class, e.getId());
+      final ProcessRequestModel removed = em.find(ProcessRequestModel.class, id);
       em.remove(removed);
   }
 

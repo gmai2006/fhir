@@ -38,7 +38,7 @@ public interface PersonDao {
   public Person create(Person e);
 
   public Person update(Person e);
-  public void delete(Person e);
+  public void delete(String id);
 
   public List<Person> findByField(QueryBuilder queryBuilder);
 

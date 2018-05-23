@@ -38,7 +38,7 @@ public interface AccountDao {
   public Account create(Account e);
 
   public Account update(Account e);
-  public void delete(Account e);
+  public void delete(String id);
 
   public List<Account> findByField(QueryBuilder queryBuilder);
 

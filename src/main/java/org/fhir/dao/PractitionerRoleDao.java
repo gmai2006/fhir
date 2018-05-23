@@ -38,7 +38,7 @@ public interface PractitionerRoleDao {
   public PractitionerRole create(PractitionerRole e);
 
   public PractitionerRole update(PractitionerRole e);
-  public void delete(PractitionerRole e);
+  public void delete(String id);
 
   public List<PractitionerRole> findByField(QueryBuilder queryBuilder);
 

@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="codeableconcept")
 public class CodeableConceptModel  implements Serializable {
-	private static final long serialVersionUID = 151910893757354506L;
+	private static final long serialVersionUID = 151967883211793051L;
   /**
   * Description: "A reference to a code defined by a terminology system."
   */
@@ -46,7 +46,7 @@ public class CodeableConceptModel  implements Serializable {
   private String coding_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="coding_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="coding_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> coding;
 
   /**
@@ -80,19 +80,19 @@ public class CodeableConceptModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public CodeableConceptModel() {
   }
 
-  public CodeableConceptModel(CodeableConcept o, String parentId) {
-  	this.parent_id = parentId;
+  public CodeableConceptModel(CodeableConcept o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getCoding() && !o.getCoding().isEmpty()) {
-    	this.coding_id = "coding" + this.parent_id;
+    	this.coding_id = "coding" + this.id;
     	this.coding = CodingHelper.toModelFromArray(o.getCoding(), this.coding_id);
     }
     this.text = o.getText();
@@ -125,11 +125,11 @@ public class CodeableConceptModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -139,7 +139,7 @@ public class CodeableConceptModel  implements Serializable {
      builder.append("text" + "->" + this.text + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -150,7 +150,7 @@ public class CodeableConceptModel  implements Serializable {
      builder.append("text" + "->" + this.text + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

@@ -90,9 +90,9 @@ public class BinaryDaoImpl implements BinaryDao {
   }
   @Override
   @Transactional
-  public void delete(Binary e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final BinaryModel removed = em.find(BinaryModel.class, e.getId());
+      final BinaryModel removed = em.find(BinaryModel.class, id);
       em.remove(removed);
   }
 

@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="contractvalueditem")
 public class ContractValuedItemModel  implements Serializable {
-	private static final long serialVersionUID = 151910893775490673L;
+	private static final long serialVersionUID = 151967883230382333L;
   /**
   * Description: "Specific type of Contract Valued Item that may be priced."
   */
@@ -46,7 +46,7 @@ public class ContractValuedItemModel  implements Serializable {
   private String entitycodeableconcept_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="entitycodeableconcept_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="entitycodeableconcept_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> entityCodeableConcept;
 
   /**
@@ -57,7 +57,7 @@ public class ContractValuedItemModel  implements Serializable {
   private String entityreference_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="entityreference_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="entityreference_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> entityReference;
 
   /**
@@ -85,7 +85,7 @@ public class ContractValuedItemModel  implements Serializable {
   private String quantity_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="quantity_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="quantity_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> quantity;
 
   /**
@@ -96,7 +96,7 @@ public class ContractValuedItemModel  implements Serializable {
   private String unitprice_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="unitprice_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="unitprice_id", insertable=false, updatable=false)
   private java.util.List<MoneyModel> unitPrice;
 
   /**
@@ -123,7 +123,7 @@ public class ContractValuedItemModel  implements Serializable {
   private String net_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="net_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="net_id", insertable=false, updatable=false)
   private java.util.List<MoneyModel> net;
 
   /**
@@ -162,23 +162,23 @@ public class ContractValuedItemModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ContractValuedItemModel() {
   }
 
-  public ContractValuedItemModel(ContractValuedItem o, String parentId) {
-  	this.parent_id = parentId;
+  public ContractValuedItemModel(ContractValuedItem o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getEntityCodeableConcept() ) {
-    	this.entitycodeableconcept_id = "entitycodeableconcept" + this.parent_id;
+    	this.entitycodeableconcept_id = "entitycodeableconcept" + this.id;
     	this.entityCodeableConcept = CodeableConceptHelper.toModel(o.getEntityCodeableConcept(), this.entitycodeableconcept_id);
     }
     if (null != o.getEntityReference() ) {
-    	this.entityreference_id = "entityreference" + this.parent_id;
+    	this.entityreference_id = "entityreference" + this.id;
     	this.entityReference = ReferenceHelper.toModel(o.getEntityReference(), this.entityreference_id);
     }
     if (null != o.getIdentifier()) {
@@ -186,17 +186,17 @@ public class ContractValuedItemModel  implements Serializable {
     }
     this.effectiveTime = o.getEffectiveTime();
     if (null != o.getQuantity() ) {
-    	this.quantity_id = "quantity" + this.parent_id;
+    	this.quantity_id = "quantity" + this.id;
     	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
     }
     if (null != o.getUnitPrice() ) {
-    	this.unitprice_id = "unitprice" + this.parent_id;
+    	this.unitprice_id = "unitprice" + this.id;
     	this.unitPrice = MoneyHelper.toModel(o.getUnitPrice(), this.unitprice_id);
     }
     this.factor = o.getFactor();
     this.points = o.getPoints();
     if (null != o.getNet() ) {
-    	this.net_id = "net" + this.parent_id;
+    	this.net_id = "net" + this.id;
     	this.net = MoneyHelper.toModel(o.getNet(), this.net_id);
     }
     if (null != o.getModifierExtension()) {
@@ -279,11 +279,11 @@ public class ContractValuedItemModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -297,7 +297,7 @@ public class ContractValuedItemModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -316,7 +316,7 @@ public class ContractValuedItemModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

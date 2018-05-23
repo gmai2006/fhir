@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="coverage")
 public class CoverageModel  implements Serializable {
-	private static final long serialVersionUID = 151910893695087314L;
+	private static final long serialVersionUID = 151967883145429182L;
   /**
   * Description: "This is a Coverage resource"
   */
@@ -71,7 +71,7 @@ public class CoverageModel  implements Serializable {
   private String type_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> type;
 
   /**
@@ -82,7 +82,7 @@ public class CoverageModel  implements Serializable {
   private String policyholder_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="policyholder_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="policyholder_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> policyHolder;
 
   /**
@@ -93,7 +93,7 @@ public class CoverageModel  implements Serializable {
   private String subscriber_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subscriber_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="subscriber_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> subscriber;
 
   /**
@@ -111,7 +111,7 @@ public class CoverageModel  implements Serializable {
   private String beneficiary_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="beneficiary_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="beneficiary_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> beneficiary;
 
   /**
@@ -122,7 +122,7 @@ public class CoverageModel  implements Serializable {
   private String relationship_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="relationship_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="relationship_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> relationship;
 
   /**
@@ -142,7 +142,7 @@ public class CoverageModel  implements Serializable {
   private String payor_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="payor_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="payor_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> payor;
 
   /**
@@ -153,7 +153,7 @@ public class CoverageModel  implements Serializable {
   private String grouping_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="grouping_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="grouping_id", insertable=false, updatable=false)
   private java.util.List<CoverageGroupingModel> grouping;
 
   /**
@@ -193,7 +193,7 @@ public class CoverageModel  implements Serializable {
   private String contract_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="contract_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="contract_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> contract;
 
   /**
@@ -205,7 +205,7 @@ public class CoverageModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -259,7 +259,7 @@ public class CoverageModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

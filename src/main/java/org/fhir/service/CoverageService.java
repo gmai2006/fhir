@@ -36,7 +36,7 @@ public interface CoverageService {
   public List<Coverage> selectAll();
   public Coverage create(Coverage bean);
   public Coverage update(Coverage bean);
-  public void delete(Coverage bean);
+  public void delete(String id);
   public List<Coverage> findByField(QueryBuilder queryBuilder);
   public List<Coverage> findByType(QueryBuilder queryBuilder);
   public List<Coverage> findByPolicyHolder(QueryBuilder queryBuilder);

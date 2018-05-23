@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="plandefinitiontarget")
 public class PlanDefinitionTargetModel  implements Serializable {
-	private static final long serialVersionUID = 151910893758856525L;
+	private static final long serialVersionUID = 151967883213275857L;
   /**
   * Description: "The parameter whose value is to be tracked, e.g. body weigth, blood pressure, or hemoglobin A1c level."
   */
@@ -46,7 +46,7 @@ public class PlanDefinitionTargetModel  implements Serializable {
   private String measure_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="measure_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="measure_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> measure;
 
   /**
@@ -57,7 +57,7 @@ public class PlanDefinitionTargetModel  implements Serializable {
   private String detailquantity_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="detailquantity_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="detailquantity_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> detailQuantity;
 
   /**
@@ -77,7 +77,7 @@ public class PlanDefinitionTargetModel  implements Serializable {
   private String detailcodeableconcept_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="detailcodeableconcept_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="detailcodeableconcept_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> detailCodeableConcept;
 
   /**
@@ -125,30 +125,30 @@ public class PlanDefinitionTargetModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public PlanDefinitionTargetModel() {
   }
 
-  public PlanDefinitionTargetModel(PlanDefinitionTarget o, String parentId) {
-  	this.parent_id = parentId;
+  public PlanDefinitionTargetModel(PlanDefinitionTarget o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getMeasure() ) {
-    	this.measure_id = "measure" + this.parent_id;
+    	this.measure_id = "measure" + this.id;
     	this.measure = CodeableConceptHelper.toModel(o.getMeasure(), this.measure_id);
     }
     if (null != o.getDetailQuantity() ) {
-    	this.detailquantity_id = "detailquantity" + this.parent_id;
+    	this.detailquantity_id = "detailquantity" + this.id;
     	this.detailQuantity = QuantityHelper.toModel(o.getDetailQuantity(), this.detailquantity_id);
     }
     if (null != o.getDetailRange()) {
     	this.detailRange = JsonUtils.toJson(o.getDetailRange());
     }
     if (null != o.getDetailCodeableConcept() ) {
-    	this.detailcodeableconcept_id = "detailcodeableconcept" + this.parent_id;
+    	this.detailcodeableconcept_id = "detailcodeableconcept" + this.id;
     	this.detailCodeableConcept = CodeableConceptHelper.toModel(o.getDetailCodeableConcept(), this.detailcodeableconcept_id);
     }
     if (null != o.getDue()) {
@@ -210,11 +210,11 @@ public class PlanDefinitionTargetModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -226,7 +226,7 @@ public class PlanDefinitionTargetModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -241,7 +241,7 @@ public class PlanDefinitionTargetModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

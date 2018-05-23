@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class LibraryResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Library create(Library obj) {
-		return this.service.create(obj);
+	public Library createOrUpdate(Library obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing Library
+   * @param obj - instance of Library
+   * @return Library
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public Library update( Library obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing Library
+   * @param obj - instance of Library
+   * @return Library
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get Library by its ID
+   * @param id - instance of Library
+   * @return Library
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class LibraryResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all Library with limit of returned records
+   * @param max - number of records
+   * @return a list Library
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class LibraryResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query Library based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of Library
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class LibraryResource {
   }
 
   /**
-  * Descr: Intended jurisdiction for the library
-  * Type: token
+   * Query Library by composite fields
+   * Descr: Intended jurisdiction for the library
+   * Type: token
   */
   @GET
   @Path("jurisdiction")
@@ -167,8 +208,9 @@ public class LibraryResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Topics associated with the module
-  * Type: token
+   * Query Library by composite fields
+   * Descr: Topics associated with the module
+   * Type: token
   */
   @GET
   @Path("topic")

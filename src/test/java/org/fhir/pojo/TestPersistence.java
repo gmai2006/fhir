@@ -40,16 +40,18 @@ public class TestPersistence extends GoogleGuiceTest {
 	@Test
 	public void testReadAccountFromJson() throws Exception {
 		String inputFile = "/media/paul/workspace/fhir-data/examples-json/account-example.json";
-
+		Account acct = null;
 		String json = FileUtils.readFile2String(inputFile, Charset.defaultCharset());
 		Account account = AccountHelper.fromJson(json);
 		assertEquals("Expect status", "active", account.getStatus());
 		Coding coding = account.getType().getCoding().get(0);
 		assertEquals("Expect code", "PBILLACCT", coding.getCode());
-AccountModel model = new AccountModel(account);
-//System.out.println(account);
-System.out.println(model.debug());
-		Account acct = service.create(account);
+		Account local = service.find(account.getId());
+		if (null != local) {
+			
+		} else {
+			acct = service.create(account);
+		}
 		
 		assertEquals("Expect code", "PBILLACCT", acct.getType().getCoding().get(0).getCode());
 		
@@ -58,7 +60,7 @@ System.out.println(model.debug());
 		assertEquals("Expect status", "active", accts.get(0).getStatus());
 		assertEquals("Expect code", "PBILLACCT", accts.get(0).getType().getCoding().get(0).getCode());
 //		clean the test data
-		service.delete(acct);
+		service.delete(acct.getId());
 	}
 
 }

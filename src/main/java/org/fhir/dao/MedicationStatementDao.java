@@ -38,7 +38,7 @@ public interface MedicationStatementDao {
   public MedicationStatement create(MedicationStatement e);
 
   public MedicationStatement update(MedicationStatement e);
-  public void delete(MedicationStatement e);
+  public void delete(String id);
 
   public List<MedicationStatement> findByField(QueryBuilder queryBuilder);
 

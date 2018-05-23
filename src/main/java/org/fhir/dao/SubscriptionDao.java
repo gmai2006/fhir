@@ -38,7 +38,7 @@ public interface SubscriptionDao {
   public Subscription create(Subscription e);
 
   public Subscription update(Subscription e);
-  public void delete(Subscription e);
+  public void delete(String id);
 
   public List<Subscription> findByField(QueryBuilder queryBuilder);
 

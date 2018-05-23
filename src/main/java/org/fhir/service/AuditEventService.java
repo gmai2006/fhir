@@ -36,7 +36,7 @@ public interface AuditEventService {
   public List<AuditEvent> selectAll();
   public AuditEvent create(AuditEvent bean);
   public AuditEvent update(AuditEvent bean);
-  public void delete(AuditEvent bean);
+  public void delete(String id);
   public List<AuditEvent> findByField(QueryBuilder queryBuilder);
   public List<AuditEvent> findByType(QueryBuilder queryBuilder);
   public List<AuditEvent> findBySubtype(QueryBuilder queryBuilder);

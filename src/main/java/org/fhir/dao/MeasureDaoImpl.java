@@ -90,9 +90,9 @@ public class MeasureDaoImpl implements MeasureDao {
   }
   @Override
   @Transactional
-  public void delete(Measure e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final MeasureModel removed = em.find(MeasureModel.class, e.getId());
+      final MeasureModel removed = em.find(MeasureModel.class, id);
       em.remove(removed);
   }
 

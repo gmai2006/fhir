@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="specimencollection")
 public class SpecimenCollectionModel  implements Serializable {
-	private static final long serialVersionUID = 151910893709966833L;
+	private static final long serialVersionUID = 151967883162696644L;
   /**
   * Description: "Person who collected the specimen."
   */
@@ -46,7 +46,7 @@ public class SpecimenCollectionModel  implements Serializable {
   private String collector_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="collector_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="collector_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> collector;
 
   /**
@@ -74,7 +74,7 @@ public class SpecimenCollectionModel  implements Serializable {
   private String quantity_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="quantity_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="quantity_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> quantity;
 
   /**
@@ -85,7 +85,7 @@ public class SpecimenCollectionModel  implements Serializable {
   private String method_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="method_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="method_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> method;
 
   /**
@@ -96,7 +96,7 @@ public class SpecimenCollectionModel  implements Serializable {
   private String bodysite_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="bodysite_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="bodysite_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> bodySite;
 
   /**
@@ -135,19 +135,19 @@ public class SpecimenCollectionModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public SpecimenCollectionModel() {
   }
 
-  public SpecimenCollectionModel(SpecimenCollection o, String parentId) {
-  	this.parent_id = parentId;
+  public SpecimenCollectionModel(SpecimenCollection o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getCollector() ) {
-    	this.collector_id = "collector" + this.parent_id;
+    	this.collector_id = "collector" + this.id;
     	this.collector = ReferenceHelper.toModel(o.getCollector(), this.collector_id);
     }
     this.collectedDateTime = o.getCollectedDateTime();
@@ -155,15 +155,15 @@ public class SpecimenCollectionModel  implements Serializable {
     	this.collectedPeriod = JsonUtils.toJson(o.getCollectedPeriod());
     }
     if (null != o.getQuantity() ) {
-    	this.quantity_id = "quantity" + this.parent_id;
+    	this.quantity_id = "quantity" + this.id;
     	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
     }
     if (null != o.getMethod() ) {
-    	this.method_id = "method" + this.parent_id;
+    	this.method_id = "method" + this.id;
     	this.method = CodeableConceptHelper.toModel(o.getMethod(), this.method_id);
     }
     if (null != o.getBodySite() ) {
-    	this.bodysite_id = "bodysite" + this.parent_id;
+    	this.bodysite_id = "bodysite" + this.id;
     	this.bodySite = CodeableConceptHelper.toModel(o.getBodySite(), this.bodysite_id);
     }
     if (null != o.getModifierExtension()) {
@@ -228,11 +228,11 @@ public class SpecimenCollectionModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -244,7 +244,7 @@ public class SpecimenCollectionModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -260,7 +260,7 @@ public class SpecimenCollectionModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

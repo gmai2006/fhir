@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class DataElementResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public DataElement create(DataElement obj) {
-		return this.service.create(obj);
+	public DataElement createOrUpdate(DataElement obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing DataElement
+   * @param obj - instance of DataElement
+   * @return DataElement
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public DataElement update( DataElement obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing DataElement
+   * @param obj - instance of DataElement
+   * @return DataElement
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get DataElement by its ID
+   * @param id - instance of DataElement
+   * @return DataElement
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class DataElementResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all DataElement with limit of returned records
+   * @param max - number of records
+   * @return a list DataElement
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class DataElementResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query DataElement based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of DataElement
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class DataElementResource {
   }
 
   /**
-  * Descr: Intended jurisdiction for the data element
-  * Type: token
+   * Query DataElement by composite fields
+   * Descr: Intended jurisdiction for the data element
+   * Type: token
   */
   @GET
   @Path("jurisdiction")

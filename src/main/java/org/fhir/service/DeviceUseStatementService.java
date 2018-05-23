@@ -36,7 +36,7 @@ public interface DeviceUseStatementService {
   public List<DeviceUseStatement> selectAll();
   public DeviceUseStatement create(DeviceUseStatement bean);
   public DeviceUseStatement update(DeviceUseStatement bean);
-  public void delete(DeviceUseStatement bean);
+  public void delete(String id);
   public List<DeviceUseStatement> findByField(QueryBuilder queryBuilder);
   public List<DeviceUseStatement> findBySubject(QueryBuilder queryBuilder);
   public List<DeviceUseStatement> findBySource(QueryBuilder queryBuilder);

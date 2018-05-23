@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="questionnaireresponseitem")
 public class QuestionnaireResponseItemModel  implements Serializable {
-	private static final long serialVersionUID = 151910893732972153L;
+	private static final long serialVersionUID = 151967883186927599L;
   /**
   * Description: "The item from the Questionnaire that corresponds to this item in the QuestionnaireResponse resource."
   */
@@ -67,7 +67,7 @@ public class QuestionnaireResponseItemModel  implements Serializable {
   private String subject_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subject_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="subject_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> subject;
 
   /**
@@ -78,7 +78,7 @@ public class QuestionnaireResponseItemModel  implements Serializable {
   private String answer_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="answer_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="answer_id", insertable=false, updatable=false)
   private java.util.List<QuestionnaireResponseAnswerModel> answer;
 
   /**
@@ -89,7 +89,7 @@ public class QuestionnaireResponseItemModel  implements Serializable {
   private String item_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="item_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="item_id", insertable=false, updatable=false)
   private java.util.List<QuestionnaireResponseItemModel> item;
 
   /**
@@ -128,14 +128,14 @@ public class QuestionnaireResponseItemModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public QuestionnaireResponseItemModel() {
   }
 
-  public QuestionnaireResponseItemModel(QuestionnaireResponseItem o, String parentId) {
-  	this.parent_id = parentId;
+  public QuestionnaireResponseItemModel(QuestionnaireResponseItem o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -143,15 +143,15 @@ public class QuestionnaireResponseItemModel  implements Serializable {
     this.definition = o.getDefinition();
     this.text = o.getText();
     if (null != o.getSubject() ) {
-    	this.subject_id = "subject" + this.parent_id;
+    	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
     }
     if (null != o.getAnswer() && !o.getAnswer().isEmpty()) {
-    	this.answer_id = "answer" + this.parent_id;
+    	this.answer_id = "answer" + this.id;
     	this.answer = QuestionnaireResponseAnswerHelper.toModelFromArray(o.getAnswer(), this.answer_id);
     }
     if (null != o.getItem() && !o.getItem().isEmpty()) {
-    	this.item_id = "item" + this.parent_id;
+    	this.item_id = "item" + this.id;
     	this.item = QuestionnaireResponseItemHelper.toModelFromArray(o.getItem(), this.item_id);
     }
     if (null != o.getModifierExtension()) {
@@ -216,11 +216,11 @@ public class QuestionnaireResponseItemModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -233,7 +233,7 @@ public class QuestionnaireResponseItemModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -249,7 +249,7 @@ public class QuestionnaireResponseItemModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

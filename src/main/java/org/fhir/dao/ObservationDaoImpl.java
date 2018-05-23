@@ -90,9 +90,9 @@ public class ObservationDaoImpl implements ObservationDao {
   }
   @Override
   @Transactional
-  public void delete(Observation e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ObservationModel removed = em.find(ObservationModel.class, e.getId());
+      final ObservationModel removed = em.find(ObservationModel.class, id);
       em.remove(removed);
   }
 

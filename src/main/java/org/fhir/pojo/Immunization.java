@@ -191,6 +191,9 @@ public class Immunization  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
@@ -238,6 +241,9 @@ public class Immunization  extends DomainResource  {
     }
     if (null != o.getPractitioner() && !o.getPractitioner().isEmpty()) {
     	this.practitioner = ImmunizationPractitionerHelper.fromArray2Array(o.getPractitioner());
+    }
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
     }
     if (null != o.getExplanation() && !o.getExplanation().isEmpty()) {
       this.explanation = new ImmunizationExplanation(o.getExplanation().get(0));

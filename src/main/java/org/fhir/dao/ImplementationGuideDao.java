@@ -38,7 +38,7 @@ public interface ImplementationGuideDao {
   public ImplementationGuide create(ImplementationGuide e);
 
   public ImplementationGuide update(ImplementationGuide e);
-  public void delete(ImplementationGuide e);
+  public void delete(String id);
 
   public List<ImplementationGuide> findByField(QueryBuilder queryBuilder);
 

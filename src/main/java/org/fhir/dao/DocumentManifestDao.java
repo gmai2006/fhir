@@ -38,7 +38,7 @@ public interface DocumentManifestDao {
   public DocumentManifest create(DocumentManifest e);
 
   public DocumentManifest update(DocumentManifest e);
-  public void delete(DocumentManifest e);
+  public void delete(String id);
 
   public List<DocumentManifest> findByField(QueryBuilder queryBuilder);
 

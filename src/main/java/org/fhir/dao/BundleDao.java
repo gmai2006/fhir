@@ -38,7 +38,7 @@ public interface BundleDao {
   public Bundle create(Bundle e);
 
   public Bundle update(Bundle e);
-  public void delete(Bundle e);
+  public void delete(String id);
 
   public List<Bundle> findByField(QueryBuilder queryBuilder);
 

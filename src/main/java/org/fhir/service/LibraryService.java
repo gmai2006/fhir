@@ -36,7 +36,7 @@ public interface LibraryService {
   public List<Library> selectAll();
   public Library create(Library bean);
   public Library update(Library bean);
-  public void delete(Library bean);
+  public void delete(String id);
   public List<Library> findByField(QueryBuilder queryBuilder);
   public List<Library> findByType(QueryBuilder queryBuilder);
   public List<Library> findByUseContext(QueryBuilder queryBuilder);

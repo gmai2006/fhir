@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="patientlink")
 public class PatientLinkModel  implements Serializable {
-	private static final long serialVersionUID = 151910893739038616L;
+	private static final long serialVersionUID = 151967883193349274L;
   /**
   * Description: "The other patient resource that the link refers to."
   */
@@ -46,7 +46,7 @@ public class PatientLinkModel  implements Serializable {
   private String other_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="other_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="other_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> other;
 
   /**
@@ -92,19 +92,19 @@ public class PatientLinkModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public PatientLinkModel() {
   }
 
-  public PatientLinkModel(PatientLink o, String parentId) {
-  	this.parent_id = parentId;
+  public PatientLinkModel(PatientLink o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getOther() ) {
-    	this.other_id = "other" + this.parent_id;
+    	this.other_id = "other" + this.id;
     	this.other = ReferenceHelper.toModel(o.getOther(), this.other_id);
     }
     this.type = o.getType();
@@ -146,11 +146,11 @@ public class PatientLinkModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -161,7 +161,7 @@ public class PatientLinkModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -173,7 +173,7 @@ public class PatientLinkModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

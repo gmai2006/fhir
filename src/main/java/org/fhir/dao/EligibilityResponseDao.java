@@ -38,7 +38,7 @@ public interface EligibilityResponseDao {
   public EligibilityResponse create(EligibilityResponse e);
 
   public EligibilityResponse update(EligibilityResponse e);
-  public void delete(EligibilityResponse e);
+  public void delete(String id);
 
   public List<EligibilityResponse> findByField(QueryBuilder queryBuilder);
 

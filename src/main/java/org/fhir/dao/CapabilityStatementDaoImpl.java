@@ -90,9 +90,9 @@ public class CapabilityStatementDaoImpl implements CapabilityStatementDao {
   }
   @Override
   @Transactional
-  public void delete(CapabilityStatement e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final CapabilityStatementModel removed = em.find(CapabilityStatementModel.class, e.getId());
+      final CapabilityStatementModel removed = em.find(CapabilityStatementModel.class, id);
       em.remove(removed);
   }
 

@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="compositionrelatesto")
 public class CompositionRelatesToModel  implements Serializable {
-	private static final long serialVersionUID = 151910893709660369L;
+	private static final long serialVersionUID = 151967883162436933L;
   /**
   * Description: "The type of relationship that this composition has with anther composition or document."
   */
@@ -63,7 +63,7 @@ public class CompositionRelatesToModel  implements Serializable {
   private String targetreference_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="targetreference_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="targetreference_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> targetReference;
 
   /**
@@ -102,14 +102,14 @@ public class CompositionRelatesToModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public CompositionRelatesToModel() {
   }
 
-  public CompositionRelatesToModel(CompositionRelatesTo o, String parentId) {
-  	this.parent_id = parentId;
+  public CompositionRelatesToModel(CompositionRelatesTo o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -118,7 +118,7 @@ public class CompositionRelatesToModel  implements Serializable {
     	this.targetIdentifier = JsonUtils.toJson(o.getTargetIdentifier());
     }
     if (null != o.getTargetReference() ) {
-    	this.targetreference_id = "targetreference" + this.parent_id;
+    	this.targetreference_id = "targetreference" + this.id;
     	this.targetReference = ReferenceHelper.toModel(o.getTargetReference(), this.targetreference_id);
     }
     if (null != o.getModifierExtension()) {
@@ -165,11 +165,11 @@ public class CompositionRelatesToModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -181,7 +181,7 @@ public class CompositionRelatesToModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -194,7 +194,7 @@ public class CompositionRelatesToModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

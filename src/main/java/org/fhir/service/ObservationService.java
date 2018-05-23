@@ -36,7 +36,7 @@ public interface ObservationService {
   public List<Observation> selectAll();
   public Observation create(Observation bean);
   public Observation update(Observation bean);
-  public void delete(Observation bean);
+  public void delete(String id);
   public List<Observation> findByField(QueryBuilder queryBuilder);
   public List<Observation> findByBasedOn(QueryBuilder queryBuilder);
   public List<Observation> findByCategory(QueryBuilder queryBuilder);

@@ -38,7 +38,7 @@ public interface StructureMapDao {
   public StructureMap create(StructureMap e);
 
   public StructureMap update(StructureMap e);
-  public void delete(StructureMap e);
+  public void delete(String id);
 
   public List<StructureMap> findByField(QueryBuilder queryBuilder);
 

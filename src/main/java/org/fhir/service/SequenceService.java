@@ -36,7 +36,7 @@ public interface SequenceService {
   public List<Sequence> selectAll();
   public Sequence create(Sequence bean);
   public Sequence update(Sequence bean);
-  public void delete(Sequence bean);
+  public void delete(String id);
   public List<Sequence> findByField(QueryBuilder queryBuilder);
   public List<Sequence> findByPatient(QueryBuilder queryBuilder);
   public List<Sequence> findBySpecimen(QueryBuilder queryBuilder);

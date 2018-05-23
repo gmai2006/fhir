@@ -38,7 +38,7 @@ public interface ImagingManifestDao {
   public ImagingManifest create(ImagingManifest e);
 
   public ImagingManifest update(ImagingManifest e);
-  public void delete(ImagingManifest e);
+  public void delete(String id);
 
   public List<ImagingManifest> findByField(QueryBuilder queryBuilder);
 

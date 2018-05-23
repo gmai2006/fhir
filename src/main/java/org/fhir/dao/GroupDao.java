@@ -38,7 +38,7 @@ public interface GroupDao {
   public Group create(Group e);
 
   public Group update(Group e);
-  public void delete(Group e);
+  public void delete(String id);
 
   public List<Group> findByField(QueryBuilder queryBuilder);
 

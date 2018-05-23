@@ -121,6 +121,9 @@ public class CareTeam  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
@@ -148,6 +151,9 @@ public class CareTeam  extends DomainResource  {
     }
     if (null != o.getManagingOrganization() && !o.getManagingOrganization().isEmpty()) {
     	this.managingOrganization = ReferenceHelper.fromArray2Array(o.getManagingOrganization());
+    }
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
     }
   }
 

@@ -138,6 +138,9 @@ public class Provenance  extends DomainResource  {
     if (null != o.getEntity() && !o.getEntity().isEmpty()) {
     	this.entity = ProvenanceEntityHelper.fromArray2Array(o.getEntity());
     }
+    if (o.getSignature() != null) {
+    	this.signature = org.fhir.utils.JsonUtils.json2Array(o.getSignature());
+    }
   }
 
   public void setResourceType( String value) {

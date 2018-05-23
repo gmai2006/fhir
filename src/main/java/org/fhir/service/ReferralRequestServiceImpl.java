@@ -97,12 +97,9 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
 
   @Override
   @Transactional
-  public void delete(ReferralRequest bean) {
-  	requireNonNull(bean);
-    logger.info("delete(ReferralRequest={}) - entered bean");
-
-    dao.delete(bean);
-
+  public void delete(String id) {
+    logger.info("delete(ReferralRequest={}) - entered id " + id);
+    dao.delete(id);
     logger.info("delete(ReferralRequest) - exited - return value={} result ");
   }
 

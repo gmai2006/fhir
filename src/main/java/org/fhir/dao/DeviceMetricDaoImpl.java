@@ -90,9 +90,9 @@ public class DeviceMetricDaoImpl implements DeviceMetricDao {
   }
   @Override
   @Transactional
-  public void delete(DeviceMetric e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final DeviceMetricModel removed = em.find(DeviceMetricModel.class, e.getId());
+      final DeviceMetricModel removed = em.find(DeviceMetricModel.class, id);
       em.remove(removed);
   }
 

@@ -36,7 +36,7 @@ public interface MessageHeaderService {
   public List<MessageHeader> selectAll();
   public MessageHeader create(MessageHeader bean);
   public MessageHeader update(MessageHeader bean);
-  public void delete(MessageHeader bean);
+  public void delete(String id);
   public List<MessageHeader> findByField(QueryBuilder queryBuilder);
   public List<MessageHeader> findByEvent(QueryBuilder queryBuilder);
   public List<MessageHeader> findByDestination(QueryBuilder queryBuilder);

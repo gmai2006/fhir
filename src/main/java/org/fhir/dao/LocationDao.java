@@ -38,7 +38,7 @@ public interface LocationDao {
   public Location create(Location e);
 
   public Location update(Location e);
-  public void delete(Location e);
+  public void delete(String id);
 
   public List<Location> findByField(QueryBuilder queryBuilder);
 

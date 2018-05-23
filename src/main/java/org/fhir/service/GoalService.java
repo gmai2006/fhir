@@ -36,7 +36,7 @@ public interface GoalService {
   public List<Goal> selectAll();
   public Goal create(Goal bean);
   public Goal update(Goal bean);
-  public void delete(Goal bean);
+  public void delete(String id);
   public List<Goal> findByField(QueryBuilder queryBuilder);
   public List<Goal> findByCategory(QueryBuilder queryBuilder);
   public List<Goal> findByPriority(QueryBuilder queryBuilder);

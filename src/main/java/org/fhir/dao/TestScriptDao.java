@@ -38,7 +38,7 @@ public interface TestScriptDao {
   public TestScript create(TestScript e);
 
   public TestScript update(TestScript e);
-  public void delete(TestScript e);
+  public void delete(String id);
 
   public List<TestScript> findByField(QueryBuilder queryBuilder);
 

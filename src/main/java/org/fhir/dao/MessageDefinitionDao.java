@@ -38,7 +38,7 @@ public interface MessageDefinitionDao {
   public MessageDefinition create(MessageDefinition e);
 
   public MessageDefinition update(MessageDefinition e);
-  public void delete(MessageDefinition e);
+  public void delete(String id);
 
   public List<MessageDefinition> findByField(QueryBuilder queryBuilder);
 

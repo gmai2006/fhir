@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class AccountResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Account create(Account obj) {
-		return this.service.create(obj);
+	public Account createOrUpdate(Account obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing Account
+   * @param obj - instance of Account
+   * @return Account
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public Account update( Account obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing Account
+   * @param obj - instance of Account
+   * @return Account
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get Account by its ID
+   * @param id - instance of Account
+   * @return Account
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class AccountResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all Account with limit of returned records
+   * @param max - number of records
+   * @return a list Account
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class AccountResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query Account based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of Account
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class AccountResource {
   }
 
   /**
-  * Descr: E.g. patient, expense, depreciation
-  * Type: token
+   * Query Account by composite fields
+   * Descr: E.g. patient, expense, depreciation
+   * Type: token
   */
   @GET
   @Path("type")
@@ -167,8 +208,9 @@ public class AccountResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: What is account tied to?
-  * Type: reference
+   * Query Account by composite fields
+   * Descr: What is account tied to?
+   * Type: reference
   */
   @GET
   @Path("patient")
@@ -193,8 +235,9 @@ public class AccountResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Who is responsible?
-  * Type: reference
+   * Query Account by composite fields
+   * Descr: Who is responsible?
+   * Type: reference
   */
   @GET
   @Path("owner")

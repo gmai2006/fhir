@@ -36,7 +36,7 @@ public interface CodeSystemService {
   public List<CodeSystem> selectAll();
   public CodeSystem create(CodeSystem bean);
   public CodeSystem update(CodeSystem bean);
-  public void delete(CodeSystem bean);
+  public void delete(String id);
   public List<CodeSystem> findByField(QueryBuilder queryBuilder);
   public List<CodeSystem> findByContact(QueryBuilder queryBuilder);
   public List<CodeSystem> findByUseContext(QueryBuilder queryBuilder);

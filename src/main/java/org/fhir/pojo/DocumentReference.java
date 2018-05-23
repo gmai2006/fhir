@@ -166,6 +166,9 @@ public class DocumentReference  extends DomainResource  {
       this.resourceType = o.getResourceType();
     }
     this.masterIdentifier = IdentifierHelper.fromJson(o.getMasterIdentifier());
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }

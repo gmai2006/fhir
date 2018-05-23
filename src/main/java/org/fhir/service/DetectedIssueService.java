@@ -36,7 +36,7 @@ public interface DetectedIssueService {
   public List<DetectedIssue> selectAll();
   public DetectedIssue create(DetectedIssue bean);
   public DetectedIssue update(DetectedIssue bean);
-  public void delete(DetectedIssue bean);
+  public void delete(String id);
   public List<DetectedIssue> findByField(QueryBuilder queryBuilder);
   public List<DetectedIssue> findByCategory(QueryBuilder queryBuilder);
   public List<DetectedIssue> findByPatient(QueryBuilder queryBuilder);

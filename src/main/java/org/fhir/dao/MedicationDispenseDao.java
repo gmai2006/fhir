@@ -38,7 +38,7 @@ public interface MedicationDispenseDao {
   public MedicationDispense create(MedicationDispense e);
 
   public MedicationDispense update(MedicationDispense e);
-  public void delete(MedicationDispense e);
+  public void delete(String id);
 
   public List<MedicationDispense> findByField(QueryBuilder queryBuilder);
 

@@ -36,7 +36,7 @@ public interface ValueSetService {
   public List<ValueSet> selectAll();
   public ValueSet create(ValueSet bean);
   public ValueSet update(ValueSet bean);
-  public void delete(ValueSet bean);
+  public void delete(String id);
   public List<ValueSet> findByField(QueryBuilder queryBuilder);
   public List<ValueSet> findByContact(QueryBuilder queryBuilder);
   public List<ValueSet> findByUseContext(QueryBuilder queryBuilder);

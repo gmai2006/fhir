@@ -36,7 +36,7 @@ public interface MeasureService {
   public List<Measure> selectAll();
   public Measure create(Measure bean);
   public Measure update(Measure bean);
-  public void delete(Measure bean);
+  public void delete(String id);
   public List<Measure> findByField(QueryBuilder queryBuilder);
   public List<Measure> findByUseContext(QueryBuilder queryBuilder);
   public List<Measure> findByJurisdiction(QueryBuilder queryBuilder);

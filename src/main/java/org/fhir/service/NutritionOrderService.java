@@ -36,7 +36,7 @@ public interface NutritionOrderService {
   public List<NutritionOrder> selectAll();
   public NutritionOrder create(NutritionOrder bean);
   public NutritionOrder update(NutritionOrder bean);
-  public void delete(NutritionOrder bean);
+  public void delete(String id);
   public List<NutritionOrder> findByField(QueryBuilder queryBuilder);
   public List<NutritionOrder> findByPatient(QueryBuilder queryBuilder);
   public List<NutritionOrder> findByEncounter(QueryBuilder queryBuilder);

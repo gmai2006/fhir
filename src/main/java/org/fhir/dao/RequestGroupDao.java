@@ -38,7 +38,7 @@ public interface RequestGroupDao {
   public RequestGroup create(RequestGroup e);
 
   public RequestGroup update(RequestGroup e);
-  public void delete(RequestGroup e);
+  public void delete(String id);
 
   public List<RequestGroup> findByField(QueryBuilder queryBuilder);
 

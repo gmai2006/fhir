@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class ConsentResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Consent create(Consent obj) {
-		return this.service.create(obj);
+	public Consent createOrUpdate(Consent obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing Consent
+   * @param obj - instance of Consent
+   * @return Consent
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public Consent update( Consent obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing Consent
+   * @param obj - instance of Consent
+   * @return Consent
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get Consent by its ID
+   * @param id - instance of Consent
+   * @return Consent
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class ConsentResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all Consent with limit of returned records
+   * @param max - number of records
+   * @return a list Consent
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class ConsentResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query Consent based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of Consent
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class ConsentResource {
   }
 
   /**
-  * Descr: Classification of the consent statement - for indexing/retrieval
-  * Type: token
+   * Query Consent by composite fields
+   * Descr: Classification of the consent statement - for indexing/retrieval
+   * Type: token
   */
   @GET
   @Path("category")
@@ -167,8 +208,9 @@ public class ConsentResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Who is agreeing to the policy and exceptions
-  * Type: reference
+   * Query Consent by composite fields
+   * Descr: Who is agreeing to the policy and exceptions
+   * Type: reference
   */
   @GET
   @Path("consentor")
@@ -193,8 +235,9 @@ public class ConsentResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Custodian of the consent
-  * Type: reference
+   * Query Consent by composite fields
+   * Descr: Custodian of the consent
+   * Type: reference
   */
   @GET
   @Path("organization")

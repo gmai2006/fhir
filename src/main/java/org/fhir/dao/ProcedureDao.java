@@ -38,7 +38,7 @@ public interface ProcedureDao {
   public Procedure create(Procedure e);
 
   public Procedure update(Procedure e);
-  public void delete(Procedure e);
+  public void delete(String id);
 
   public List<Procedure> findByField(QueryBuilder queryBuilder);
 

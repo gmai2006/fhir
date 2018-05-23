@@ -82,6 +82,9 @@ public class SpecimenContainer  extends BackboneElement  {
 
   public SpecimenContainer(SpecimenContainerModel o) {
     this.id = o.getId();
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getDescription()) {
       this.description = o.getDescription();
     }

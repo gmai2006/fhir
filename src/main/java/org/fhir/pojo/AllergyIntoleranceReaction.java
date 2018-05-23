@@ -112,6 +112,9 @@ public class AllergyIntoleranceReaction  extends BackboneElement  {
     if (null != o.getExposureRoute() && !o.getExposureRoute().isEmpty()) {
       this.exposureRoute = new CodeableConcept(o.getExposureRoute().get(0));
     }
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
+    }
   }
 
   public void setSubstance( CodeableConcept value) {

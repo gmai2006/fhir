@@ -90,9 +90,9 @@ public class DetectedIssueDaoImpl implements DetectedIssueDao {
   }
   @Override
   @Transactional
-  public void delete(DetectedIssue e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final DetectedIssueModel removed = em.find(DetectedIssueModel.class, e.getId());
+      final DetectedIssueModel removed = em.find(DetectedIssueModel.class, id);
       em.remove(removed);
   }
 

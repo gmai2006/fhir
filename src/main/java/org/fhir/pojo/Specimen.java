@@ -123,6 +123,9 @@ public class Specimen  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     this.accessionIdentifier = IdentifierHelper.fromJson(o.getAccessionIdentifier());
     if (null != o.getStatus()) {
       this.status = o.getStatus();
@@ -150,6 +153,9 @@ public class Specimen  extends DomainResource  {
     }
     if (null != o.getContainer() && !o.getContainer().isEmpty()) {
     	this.container = SpecimenContainerHelper.fromArray2Array(o.getContainer());
+    }
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
     }
   }
 

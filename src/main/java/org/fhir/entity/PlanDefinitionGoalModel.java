@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="plandefinitiongoal")
 public class PlanDefinitionGoalModel  implements Serializable {
-	private static final long serialVersionUID = 151910893753215851L;
+	private static final long serialVersionUID = 151967883207812089L;
   /**
   * Description: "Indicates a category the goal falls within."
   */
@@ -46,7 +46,7 @@ public class PlanDefinitionGoalModel  implements Serializable {
   private String category_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> category;
 
   /**
@@ -57,7 +57,7 @@ public class PlanDefinitionGoalModel  implements Serializable {
   private String description_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="description_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="description_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> description;
 
   /**
@@ -68,7 +68,7 @@ public class PlanDefinitionGoalModel  implements Serializable {
   private String priority_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="priority_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="priority_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> priority;
 
   /**
@@ -79,7 +79,7 @@ public class PlanDefinitionGoalModel  implements Serializable {
   private String start_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="start_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="start_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> start;
 
   /**
@@ -90,7 +90,7 @@ public class PlanDefinitionGoalModel  implements Serializable {
   private String addresses_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="addresses_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="addresses_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> addresses;
 
   /**
@@ -101,7 +101,7 @@ public class PlanDefinitionGoalModel  implements Serializable {
   private String documentation_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="documentation_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="documentation_id", insertable=false, updatable=false)
   private java.util.List<RelatedArtifactModel> documentation;
 
   /**
@@ -112,7 +112,7 @@ public class PlanDefinitionGoalModel  implements Serializable {
   private String target_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="target_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="target_id", insertable=false, updatable=false)
   private java.util.List<PlanDefinitionTargetModel> target;
 
   /**
@@ -151,43 +151,43 @@ public class PlanDefinitionGoalModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public PlanDefinitionGoalModel() {
   }
 
-  public PlanDefinitionGoalModel(PlanDefinitionGoal o, String parentId) {
-  	this.parent_id = parentId;
+  public PlanDefinitionGoalModel(PlanDefinitionGoal o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getCategory() ) {
-    	this.category_id = "category" + this.parent_id;
+    	this.category_id = "category" + this.id;
     	this.category = CodeableConceptHelper.toModel(o.getCategory(), this.category_id);
     }
     if (null != o.getDescription() ) {
-    	this.description_id = "description" + this.parent_id;
+    	this.description_id = "description" + this.id;
     	this.description = CodeableConceptHelper.toModel(o.getDescription(), this.description_id);
     }
     if (null != o.getPriority() ) {
-    	this.priority_id = "priority" + this.parent_id;
+    	this.priority_id = "priority" + this.id;
     	this.priority = CodeableConceptHelper.toModel(o.getPriority(), this.priority_id);
     }
     if (null != o.getStart() ) {
-    	this.start_id = "start" + this.parent_id;
+    	this.start_id = "start" + this.id;
     	this.start = CodeableConceptHelper.toModel(o.getStart(), this.start_id);
     }
     if (null != o.getAddresses() && !o.getAddresses().isEmpty()) {
-    	this.addresses_id = "addresses" + this.parent_id;
+    	this.addresses_id = "addresses" + this.id;
     	this.addresses = CodeableConceptHelper.toModelFromArray(o.getAddresses(), this.addresses_id);
     }
     if (null != o.getDocumentation() && !o.getDocumentation().isEmpty()) {
-    	this.documentation_id = "documentation" + this.parent_id;
+    	this.documentation_id = "documentation" + this.id;
     	this.documentation = RelatedArtifactHelper.toModelFromArray(o.getDocumentation(), this.documentation_id);
     }
     if (null != o.getTarget() && !o.getTarget().isEmpty()) {
-    	this.target_id = "target" + this.parent_id;
+    	this.target_id = "target" + this.id;
     	this.target = PlanDefinitionTargetHelper.toModelFromArray(o.getTarget(), this.target_id);
     }
     if (null != o.getModifierExtension()) {
@@ -258,11 +258,11 @@ public class PlanDefinitionGoalModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -272,7 +272,7 @@ public class PlanDefinitionGoalModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -289,7 +289,7 @@ public class PlanDefinitionGoalModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

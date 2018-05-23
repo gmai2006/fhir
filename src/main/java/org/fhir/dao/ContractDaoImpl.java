@@ -90,9 +90,9 @@ public class ContractDaoImpl implements ContractDao {
   }
   @Override
   @Transactional
-  public void delete(Contract e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ContractModel removed = em.find(ContractModel.class, e.getId());
+      final ContractModel removed = em.find(ContractModel.class, id);
       em.remove(removed);
   }
 

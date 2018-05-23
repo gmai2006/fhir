@@ -90,9 +90,9 @@ public class VisionPrescriptionDaoImpl implements VisionPrescriptionDao {
   }
   @Override
   @Transactional
-  public void delete(VisionPrescription e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final VisionPrescriptionModel removed = em.find(VisionPrescriptionModel.class, e.getId());
+      final VisionPrescriptionModel removed = em.find(VisionPrescriptionModel.class, id);
       em.remove(removed);
   }
 

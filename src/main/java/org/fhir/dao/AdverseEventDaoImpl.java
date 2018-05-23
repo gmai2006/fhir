@@ -90,9 +90,9 @@ public class AdverseEventDaoImpl implements AdverseEventDao {
   }
   @Override
   @Transactional
-  public void delete(AdverseEvent e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final AdverseEventModel removed = em.find(AdverseEventModel.class, e.getId());
+      final AdverseEventModel removed = em.find(AdverseEventModel.class, id);
       em.remove(removed);
   }
 

@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="practitionerrole")
 public class PractitionerRoleModel  implements Serializable {
-	private static final long serialVersionUID = 151910893767447700L;
+	private static final long serialVersionUID = 151967883221689064L;
   /**
   * Description: "This is a PractitionerRole resource"
   */
@@ -79,7 +79,7 @@ public class PractitionerRoleModel  implements Serializable {
   private String practitioner_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="practitioner_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="practitioner_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> practitioner;
 
   /**
@@ -90,7 +90,7 @@ public class PractitionerRoleModel  implements Serializable {
   private String organization_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="organization_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="organization_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> organization;
 
   /**
@@ -101,7 +101,7 @@ public class PractitionerRoleModel  implements Serializable {
   private String code_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> code;
 
   /**
@@ -112,7 +112,7 @@ public class PractitionerRoleModel  implements Serializable {
   private String specialty_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="specialty_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="specialty_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> specialty;
 
   /**
@@ -123,7 +123,7 @@ public class PractitionerRoleModel  implements Serializable {
   private String location_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="location_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="location_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> location;
 
   /**
@@ -134,7 +134,7 @@ public class PractitionerRoleModel  implements Serializable {
   private String healthcareservice_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="healthcareservice_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="healthcareservice_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> healthcareService;
 
   /**
@@ -154,7 +154,7 @@ public class PractitionerRoleModel  implements Serializable {
   private String availabletime_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="availabletime_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="availabletime_id", insertable=false, updatable=false)
   private java.util.List<PractitionerRoleAvailableTimeModel> availableTime;
 
   /**
@@ -165,7 +165,7 @@ public class PractitionerRoleModel  implements Serializable {
   private String notavailable_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="notavailable_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="notavailable_id", insertable=false, updatable=false)
   private java.util.List<PractitionerRoleNotAvailableModel> notAvailable;
 
   /**
@@ -183,7 +183,7 @@ public class PractitionerRoleModel  implements Serializable {
   private String endpoint_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="endpoint_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="endpoint_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> endpoint;
 
   /**
@@ -195,7 +195,7 @@ public class PractitionerRoleModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -249,7 +249,7 @@ public class PractitionerRoleModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

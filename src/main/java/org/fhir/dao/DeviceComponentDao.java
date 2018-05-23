@@ -38,7 +38,7 @@ public interface DeviceComponentDao {
   public DeviceComponent create(DeviceComponent e);
 
   public DeviceComponent update(DeviceComponent e);
-  public void delete(DeviceComponent e);
+  public void delete(String id);
 
   public List<DeviceComponent> findByField(QueryBuilder queryBuilder);
 

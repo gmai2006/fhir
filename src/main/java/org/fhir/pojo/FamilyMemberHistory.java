@@ -246,6 +246,9 @@ public class FamilyMemberHistory  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
     	this.definition = ReferenceHelper.fromArray2Array(o.getDefinition());
     }
@@ -304,6 +307,9 @@ public class FamilyMemberHistory  extends DomainResource  {
     }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
     	this.reasonReference = ReferenceHelper.fromArray2Array(o.getReasonReference());
+    }
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
     }
     if (null != o.getCondition() && !o.getCondition().isEmpty()) {
     	this.condition = FamilyMemberHistoryConditionHelper.fromArray2Array(o.getCondition());

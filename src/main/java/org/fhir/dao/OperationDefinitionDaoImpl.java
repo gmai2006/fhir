@@ -90,9 +90,9 @@ public class OperationDefinitionDaoImpl implements OperationDefinitionDao {
   }
   @Override
   @Transactional
-  public void delete(OperationDefinition e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final OperationDefinitionModel removed = em.find(OperationDefinitionModel.class, e.getId());
+      final OperationDefinitionModel removed = em.find(OperationDefinitionModel.class, id);
       em.remove(removed);
   }
 

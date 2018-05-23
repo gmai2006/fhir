@@ -36,7 +36,7 @@ public interface ImplementationGuideService {
   public List<ImplementationGuide> selectAll();
   public ImplementationGuide create(ImplementationGuide bean);
   public ImplementationGuide update(ImplementationGuide bean);
-  public void delete(ImplementationGuide bean);
+  public void delete(String id);
   public List<ImplementationGuide> findByField(QueryBuilder queryBuilder);
   public List<ImplementationGuide> findByContact(QueryBuilder queryBuilder);
   public List<ImplementationGuide> findByUseContext(QueryBuilder queryBuilder);

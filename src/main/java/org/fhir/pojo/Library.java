@@ -258,6 +258,9 @@ public class Library  extends DomainResource  {
     if (null != o.getUrl()) {
       this.url = o.getUrl();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getVersion()) {
       this.version = o.getVersion();
     }
@@ -319,8 +322,14 @@ public class Library  extends DomainResource  {
     if (null != o.getRelatedArtifact() && !o.getRelatedArtifact().isEmpty()) {
     	this.relatedArtifact = RelatedArtifactHelper.fromArray2Array(o.getRelatedArtifact());
     }
+    if (o.getParameter() != null) {
+    	this.parameter = org.fhir.utils.JsonUtils.json2Array(o.getParameter());
+    }
     if (null != o.getDataRequirement() && !o.getDataRequirement().isEmpty()) {
     	this.dataRequirement = DataRequirementHelper.fromArray2Array(o.getDataRequirement());
+    }
+    if (o.getContent() != null) {
+    	this.content = org.fhir.utils.JsonUtils.json2Array(o.getContent());
     }
   }
 

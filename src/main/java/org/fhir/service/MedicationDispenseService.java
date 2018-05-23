@@ -36,7 +36,7 @@ public interface MedicationDispenseService {
   public List<MedicationDispense> selectAll();
   public MedicationDispense create(MedicationDispense bean);
   public MedicationDispense update(MedicationDispense bean);
-  public void delete(MedicationDispense bean);
+  public void delete(String id);
   public List<MedicationDispense> findByField(QueryBuilder queryBuilder);
   public List<MedicationDispense> findByPartOf(QueryBuilder queryBuilder);
   public List<MedicationDispense> findByCategory(QueryBuilder queryBuilder);

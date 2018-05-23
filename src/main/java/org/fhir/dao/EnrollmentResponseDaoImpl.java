@@ -90,9 +90,9 @@ public class EnrollmentResponseDaoImpl implements EnrollmentResponseDao {
   }
   @Override
   @Transactional
-  public void delete(EnrollmentResponse e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final EnrollmentResponseModel removed = em.find(EnrollmentResponseModel.class, e.getId());
+      final EnrollmentResponseModel removed = em.find(EnrollmentResponseModel.class, id);
       em.remove(removed);
   }
 

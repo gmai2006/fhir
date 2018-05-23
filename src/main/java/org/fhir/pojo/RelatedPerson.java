@@ -123,6 +123,9 @@ public class RelatedPerson  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getActive()) {
       this.active = o.getActive();
     }
@@ -132,6 +135,12 @@ public class RelatedPerson  extends DomainResource  {
     if (null != o.getRelationship() && !o.getRelationship().isEmpty()) {
       this.relationship = new CodeableConcept(o.getRelationship().get(0));
     }
+    if (o.getName() != null) {
+    	this.name = org.fhir.utils.JsonUtils.json2Array(o.getName());
+    }
+    if (o.getTelecom() != null) {
+    	this.telecom = org.fhir.utils.JsonUtils.json2Array(o.getTelecom());
+    }
     if (null != o.getGender()) {
       this.gender = o.getGender();
     }
@@ -140,6 +149,9 @@ public class RelatedPerson  extends DomainResource  {
     }
     if (null != o.getAddress() && !o.getAddress().isEmpty()) {
     	this.address = AddressHelper.fromArray2Array(o.getAddress());
+    }
+    if (o.getPhoto() != null) {
+    	this.photo = org.fhir.utils.JsonUtils.json2Array(o.getPhoto());
     }
     this.period = PeriodHelper.fromJson(o.getPeriod());
   }

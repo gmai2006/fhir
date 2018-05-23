@@ -90,9 +90,9 @@ public class DocumentManifestDaoImpl implements DocumentManifestDao {
   }
   @Override
   @Transactional
-  public void delete(DocumentManifest e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final DocumentManifestModel removed = em.find(DocumentManifestModel.class, e.getId());
+      final DocumentManifestModel removed = em.find(DocumentManifestModel.class, id);
       em.remove(removed);
   }
 

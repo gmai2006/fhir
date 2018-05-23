@@ -97,12 +97,9 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
 
   @Override
   @Transactional
-  public void delete(ConceptMap bean) {
-  	requireNonNull(bean);
-    logger.info("delete(ConceptMap={}) - entered bean");
-
-    dao.delete(bean);
-
+  public void delete(String id) {
+    logger.info("delete(ConceptMap={}) - entered id " + id);
+    dao.delete(id);
     logger.info("delete(ConceptMap) - exited - return value={} result ");
   }
 

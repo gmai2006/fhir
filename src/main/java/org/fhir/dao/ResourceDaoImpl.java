@@ -90,9 +90,9 @@ public class ResourceDaoImpl implements ResourceDao {
   }
   @Override
   @Transactional
-  public void delete(Resource e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ResourceModel removed = em.find(ResourceModel.class, e.getId());
+      final ResourceModel removed = em.find(ResourceModel.class, id);
       em.remove(removed);
   }
 

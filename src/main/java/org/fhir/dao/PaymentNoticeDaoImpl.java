@@ -90,9 +90,9 @@ public class PaymentNoticeDaoImpl implements PaymentNoticeDao {
   }
   @Override
   @Transactional
-  public void delete(PaymentNotice e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final PaymentNoticeModel removed = em.find(PaymentNoticeModel.class, e.getId());
+      final PaymentNoticeModel removed = em.find(PaymentNoticeModel.class, id);
       em.remove(removed);
   }
 

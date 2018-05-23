@@ -90,9 +90,9 @@ public class GroupDaoImpl implements GroupDao {
   }
   @Override
   @Transactional
-  public void delete(Group e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final GroupModel removed = em.find(GroupModel.class, e.getId());
+      final GroupModel removed = em.find(GroupModel.class, id);
       em.remove(removed);
   }
 

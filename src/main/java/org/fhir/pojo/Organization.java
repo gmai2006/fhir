@@ -116,6 +116,9 @@ public class Organization  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getActive()) {
       this.active = o.getActive();
     }
@@ -127,6 +130,9 @@ public class Organization  extends DomainResource  {
     }
     if (o.getAlias() != null) {
     	this.alias = org.fhir.utils.JsonUtils.json2Array(o.getAlias());
+    }
+    if (o.getTelecom() != null) {
+    	this.telecom = org.fhir.utils.JsonUtils.json2Array(o.getTelecom());
     }
     if (null != o.getAddress() && !o.getAddress().isEmpty()) {
     	this.address = AddressHelper.fromArray2Array(o.getAddress());

@@ -90,9 +90,9 @@ public class RequestGroupDaoImpl implements RequestGroupDao {
   }
   @Override
   @Transactional
-  public void delete(RequestGroup e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final RequestGroupModel removed = em.find(RequestGroupModel.class, e.getId());
+      final RequestGroupModel removed = em.find(RequestGroupModel.class, id);
       em.remove(removed);
   }
 

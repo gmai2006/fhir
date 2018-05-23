@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="operationdefinitionparameter")
 public class OperationDefinitionParameterModel  implements Serializable {
-	private static final long serialVersionUID = 151910893737144632L;
+	private static final long serialVersionUID = 151967883191313370L;
   /**
   * Description: "The name of used to identify the parameter."
   */
@@ -98,7 +98,7 @@ public class OperationDefinitionParameterModel  implements Serializable {
   private String profile_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="profile_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="profile_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> profile;
 
   /**
@@ -109,7 +109,7 @@ public class OperationDefinitionParameterModel  implements Serializable {
   private String binding_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="binding_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="binding_id", insertable=false, updatable=false)
   private java.util.List<OperationDefinitionBindingModel> binding;
 
   /**
@@ -120,7 +120,7 @@ public class OperationDefinitionParameterModel  implements Serializable {
   private String part_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="part_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="part_id", insertable=false, updatable=false)
   private java.util.List<OperationDefinitionParameterModel> part;
 
   /**
@@ -159,14 +159,14 @@ public class OperationDefinitionParameterModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public OperationDefinitionParameterModel() {
   }
 
-  public OperationDefinitionParameterModel(OperationDefinitionParameter o, String parentId) {
-  	this.parent_id = parentId;
+  public OperationDefinitionParameterModel(OperationDefinitionParameter o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -178,15 +178,15 @@ public class OperationDefinitionParameterModel  implements Serializable {
     this.type = o.getType();
     this.searchType = o.getSearchType();
     if (null != o.getProfile() ) {
-    	this.profile_id = "profile" + this.parent_id;
+    	this.profile_id = "profile" + this.id;
     	this.profile = ReferenceHelper.toModel(o.getProfile(), this.profile_id);
     }
     if (null != o.getBinding() ) {
-    	this.binding_id = "binding" + this.parent_id;
+    	this.binding_id = "binding" + this.id;
     	this.binding = OperationDefinitionBindingHelper.toModel(o.getBinding(), this.binding_id);
     }
     if (null != o.getPart() && !o.getPart().isEmpty()) {
-    	this.part_id = "part" + this.parent_id;
+    	this.part_id = "part" + this.id;
     	this.part = OperationDefinitionParameterHelper.toModelFromArray(o.getPart(), this.part_id);
     }
     if (null != o.getModifierExtension()) {
@@ -275,11 +275,11 @@ public class OperationDefinitionParameterModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -296,7 +296,7 @@ public class OperationDefinitionParameterModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -316,7 +316,7 @@ public class OperationDefinitionParameterModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

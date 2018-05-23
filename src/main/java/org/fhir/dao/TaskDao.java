@@ -38,7 +38,7 @@ public interface TaskDao {
   public Task create(Task e);
 
   public Task update(Task e);
-  public void delete(Task e);
+  public void delete(String id);
 
   public List<Task> findByField(QueryBuilder queryBuilder);
 

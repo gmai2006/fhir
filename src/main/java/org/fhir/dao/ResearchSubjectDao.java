@@ -38,7 +38,7 @@ public interface ResearchSubjectDao {
   public ResearchSubject create(ResearchSubject e);
 
   public ResearchSubject update(ResearchSubject e);
-  public void delete(ResearchSubject e);
+  public void delete(String id);
 
   public List<ResearchSubject> findByField(QueryBuilder queryBuilder);
 

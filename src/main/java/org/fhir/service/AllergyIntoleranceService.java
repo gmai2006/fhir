@@ -36,7 +36,7 @@ public interface AllergyIntoleranceService {
   public List<AllergyIntolerance> selectAll();
   public AllergyIntolerance create(AllergyIntolerance bean);
   public AllergyIntolerance update(AllergyIntolerance bean);
-  public void delete(AllergyIntolerance bean);
+  public void delete(String id);
   public List<AllergyIntolerance> findByField(QueryBuilder queryBuilder);
   public List<AllergyIntolerance> findByCode(QueryBuilder queryBuilder);
   public List<AllergyIntolerance> findByPatient(QueryBuilder queryBuilder);

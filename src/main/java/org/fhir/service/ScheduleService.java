@@ -36,7 +36,7 @@ public interface ScheduleService {
   public List<Schedule> selectAll();
   public Schedule create(Schedule bean);
   public Schedule update(Schedule bean);
-  public void delete(Schedule bean);
+  public void delete(String id);
   public List<Schedule> findByField(QueryBuilder queryBuilder);
   public List<Schedule> findByServiceCategory(QueryBuilder queryBuilder);
   public List<Schedule> findByServiceType(QueryBuilder queryBuilder);

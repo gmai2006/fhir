@@ -36,7 +36,7 @@ public interface QuestionnaireService {
   public List<Questionnaire> selectAll();
   public Questionnaire create(Questionnaire bean);
   public Questionnaire update(Questionnaire bean);
-  public void delete(Questionnaire bean);
+  public void delete(String id);
   public List<Questionnaire> findByField(QueryBuilder queryBuilder);
   public List<Questionnaire> findByUseContext(QueryBuilder queryBuilder);
   public List<Questionnaire> findByJurisdiction(QueryBuilder queryBuilder);

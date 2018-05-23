@@ -38,7 +38,7 @@ public interface OrganizationDao {
   public Organization create(Organization e);
 
   public Organization update(Organization e);
-  public void delete(Organization e);
+  public void delete(String id);
 
   public List<Organization> findByField(QueryBuilder queryBuilder);
 

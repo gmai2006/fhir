@@ -38,7 +38,7 @@ public interface GuidanceResponseDao {
   public GuidanceResponse create(GuidanceResponse e);
 
   public GuidanceResponse update(GuidanceResponse e);
-  public void delete(GuidanceResponse e);
+  public void delete(String id);
 
   public List<GuidanceResponse> findByField(QueryBuilder queryBuilder);
 

@@ -36,7 +36,7 @@ public interface StructureMapService {
   public List<StructureMap> selectAll();
   public StructureMap create(StructureMap bean);
   public StructureMap update(StructureMap bean);
-  public void delete(StructureMap bean);
+  public void delete(String id);
   public List<StructureMap> findByField(QueryBuilder queryBuilder);
   public List<StructureMap> findByContact(QueryBuilder queryBuilder);
   public List<StructureMap> findByUseContext(QueryBuilder queryBuilder);

@@ -221,6 +221,9 @@ public class Condition  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getClinicalStatus()) {
       this.clinicalStatus = o.getClinicalStatus();
     }
@@ -277,6 +280,9 @@ public class Condition  extends DomainResource  {
     }
     if (null != o.getEvidence() && !o.getEvidence().isEmpty()) {
     	this.evidence = ConditionEvidenceHelper.fromArray2Array(o.getEvidence());
+    }
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
     }
   }
 

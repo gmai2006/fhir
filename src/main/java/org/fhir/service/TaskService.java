@@ -36,7 +36,7 @@ public interface TaskService {
   public List<Task> selectAll();
   public Task create(Task bean);
   public Task update(Task bean);
-  public void delete(Task bean);
+  public void delete(String id);
   public List<Task> findByField(QueryBuilder queryBuilder);
   public List<Task> findByDefinitionReference(QueryBuilder queryBuilder);
   public List<Task> findByBasedOn(QueryBuilder queryBuilder);

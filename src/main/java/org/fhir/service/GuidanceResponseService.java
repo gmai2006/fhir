@@ -36,7 +36,7 @@ public interface GuidanceResponseService {
   public List<GuidanceResponse> selectAll();
   public GuidanceResponse create(GuidanceResponse bean);
   public GuidanceResponse update(GuidanceResponse bean);
-  public void delete(GuidanceResponse bean);
+  public void delete(String id);
   public List<GuidanceResponse> findByField(QueryBuilder queryBuilder);
   public List<GuidanceResponse> findByModule(QueryBuilder queryBuilder);
   public List<GuidanceResponse> findBySubject(QueryBuilder queryBuilder);

@@ -90,9 +90,9 @@ public class CareTeamDaoImpl implements CareTeamDao {
   }
   @Override
   @Transactional
-  public void delete(CareTeam e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final CareTeamModel removed = em.find(CareTeamModel.class, e.getId());
+      final CareTeamModel removed = em.find(CareTeamModel.class, id);
       em.remove(removed);
   }
 

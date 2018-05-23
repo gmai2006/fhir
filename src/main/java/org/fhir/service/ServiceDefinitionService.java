@@ -36,7 +36,7 @@ public interface ServiceDefinitionService {
   public List<ServiceDefinition> selectAll();
   public ServiceDefinition create(ServiceDefinition bean);
   public ServiceDefinition update(ServiceDefinition bean);
-  public void delete(ServiceDefinition bean);
+  public void delete(String id);
   public List<ServiceDefinition> findByField(QueryBuilder queryBuilder);
   public List<ServiceDefinition> findByUseContext(QueryBuilder queryBuilder);
   public List<ServiceDefinition> findByJurisdiction(QueryBuilder queryBuilder);

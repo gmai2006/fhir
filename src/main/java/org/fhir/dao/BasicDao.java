@@ -38,7 +38,7 @@ public interface BasicDao {
   public Basic create(Basic e);
 
   public Basic update(Basic e);
-  public void delete(Basic e);
+  public void delete(String id);
 
   public List<Basic> findByField(QueryBuilder queryBuilder);
 

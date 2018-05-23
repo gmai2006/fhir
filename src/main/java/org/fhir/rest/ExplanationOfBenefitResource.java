@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class ExplanationOfBenefitResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ExplanationOfBenefit create(ExplanationOfBenefit obj) {
-		return this.service.create(obj);
+	public ExplanationOfBenefit createOrUpdate(ExplanationOfBenefit obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing ExplanationOfBenefit
+   * @param obj - instance of ExplanationOfBenefit
+   * @return ExplanationOfBenefit
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public ExplanationOfBenefit update( ExplanationOfBenefit obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing ExplanationOfBenefit
+   * @param obj - instance of ExplanationOfBenefit
+   * @return ExplanationOfBenefit
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get ExplanationOfBenefit by its ID
+   * @param id - instance of ExplanationOfBenefit
+   * @return ExplanationOfBenefit
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class ExplanationOfBenefitResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all ExplanationOfBenefit with limit of returned records
+   * @param max - number of records
+   * @return a list ExplanationOfBenefit
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class ExplanationOfBenefitResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query ExplanationOfBenefit based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of ExplanationOfBenefit
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class ExplanationOfBenefitResource {
   }
 
   /**
-  * Descr: The reference to the patient
-  * Type: reference
+   * Query ExplanationOfBenefit by composite fields
+   * Descr: The reference to the patient
+   * Type: reference
   */
   @GET
   @Path("patient")
@@ -167,8 +208,9 @@ public class ExplanationOfBenefitResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The party responsible for the entry of the Claim
-  * Type: reference
+   * Query ExplanationOfBenefit by composite fields
+   * Descr: The party responsible for the entry of the Claim
+   * Type: reference
   */
   @GET
   @Path("enterer")
@@ -193,8 +235,9 @@ public class ExplanationOfBenefitResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The reference to the provider
-  * Type: reference
+   * Query ExplanationOfBenefit by composite fields
+   * Descr: The reference to the provider
+   * Type: reference
   */
   @GET
   @Path("provider")
@@ -219,8 +262,9 @@ public class ExplanationOfBenefitResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The reference to the providing organization
-  * Type: reference
+   * Query ExplanationOfBenefit by composite fields
+   * Descr: The reference to the providing organization
+   * Type: reference
   */
   @GET
   @Path("organization")
@@ -245,8 +289,9 @@ public class ExplanationOfBenefitResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Facility responsible for the goods and services
-  * Type: reference
+   * Query ExplanationOfBenefit by composite fields
+   * Descr: Facility responsible for the goods and services
+   * Type: reference
   */
   @GET
   @Path("facility")
@@ -271,8 +316,9 @@ public class ExplanationOfBenefitResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The reference to the claim
-  * Type: reference
+   * Query ExplanationOfBenefit by composite fields
+   * Descr: The reference to the claim
+   * Type: reference
   */
   @GET
   @Path("claim")

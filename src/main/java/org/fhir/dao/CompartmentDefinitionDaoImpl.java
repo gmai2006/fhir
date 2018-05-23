@@ -90,9 +90,9 @@ public class CompartmentDefinitionDaoImpl implements CompartmentDefinitionDao {
   }
   @Override
   @Transactional
-  public void delete(CompartmentDefinition e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final CompartmentDefinitionModel removed = em.find(CompartmentDefinitionModel.class, e.getId());
+      final CompartmentDefinitionModel removed = em.find(CompartmentDefinitionModel.class, id);
       em.remove(removed);
   }
 

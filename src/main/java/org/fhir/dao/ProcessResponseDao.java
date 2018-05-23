@@ -38,7 +38,7 @@ public interface ProcessResponseDao {
   public ProcessResponse create(ProcessResponse e);
 
   public ProcessResponse update(ProcessResponse e);
-  public void delete(ProcessResponse e);
+  public void delete(String id);
 
   public List<ProcessResponse> findByField(QueryBuilder queryBuilder);
 

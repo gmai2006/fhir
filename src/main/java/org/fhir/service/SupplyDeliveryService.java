@@ -36,7 +36,7 @@ public interface SupplyDeliveryService {
   public List<SupplyDelivery> selectAll();
   public SupplyDelivery create(SupplyDelivery bean);
   public SupplyDelivery update(SupplyDelivery bean);
-  public void delete(SupplyDelivery bean);
+  public void delete(String id);
   public List<SupplyDelivery> findByField(QueryBuilder queryBuilder);
   public List<SupplyDelivery> findByBasedOn(QueryBuilder queryBuilder);
   public List<SupplyDelivery> findByPartOf(QueryBuilder queryBuilder);

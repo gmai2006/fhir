@@ -38,7 +38,7 @@ public interface ImagingStudyDao {
   public ImagingStudy create(ImagingStudy e);
 
   public ImagingStudy update(ImagingStudy e);
-  public void delete(ImagingStudy e);
+  public void delete(String id);
 
   public List<ImagingStudy> findByField(QueryBuilder queryBuilder);
 

@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="medicationadministrationdosage")
 public class MedicationAdministrationDosageModel  implements Serializable {
-	private static final long serialVersionUID = 151910893736438107L;
+	private static final long serialVersionUID = 151967883190612507L;
   /**
   * Description: "Free text dosage can be used for cases where the dosage administered is too complex to code. When coded dosage is present, the free text dosage may still be present for display to humans.\r\rThe dosage instructions should reflect the dosage of the medication that was administered."
   */
@@ -53,7 +53,7 @@ public class MedicationAdministrationDosageModel  implements Serializable {
   private String site_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="site_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="site_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> site;
 
   /**
@@ -64,7 +64,7 @@ public class MedicationAdministrationDosageModel  implements Serializable {
   private String route_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="route_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="route_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> route;
 
   /**
@@ -75,7 +75,7 @@ public class MedicationAdministrationDosageModel  implements Serializable {
   private String method_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="method_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="method_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> method;
 
   /**
@@ -86,7 +86,7 @@ public class MedicationAdministrationDosageModel  implements Serializable {
   private String dose_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="dose_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="dose_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> dose;
 
   /**
@@ -106,7 +106,7 @@ public class MedicationAdministrationDosageModel  implements Serializable {
   private String ratesimplequantity_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="ratesimplequantity_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="ratesimplequantity_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> rateSimpleQuantity;
 
   /**
@@ -145,39 +145,39 @@ public class MedicationAdministrationDosageModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public MedicationAdministrationDosageModel() {
   }
 
-  public MedicationAdministrationDosageModel(MedicationAdministrationDosage o, String parentId) {
-  	this.parent_id = parentId;
+  public MedicationAdministrationDosageModel(MedicationAdministrationDosage o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     this.text = o.getText();
     if (null != o.getSite() ) {
-    	this.site_id = "site" + this.parent_id;
+    	this.site_id = "site" + this.id;
     	this.site = CodeableConceptHelper.toModel(o.getSite(), this.site_id);
     }
     if (null != o.getRoute() ) {
-    	this.route_id = "route" + this.parent_id;
+    	this.route_id = "route" + this.id;
     	this.route = CodeableConceptHelper.toModel(o.getRoute(), this.route_id);
     }
     if (null != o.getMethod() ) {
-    	this.method_id = "method" + this.parent_id;
+    	this.method_id = "method" + this.id;
     	this.method = CodeableConceptHelper.toModel(o.getMethod(), this.method_id);
     }
     if (null != o.getDose() ) {
-    	this.dose_id = "dose" + this.parent_id;
+    	this.dose_id = "dose" + this.id;
     	this.dose = QuantityHelper.toModel(o.getDose(), this.dose_id);
     }
     if (null != o.getRateRatio()) {
     	this.rateRatio = JsonUtils.toJson(o.getRateRatio());
     }
     if (null != o.getRateSimpleQuantity() ) {
-    	this.ratesimplequantity_id = "ratesimplequantity" + this.parent_id;
+    	this.ratesimplequantity_id = "ratesimplequantity" + this.id;
     	this.rateSimpleQuantity = QuantityHelper.toModel(o.getRateSimpleQuantity(), this.ratesimplequantity_id);
     }
     if (null != o.getModifierExtension()) {
@@ -248,11 +248,11 @@ public class MedicationAdministrationDosageModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -264,7 +264,7 @@ public class MedicationAdministrationDosageModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -281,7 +281,7 @@ public class MedicationAdministrationDosageModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

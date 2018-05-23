@@ -131,6 +131,9 @@ public class PractitionerRole  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getActive()) {
       this.active = o.getActive();
     }
@@ -152,6 +155,9 @@ public class PractitionerRole  extends DomainResource  {
     }
     if (null != o.getHealthcareService() && !o.getHealthcareService().isEmpty()) {
     	this.healthcareService = ReferenceHelper.fromArray2Array(o.getHealthcareService());
+    }
+    if (o.getTelecom() != null) {
+    	this.telecom = org.fhir.utils.JsonUtils.json2Array(o.getTelecom());
     }
     if (null != o.getAvailableTime() && !o.getAvailableTime().isEmpty()) {
     	this.availableTime = PractitionerRoleAvailableTimeHelper.fromArray2Array(o.getAvailableTime());

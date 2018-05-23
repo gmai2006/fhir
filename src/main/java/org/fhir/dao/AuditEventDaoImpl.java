@@ -90,9 +90,9 @@ public class AuditEventDaoImpl implements AuditEventDao {
   }
   @Override
   @Transactional
-  public void delete(AuditEvent e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final AuditEventModel removed = em.find(AuditEventModel.class, e.getId());
+      final AuditEventModel removed = em.find(AuditEventModel.class, id);
       em.remove(removed);
   }
 

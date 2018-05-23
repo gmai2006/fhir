@@ -36,7 +36,7 @@ public interface ConceptMapService {
   public List<ConceptMap> selectAll();
   public ConceptMap create(ConceptMap bean);
   public ConceptMap update(ConceptMap bean);
-  public void delete(ConceptMap bean);
+  public void delete(String id);
   public List<ConceptMap> findByField(QueryBuilder queryBuilder);
   public List<ConceptMap> findByContact(QueryBuilder queryBuilder);
   public List<ConceptMap> findByUseContext(QueryBuilder queryBuilder);

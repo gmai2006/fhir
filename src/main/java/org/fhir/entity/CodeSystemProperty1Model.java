@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="codesystemproperty1")
 public class CodeSystemProperty1Model  implements Serializable {
-	private static final long serialVersionUID = 15191089373752008L;
+	private static final long serialVersionUID = 151967883191769264L;
   /**
   * Description: "A code that is a reference to CodeSystem.property.code."
   */
@@ -62,7 +62,7 @@ public class CodeSystemProperty1Model  implements Serializable {
   private String valuecoding_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuecoding_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="valuecoding_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> valueCoding;
 
   /**
@@ -131,21 +131,21 @@ public class CodeSystemProperty1Model  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public CodeSystemProperty1Model() {
   }
 
-  public CodeSystemProperty1Model(CodeSystemProperty1 o, String parentId) {
-  	this.parent_id = parentId;
+  public CodeSystemProperty1Model(CodeSystemProperty1 o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     this.code = o.getCode();
     this.valueCode = o.getValueCode();
     if (null != o.getValueCoding() ) {
-    	this.valuecoding_id = "valuecoding" + this.parent_id;
+    	this.valuecoding_id = "valuecoding" + this.id;
     	this.valueCoding = CodingHelper.toModel(o.getValueCoding(), this.valuecoding_id);
     }
     this.valueString = o.getValueString();
@@ -220,11 +220,11 @@ public class CodeSystemProperty1Model  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -240,7 +240,7 @@ public class CodeSystemProperty1Model  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -257,7 +257,7 @@ public class CodeSystemProperty1Model  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

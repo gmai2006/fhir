@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class PaymentReconciliationResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public PaymentReconciliation create(PaymentReconciliation obj) {
-		return this.service.create(obj);
+	public PaymentReconciliation createOrUpdate(PaymentReconciliation obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing PaymentReconciliation
+   * @param obj - instance of PaymentReconciliation
+   * @return PaymentReconciliation
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public PaymentReconciliation update( PaymentReconciliation obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing PaymentReconciliation
+   * @param obj - instance of PaymentReconciliation
+   * @return PaymentReconciliation
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get PaymentReconciliation by its ID
+   * @param id - instance of PaymentReconciliation
+   * @return PaymentReconciliation
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class PaymentReconciliationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all PaymentReconciliation with limit of returned records
+   * @param max - number of records
+   * @return a list PaymentReconciliation
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class PaymentReconciliationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query PaymentReconciliation based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of PaymentReconciliation
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class PaymentReconciliationResource {
   }
 
   /**
-  * Descr: The organization who generated this resource
-  * Type: reference
+   * Query PaymentReconciliation by composite fields
+   * Descr: The organization who generated this resource
+   * Type: reference
   */
   @GET
   @Path("organization")
@@ -167,8 +208,9 @@ public class PaymentReconciliationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The reference to the claim
-  * Type: reference
+   * Query PaymentReconciliation by composite fields
+   * Descr: The reference to the claim
+   * Type: reference
   */
   @GET
   @Path("request")
@@ -193,8 +235,9 @@ public class PaymentReconciliationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The processing outcome
-  * Type: token
+   * Query PaymentReconciliation by composite fields
+   * Descr: The processing outcome
+   * Type: token
   */
   @GET
   @Path("outcome")
@@ -219,8 +262,9 @@ public class PaymentReconciliationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The reference to the provider who sumbitted the claim
-  * Type: reference
+   * Query PaymentReconciliation by composite fields
+   * Descr: The reference to the provider who sumbitted the claim
+   * Type: reference
   */
   @GET
   @Path("requestprovider")
@@ -245,8 +289,9 @@ public class PaymentReconciliationResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The organization who generated this resource
-  * Type: reference
+   * Query PaymentReconciliation by composite fields
+   * Descr: The organization who generated this resource
+   * Type: reference
   */
   @GET
   @Path("requestorganization")

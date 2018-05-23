@@ -90,9 +90,9 @@ public class ReferralRequestDaoImpl implements ReferralRequestDao {
   }
   @Override
   @Transactional
-  public void delete(ReferralRequest e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ReferralRequestModel removed = em.find(ReferralRequestModel.class, e.getId());
+      final ReferralRequestModel removed = em.find(ReferralRequestModel.class, id);
       em.remove(removed);
   }
 

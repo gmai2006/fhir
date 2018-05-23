@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="endpoint")
 public class EndpointModel  implements Serializable {
-	private static final long serialVersionUID = 151910893707554558L;
+	private static final long serialVersionUID = 151967883160131057L;
   /**
   * Description: "This is a Endpoint resource"
   */
@@ -70,7 +70,7 @@ public class EndpointModel  implements Serializable {
   private String connectiontype_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="connectiontype_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="connectiontype_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> connectionType;
 
   /**
@@ -88,7 +88,7 @@ public class EndpointModel  implements Serializable {
   private String managingorganization_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="managingorganization_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="managingorganization_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> managingOrganization;
 
   /**
@@ -117,7 +117,7 @@ public class EndpointModel  implements Serializable {
   private String payloadtype_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="payloadtype_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="payloadtype_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> payloadType;
 
   /**
@@ -150,7 +150,7 @@ public class EndpointModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -204,7 +204,7 @@ public class EndpointModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

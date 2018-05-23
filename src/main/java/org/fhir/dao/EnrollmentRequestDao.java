@@ -38,7 +38,7 @@ public interface EnrollmentRequestDao {
   public EnrollmentRequest create(EnrollmentRequest e);
 
   public EnrollmentRequest update(EnrollmentRequest e);
-  public void delete(EnrollmentRequest e);
+  public void delete(String id);
 
   public List<EnrollmentRequest> findByField(QueryBuilder queryBuilder);
 

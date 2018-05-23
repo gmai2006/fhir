@@ -90,9 +90,9 @@ public class FHIRListDaoImpl implements FHIRListDao {
   }
   @Override
   @Transactional
-  public void delete(FHIRList e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final FHIRListModel removed = em.find(FHIRListModel.class, e.getId());
+      final FHIRListModel removed = em.find(FHIRListModel.class, id);
       em.remove(removed);
   }
 

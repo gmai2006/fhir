@@ -63,6 +63,9 @@ public class PractitionerQualification  extends BackboneElement  {
 
   public PractitionerQualification(PractitionerQualificationModel o) {
     this.id = o.getId();
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getCode() && !o.getCode().isEmpty()) {
       this.code = new CodeableConcept(o.getCode().get(0));
     }

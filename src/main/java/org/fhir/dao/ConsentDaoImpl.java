@@ -90,9 +90,9 @@ public class ConsentDaoImpl implements ConsentDao {
   }
   @Override
   @Transactional
-  public void delete(Consent e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ConsentModel removed = em.find(ConsentModel.class, e.getId());
+      final ConsentModel removed = em.find(ConsentModel.class, id);
       em.remove(removed);
   }
 

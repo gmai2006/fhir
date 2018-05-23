@@ -90,9 +90,9 @@ public class HealthcareServiceDaoImpl implements HealthcareServiceDao {
   }
   @Override
   @Transactional
-  public void delete(HealthcareService e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final HealthcareServiceModel removed = em.find(HealthcareServiceModel.class, e.getId());
+      final HealthcareServiceModel removed = em.find(HealthcareServiceModel.class, id);
       em.remove(removed);
   }
 

@@ -36,7 +36,7 @@ public interface ResearchStudyService {
   public List<ResearchStudy> selectAll();
   public ResearchStudy create(ResearchStudy bean);
   public ResearchStudy update(ResearchStudy bean);
-  public void delete(ResearchStudy bean);
+  public void delete(String id);
   public List<ResearchStudy> findByField(QueryBuilder queryBuilder);
   public List<ResearchStudy> findByProtocol(QueryBuilder queryBuilder);
   public List<ResearchStudy> findByPartOf(QueryBuilder queryBuilder);

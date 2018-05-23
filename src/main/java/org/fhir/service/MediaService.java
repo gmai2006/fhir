@@ -36,7 +36,7 @@ public interface MediaService {
   public List<Media> selectAll();
   public Media create(Media bean);
   public Media update(Media bean);
-  public void delete(Media bean);
+  public void delete(String id);
   public List<Media> findByField(QueryBuilder queryBuilder);
   public List<Media> findByBasedOn(QueryBuilder queryBuilder);
   public List<Media> findBySubtype(QueryBuilder queryBuilder);

@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="dosage")
 public class DosageModel  implements Serializable {
-	private static final long serialVersionUID = 151910893773848667L;
+	private static final long serialVersionUID = 151967883228836355L;
   /**
   * Description: "Indicates the order in which the dosage instructions should be applied or interpreted."
   */
@@ -61,7 +61,7 @@ public class DosageModel  implements Serializable {
   private String additionalinstruction_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="additionalinstruction_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="additionalinstruction_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> additionalInstruction;
 
   /**
@@ -95,7 +95,7 @@ public class DosageModel  implements Serializable {
   private String asneededcodeableconcept_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="asneededcodeableconcept_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="asneededcodeableconcept_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> asNeededCodeableConcept;
 
   /**
@@ -106,7 +106,7 @@ public class DosageModel  implements Serializable {
   private String site_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="site_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="site_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> site;
 
   /**
@@ -117,7 +117,7 @@ public class DosageModel  implements Serializable {
   private String route_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="route_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="route_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> route;
 
   /**
@@ -128,7 +128,7 @@ public class DosageModel  implements Serializable {
   private String method_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="method_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="method_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> method;
 
   /**
@@ -148,7 +148,7 @@ public class DosageModel  implements Serializable {
   private String dosesimplequantity_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="dosesimplequantity_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="dosesimplequantity_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> doseSimpleQuantity;
 
   /**
@@ -168,7 +168,7 @@ public class DosageModel  implements Serializable {
   private String maxdoseperadministration_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="maxdoseperadministration_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="maxdoseperadministration_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> maxDosePerAdministration;
 
   /**
@@ -179,7 +179,7 @@ public class DosageModel  implements Serializable {
   private String maxdoseperlifetime_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="maxdoseperlifetime_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="maxdoseperlifetime_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> maxDosePerLifetime;
 
   /**
@@ -208,7 +208,7 @@ public class DosageModel  implements Serializable {
   private String ratesimplequantity_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="ratesimplequantity_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="ratesimplequantity_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> rateSimpleQuantity;
 
   /**
@@ -235,21 +235,21 @@ public class DosageModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public DosageModel() {
   }
 
-  public DosageModel(Dosage o, String parentId) {
-  	this.parent_id = parentId;
+  public DosageModel(Dosage o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     this.sequence = o.getSequence();
     this.text = o.getText();
     if (null != o.getAdditionalInstruction() && !o.getAdditionalInstruction().isEmpty()) {
-    	this.additionalinstruction_id = "additionalinstruction" + this.parent_id;
+    	this.additionalinstruction_id = "additionalinstruction" + this.id;
     	this.additionalInstruction = CodeableConceptHelper.toModelFromArray(o.getAdditionalInstruction(), this.additionalinstruction_id);
     }
     this.patientInstruction = o.getPatientInstruction();
@@ -258,37 +258,37 @@ public class DosageModel  implements Serializable {
     }
     this.asNeededBoolean = o.getAsNeededBoolean();
     if (null != o.getAsNeededCodeableConcept() ) {
-    	this.asneededcodeableconcept_id = "asneededcodeableconcept" + this.parent_id;
+    	this.asneededcodeableconcept_id = "asneededcodeableconcept" + this.id;
     	this.asNeededCodeableConcept = CodeableConceptHelper.toModel(o.getAsNeededCodeableConcept(), this.asneededcodeableconcept_id);
     }
     if (null != o.getSite() ) {
-    	this.site_id = "site" + this.parent_id;
+    	this.site_id = "site" + this.id;
     	this.site = CodeableConceptHelper.toModel(o.getSite(), this.site_id);
     }
     if (null != o.getRoute() ) {
-    	this.route_id = "route" + this.parent_id;
+    	this.route_id = "route" + this.id;
     	this.route = CodeableConceptHelper.toModel(o.getRoute(), this.route_id);
     }
     if (null != o.getMethod() ) {
-    	this.method_id = "method" + this.parent_id;
+    	this.method_id = "method" + this.id;
     	this.method = CodeableConceptHelper.toModel(o.getMethod(), this.method_id);
     }
     if (null != o.getDoseRange()) {
     	this.doseRange = JsonUtils.toJson(o.getDoseRange());
     }
     if (null != o.getDoseSimpleQuantity() ) {
-    	this.dosesimplequantity_id = "dosesimplequantity" + this.parent_id;
+    	this.dosesimplequantity_id = "dosesimplequantity" + this.id;
     	this.doseSimpleQuantity = QuantityHelper.toModel(o.getDoseSimpleQuantity(), this.dosesimplequantity_id);
     }
     if (null != o.getMaxDosePerPeriod()) {
     	this.maxDosePerPeriod = JsonUtils.toJson(o.getMaxDosePerPeriod());
     }
     if (null != o.getMaxDosePerAdministration() ) {
-    	this.maxdoseperadministration_id = "maxdoseperadministration" + this.parent_id;
+    	this.maxdoseperadministration_id = "maxdoseperadministration" + this.id;
     	this.maxDosePerAdministration = QuantityHelper.toModel(o.getMaxDosePerAdministration(), this.maxdoseperadministration_id);
     }
     if (null != o.getMaxDosePerLifetime() ) {
-    	this.maxdoseperlifetime_id = "maxdoseperlifetime" + this.parent_id;
+    	this.maxdoseperlifetime_id = "maxdoseperlifetime" + this.id;
     	this.maxDosePerLifetime = QuantityHelper.toModel(o.getMaxDosePerLifetime(), this.maxdoseperlifetime_id);
     }
     if (null != o.getRateRatio()) {
@@ -298,7 +298,7 @@ public class DosageModel  implements Serializable {
     	this.rateRange = JsonUtils.toJson(o.getRateRange());
     }
     if (null != o.getRateSimpleQuantity() ) {
-    	this.ratesimplequantity_id = "ratesimplequantity" + this.parent_id;
+    	this.ratesimplequantity_id = "ratesimplequantity" + this.id;
     	this.rateSimpleQuantity = QuantityHelper.toModel(o.getRateSimpleQuantity(), this.ratesimplequantity_id);
     }
     if (null != o.getExtension()) {
@@ -426,11 +426,11 @@ public class DosageModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -448,7 +448,7 @@ public class DosageModel  implements Serializable {
      builder.append("rateRange" + "->" + this.rateRange + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -475,7 +475,7 @@ public class DosageModel  implements Serializable {
      builder.append("rateSimpleQuantity" + "->" + this.rateSimpleQuantity + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

@@ -38,7 +38,7 @@ public interface GraphDefinitionDao {
   public GraphDefinition create(GraphDefinition e);
 
   public GraphDefinition update(GraphDefinition e);
-  public void delete(GraphDefinition e);
+  public void delete(String id);
 
   public List<GraphDefinition> findByField(QueryBuilder queryBuilder);
 

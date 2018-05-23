@@ -36,7 +36,7 @@ public interface DeviceMetricService {
   public List<DeviceMetric> selectAll();
   public DeviceMetric create(DeviceMetric bean);
   public DeviceMetric update(DeviceMetric bean);
-  public void delete(DeviceMetric bean);
+  public void delete(String id);
   public List<DeviceMetric> findByField(QueryBuilder queryBuilder);
   public List<DeviceMetric> findByType(QueryBuilder queryBuilder);
   public List<DeviceMetric> findByUnit(QueryBuilder queryBuilder);

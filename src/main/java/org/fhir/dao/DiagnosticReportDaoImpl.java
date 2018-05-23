@@ -90,9 +90,9 @@ public class DiagnosticReportDaoImpl implements DiagnosticReportDao {
   }
   @Override
   @Transactional
-  public void delete(DiagnosticReport e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final DiagnosticReportModel removed = em.find(DiagnosticReportModel.class, e.getId());
+      final DiagnosticReportModel removed = em.find(DiagnosticReportModel.class, id);
       em.remove(removed);
   }
 

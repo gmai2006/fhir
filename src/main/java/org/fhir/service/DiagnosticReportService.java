@@ -36,7 +36,7 @@ public interface DiagnosticReportService {
   public List<DiagnosticReport> selectAll();
   public DiagnosticReport create(DiagnosticReport bean);
   public DiagnosticReport update(DiagnosticReport bean);
-  public void delete(DiagnosticReport bean);
+  public void delete(String id);
   public List<DiagnosticReport> findByField(QueryBuilder queryBuilder);
   public List<DiagnosticReport> findByBasedOn(QueryBuilder queryBuilder);
   public List<DiagnosticReport> findByCategory(QueryBuilder queryBuilder);

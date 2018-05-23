@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class RequestGroupResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public RequestGroup create(RequestGroup obj) {
-		return this.service.create(obj);
+	public RequestGroup createOrUpdate(RequestGroup obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing RequestGroup
+   * @param obj - instance of RequestGroup
+   * @return RequestGroup
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public RequestGroup update( RequestGroup obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing RequestGroup
+   * @param obj - instance of RequestGroup
+   * @return RequestGroup
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get RequestGroup by its ID
+   * @param id - instance of RequestGroup
+   * @return RequestGroup
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class RequestGroupResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all RequestGroup with limit of returned records
+   * @param max - number of records
+   * @return a list RequestGroup
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class RequestGroupResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query RequestGroup based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of RequestGroup
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class RequestGroupResource {
   }
 
   /**
-  * Descr: The definition from which the request group is realized
-  * Type: reference
+   * Query RequestGroup by composite fields
+   * Descr: The definition from which the request group is realized
+   * Type: reference
   */
   @GET
   @Path("definition")
@@ -167,8 +208,9 @@ public class RequestGroupResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The identity of a patient to search for request groups
-  * Type: reference
+   * Query RequestGroup by composite fields
+   * Descr: The identity of a patient to search for request groups
+   * Type: reference
   */
   @GET
   @Path("patient")
@@ -193,8 +235,9 @@ public class RequestGroupResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The encounter the request group applies to
-  * Type: reference
+   * Query RequestGroup by composite fields
+   * Descr: The encounter the request group applies to
+   * Type: reference
   */
   @GET
   @Path("encounter")
@@ -219,8 +262,9 @@ public class RequestGroupResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The author of the request group
-  * Type: reference
+   * Query RequestGroup by composite fields
+   * Descr: The author of the request group
+   * Type: reference
   */
   @GET
   @Path("author")

@@ -36,7 +36,7 @@ public interface RelatedPersonService {
   public List<RelatedPerson> selectAll();
   public RelatedPerson create(RelatedPerson bean);
   public RelatedPerson update(RelatedPerson bean);
-  public void delete(RelatedPerson bean);
+  public void delete(String id);
   public List<RelatedPerson> findByField(QueryBuilder queryBuilder);
   public List<RelatedPerson> findByPatient(QueryBuilder queryBuilder);
   public List<RelatedPerson> findByRelationship(QueryBuilder queryBuilder);

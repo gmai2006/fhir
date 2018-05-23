@@ -155,6 +155,9 @@ public class RequestGroup  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
     	this.definition = ReferenceHelper.fromArray2Array(o.getDefinition());
     }
@@ -191,6 +194,9 @@ public class RequestGroup  extends DomainResource  {
     }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
       this.reasonReference = new Reference(o.getReasonReference().get(0));
+    }
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
     }
     if (null != o.getAction() && !o.getAction().isEmpty()) {
     	this.action = RequestGroupActionHelper.fromArray2Array(o.getAction());

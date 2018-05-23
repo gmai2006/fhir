@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="nutritionordertexture")
 public class NutritionOrderTextureModel  implements Serializable {
-	private static final long serialVersionUID = 151910893701153446L;
+	private static final long serialVersionUID = 151967883152973961L;
   /**
   * Description: "Any texture modifications (for solid foods) that should be made, e.g. easy to chew, chopped, ground, and pureed."
   */
@@ -46,7 +46,7 @@ public class NutritionOrderTextureModel  implements Serializable {
   private String modifier_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="modifier_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="modifier_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> modifier;
 
   /**
@@ -57,7 +57,7 @@ public class NutritionOrderTextureModel  implements Serializable {
   private String foodtype_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="foodtype_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="foodtype_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> foodType;
 
   /**
@@ -96,23 +96,23 @@ public class NutritionOrderTextureModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public NutritionOrderTextureModel() {
   }
 
-  public NutritionOrderTextureModel(NutritionOrderTexture o, String parentId) {
-  	this.parent_id = parentId;
+  public NutritionOrderTextureModel(NutritionOrderTexture o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getModifier() ) {
-    	this.modifier_id = "modifier" + this.parent_id;
+    	this.modifier_id = "modifier" + this.id;
     	this.modifier = CodeableConceptHelper.toModel(o.getModifier(), this.modifier_id);
     }
     if (null != o.getFoodType() ) {
-    	this.foodtype_id = "foodtype" + this.parent_id;
+    	this.foodtype_id = "foodtype" + this.id;
     	this.foodType = CodeableConceptHelper.toModel(o.getFoodType(), this.foodtype_id);
     }
     if (null != o.getModifierExtension()) {
@@ -153,11 +153,11 @@ public class NutritionOrderTextureModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -167,7 +167,7 @@ public class NutritionOrderTextureModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -179,7 +179,7 @@ public class NutritionOrderTextureModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

@@ -38,7 +38,7 @@ public interface TestReportDao {
   public TestReport create(TestReport e);
 
   public TestReport update(TestReport e);
-  public void delete(TestReport e);
+  public void delete(String id);
 
   public List<TestReport> findByField(QueryBuilder queryBuilder);
 

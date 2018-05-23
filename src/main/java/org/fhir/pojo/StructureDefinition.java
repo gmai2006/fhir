@@ -297,6 +297,9 @@ public class StructureDefinition  extends DomainResource  {
     if (null != o.getUrl()) {
       this.url = o.getUrl();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getVersion()) {
       this.version = o.getVersion();
     }
@@ -341,6 +344,9 @@ public class StructureDefinition  extends DomainResource  {
     }
     if (null != o.getFhirVersion()) {
       this.fhirVersion = o.getFhirVersion();
+    }
+    if (o.getMapping() != null) {
+    	this.mapping = org.fhir.utils.JsonUtils.json2Array(o.getMapping());
     }
     if (null != o.getKind()) {
       this.kind = o.getKind();

@@ -36,7 +36,7 @@ public interface RiskAssessmentService {
   public List<RiskAssessment> selectAll();
   public RiskAssessment create(RiskAssessment bean);
   public RiskAssessment update(RiskAssessment bean);
-  public void delete(RiskAssessment bean);
+  public void delete(String id);
   public List<RiskAssessment> findByField(QueryBuilder queryBuilder);
   public List<RiskAssessment> findByBasedOn(QueryBuilder queryBuilder);
   public List<RiskAssessment> findByParent(QueryBuilder queryBuilder);

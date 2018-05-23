@@ -36,7 +36,7 @@ public interface TestScriptService {
   public List<TestScript> selectAll();
   public TestScript create(TestScript bean);
   public TestScript update(TestScript bean);
-  public void delete(TestScript bean);
+  public void delete(String id);
   public List<TestScript> findByField(QueryBuilder queryBuilder);
   public List<TestScript> findByContact(QueryBuilder queryBuilder);
   public List<TestScript> findByUseContext(QueryBuilder queryBuilder);

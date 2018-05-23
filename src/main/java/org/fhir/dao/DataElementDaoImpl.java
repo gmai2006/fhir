@@ -90,9 +90,9 @@ public class DataElementDaoImpl implements DataElementDao {
   }
   @Override
   @Transactional
-  public void delete(DataElement e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final DataElementModel removed = em.find(DataElementModel.class, e.getId());
+      final DataElementModel removed = em.find(DataElementModel.class, id);
       em.remove(removed);
   }
 

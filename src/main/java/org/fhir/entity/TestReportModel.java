@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="testreport")
 public class TestReportModel  implements Serializable {
-	private static final long serialVersionUID = 151910893764695621L;
+	private static final long serialVersionUID = 151967883218943986L;
   /**
   * Description: "This is a TestReport resource"
   */
@@ -77,7 +77,7 @@ public class TestReportModel  implements Serializable {
   private String testscript_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="testscript_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="testscript_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> testScript;
 
   /**
@@ -118,7 +118,7 @@ public class TestReportModel  implements Serializable {
   private String participant_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="participant_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="participant_id", insertable=false, updatable=false)
   private java.util.List<TestReportParticipantModel> participant;
 
   /**
@@ -129,7 +129,7 @@ public class TestReportModel  implements Serializable {
   private String setup_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="setup_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="setup_id", insertable=false, updatable=false)
   private java.util.List<TestReportSetupModel> setup;
 
   /**
@@ -140,7 +140,7 @@ public class TestReportModel  implements Serializable {
   private String test_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="test_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="test_id", insertable=false, updatable=false)
   private java.util.List<TestReportTestModel> test;
 
   /**
@@ -151,7 +151,7 @@ public class TestReportModel  implements Serializable {
   private String teardown_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="teardown_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="teardown_id", insertable=false, updatable=false)
   private java.util.List<TestReportTeardownModel> teardown;
 
   /**
@@ -163,7 +163,7 @@ public class TestReportModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -217,7 +217,7 @@ public class TestReportModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

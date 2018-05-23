@@ -36,7 +36,7 @@ public interface MessageDefinitionService {
   public List<MessageDefinition> selectAll();
   public MessageDefinition create(MessageDefinition bean);
   public MessageDefinition update(MessageDefinition bean);
-  public void delete(MessageDefinition bean);
+  public void delete(String id);
   public List<MessageDefinition> findByField(QueryBuilder queryBuilder);
   public List<MessageDefinition> findByContact(QueryBuilder queryBuilder);
   public List<MessageDefinition> findByUseContext(QueryBuilder queryBuilder);

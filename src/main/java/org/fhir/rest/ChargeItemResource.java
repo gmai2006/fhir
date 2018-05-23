@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class ChargeItemResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ChargeItem create(ChargeItem obj) {
-		return this.service.create(obj);
+	public ChargeItem createOrUpdate(ChargeItem obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing ChargeItem
+   * @param obj - instance of ChargeItem
+   * @return ChargeItem
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public ChargeItem update( ChargeItem obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing ChargeItem
+   * @param obj - instance of ChargeItem
+   * @return ChargeItem
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get ChargeItem by its ID
+   * @param id - instance of ChargeItem
+   * @return ChargeItem
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class ChargeItemResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all ChargeItem with limit of returned records
+   * @param max - number of records
+   * @return a list ChargeItem
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class ChargeItemResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query ChargeItem based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of ChargeItem
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class ChargeItemResource {
   }
 
   /**
-  * Descr: A code that identifies the charge, like a billing code
-  * Type: token
+   * Query ChargeItem by composite fields
+   * Descr: A code that identifies the charge, like a billing code
+   * Type: token
   */
   @GET
   @Path("code")
@@ -167,8 +208,9 @@ public class ChargeItemResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Individual service was done for/to
-  * Type: reference
+   * Query ChargeItem by composite fields
+   * Descr: Individual service was done for/to
+   * Type: reference
   */
   @GET
   @Path("patient")
@@ -193,8 +235,9 @@ public class ChargeItemResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Encounter / Episode associated with event
-  * Type: reference
+   * Query ChargeItem by composite fields
+   * Descr: Encounter / Episode associated with event
+   * Type: reference
   */
   @GET
   @Path("context")
@@ -219,8 +262,9 @@ public class ChargeItemResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Organization providing the charged sevice
-  * Type: reference
+   * Query ChargeItem by composite fields
+   * Descr: Organization providing the charged sevice
+   * Type: reference
   */
   @GET
   @Path("performingorganization")
@@ -245,8 +289,9 @@ public class ChargeItemResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Organization requesting the charged service
-  * Type: reference
+   * Query ChargeItem by composite fields
+   * Descr: Organization requesting the charged service
+   * Type: reference
   */
   @GET
   @Path("requestingorganization")
@@ -271,8 +316,9 @@ public class ChargeItemResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Quantity of which the charge item has been serviced
-  * Type: quantity
+   * Query ChargeItem by composite fields
+   * Descr: Quantity of which the charge item has been serviced
+   * Type: quantity
   */
   @GET
   @Path("quantity")
@@ -297,8 +343,9 @@ public class ChargeItemResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Price overriding the associated rules
-  * Type: quantity
+   * Query ChargeItem by composite fields
+   * Descr: Price overriding the associated rules
+   * Type: quantity
   */
   @GET
   @Path("priceoverride")
@@ -323,8 +370,9 @@ public class ChargeItemResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Individual who was entering
-  * Type: reference
+   * Query ChargeItem by composite fields
+   * Descr: Individual who was entering
+   * Type: reference
   */
   @GET
   @Path("enterer")
@@ -349,8 +397,9 @@ public class ChargeItemResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Which rendered service is being charged?
-  * Type: reference
+   * Query ChargeItem by composite fields
+   * Descr: Which rendered service is being charged?
+   * Type: reference
   */
   @GET
   @Path("service")

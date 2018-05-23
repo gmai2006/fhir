@@ -38,7 +38,7 @@ public interface PaymentNoticeDao {
   public PaymentNotice create(PaymentNotice e);
 
   public PaymentNotice update(PaymentNotice e);
-  public void delete(PaymentNotice e);
+  public void delete(String id);
 
   public List<PaymentNotice> findByField(QueryBuilder queryBuilder);
 

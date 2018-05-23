@@ -38,7 +38,7 @@ public interface SupplyRequestDao {
   public SupplyRequest create(SupplyRequest e);
 
   public SupplyRequest update(SupplyRequest e);
-  public void delete(SupplyRequest e);
+  public void delete(String id);
 
   public List<SupplyRequest> findByField(QueryBuilder queryBuilder);
 

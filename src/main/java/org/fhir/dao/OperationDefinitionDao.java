@@ -38,7 +38,7 @@ public interface OperationDefinitionDao {
   public OperationDefinition create(OperationDefinition e);
 
   public OperationDefinition update(OperationDefinition e);
-  public void delete(OperationDefinition e);
+  public void delete(String id);
 
   public List<OperationDefinition> findByField(QueryBuilder queryBuilder);
 

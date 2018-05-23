@@ -38,7 +38,7 @@ public interface EncounterDao {
   public Encounter create(Encounter e);
 
   public Encounter update(Encounter e);
-  public void delete(Encounter e);
+  public void delete(String id);
 
   public List<Encounter> findByField(QueryBuilder queryBuilder);
 

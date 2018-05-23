@@ -36,7 +36,7 @@ public interface PractitionerService {
   public List<Practitioner> selectAll();
   public Practitioner create(Practitioner bean);
   public Practitioner update(Practitioner bean);
-  public void delete(Practitioner bean);
+  public void delete(String id);
   public List<Practitioner> findByField(QueryBuilder queryBuilder);
   public List<Practitioner> findByAddress(QueryBuilder queryBuilder);
   public List<Practitioner> findByQualification(QueryBuilder queryBuilder);

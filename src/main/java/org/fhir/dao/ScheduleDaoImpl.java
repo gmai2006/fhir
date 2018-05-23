@@ -90,9 +90,9 @@ public class ScheduleDaoImpl implements ScheduleDao {
   }
   @Override
   @Transactional
-  public void delete(Schedule e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ScheduleModel removed = em.find(ScheduleModel.class, e.getId());
+      final ScheduleModel removed = em.find(ScheduleModel.class, id);
       em.remove(removed);
   }
 

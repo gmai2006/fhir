@@ -90,9 +90,9 @@ public class ProvenanceDaoImpl implements ProvenanceDao {
   }
   @Override
   @Transactional
-  public void delete(Provenance e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ProvenanceModel removed = em.find(ProvenanceModel.class, e.getId());
+      final ProvenanceModel removed = em.find(ProvenanceModel.class, id);
       em.remove(removed);
   }
 

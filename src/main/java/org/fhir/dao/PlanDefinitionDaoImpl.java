@@ -90,9 +90,9 @@ public class PlanDefinitionDaoImpl implements PlanDefinitionDao {
   }
   @Override
   @Transactional
-  public void delete(PlanDefinition e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final PlanDefinitionModel removed = em.find(PlanDefinitionModel.class, e.getId());
+      final PlanDefinitionModel removed = em.find(PlanDefinitionModel.class, id);
       em.remove(removed);
   }
 

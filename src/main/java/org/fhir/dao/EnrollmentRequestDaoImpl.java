@@ -90,9 +90,9 @@ public class EnrollmentRequestDaoImpl implements EnrollmentRequestDao {
   }
   @Override
   @Transactional
-  public void delete(EnrollmentRequest e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final EnrollmentRequestModel removed = em.find(EnrollmentRequestModel.class, e.getId());
+      final EnrollmentRequestModel removed = em.find(EnrollmentRequestModel.class, id);
       em.remove(removed);
   }
 

@@ -38,7 +38,7 @@ public interface BodySiteDao {
   public BodySite create(BodySite e);
 
   public BodySite update(BodySite e);
-  public void delete(BodySite e);
+  public void delete(String id);
 
   public List<BodySite> findByField(QueryBuilder queryBuilder);
 

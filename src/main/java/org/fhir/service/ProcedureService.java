@@ -36,7 +36,7 @@ public interface ProcedureService {
   public List<Procedure> selectAll();
   public Procedure create(Procedure bean);
   public Procedure update(Procedure bean);
-  public void delete(Procedure bean);
+  public void delete(String id);
   public List<Procedure> findByField(QueryBuilder queryBuilder);
   public List<Procedure> findByDefinition(QueryBuilder queryBuilder);
   public List<Procedure> findByBasedOn(QueryBuilder queryBuilder);

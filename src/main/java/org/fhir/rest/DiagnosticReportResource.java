@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class DiagnosticReportResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public DiagnosticReport create(DiagnosticReport obj) {
-		return this.service.create(obj);
+	public DiagnosticReport createOrUpdate(DiagnosticReport obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing DiagnosticReport
+   * @param obj - instance of DiagnosticReport
+   * @return DiagnosticReport
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public DiagnosticReport update( DiagnosticReport obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing DiagnosticReport
+   * @param obj - instance of DiagnosticReport
+   * @return DiagnosticReport
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get DiagnosticReport by its ID
+   * @param id - instance of DiagnosticReport
+   * @return DiagnosticReport
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class DiagnosticReportResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all DiagnosticReport with limit of returned records
+   * @param max - number of records
+   * @return a list DiagnosticReport
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class DiagnosticReportResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query DiagnosticReport based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of DiagnosticReport
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class DiagnosticReportResource {
   }
 
   /**
-  * Descr: Which diagnostic discipline/department created the report
-  * Type: token
+   * Query DiagnosticReport by composite fields
+   * Descr: Which diagnostic discipline/department created the report
+   * Type: token
   */
   @GET
   @Path("category")
@@ -167,8 +208,9 @@ public class DiagnosticReportResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The subject of the report
-  * Type: reference
+   * Query DiagnosticReport by composite fields
+   * Descr: The subject of the report
+   * Type: reference
   */
   @GET
   @Path("subject")
@@ -193,8 +235,9 @@ public class DiagnosticReportResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Healthcare event (Episode of Care or Encounter) related to the report
-  * Type: reference
+   * Query DiagnosticReport by composite fields
+   * Descr: Healthcare event (Episode of Care or Encounter) related to the report
+   * Type: reference
   */
   @GET
   @Path("context")
@@ -219,8 +262,9 @@ public class DiagnosticReportResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The specimen details
-  * Type: reference
+   * Query DiagnosticReport by composite fields
+   * Descr: The specimen details
+   * Type: reference
   */
   @GET
   @Path("specimen")
@@ -245,8 +289,9 @@ public class DiagnosticReportResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Link to an atomic result (observation resource)
-  * Type: reference
+   * Query DiagnosticReport by composite fields
+   * Descr: Link to an atomic result (observation resource)
+   * Type: reference
   */
   @GET
   @Path("result")
@@ -271,8 +316,9 @@ public class DiagnosticReportResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: A coded diagnosis on the report
-  * Type: token
+   * Query DiagnosticReport by composite fields
+   * Descr: A coded diagnosis on the report
+   * Type: token
   */
   @GET
   @Path("diagnosis")

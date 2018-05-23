@@ -90,9 +90,9 @@ public class PatientDaoImpl implements PatientDao {
   }
   @Override
   @Transactional
-  public void delete(Patient e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final PatientModel removed = em.find(PatientModel.class, e.getId());
+      final PatientModel removed = em.find(PatientModel.class, id);
       em.remove(removed);
   }
 

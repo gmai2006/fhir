@@ -36,7 +36,7 @@ public interface SearchParameterService {
   public List<SearchParameter> selectAll();
   public SearchParameter create(SearchParameter bean);
   public SearchParameter update(SearchParameter bean);
-  public void delete(SearchParameter bean);
+  public void delete(String id);
   public List<SearchParameter> findByField(QueryBuilder queryBuilder);
   public List<SearchParameter> findByContact(QueryBuilder queryBuilder);
   public List<SearchParameter> findByUseContext(QueryBuilder queryBuilder);

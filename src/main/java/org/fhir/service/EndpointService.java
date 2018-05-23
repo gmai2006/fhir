@@ -36,7 +36,7 @@ public interface EndpointService {
   public List<Endpoint> selectAll();
   public Endpoint create(Endpoint bean);
   public Endpoint update(Endpoint bean);
-  public void delete(Endpoint bean);
+  public void delete(String id);
   public List<Endpoint> findByField(QueryBuilder queryBuilder);
   public List<Endpoint> findByConnectionType(QueryBuilder queryBuilder);
   public List<Endpoint> findByManagingOrganization(QueryBuilder queryBuilder);

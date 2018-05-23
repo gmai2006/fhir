@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="slot")
 public class SlotModel  implements Serializable {
-	private static final long serialVersionUID = 151910893743031038L;
+	private static final long serialVersionUID = 151967883197598759L;
   /**
   * Description: "This is a Slot resource"
   */
@@ -63,7 +63,7 @@ public class SlotModel  implements Serializable {
   private String servicecategory_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="servicecategory_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="servicecategory_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> serviceCategory;
 
   /**
@@ -74,7 +74,7 @@ public class SlotModel  implements Serializable {
   private String servicetype_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="servicetype_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="servicetype_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> serviceType;
 
   /**
@@ -85,7 +85,7 @@ public class SlotModel  implements Serializable {
   private String specialty_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="specialty_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="specialty_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> specialty;
 
   /**
@@ -96,7 +96,7 @@ public class SlotModel  implements Serializable {
   private String appointmenttype_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="appointmenttype_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="appointmenttype_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> appointmentType;
 
   /**
@@ -107,7 +107,7 @@ public class SlotModel  implements Serializable {
   private String schedule_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="schedule_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="schedule_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> schedule;
 
   /**
@@ -154,7 +154,7 @@ public class SlotModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -208,7 +208,7 @@ public class SlotModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

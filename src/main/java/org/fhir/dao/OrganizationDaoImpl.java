@@ -90,9 +90,9 @@ public class OrganizationDaoImpl implements OrganizationDao {
   }
   @Override
   @Transactional
-  public void delete(Organization e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final OrganizationModel removed = em.find(OrganizationModel.class, e.getId());
+      final OrganizationModel removed = em.find(OrganizationModel.class, id);
       em.remove(removed);
   }
 

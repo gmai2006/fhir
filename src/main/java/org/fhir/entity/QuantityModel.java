@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="quantity")
 public class QuantityModel  implements Serializable {
-	private static final long serialVersionUID = 151910893726364678L;
+	private static final long serialVersionUID = 151967883179282880L;
   /**
   * Description: "The value of the measured amount. The value includes an implicit precision in the presentation of the value."
   */
@@ -99,14 +99,14 @@ public class QuantityModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public QuantityModel() {
   }
 
-  public QuantityModel(Quantity o, String parentId) {
-  	this.parent_id = parentId;
+  public QuantityModel(Quantity o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -162,11 +162,11 @@ public class QuantityModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -180,7 +180,7 @@ public class QuantityModel  implements Serializable {
      builder.append("code" + "->" + this.code + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -194,7 +194,7 @@ public class QuantityModel  implements Serializable {
      builder.append("code" + "->" + this.code + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

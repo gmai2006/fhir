@@ -36,7 +36,7 @@ public interface BasicService {
   public List<Basic> selectAll();
   public Basic create(Basic bean);
   public Basic update(Basic bean);
-  public void delete(Basic bean);
+  public void delete(String id);
   public List<Basic> findByField(QueryBuilder queryBuilder);
   public List<Basic> findByCode(QueryBuilder queryBuilder);
   public List<Basic> findBySubject(QueryBuilder queryBuilder);

@@ -36,7 +36,7 @@ public interface EligibilityRequestService {
   public List<EligibilityRequest> selectAll();
   public EligibilityRequest create(EligibilityRequest bean);
   public EligibilityRequest update(EligibilityRequest bean);
-  public void delete(EligibilityRequest bean);
+  public void delete(String id);
   public List<EligibilityRequest> findByField(QueryBuilder queryBuilder);
   public List<EligibilityRequest> findByPriority(QueryBuilder queryBuilder);
   public List<EligibilityRequest> findByPatient(QueryBuilder queryBuilder);

@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="patientcontact")
 public class PatientContactModel  implements Serializable {
-	private static final long serialVersionUID = 151910893748878384L;
+	private static final long serialVersionUID = 151967883204053615L;
   /**
   * Description: "The nature of the relationship between the patient and the contact person."
   */
@@ -46,7 +46,7 @@ public class PatientContactModel  implements Serializable {
   private String relationship_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="relationship_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="relationship_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> relationship;
 
   /**
@@ -75,7 +75,7 @@ public class PatientContactModel  implements Serializable {
   private String address_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="address_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="address_id", insertable=false, updatable=false)
   private java.util.List<AddressModel> address;
 
   /**
@@ -93,7 +93,7 @@ public class PatientContactModel  implements Serializable {
   private String organization_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="organization_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="organization_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> organization;
 
   /**
@@ -141,19 +141,19 @@ public class PatientContactModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public PatientContactModel() {
   }
 
-  public PatientContactModel(PatientContact o, String parentId) {
-  	this.parent_id = parentId;
+  public PatientContactModel(PatientContact o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getRelationship() && !o.getRelationship().isEmpty()) {
-    	this.relationship_id = "relationship" + this.parent_id;
+    	this.relationship_id = "relationship" + this.id;
     	this.relationship = CodeableConceptHelper.toModelFromArray(o.getRelationship(), this.relationship_id);
     }
     if (null != o.getName()) {
@@ -163,12 +163,12 @@ public class PatientContactModel  implements Serializable {
     	this.telecom = JsonUtils.toJson(o.getTelecom());
     }
     if (null != o.getAddress() ) {
-    	this.address_id = "address" + this.parent_id;
+    	this.address_id = "address" + this.id;
     	this.address = AddressHelper.toModel(o.getAddress(), this.address_id);
     }
     this.gender = o.getGender();
     if (null != o.getOrganization() ) {
-    	this.organization_id = "organization" + this.parent_id;
+    	this.organization_id = "organization" + this.id;
     	this.organization = ReferenceHelper.toModel(o.getOrganization(), this.organization_id);
     }
     if (null != o.getPeriod()) {
@@ -242,11 +242,11 @@ public class PatientContactModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -260,7 +260,7 @@ public class PatientContactModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -277,7 +277,7 @@ public class PatientContactModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

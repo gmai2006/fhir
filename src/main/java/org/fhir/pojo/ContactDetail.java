@@ -60,6 +60,9 @@ public class ContactDetail  extends Element  {
     if (null != o.getName()) {
       this.name = o.getName();
     }
+    if (o.getTelecom() != null) {
+    	this.telecom = org.fhir.utils.JsonUtils.json2Array(o.getTelecom());
+    }
   }
 
   public void setName( String value) {

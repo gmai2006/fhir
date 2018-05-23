@@ -36,7 +36,7 @@ public interface PatientService {
   public List<Patient> selectAll();
   public Patient create(Patient bean);
   public Patient update(Patient bean);
-  public void delete(Patient bean);
+  public void delete(String id);
   public List<Patient> findByField(QueryBuilder queryBuilder);
   public List<Patient> findByAddress(QueryBuilder queryBuilder);
   public List<Patient> findByMaritalStatus(QueryBuilder queryBuilder);

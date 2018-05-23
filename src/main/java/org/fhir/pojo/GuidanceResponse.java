@@ -172,6 +172,9 @@ public class GuidanceResponse  extends DomainResource  {
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
       this.reasonReference = new Reference(o.getReasonReference().get(0));
     }
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
+    }
     if (null != o.getEvaluationMessage() && !o.getEvaluationMessage().isEmpty()) {
     	this.evaluationMessage = ReferenceHelper.fromArray2Array(o.getEvaluationMessage());
     }

@@ -90,9 +90,9 @@ public class SearchParameterDaoImpl implements SearchParameterDao {
   }
   @Override
   @Transactional
-  public void delete(SearchParameter e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final SearchParameterModel removed = em.find(SearchParameterModel.class, e.getId());
+      final SearchParameterModel removed = em.find(SearchParameterModel.class, id);
       em.remove(removed);
   }
 

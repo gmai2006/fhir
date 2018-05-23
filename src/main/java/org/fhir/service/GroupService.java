@@ -36,7 +36,7 @@ public interface GroupService {
   public List<Group> selectAll();
   public Group create(Group bean);
   public Group update(Group bean);
-  public void delete(Group bean);
+  public void delete(String id);
   public List<Group> findByField(QueryBuilder queryBuilder);
   public List<Group> findByCode(QueryBuilder queryBuilder);
   public List<Group> findByCharacteristic(QueryBuilder queryBuilder);

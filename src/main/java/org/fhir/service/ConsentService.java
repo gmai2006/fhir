@@ -36,7 +36,7 @@ public interface ConsentService {
   public List<Consent> selectAll();
   public Consent create(Consent bean);
   public Consent update(Consent bean);
-  public void delete(Consent bean);
+  public void delete(String id);
   public List<Consent> findByField(QueryBuilder queryBuilder);
   public List<Consent> findByCategory(QueryBuilder queryBuilder);
   public List<Consent> findByPatient(QueryBuilder queryBuilder);

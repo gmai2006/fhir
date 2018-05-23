@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class PaymentNoticeResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public PaymentNotice create(PaymentNotice obj) {
-		return this.service.create(obj);
+	public PaymentNotice createOrUpdate(PaymentNotice obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing PaymentNotice
+   * @param obj - instance of PaymentNotice
+   * @return PaymentNotice
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public PaymentNotice update( PaymentNotice obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing PaymentNotice
+   * @param obj - instance of PaymentNotice
+   * @return PaymentNotice
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get PaymentNotice by its ID
+   * @param id - instance of PaymentNotice
+   * @return PaymentNotice
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class PaymentNoticeResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all PaymentNotice with limit of returned records
+   * @param max - number of records
+   * @return a list PaymentNotice
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class PaymentNoticeResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query PaymentNotice based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of PaymentNotice
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class PaymentNoticeResource {
   }
 
   /**
-  * Descr: The Claim
-  * Type: reference
+   * Query PaymentNotice by composite fields
+   * Descr: The Claim
+   * Type: reference
   */
   @GET
   @Path("request")
@@ -167,8 +208,9 @@ public class PaymentNoticeResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The ClaimResponse
-  * Type: reference
+   * Query PaymentNotice by composite fields
+   * Descr: The ClaimResponse
+   * Type: reference
   */
   @GET
   @Path("response")
@@ -193,8 +235,9 @@ public class PaymentNoticeResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The reference to the provider
-  * Type: reference
+   * Query PaymentNotice by composite fields
+   * Descr: The reference to the provider
+   * Type: reference
   */
   @GET
   @Path("provider")
@@ -219,8 +262,9 @@ public class PaymentNoticeResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The organization who generated this resource
-  * Type: reference
+   * Query PaymentNotice by composite fields
+   * Descr: The organization who generated this resource
+   * Type: reference
   */
   @GET
   @Path("organization")
@@ -245,8 +289,9 @@ public class PaymentNoticeResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The type of payment notice
-  * Type: token
+   * Query PaymentNotice by composite fields
+   * Descr: The type of payment notice
+   * Type: token
   */
   @GET
   @Path("paymentstatus")

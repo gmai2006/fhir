@@ -90,9 +90,9 @@ public class ImmunizationDaoImpl implements ImmunizationDao {
   }
   @Override
   @Transactional
-  public void delete(Immunization e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ImmunizationModel removed = em.find(ImmunizationModel.class, e.getId());
+      final ImmunizationModel removed = em.find(ImmunizationModel.class, id);
       em.remove(removed);
   }
 

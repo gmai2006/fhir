@@ -90,9 +90,9 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
   }
   @Override
   @Transactional
-  public void delete(Subscription e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final SubscriptionModel removed = em.find(SubscriptionModel.class, e.getId());
+      final SubscriptionModel removed = em.find(SubscriptionModel.class, id);
       em.remove(removed);
   }
 

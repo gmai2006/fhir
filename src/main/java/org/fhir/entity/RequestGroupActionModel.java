@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="requestgroupaction")
 public class RequestGroupActionModel  implements Serializable {
-	private static final long serialVersionUID = 15191089372958538L;
+	private static final long serialVersionUID = 151967883183145129L;
   /**
   * Description: "A user-visible label for the action."
   */
@@ -74,7 +74,7 @@ public class RequestGroupActionModel  implements Serializable {
   private String code_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> code;
 
   /**
@@ -85,7 +85,7 @@ public class RequestGroupActionModel  implements Serializable {
   private String documentation_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="documentation_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="documentation_id", insertable=false, updatable=false)
   private java.util.List<RelatedArtifactModel> documentation;
 
   /**
@@ -96,7 +96,7 @@ public class RequestGroupActionModel  implements Serializable {
   private String condition_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="condition_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="condition_id", insertable=false, updatable=false)
   private java.util.List<RequestGroupConditionModel> condition;
 
   /**
@@ -107,7 +107,7 @@ public class RequestGroupActionModel  implements Serializable {
   private String relatedaction_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="relatedaction_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="relatedaction_id", insertable=false, updatable=false)
   private java.util.List<RequestGroupRelatedActionModel> relatedAction;
 
   /**
@@ -162,7 +162,7 @@ public class RequestGroupActionModel  implements Serializable {
   private String participant_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="participant_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="participant_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> participant;
 
   /**
@@ -173,7 +173,7 @@ public class RequestGroupActionModel  implements Serializable {
   private String type_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> type;
 
   /**
@@ -224,7 +224,7 @@ public class RequestGroupActionModel  implements Serializable {
   private String resource_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="resource_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="resource_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> resource;
 
   /**
@@ -235,7 +235,7 @@ public class RequestGroupActionModel  implements Serializable {
   private String action_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="action_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="action_id", insertable=false, updatable=false)
   private java.util.List<RequestGroupActionModel> action;
 
   /**
@@ -274,14 +274,14 @@ public class RequestGroupActionModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public RequestGroupActionModel() {
   }
 
-  public RequestGroupActionModel(RequestGroupAction o, String parentId) {
-  	this.parent_id = parentId;
+  public RequestGroupActionModel(RequestGroupAction o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -290,19 +290,19 @@ public class RequestGroupActionModel  implements Serializable {
     this.description = o.getDescription();
     this.textEquivalent = o.getTextEquivalent();
     if (null != o.getCode() && !o.getCode().isEmpty()) {
-    	this.code_id = "code" + this.parent_id;
+    	this.code_id = "code" + this.id;
     	this.code = CodeableConceptHelper.toModelFromArray(o.getCode(), this.code_id);
     }
     if (null != o.getDocumentation() && !o.getDocumentation().isEmpty()) {
-    	this.documentation_id = "documentation" + this.parent_id;
+    	this.documentation_id = "documentation" + this.id;
     	this.documentation = RelatedArtifactHelper.toModelFromArray(o.getDocumentation(), this.documentation_id);
     }
     if (null != o.getCondition() && !o.getCondition().isEmpty()) {
-    	this.condition_id = "condition" + this.parent_id;
+    	this.condition_id = "condition" + this.id;
     	this.condition = RequestGroupConditionHelper.toModelFromArray(o.getCondition(), this.condition_id);
     }
     if (null != o.getRelatedAction() && !o.getRelatedAction().isEmpty()) {
-    	this.relatedaction_id = "relatedaction" + this.parent_id;
+    	this.relatedaction_id = "relatedaction" + this.id;
     	this.relatedAction = RequestGroupRelatedActionHelper.toModelFromArray(o.getRelatedAction(), this.relatedaction_id);
     }
     this.timingDateTime = o.getTimingDateTime();
@@ -319,11 +319,11 @@ public class RequestGroupActionModel  implements Serializable {
     	this.timingTiming = JsonUtils.toJson(o.getTimingTiming());
     }
     if (null != o.getParticipant() && !o.getParticipant().isEmpty()) {
-    	this.participant_id = "participant" + this.parent_id;
+    	this.participant_id = "participant" + this.id;
     	this.participant = ReferenceHelper.toModelFromArray(o.getParticipant(), this.participant_id);
     }
     if (null != o.getType() ) {
-    	this.type_id = "type" + this.parent_id;
+    	this.type_id = "type" + this.id;
     	this.type = CodingHelper.toModel(o.getType(), this.type_id);
     }
     this.groupingBehavior = o.getGroupingBehavior();
@@ -332,11 +332,11 @@ public class RequestGroupActionModel  implements Serializable {
     this.precheckBehavior = o.getPrecheckBehavior();
     this.cardinalityBehavior = o.getCardinalityBehavior();
     if (null != o.getResource() ) {
-    	this.resource_id = "resource" + this.parent_id;
+    	this.resource_id = "resource" + this.id;
     	this.resource = ReferenceHelper.toModel(o.getResource(), this.resource_id);
     }
     if (null != o.getAction() && !o.getAction().isEmpty()) {
-    	this.action_id = "action" + this.parent_id;
+    	this.action_id = "action" + this.id;
     	this.action = RequestGroupActionHelper.toModelFromArray(o.getAction(), this.action_id);
     }
     if (null != o.getModifierExtension()) {
@@ -497,11 +497,11 @@ public class RequestGroupActionModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -525,7 +525,7 @@ public class RequestGroupActionModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -557,7 +557,7 @@ public class RequestGroupActionModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

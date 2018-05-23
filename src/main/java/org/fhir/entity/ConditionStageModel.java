@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="conditionstage")
 public class ConditionStageModel  implements Serializable {
-	private static final long serialVersionUID = 15191089375784615L;
+	private static final long serialVersionUID = 151967883212263198L;
   /**
   * Description: "A simple summary of the stage such as \"Stage 3\". The determination of the stage is disease-specific."
   */
@@ -46,7 +46,7 @@ public class ConditionStageModel  implements Serializable {
   private String summary_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="summary_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="summary_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> summary;
 
   /**
@@ -57,7 +57,7 @@ public class ConditionStageModel  implements Serializable {
   private String assessment_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="assessment_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="assessment_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> assessment;
 
   /**
@@ -96,23 +96,23 @@ public class ConditionStageModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ConditionStageModel() {
   }
 
-  public ConditionStageModel(ConditionStage o, String parentId) {
-  	this.parent_id = parentId;
+  public ConditionStageModel(ConditionStage o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getSummary() ) {
-    	this.summary_id = "summary" + this.parent_id;
+    	this.summary_id = "summary" + this.id;
     	this.summary = CodeableConceptHelper.toModel(o.getSummary(), this.summary_id);
     }
     if (null != o.getAssessment() && !o.getAssessment().isEmpty()) {
-    	this.assessment_id = "assessment" + this.parent_id;
+    	this.assessment_id = "assessment" + this.id;
     	this.assessment = ReferenceHelper.toModelFromArray(o.getAssessment(), this.assessment_id);
     }
     if (null != o.getModifierExtension()) {
@@ -153,11 +153,11 @@ public class ConditionStageModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -167,7 +167,7 @@ public class ConditionStageModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -179,7 +179,7 @@ public class ConditionStageModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

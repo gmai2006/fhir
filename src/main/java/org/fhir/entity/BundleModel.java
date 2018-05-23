@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="bundle")
 public class BundleModel  implements Serializable {
-	private static final long serialVersionUID = 15191089376518660L;
+	private static final long serialVersionUID = 151967883219333819L;
   /**
   * Description: "This is a Bundle resource"
   */
@@ -78,7 +78,7 @@ public class BundleModel  implements Serializable {
   private String link_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="link_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="link_id", insertable=false, updatable=false)
   private java.util.List<BundleLinkModel> link;
 
   /**
@@ -89,7 +89,7 @@ public class BundleModel  implements Serializable {
   private String entry_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="entry_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="entry_id", insertable=false, updatable=false)
   private java.util.List<BundleEntryModel> entry;
 
   /**
@@ -120,7 +120,7 @@ public class BundleModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

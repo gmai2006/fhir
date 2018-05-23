@@ -38,7 +38,7 @@ public interface CompositionDao {
   public Composition create(Composition e);
 
   public Composition update(Composition e);
-  public void delete(Composition e);
+  public void delete(String id);
 
   public List<Composition> findByField(QueryBuilder queryBuilder);
 

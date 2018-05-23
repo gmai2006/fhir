@@ -36,7 +36,7 @@ public interface EncounterService {
   public List<Encounter> selectAll();
   public Encounter create(Encounter bean);
   public Encounter update(Encounter bean);
-  public void delete(Encounter bean);
+  public void delete(String id);
   public List<Encounter> findByField(QueryBuilder queryBuilder);
   public List<Encounter> findByStatusHistory(QueryBuilder queryBuilder);
   public List<Encounter> findByFHIRclass(QueryBuilder queryBuilder);

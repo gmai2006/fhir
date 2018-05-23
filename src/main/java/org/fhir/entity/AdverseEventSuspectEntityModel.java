@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="adverseeventsuspectentity")
 public class AdverseEventSuspectEntityModel  implements Serializable {
-	private static final long serialVersionUID = 151910893738239223L;
+	private static final long serialVersionUID = 151967883192432647L;
   /**
   * Description: "Identifies the actual instance of what caused the adverse event.  May be a substance, medication, medication administration, medication statement or a device."
   */
@@ -46,7 +46,7 @@ public class AdverseEventSuspectEntityModel  implements Serializable {
   private String instance_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="instance_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="instance_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> instance;
 
   /**
@@ -64,7 +64,7 @@ public class AdverseEventSuspectEntityModel  implements Serializable {
   private String causalityassessment_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="causalityassessment_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="causalityassessment_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> causalityAssessment;
 
   /**
@@ -82,7 +82,7 @@ public class AdverseEventSuspectEntityModel  implements Serializable {
   private String causalitymethod_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="causalitymethod_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="causalitymethod_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> causalityMethod;
 
   /**
@@ -93,7 +93,7 @@ public class AdverseEventSuspectEntityModel  implements Serializable {
   private String causalityauthor_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="causalityauthor_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="causalityauthor_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> causalityAuthor;
 
   /**
@@ -104,7 +104,7 @@ public class AdverseEventSuspectEntityModel  implements Serializable {
   private String causalityresult_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="causalityresult_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="causalityresult_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> causalityResult;
 
   /**
@@ -143,37 +143,37 @@ public class AdverseEventSuspectEntityModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public AdverseEventSuspectEntityModel() {
   }
 
-  public AdverseEventSuspectEntityModel(AdverseEventSuspectEntity o, String parentId) {
-  	this.parent_id = parentId;
+  public AdverseEventSuspectEntityModel(AdverseEventSuspectEntity o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getInstance() ) {
-    	this.instance_id = "instance" + this.parent_id;
+    	this.instance_id = "instance" + this.id;
     	this.instance = ReferenceHelper.toModel(o.getInstance(), this.instance_id);
     }
     this.causality = o.getCausality();
     if (null != o.getCausalityAssessment() ) {
-    	this.causalityassessment_id = "causalityassessment" + this.parent_id;
+    	this.causalityassessment_id = "causalityassessment" + this.id;
     	this.causalityAssessment = CodeableConceptHelper.toModel(o.getCausalityAssessment(), this.causalityassessment_id);
     }
     this.causalityProductRelatedness = o.getCausalityProductRelatedness();
     if (null != o.getCausalityMethod() ) {
-    	this.causalitymethod_id = "causalitymethod" + this.parent_id;
+    	this.causalitymethod_id = "causalitymethod" + this.id;
     	this.causalityMethod = CodeableConceptHelper.toModel(o.getCausalityMethod(), this.causalitymethod_id);
     }
     if (null != o.getCausalityAuthor() ) {
-    	this.causalityauthor_id = "causalityauthor" + this.parent_id;
+    	this.causalityauthor_id = "causalityauthor" + this.id;
     	this.causalityAuthor = ReferenceHelper.toModel(o.getCausalityAuthor(), this.causalityauthor_id);
     }
     if (null != o.getCausalityResult() ) {
-    	this.causalityresult_id = "causalityresult" + this.parent_id;
+    	this.causalityresult_id = "causalityresult" + this.id;
     	this.causalityResult = CodeableConceptHelper.toModel(o.getCausalityResult(), this.causalityresult_id);
     }
     if (null != o.getModifierExtension()) {
@@ -244,11 +244,11 @@ public class AdverseEventSuspectEntityModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -260,7 +260,7 @@ public class AdverseEventSuspectEntityModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -277,7 +277,7 @@ public class AdverseEventSuspectEntityModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

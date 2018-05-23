@@ -38,7 +38,7 @@ public interface CareTeamDao {
   public CareTeam create(CareTeam e);
 
   public CareTeam update(CareTeam e);
-  public void delete(CareTeam e);
+  public void delete(String id);
 
   public List<CareTeam> findByField(QueryBuilder queryBuilder);
 

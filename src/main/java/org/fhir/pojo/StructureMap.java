@@ -206,6 +206,9 @@ public class StructureMap  extends DomainResource  {
     if (null != o.getUrl()) {
       this.url = o.getUrl();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getVersion()) {
       this.version = o.getVersion();
     }

@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="eligibilityresponseinsurance")
 public class EligibilityResponseInsuranceModel  implements Serializable {
-	private static final long serialVersionUID = 151910893703223092L;
+	private static final long serialVersionUID = 151967883155138875L;
   /**
   * Description: "A suite of updated or additional Coverages from the Insurer."
   */
@@ -46,7 +46,7 @@ public class EligibilityResponseInsuranceModel  implements Serializable {
   private String coverage_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="coverage_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="coverage_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> coverage;
 
   /**
@@ -57,7 +57,7 @@ public class EligibilityResponseInsuranceModel  implements Serializable {
   private String contract_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="contract_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="contract_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> contract;
 
   /**
@@ -68,7 +68,7 @@ public class EligibilityResponseInsuranceModel  implements Serializable {
   private String benefitbalance_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="benefitbalance_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="benefitbalance_id", insertable=false, updatable=false)
   private java.util.List<EligibilityResponseBenefitBalanceModel> benefitBalance;
 
   /**
@@ -107,27 +107,27 @@ public class EligibilityResponseInsuranceModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public EligibilityResponseInsuranceModel() {
   }
 
-  public EligibilityResponseInsuranceModel(EligibilityResponseInsurance o, String parentId) {
-  	this.parent_id = parentId;
+  public EligibilityResponseInsuranceModel(EligibilityResponseInsurance o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getCoverage() ) {
-    	this.coverage_id = "coverage" + this.parent_id;
+    	this.coverage_id = "coverage" + this.id;
     	this.coverage = ReferenceHelper.toModel(o.getCoverage(), this.coverage_id);
     }
     if (null != o.getContract() ) {
-    	this.contract_id = "contract" + this.parent_id;
+    	this.contract_id = "contract" + this.id;
     	this.contract = ReferenceHelper.toModel(o.getContract(), this.contract_id);
     }
     if (null != o.getBenefitBalance() && !o.getBenefitBalance().isEmpty()) {
-    	this.benefitbalance_id = "benefitbalance" + this.parent_id;
+    	this.benefitbalance_id = "benefitbalance" + this.id;
     	this.benefitBalance = EligibilityResponseBenefitBalanceHelper.toModelFromArray(o.getBenefitBalance(), this.benefitbalance_id);
     }
     if (null != o.getModifierExtension()) {
@@ -174,11 +174,11 @@ public class EligibilityResponseInsuranceModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -188,7 +188,7 @@ public class EligibilityResponseInsuranceModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -201,7 +201,7 @@ public class EligibilityResponseInsuranceModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

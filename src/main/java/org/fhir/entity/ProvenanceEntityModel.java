@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="provenanceentity")
 public class ProvenanceEntityModel  implements Serializable {
-	private static final long serialVersionUID = 15191089376339662L;
+	private static final long serialVersionUID = 151967883217527777L;
   /**
   * Description: "How the entity was used during the activity."
   */
@@ -60,7 +60,7 @@ public class ProvenanceEntityModel  implements Serializable {
   private String whatreference_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="whatreference_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="whatreference_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> whatReference;
 
   /**
@@ -80,7 +80,7 @@ public class ProvenanceEntityModel  implements Serializable {
   private String agent_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="agent_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="agent_id", insertable=false, updatable=false)
   private java.util.List<ProvenanceAgentModel> agent;
 
   /**
@@ -119,28 +119,28 @@ public class ProvenanceEntityModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ProvenanceEntityModel() {
   }
 
-  public ProvenanceEntityModel(ProvenanceEntity o, String parentId) {
-  	this.parent_id = parentId;
+  public ProvenanceEntityModel(ProvenanceEntity o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     this.role = o.getRole();
     this.whatUri = o.getWhatUri();
     if (null != o.getWhatReference() ) {
-    	this.whatreference_id = "whatreference" + this.parent_id;
+    	this.whatreference_id = "whatreference" + this.id;
     	this.whatReference = ReferenceHelper.toModel(o.getWhatReference(), this.whatreference_id);
     }
     if (null != o.getWhatIdentifier()) {
     	this.whatIdentifier = JsonUtils.toJson(o.getWhatIdentifier());
     }
     if (null != o.getAgent() && !o.getAgent().isEmpty()) {
-    	this.agent_id = "agent" + this.parent_id;
+    	this.agent_id = "agent" + this.id;
     	this.agent = ProvenanceAgentHelper.toModelFromArray(o.getAgent(), this.agent_id);
     }
     if (null != o.getModifierExtension()) {
@@ -199,11 +199,11 @@ public class ProvenanceEntityModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -216,7 +216,7 @@ public class ProvenanceEntityModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -231,7 +231,7 @@ public class ProvenanceEntityModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

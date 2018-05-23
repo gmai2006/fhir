@@ -36,7 +36,7 @@ public interface ProcedureRequestService {
   public List<ProcedureRequest> selectAll();
   public ProcedureRequest create(ProcedureRequest bean);
   public ProcedureRequest update(ProcedureRequest bean);
-  public void delete(ProcedureRequest bean);
+  public void delete(String id);
   public List<ProcedureRequest> findByField(QueryBuilder queryBuilder);
   public List<ProcedureRequest> findByDefinition(QueryBuilder queryBuilder);
   public List<ProcedureRequest> findByBasedOn(QueryBuilder queryBuilder);

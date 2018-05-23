@@ -90,9 +90,9 @@ public class MeasureReportDaoImpl implements MeasureReportDao {
   }
   @Override
   @Transactional
-  public void delete(MeasureReport e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final MeasureReportModel removed = em.find(MeasureReportModel.class, e.getId());
+      final MeasureReportModel removed = em.find(MeasureReportModel.class, id);
       em.remove(removed);
   }
 

@@ -36,7 +36,7 @@ public interface VisionPrescriptionService {
   public List<VisionPrescription> selectAll();
   public VisionPrescription create(VisionPrescription bean);
   public VisionPrescription update(VisionPrescription bean);
-  public void delete(VisionPrescription bean);
+  public void delete(String id);
   public List<VisionPrescription> findByField(QueryBuilder queryBuilder);
   public List<VisionPrescription> findByPatient(QueryBuilder queryBuilder);
   public List<VisionPrescription> findByEncounter(QueryBuilder queryBuilder);

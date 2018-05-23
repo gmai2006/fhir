@@ -38,7 +38,7 @@ public interface CommunicationDao {
   public Communication create(Communication e);
 
   public Communication update(Communication e);
-  public void delete(Communication e);
+  public void delete(String id);
 
   public List<Communication> findByField(QueryBuilder queryBuilder);
 

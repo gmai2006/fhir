@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="valuesetdesignation")
 public class ValueSetDesignationModel  implements Serializable {
-	private static final long serialVersionUID = 151910893754436437L;
+	private static final long serialVersionUID = 151967883208919345L;
   /**
   * Description: "The language this designation is defined for."
   */
@@ -54,7 +54,7 @@ public class ValueSetDesignationModel  implements Serializable {
   private String use_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="use_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="use_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> use;
 
   /**
@@ -100,20 +100,20 @@ public class ValueSetDesignationModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ValueSetDesignationModel() {
   }
 
-  public ValueSetDesignationModel(ValueSetDesignation o, String parentId) {
-  	this.parent_id = parentId;
+  public ValueSetDesignationModel(ValueSetDesignation o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     this.language = o.getLanguage();
     if (null != o.getUse() ) {
-    	this.use_id = "use" + this.parent_id;
+    	this.use_id = "use" + this.id;
     	this.use = CodingHelper.toModel(o.getUse(), this.use_id);
     }
     this.value = o.getValue();
@@ -161,11 +161,11 @@ public class ValueSetDesignationModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -177,7 +177,7 @@ public class ValueSetDesignationModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -190,7 +190,7 @@ public class ValueSetDesignationModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

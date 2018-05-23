@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class MediaResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Media create(Media obj) {
-		return this.service.create(obj);
+	public Media createOrUpdate(Media obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing Media
+   * @param obj - instance of Media
+   * @return Media
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public Media update( Media obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing Media
+   * @param obj - instance of Media
+   * @return Media
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get Media by its ID
+   * @param id - instance of Media
+   * @return Media
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class MediaResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all Media with limit of returned records
+   * @param max - number of records
+   * @return a list Media
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class MediaResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query Media based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of Media
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class MediaResource {
   }
 
   /**
-  * Descr: The type of acquisition equipment/process
-  * Type: token
+   * Query Media by composite fields
+   * Descr: The type of acquisition equipment/process
+   * Type: token
   */
   @GET
   @Path("subtype")
@@ -167,8 +208,9 @@ public class MediaResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Imaging view, e.g. Lateral or Antero-posterior
-  * Type: token
+   * Query Media by composite fields
+   * Descr: Imaging view, e.g. Lateral or Antero-posterior
+   * Type: token
   */
   @GET
   @Path("view")
@@ -193,8 +235,9 @@ public class MediaResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Who/What this Media is a record of
-  * Type: reference
+   * Query Media by composite fields
+   * Descr: Who/What this Media is a record of
+   * Type: reference
   */
   @GET
   @Path("subject")
@@ -219,8 +262,9 @@ public class MediaResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Encounter / Episode associated with media
-  * Type: reference
+   * Query Media by composite fields
+   * Descr: Encounter / Episode associated with media
+   * Type: reference
   */
   @GET
   @Path("context")
@@ -245,8 +289,9 @@ public class MediaResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The person who generated the image
-  * Type: reference
+   * Query Media by composite fields
+   * Descr: The person who generated the image
+   * Type: reference
   */
   @GET
   @Path("operator")
@@ -271,8 +316,9 @@ public class MediaResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Body part in media
-  * Type: token
+   * Query Media by composite fields
+   * Descr: Body part in media
+   * Type: token
   */
   @GET
   @Path("site")
@@ -297,8 +343,9 @@ public class MediaResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Observing Device
-  * Type: reference
+   * Query Media by composite fields
+   * Descr: Observing Device
+   * Type: reference
   */
   @GET
   @Path("device")

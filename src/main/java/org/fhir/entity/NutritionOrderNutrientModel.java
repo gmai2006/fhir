@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="nutritionordernutrient")
 public class NutritionOrderNutrientModel  implements Serializable {
-	private static final long serialVersionUID = 151910893744333122L;
+	private static final long serialVersionUID = 151967883198914439L;
   /**
   * Description: "The nutrient that is being modified such as carbohydrate or sodium."
   */
@@ -46,7 +46,7 @@ public class NutritionOrderNutrientModel  implements Serializable {
   private String modifier_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="modifier_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="modifier_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> modifier;
 
   /**
@@ -57,7 +57,7 @@ public class NutritionOrderNutrientModel  implements Serializable {
   private String amount_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="amount_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="amount_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> amount;
 
   /**
@@ -96,23 +96,23 @@ public class NutritionOrderNutrientModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public NutritionOrderNutrientModel() {
   }
 
-  public NutritionOrderNutrientModel(NutritionOrderNutrient o, String parentId) {
-  	this.parent_id = parentId;
+  public NutritionOrderNutrientModel(NutritionOrderNutrient o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getModifier() ) {
-    	this.modifier_id = "modifier" + this.parent_id;
+    	this.modifier_id = "modifier" + this.id;
     	this.modifier = CodeableConceptHelper.toModel(o.getModifier(), this.modifier_id);
     }
     if (null != o.getAmount() ) {
-    	this.amount_id = "amount" + this.parent_id;
+    	this.amount_id = "amount" + this.id;
     	this.amount = QuantityHelper.toModel(o.getAmount(), this.amount_id);
     }
     if (null != o.getModifierExtension()) {
@@ -153,11 +153,11 @@ public class NutritionOrderNutrientModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -167,7 +167,7 @@ public class NutritionOrderNutrientModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -179,7 +179,7 @@ public class NutritionOrderNutrientModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

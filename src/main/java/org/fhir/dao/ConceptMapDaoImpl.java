@@ -90,9 +90,9 @@ public class ConceptMapDaoImpl implements ConceptMapDao {
   }
   @Override
   @Transactional
-  public void delete(ConceptMap e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ConceptMapModel removed = em.find(ConceptMapModel.class, e.getId());
+      final ConceptMapModel removed = em.find(ConceptMapModel.class, id);
       em.remove(removed);
   }
 

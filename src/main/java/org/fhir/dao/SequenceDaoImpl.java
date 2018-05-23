@@ -90,9 +90,9 @@ public class SequenceDaoImpl implements SequenceDao {
   }
   @Override
   @Transactional
-  public void delete(Sequence e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final SequenceModel removed = em.find(SequenceModel.class, e.getId());
+      final SequenceModel removed = em.find(SequenceModel.class, id);
       em.remove(removed);
   }
 

@@ -38,7 +38,7 @@ public interface CompartmentDefinitionDao {
   public CompartmentDefinition create(CompartmentDefinition e);
 
   public CompartmentDefinition update(CompartmentDefinition e);
-  public void delete(CompartmentDefinition e);
+  public void delete(String id);
 
   public List<CompartmentDefinition> findByField(QueryBuilder queryBuilder);
 

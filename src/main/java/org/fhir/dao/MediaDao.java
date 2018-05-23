@@ -38,7 +38,7 @@ public interface MediaDao {
   public Media create(Media e);
 
   public Media update(Media e);
-  public void delete(Media e);
+  public void delete(String id);
 
   public List<Media> findByField(QueryBuilder queryBuilder);
 

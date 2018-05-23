@@ -36,7 +36,7 @@ public interface FlagService {
   public List<Flag> selectAll();
   public Flag create(Flag bean);
   public Flag update(Flag bean);
-  public void delete(Flag bean);
+  public void delete(String id);
   public List<Flag> findByField(QueryBuilder queryBuilder);
   public List<Flag> findByCategory(QueryBuilder queryBuilder);
   public List<Flag> findByCode(QueryBuilder queryBuilder);

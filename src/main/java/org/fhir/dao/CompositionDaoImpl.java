@@ -90,9 +90,9 @@ public class CompositionDaoImpl implements CompositionDao {
   }
   @Override
   @Transactional
-  public void delete(Composition e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final CompositionModel removed = em.find(CompositionModel.class, e.getId());
+      final CompositionModel removed = em.find(CompositionModel.class, id);
       em.remove(removed);
   }
 

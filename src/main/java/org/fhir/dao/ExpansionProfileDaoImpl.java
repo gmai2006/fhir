@@ -90,9 +90,9 @@ public class ExpansionProfileDaoImpl implements ExpansionProfileDao {
   }
   @Override
   @Transactional
-  public void delete(ExpansionProfile e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ExpansionProfileModel removed = em.find(ExpansionProfileModel.class, e.getId());
+      final ExpansionProfileModel removed = em.find(ExpansionProfileModel.class, id);
       em.remove(removed);
   }
 

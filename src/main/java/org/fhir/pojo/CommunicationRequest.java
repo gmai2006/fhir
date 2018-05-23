@@ -180,6 +180,9 @@ public class CommunicationRequest  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getBasedOn() && !o.getBasedOn().isEmpty()) {
     	this.basedOn = ReferenceHelper.fromArray2Array(o.getBasedOn());
     }
@@ -232,6 +235,9 @@ public class CommunicationRequest  extends DomainResource  {
     }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
     	this.reasonReference = ReferenceHelper.fromArray2Array(o.getReasonReference());
+    }
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
     }
   }
 

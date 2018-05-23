@@ -38,7 +38,7 @@ public interface EnrollmentResponseDao {
   public EnrollmentResponse create(EnrollmentResponse e);
 
   public EnrollmentResponse update(EnrollmentResponse e);
-  public void delete(EnrollmentResponse e);
+  public void delete(String id);
 
   public List<EnrollmentResponse> findByField(QueryBuilder queryBuilder);
 

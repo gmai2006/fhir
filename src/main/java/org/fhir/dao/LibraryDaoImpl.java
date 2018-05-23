@@ -90,9 +90,9 @@ public class LibraryDaoImpl implements LibraryDao {
   }
   @Override
   @Transactional
-  public void delete(Library e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final LibraryModel removed = em.find(LibraryModel.class, e.getId());
+      final LibraryModel removed = em.find(LibraryModel.class, id);
       em.remove(removed);
   }
 

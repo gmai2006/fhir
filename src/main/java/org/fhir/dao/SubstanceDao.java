@@ -38,7 +38,7 @@ public interface SubstanceDao {
   public Substance create(Substance e);
 
   public Substance update(Substance e);
-  public void delete(Substance e);
+  public void delete(String id);
 
   public List<Substance> findByField(QueryBuilder queryBuilder);
 

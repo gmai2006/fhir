@@ -62,15 +62,6 @@ public class TestAllRestResources  {
 	}
 
 	@Test
-	public void testRetrieveFHIRList() {
-		Response response = get("/FHIRList");
-		if (200 == response.getStatusCode()) {
-	  	List<FHIRList> result = Arrays.asList(response.getBody().as(FHIRList[].class));
-	  	assertEquals("Expect ", "FHIRList", result.get(0).getResourceType()); 
-		} else System.out.println("No data found [ testRetrieveFHIRList ]");
-	}
-
-	@Test
 	public void testRetrieveNutritionOrder() {
 		Response response = get("/NutritionOrder");
 		if (200 == response.getStatusCode()) {

@@ -90,9 +90,9 @@ public class DocumentReferenceDaoImpl implements DocumentReferenceDao {
   }
   @Override
   @Transactional
-  public void delete(DocumentReference e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final DocumentReferenceModel removed = em.find(DocumentReferenceModel.class, e.getId());
+      final DocumentReferenceModel removed = em.find(DocumentReferenceModel.class, id);
       em.remove(removed);
   }
 

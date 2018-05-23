@@ -36,7 +36,7 @@ public interface CompartmentDefinitionService {
   public List<CompartmentDefinition> selectAll();
   public CompartmentDefinition create(CompartmentDefinition bean);
   public CompartmentDefinition update(CompartmentDefinition bean);
-  public void delete(CompartmentDefinition bean);
+  public void delete(String id);
   public List<CompartmentDefinition> findByField(QueryBuilder queryBuilder);
   public List<CompartmentDefinition> findByContact(QueryBuilder queryBuilder);
   public List<CompartmentDefinition> findByUseContext(QueryBuilder queryBuilder);

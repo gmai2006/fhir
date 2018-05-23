@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="capabilitystatementevent")
 public class CapabilityStatementEventModel  implements Serializable {
-	private static final long serialVersionUID = 151910893771833003L;
+	private static final long serialVersionUID = 151967883225930663L;
   /**
   * Description: "A coded identifier of a supported messaging event."
   */
@@ -46,7 +46,7 @@ public class CapabilityStatementEventModel  implements Serializable {
   private String code_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> code;
 
   /**
@@ -79,7 +79,7 @@ public class CapabilityStatementEventModel  implements Serializable {
   private String request_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="request_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="request_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> request;
 
   /**
@@ -90,7 +90,7 @@ public class CapabilityStatementEventModel  implements Serializable {
   private String response_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="response_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="response_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> response;
 
   /**
@@ -136,30 +136,30 @@ public class CapabilityStatementEventModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public CapabilityStatementEventModel() {
   }
 
-  public CapabilityStatementEventModel(CapabilityStatementEvent o, String parentId) {
-  	this.parent_id = parentId;
+  public CapabilityStatementEventModel(CapabilityStatementEvent o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getCode() ) {
-    	this.code_id = "code" + this.parent_id;
+    	this.code_id = "code" + this.id;
     	this.code = CodingHelper.toModel(o.getCode(), this.code_id);
     }
     this.category = o.getCategory();
     this.mode = o.getMode();
     this.focus = o.getFocus();
     if (null != o.getRequest() ) {
-    	this.request_id = "request" + this.parent_id;
+    	this.request_id = "request" + this.id;
     	this.request = ReferenceHelper.toModel(o.getRequest(), this.request_id);
     }
     if (null != o.getResponse() ) {
-    	this.response_id = "response" + this.parent_id;
+    	this.response_id = "response" + this.id;
     	this.response = ReferenceHelper.toModel(o.getResponse(), this.response_id);
     }
     this.documentation = o.getDocumentation();
@@ -231,11 +231,11 @@ public class CapabilityStatementEventModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -249,7 +249,7 @@ public class CapabilityStatementEventModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -266,7 +266,7 @@ public class CapabilityStatementEventModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

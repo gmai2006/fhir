@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="fhirbinary")
 public class BinaryModel  implements Serializable {
-	private static final long serialVersionUID = 151910893711547890L;
+	private static final long serialVersionUID = 151967883164339354L;
   /**
   * Description: "This is a Binary resource"
   */
@@ -62,7 +62,7 @@ public class BinaryModel  implements Serializable {
   private String securitycontext_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="securitycontext_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="securitycontext_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> securityContext;
 
   /**
@@ -91,7 +91,7 @@ public class BinaryModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

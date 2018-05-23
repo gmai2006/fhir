@@ -36,7 +36,7 @@ public interface ConditionService {
   public List<Condition> selectAll();
   public Condition create(Condition bean);
   public Condition update(Condition bean);
-  public void delete(Condition bean);
+  public void delete(String id);
   public List<Condition> findByField(QueryBuilder queryBuilder);
   public List<Condition> findByCategory(QueryBuilder queryBuilder);
   public List<Condition> findBySeverity(QueryBuilder queryBuilder);

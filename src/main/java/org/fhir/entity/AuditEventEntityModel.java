@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="auditevententity")
 public class AuditEventEntityModel  implements Serializable {
-	private static final long serialVersionUID = 151910893698515809L;
+	private static final long serialVersionUID = 151967883149936137L;
   /**
   * Description: "Identifies a specific instance of the entity. The reference should always be version specific."
   * Actual type: String;
@@ -55,7 +55,7 @@ public class AuditEventEntityModel  implements Serializable {
   private String reference_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reference_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="reference_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> reference;
 
   /**
@@ -66,7 +66,7 @@ public class AuditEventEntityModel  implements Serializable {
   private String type_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> type;
 
   /**
@@ -77,7 +77,7 @@ public class AuditEventEntityModel  implements Serializable {
   private String role_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="role_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="role_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> role;
 
   /**
@@ -88,7 +88,7 @@ public class AuditEventEntityModel  implements Serializable {
   private String lifecycle_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="lifecycle_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="lifecycle_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> lifecycle;
 
   /**
@@ -99,7 +99,7 @@ public class AuditEventEntityModel  implements Serializable {
   private String securitylabel_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="securitylabel_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="securitylabel_id", insertable=false, updatable=false)
   private java.util.List<CodingModel> securityLabel;
 
   /**
@@ -131,7 +131,7 @@ public class AuditEventEntityModel  implements Serializable {
   private String detail_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="detail_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="detail_id", insertable=false, updatable=false)
   private java.util.List<AuditEventDetailModel> detail;
 
   /**
@@ -170,14 +170,14 @@ public class AuditEventEntityModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public AuditEventEntityModel() {
   }
 
-  public AuditEventEntityModel(AuditEventEntity o, String parentId) {
-  	this.parent_id = parentId;
+  public AuditEventEntityModel(AuditEventEntity o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -185,30 +185,30 @@ public class AuditEventEntityModel  implements Serializable {
     	this.identifier = JsonUtils.toJson(o.getIdentifier());
     }
     if (null != o.getReference() ) {
-    	this.reference_id = "reference" + this.parent_id;
+    	this.reference_id = "reference" + this.id;
     	this.reference = ReferenceHelper.toModel(o.getReference(), this.reference_id);
     }
     if (null != o.getType() ) {
-    	this.type_id = "type" + this.parent_id;
+    	this.type_id = "type" + this.id;
     	this.type = CodingHelper.toModel(o.getType(), this.type_id);
     }
     if (null != o.getRole() ) {
-    	this.role_id = "role" + this.parent_id;
+    	this.role_id = "role" + this.id;
     	this.role = CodingHelper.toModel(o.getRole(), this.role_id);
     }
     if (null != o.getLifecycle() ) {
-    	this.lifecycle_id = "lifecycle" + this.parent_id;
+    	this.lifecycle_id = "lifecycle" + this.id;
     	this.lifecycle = CodingHelper.toModel(o.getLifecycle(), this.lifecycle_id);
     }
     if (null != o.getSecurityLabel() && !o.getSecurityLabel().isEmpty()) {
-    	this.securitylabel_id = "securitylabel" + this.parent_id;
+    	this.securitylabel_id = "securitylabel" + this.id;
     	this.securityLabel = CodingHelper.toModelFromArray(o.getSecurityLabel(), this.securitylabel_id);
     }
     this.name = o.getName();
     this.description = o.getDescription();
     this.query = o.getQuery();
     if (null != o.getDetail() && !o.getDetail().isEmpty()) {
-    	this.detail_id = "detail" + this.parent_id;
+    	this.detail_id = "detail" + this.id;
     	this.detail = AuditEventDetailHelper.toModelFromArray(o.getDetail(), this.detail_id);
     }
     if (null != o.getModifierExtension()) {
@@ -297,11 +297,11 @@ public class AuditEventEntityModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -315,7 +315,7 @@ public class AuditEventEntityModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -335,7 +335,7 @@ public class AuditEventEntityModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

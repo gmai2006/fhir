@@ -135,6 +135,9 @@ public class DeviceUseStatement  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
@@ -161,6 +164,9 @@ public class DeviceUseStatement  extends DomainResource  {
     }
     if (null != o.getBodySite() && !o.getBodySite().isEmpty()) {
       this.bodySite = new CodeableConcept(o.getBodySite().get(0));
+    }
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
     }
   }
 

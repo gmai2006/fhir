@@ -280,11 +280,32 @@ public class TestScript  extends DomainResource  {
     if (null != o.getCopyright()) {
       this.copyright = o.getCopyright();
     }
+    if (o.getOrigin() != null) {
+    	this.origin = org.fhir.utils.JsonUtils.json2Array(o.getOrigin());
+    }
+    if (o.getDestination() != null) {
+    	this.destination = org.fhir.utils.JsonUtils.json2Array(o.getDestination());
+    }
     this.metadata = TestScriptMetadataHelper.fromJson(o.getMetadata());
+    if (o.getFixture() != null) {
+    	this.fixture = org.fhir.utils.JsonUtils.json2Array(o.getFixture());
+    }
     if (null != o.getProfile() && !o.getProfile().isEmpty()) {
     	this.profile = ReferenceHelper.fromArray2Array(o.getProfile());
     }
+    if (o.getVariable() != null) {
+    	this.variable = org.fhir.utils.JsonUtils.json2Array(o.getVariable());
+    }
+    if (o.getRule() != null) {
+    	this.rule = org.fhir.utils.JsonUtils.json2Array(o.getRule());
+    }
+    if (o.getRuleset() != null) {
+    	this.ruleset = org.fhir.utils.JsonUtils.json2Array(o.getRuleset());
+    }
     this.setup = TestScriptSetupHelper.fromJson(o.getSetup());
+    if (o.getTest() != null) {
+    	this.test = org.fhir.utils.JsonUtils.json2Array(o.getTest());
+    }
     this.teardown = TestScriptTeardownHelper.fromJson(o.getTeardown());
   }
 

@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class ScheduleResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Schedule create(Schedule obj) {
-		return this.service.create(obj);
+	public Schedule createOrUpdate(Schedule obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing Schedule
+   * @param obj - instance of Schedule
+   * @return Schedule
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public Schedule update( Schedule obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing Schedule
+   * @param obj - instance of Schedule
+   * @return Schedule
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get Schedule by its ID
+   * @param id - instance of Schedule
+   * @return Schedule
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class ScheduleResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all Schedule with limit of returned records
+   * @param max - number of records
+   * @return a list Schedule
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class ScheduleResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query Schedule based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of Schedule
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class ScheduleResource {
   }
 
   /**
-  * Descr: The type of appointments that can be booked into associated slot(s)
-  * Type: token
+   * Query Schedule by composite fields
+   * Descr: The type of appointments that can be booked into associated slot(s)
+   * Type: token
   */
   @GET
   @Path("type")
@@ -167,8 +208,9 @@ public class ScheduleResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The individual(HealthcareService, Practitioner, Location, ...) to find a Schedule for
-  * Type: reference
+   * Query Schedule by composite fields
+   * Descr: The individual(HealthcareService, Practitioner, Location, ...) to find a Schedule for
+   * Type: reference
   */
   @GET
   @Path("actor")

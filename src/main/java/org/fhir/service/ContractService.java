@@ -36,7 +36,7 @@ public interface ContractService {
   public List<Contract> selectAll();
   public Contract create(Contract bean);
   public Contract update(Contract bean);
-  public void delete(Contract bean);
+  public void delete(String id);
   public List<Contract> findByField(QueryBuilder queryBuilder);
   public List<Contract> findBySubject(QueryBuilder queryBuilder);
   public List<Contract> findByTopic(QueryBuilder queryBuilder);

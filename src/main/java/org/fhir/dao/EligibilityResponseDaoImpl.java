@@ -90,9 +90,9 @@ public class EligibilityResponseDaoImpl implements EligibilityResponseDao {
   }
   @Override
   @Transactional
-  public void delete(EligibilityResponse e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final EligibilityResponseModel removed = em.find(EligibilityResponseModel.class, e.getId());
+      final EligibilityResponseModel removed = em.find(EligibilityResponseModel.class, id);
       em.remove(removed);
   }
 

@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="healthcareservice")
 public class HealthcareServiceModel  implements Serializable {
-	private static final long serialVersionUID = 151910893700658383L;
+	private static final long serialVersionUID = 151967883152266517L;
   /**
   * Description: "This is a HealthcareService resource"
   */
@@ -70,7 +70,7 @@ public class HealthcareServiceModel  implements Serializable {
   private String providedby_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="providedby_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="providedby_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> providedBy;
 
   /**
@@ -81,7 +81,7 @@ public class HealthcareServiceModel  implements Serializable {
   private String category_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> category;
 
   /**
@@ -92,7 +92,7 @@ public class HealthcareServiceModel  implements Serializable {
   private String type_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> type;
 
   /**
@@ -103,7 +103,7 @@ public class HealthcareServiceModel  implements Serializable {
   private String specialty_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="specialty_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="specialty_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> specialty;
 
   /**
@@ -114,7 +114,7 @@ public class HealthcareServiceModel  implements Serializable {
   private String location_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="location_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="location_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> location;
 
   /**
@@ -164,7 +164,7 @@ public class HealthcareServiceModel  implements Serializable {
   private String coveragearea_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="coveragearea_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="coveragearea_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> coverageArea;
 
   /**
@@ -175,7 +175,7 @@ public class HealthcareServiceModel  implements Serializable {
   private String serviceprovisioncode_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="serviceprovisioncode_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="serviceprovisioncode_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> serviceProvisionCode;
 
   /**
@@ -186,7 +186,7 @@ public class HealthcareServiceModel  implements Serializable {
   private String eligibility_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="eligibility_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="eligibility_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> eligibility;
 
   /**
@@ -211,7 +211,7 @@ public class HealthcareServiceModel  implements Serializable {
   private String characteristic_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="characteristic_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="characteristic_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> characteristic;
 
   /**
@@ -222,7 +222,7 @@ public class HealthcareServiceModel  implements Serializable {
   private String referralmethod_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="referralmethod_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="referralmethod_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> referralMethod;
 
   /**
@@ -240,7 +240,7 @@ public class HealthcareServiceModel  implements Serializable {
   private String availabletime_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="availabletime_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="availabletime_id", insertable=false, updatable=false)
   private java.util.List<HealthcareServiceAvailableTimeModel> availableTime;
 
   /**
@@ -251,7 +251,7 @@ public class HealthcareServiceModel  implements Serializable {
   private String notavailable_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="notavailable_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="notavailable_id", insertable=false, updatable=false)
   private java.util.List<HealthcareServiceNotAvailableModel> notAvailable;
 
   /**
@@ -269,7 +269,7 @@ public class HealthcareServiceModel  implements Serializable {
   private String endpoint_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="endpoint_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="endpoint_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> endpoint;
 
   /**
@@ -281,7 +281,7 @@ public class HealthcareServiceModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -335,7 +335,7 @@ public class HealthcareServiceModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

@@ -36,7 +36,7 @@ public interface MedicationStatementService {
   public List<MedicationStatement> selectAll();
   public MedicationStatement create(MedicationStatement bean);
   public MedicationStatement update(MedicationStatement bean);
-  public void delete(MedicationStatement bean);
+  public void delete(String id);
   public List<MedicationStatement> findByField(QueryBuilder queryBuilder);
   public List<MedicationStatement> findByBasedOn(QueryBuilder queryBuilder);
   public List<MedicationStatement> findByPartOf(QueryBuilder queryBuilder);

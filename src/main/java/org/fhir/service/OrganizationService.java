@@ -36,7 +36,7 @@ public interface OrganizationService {
   public List<Organization> selectAll();
   public Organization create(Organization bean);
   public Organization update(Organization bean);
-  public void delete(Organization bean);
+  public void delete(String id);
   public List<Organization> findByField(QueryBuilder queryBuilder);
   public List<Organization> findByType(QueryBuilder queryBuilder);
   public List<Organization> findByAddress(QueryBuilder queryBuilder);

@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="graphdefinitiontarget")
 public class GraphDefinitionTargetModel  implements Serializable {
-	private static final long serialVersionUID = 151910893720730040L;
+	private static final long serialVersionUID = 151967883173398203L;
   /**
   * Description: "Type of resource this link refers to."
   */
@@ -61,7 +61,7 @@ public class GraphDefinitionTargetModel  implements Serializable {
   private String compartment_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="compartment_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="compartment_id", insertable=false, updatable=false)
   private java.util.List<GraphDefinitionCompartmentModel> compartment;
 
   /**
@@ -72,7 +72,7 @@ public class GraphDefinitionTargetModel  implements Serializable {
   private String link_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="link_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="link_id", insertable=false, updatable=false)
   private java.util.List<GraphDefinitionLinkModel> link;
 
   /**
@@ -111,25 +111,25 @@ public class GraphDefinitionTargetModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public GraphDefinitionTargetModel() {
   }
 
-  public GraphDefinitionTargetModel(GraphDefinitionTarget o, String parentId) {
-  	this.parent_id = parentId;
+  public GraphDefinitionTargetModel(GraphDefinitionTarget o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     this.type = o.getType();
     this.profile = o.getProfile();
     if (null != o.getCompartment() && !o.getCompartment().isEmpty()) {
-    	this.compartment_id = "compartment" + this.parent_id;
+    	this.compartment_id = "compartment" + this.id;
     	this.compartment = GraphDefinitionCompartmentHelper.toModelFromArray(o.getCompartment(), this.compartment_id);
     }
     if (null != o.getLink() && !o.getLink().isEmpty()) {
-    	this.link_id = "link" + this.parent_id;
+    	this.link_id = "link" + this.id;
     	this.link = GraphDefinitionLinkHelper.toModelFromArray(o.getLink(), this.link_id);
     }
     if (null != o.getModifierExtension()) {
@@ -182,11 +182,11 @@ public class GraphDefinitionTargetModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -198,7 +198,7 @@ public class GraphDefinitionTargetModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -212,7 +212,7 @@ public class GraphDefinitionTargetModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

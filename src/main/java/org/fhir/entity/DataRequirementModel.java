@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="datarequirement")
 public class DataRequirementModel  implements Serializable {
-	private static final long serialVersionUID = 151910893734563671L;
+	private static final long serialVersionUID = 151967883188660262L;
   /**
   * Description: "The type of the required data, specified as the type name of a resource. For profiles, this value is set to the type of the base resource of the profile."
   */
@@ -68,7 +68,7 @@ public class DataRequirementModel  implements Serializable {
   private String codefilter_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="codefilter_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="codefilter_id", insertable=false, updatable=false)
   private java.util.List<DataRequirementCodeFilterModel> codeFilter;
 
   /**
@@ -79,7 +79,7 @@ public class DataRequirementModel  implements Serializable {
   private String datefilter_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="datefilter_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="datefilter_id", insertable=false, updatable=false)
   private java.util.List<DataRequirementDateFilterModel> dateFilter;
 
   /**
@@ -106,14 +106,14 @@ public class DataRequirementModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public DataRequirementModel() {
   }
 
-  public DataRequirementModel(DataRequirement o, String parentId) {
-  	this.parent_id = parentId;
+  public DataRequirementModel(DataRequirement o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -121,11 +121,11 @@ public class DataRequirementModel  implements Serializable {
     this.profile = org.fhir.utils.JsonUtils.toJson(o.getProfile());
     this.mustSupport = org.fhir.utils.JsonUtils.toJson(o.getMustSupport());
     if (null != o.getCodeFilter() && !o.getCodeFilter().isEmpty()) {
-    	this.codefilter_id = "codefilter" + this.parent_id;
+    	this.codefilter_id = "codefilter" + this.id;
     	this.codeFilter = DataRequirementCodeFilterHelper.toModelFromArray(o.getCodeFilter(), this.codefilter_id);
     }
     if (null != o.getDateFilter() && !o.getDateFilter().isEmpty()) {
-    	this.datefilter_id = "datefilter" + this.parent_id;
+    	this.datefilter_id = "datefilter" + this.id;
     	this.dateFilter = DataRequirementDateFilterHelper.toModelFromArray(o.getDateFilter(), this.datefilter_id);
     }
     if (null != o.getExtension()) {
@@ -175,11 +175,11 @@ public class DataRequirementModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -191,7 +191,7 @@ public class DataRequirementModel  implements Serializable {
      builder.append("mustSupport" + "->" + this.mustSupport + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -205,7 +205,7 @@ public class DataRequirementModel  implements Serializable {
      builder.append("dateFilter" + "->" + this.dateFilter + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

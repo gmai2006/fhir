@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="adverseevent")
 public class AdverseEventModel  implements Serializable {
-	private static final long serialVersionUID = 151910893774744909L;
+	private static final long serialVersionUID = 151967883229945123L;
   /**
   * Description: "This is a AdverseEvent resource"
   */
@@ -70,7 +70,7 @@ public class AdverseEventModel  implements Serializable {
   private String type_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> type;
 
   /**
@@ -81,7 +81,7 @@ public class AdverseEventModel  implements Serializable {
   private String subject_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subject_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="subject_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> subject;
 
   /**
@@ -100,7 +100,7 @@ public class AdverseEventModel  implements Serializable {
   private String reaction_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reaction_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="reaction_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> reaction;
 
   /**
@@ -111,7 +111,7 @@ public class AdverseEventModel  implements Serializable {
   private String location_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="location_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="location_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> location;
 
   /**
@@ -122,7 +122,7 @@ public class AdverseEventModel  implements Serializable {
   private String seriousness_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="seriousness_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="seriousness_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> seriousness;
 
   /**
@@ -133,7 +133,7 @@ public class AdverseEventModel  implements Serializable {
   private String outcome_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="outcome_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="outcome_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> outcome;
 
   /**
@@ -144,7 +144,7 @@ public class AdverseEventModel  implements Serializable {
   private String recorder_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="recorder_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="recorder_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> recorder;
 
   /**
@@ -155,7 +155,7 @@ public class AdverseEventModel  implements Serializable {
   private String eventparticipant_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="eventparticipant_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="eventparticipant_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> eventParticipant;
 
   /**
@@ -173,7 +173,7 @@ public class AdverseEventModel  implements Serializable {
   private String suspectentity_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="suspectentity_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="suspectentity_id", insertable=false, updatable=false)
   private java.util.List<AdverseEventSuspectEntityModel> suspectEntity;
 
   /**
@@ -184,7 +184,7 @@ public class AdverseEventModel  implements Serializable {
   private String subjectmedicalhistory_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subjectmedicalhistory_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="subjectmedicalhistory_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> subjectMedicalHistory;
 
   /**
@@ -195,7 +195,7 @@ public class AdverseEventModel  implements Serializable {
   private String referencedocument_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="referencedocument_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="referencedocument_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> referenceDocument;
 
   /**
@@ -206,7 +206,7 @@ public class AdverseEventModel  implements Serializable {
   private String study_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="study_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="study_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> study;
 
   /**
@@ -218,7 +218,7 @@ public class AdverseEventModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -272,7 +272,7 @@ public class AdverseEventModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

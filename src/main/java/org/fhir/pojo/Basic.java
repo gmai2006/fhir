@@ -83,6 +83,9 @@ public class Basic  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getCode() && !o.getCode().isEmpty()) {
       this.code = new CodeableConcept(o.getCode().get(0));
     }

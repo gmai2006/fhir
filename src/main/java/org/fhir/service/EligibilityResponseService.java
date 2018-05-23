@@ -36,7 +36,7 @@ public interface EligibilityResponseService {
   public List<EligibilityResponse> selectAll();
   public EligibilityResponse create(EligibilityResponse bean);
   public EligibilityResponse update(EligibilityResponse bean);
-  public void delete(EligibilityResponse bean);
+  public void delete(String id);
   public List<EligibilityResponse> findByField(QueryBuilder queryBuilder);
   public List<EligibilityResponse> findByRequestProvider(QueryBuilder queryBuilder);
   public List<EligibilityResponse> findByRequestOrganization(QueryBuilder queryBuilder);

@@ -36,7 +36,7 @@ public interface SlotService {
   public List<Slot> selectAll();
   public Slot create(Slot bean);
   public Slot update(Slot bean);
-  public void delete(Slot bean);
+  public void delete(String id);
   public List<Slot> findByField(QueryBuilder queryBuilder);
   public List<Slot> findByServiceCategory(QueryBuilder queryBuilder);
   public List<Slot> findByServiceType(QueryBuilder queryBuilder);

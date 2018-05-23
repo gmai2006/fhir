@@ -90,9 +90,9 @@ public class TestScriptDaoImpl implements TestScriptDao {
   }
   @Override
   @Transactional
-  public void delete(TestScript e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final TestScriptModel removed = em.find(TestScriptModel.class, e.getId());
+      final TestScriptModel removed = em.find(TestScriptModel.class, id);
       em.remove(removed);
   }
 

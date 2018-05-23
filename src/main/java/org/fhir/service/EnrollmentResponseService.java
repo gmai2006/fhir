@@ -36,7 +36,7 @@ public interface EnrollmentResponseService {
   public List<EnrollmentResponse> selectAll();
   public EnrollmentResponse create(EnrollmentResponse bean);
   public EnrollmentResponse update(EnrollmentResponse bean);
-  public void delete(EnrollmentResponse bean);
+  public void delete(String id);
   public List<EnrollmentResponse> findByField(QueryBuilder queryBuilder);
   public List<EnrollmentResponse> findByRequest(QueryBuilder queryBuilder);
   public List<EnrollmentResponse> findByOutcome(QueryBuilder queryBuilder);

@@ -38,7 +38,7 @@ public interface ActivityDefinitionDao {
   public ActivityDefinition create(ActivityDefinition e);
 
   public ActivityDefinition update(ActivityDefinition e);
-  public void delete(ActivityDefinition e);
+  public void delete(String id);
 
   public List<ActivityDefinition> findByField(QueryBuilder queryBuilder);
 

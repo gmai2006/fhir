@@ -133,6 +133,9 @@ public class Endpoint  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
@@ -144,6 +147,9 @@ public class Endpoint  extends DomainResource  {
     }
     if (null != o.getManagingOrganization() && !o.getManagingOrganization().isEmpty()) {
       this.managingOrganization = new Reference(o.getManagingOrganization().get(0));
+    }
+    if (o.getContact() != null) {
+    	this.contact = org.fhir.utils.JsonUtils.json2Array(o.getContact());
     }
     this.period = PeriodHelper.fromJson(o.getPeriod());
     if (null != o.getPayloadType() && !o.getPayloadType().isEmpty()) {

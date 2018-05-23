@@ -36,7 +36,7 @@ public interface LocationService {
   public List<Location> selectAll();
   public Location create(Location bean);
   public Location update(Location bean);
-  public void delete(Location bean);
+  public void delete(String id);
   public List<Location> findByField(QueryBuilder queryBuilder);
   public List<Location> findByOperationalStatus(QueryBuilder queryBuilder);
   public List<Location> findByType(QueryBuilder queryBuilder);

@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="bundleentry")
 public class BundleEntryModel  implements Serializable {
-	private static final long serialVersionUID = 151910893746383467L;
+	private static final long serialVersionUID = 151967883201487359L;
   /**
   * Description: "A series of links that provide context to this entry."
   */
@@ -46,7 +46,7 @@ public class BundleEntryModel  implements Serializable {
   private String link_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="link_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="link_id", insertable=false, updatable=false)
   private java.util.List<BundleLinkModel> link;
 
   /**
@@ -73,7 +73,7 @@ public class BundleEntryModel  implements Serializable {
   private String search_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="search_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="search_id", insertable=false, updatable=false)
   private java.util.List<BundleSearchModel> search;
 
   /**
@@ -84,7 +84,7 @@ public class BundleEntryModel  implements Serializable {
   private String request_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="request_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="request_id", insertable=false, updatable=false)
   private java.util.List<BundleRequestModel> request;
 
   /**
@@ -95,7 +95,7 @@ public class BundleEntryModel  implements Serializable {
   private String response_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="response_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="response_id", insertable=false, updatable=false)
   private java.util.List<BundleResponseModel> response;
 
   /**
@@ -134,19 +134,19 @@ public class BundleEntryModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public BundleEntryModel() {
   }
 
-  public BundleEntryModel(BundleEntry o, String parentId) {
-  	this.parent_id = parentId;
+  public BundleEntryModel(BundleEntry o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getLink() && !o.getLink().isEmpty()) {
-    	this.link_id = "link" + this.parent_id;
+    	this.link_id = "link" + this.id;
     	this.link = BundleLinkHelper.toModelFromArray(o.getLink(), this.link_id);
     }
     this.fullUrl = o.getFullUrl();
@@ -154,15 +154,15 @@ public class BundleEntryModel  implements Serializable {
     	this.resource = JsonUtils.toJson(o.getResource());
     }
     if (null != o.getSearch() ) {
-    	this.search_id = "search" + this.parent_id;
+    	this.search_id = "search" + this.id;
     	this.search = BundleSearchHelper.toModel(o.getSearch(), this.search_id);
     }
     if (null != o.getRequest() ) {
-    	this.request_id = "request" + this.parent_id;
+    	this.request_id = "request" + this.id;
     	this.request = BundleRequestHelper.toModel(o.getRequest(), this.request_id);
     }
     if (null != o.getResponse() ) {
-    	this.response_id = "response" + this.parent_id;
+    	this.response_id = "response" + this.id;
     	this.response = BundleResponseHelper.toModel(o.getResponse(), this.response_id);
     }
     if (null != o.getModifierExtension()) {
@@ -227,11 +227,11 @@ public class BundleEntryModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -243,7 +243,7 @@ public class BundleEntryModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -259,7 +259,7 @@ public class BundleEntryModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

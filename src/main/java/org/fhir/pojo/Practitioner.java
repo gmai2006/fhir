@@ -117,8 +117,17 @@ public class Practitioner  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getActive()) {
       this.active = o.getActive();
+    }
+    if (o.getName() != null) {
+    	this.name = org.fhir.utils.JsonUtils.json2Array(o.getName());
+    }
+    if (o.getTelecom() != null) {
+    	this.telecom = org.fhir.utils.JsonUtils.json2Array(o.getTelecom());
     }
     if (null != o.getAddress() && !o.getAddress().isEmpty()) {
     	this.address = AddressHelper.fromArray2Array(o.getAddress());
@@ -128,6 +137,9 @@ public class Practitioner  extends DomainResource  {
     }
     if (null != o.getBirthDate()) {
       this.birthDate = o.getBirthDate();
+    }
+    if (o.getPhoto() != null) {
+    	this.photo = org.fhir.utils.JsonUtils.json2Array(o.getPhoto());
     }
     if (null != o.getQualification() && !o.getQualification().isEmpty()) {
     	this.qualification = PractitionerQualificationHelper.fromArray2Array(o.getQualification());

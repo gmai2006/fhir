@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class MedicationStatementResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public MedicationStatement create(MedicationStatement obj) {
-		return this.service.create(obj);
+	public MedicationStatement createOrUpdate(MedicationStatement obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing MedicationStatement
+   * @param obj - instance of MedicationStatement
+   * @return MedicationStatement
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public MedicationStatement update( MedicationStatement obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing MedicationStatement
+   * @param obj - instance of MedicationStatement
+   * @return MedicationStatement
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get MedicationStatement by its ID
+   * @param id - instance of MedicationStatement
+   * @return MedicationStatement
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class MedicationStatementResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all MedicationStatement with limit of returned records
+   * @param max - number of records
+   * @return a list MedicationStatement
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class MedicationStatementResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query MedicationStatement based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of MedicationStatement
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class MedicationStatementResource {
   }
 
   /**
-  * Descr: Returns statements that are part of another event.
-  * Type: reference
+   * Query MedicationStatement by composite fields
+   * Descr: Returns statements that are part of another event.
+   * Type: reference
   */
   @GET
   @Path("partof")
@@ -167,8 +208,9 @@ public class MedicationStatementResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Returns statements for a specific context (episode or episode of Care).
-  * Type: reference
+   * Query MedicationStatement by composite fields
+   * Descr: Returns statements for a specific context (episode or episode of Care).
+   * Type: reference
   */
   @GET
   @Path("context")
@@ -193,8 +235,9 @@ public class MedicationStatementResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Who or where the information in the statement came from
-  * Type: reference
+   * Query MedicationStatement by composite fields
+   * Descr: Who or where the information in the statement came from
+   * Type: reference
   */
   @GET
   @Path("source")
@@ -219,8 +262,9 @@ public class MedicationStatementResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The identity of a patient, animal or group to list statements for
-  * Type: reference
+   * Query MedicationStatement by composite fields
+   * Descr: The identity of a patient, animal or group to list statements for
+   * Type: reference
   */
   @GET
   @Path("subject")

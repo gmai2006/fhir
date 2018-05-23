@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="immunizationrecommendationrecommendation")
 public class ImmunizationRecommendationRecommendationModel  implements Serializable {
-	private static final long serialVersionUID = 151910893755965066L;
+	private static final long serialVersionUID = 15196788321046511L;
   /**
   * Description: "The date the immunization recommendation was created."
   */
@@ -54,7 +54,7 @@ public class ImmunizationRecommendationRecommendationModel  implements Serializa
   private String vaccinecode_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="vaccinecode_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="vaccinecode_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> vaccineCode;
 
   /**
@@ -65,7 +65,7 @@ public class ImmunizationRecommendationRecommendationModel  implements Serializa
   private String targetdisease_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="targetdisease_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="targetdisease_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> targetDisease;
 
   /**
@@ -84,7 +84,7 @@ public class ImmunizationRecommendationRecommendationModel  implements Serializa
   private String forecaststatus_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="forecaststatus_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="forecaststatus_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> forecastStatus;
 
   /**
@@ -95,7 +95,7 @@ public class ImmunizationRecommendationRecommendationModel  implements Serializa
   private String datecriterion_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="datecriterion_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="datecriterion_id", insertable=false, updatable=false)
   private java.util.List<ImmunizationRecommendationDateCriterionModel> dateCriterion;
 
   /**
@@ -106,7 +106,7 @@ public class ImmunizationRecommendationRecommendationModel  implements Serializa
   private String protocol_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="protocol_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="protocol_id", insertable=false, updatable=false)
   private java.util.List<ImmunizationRecommendationProtocolModel> protocol;
 
   /**
@@ -117,7 +117,7 @@ public class ImmunizationRecommendationRecommendationModel  implements Serializa
   private String supportingimmunization_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="supportingimmunization_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="supportingimmunization_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> supportingImmunization;
 
   /**
@@ -128,7 +128,7 @@ public class ImmunizationRecommendationRecommendationModel  implements Serializa
   private String supportingpatientinformation_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="supportingpatientinformation_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="supportingpatientinformation_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> supportingPatientInformation;
 
   /**
@@ -167,45 +167,45 @@ public class ImmunizationRecommendationRecommendationModel  implements Serializa
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ImmunizationRecommendationRecommendationModel() {
   }
 
-  public ImmunizationRecommendationRecommendationModel(ImmunizationRecommendationRecommendation o, String parentId) {
-  	this.parent_id = parentId;
+  public ImmunizationRecommendationRecommendationModel(ImmunizationRecommendationRecommendation o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     this.date = o.getDate();
     if (null != o.getVaccineCode() ) {
-    	this.vaccinecode_id = "vaccinecode" + this.parent_id;
+    	this.vaccinecode_id = "vaccinecode" + this.id;
     	this.vaccineCode = CodeableConceptHelper.toModel(o.getVaccineCode(), this.vaccinecode_id);
     }
     if (null != o.getTargetDisease() ) {
-    	this.targetdisease_id = "targetdisease" + this.parent_id;
+    	this.targetdisease_id = "targetdisease" + this.id;
     	this.targetDisease = CodeableConceptHelper.toModel(o.getTargetDisease(), this.targetdisease_id);
     }
     this.doseNumber = o.getDoseNumber();
     if (null != o.getForecastStatus() ) {
-    	this.forecaststatus_id = "forecaststatus" + this.parent_id;
+    	this.forecaststatus_id = "forecaststatus" + this.id;
     	this.forecastStatus = CodeableConceptHelper.toModel(o.getForecastStatus(), this.forecaststatus_id);
     }
     if (null != o.getDateCriterion() && !o.getDateCriterion().isEmpty()) {
-    	this.datecriterion_id = "datecriterion" + this.parent_id;
+    	this.datecriterion_id = "datecriterion" + this.id;
     	this.dateCriterion = ImmunizationRecommendationDateCriterionHelper.toModelFromArray(o.getDateCriterion(), this.datecriterion_id);
     }
     if (null != o.getProtocol() ) {
-    	this.protocol_id = "protocol" + this.parent_id;
+    	this.protocol_id = "protocol" + this.id;
     	this.protocol = ImmunizationRecommendationProtocolHelper.toModel(o.getProtocol(), this.protocol_id);
     }
     if (null != o.getSupportingImmunization() && !o.getSupportingImmunization().isEmpty()) {
-    	this.supportingimmunization_id = "supportingimmunization" + this.parent_id;
+    	this.supportingimmunization_id = "supportingimmunization" + this.id;
     	this.supportingImmunization = ReferenceHelper.toModelFromArray(o.getSupportingImmunization(), this.supportingimmunization_id);
     }
     if (null != o.getSupportingPatientInformation() && !o.getSupportingPatientInformation().isEmpty()) {
-    	this.supportingpatientinformation_id = "supportingpatientinformation" + this.parent_id;
+    	this.supportingpatientinformation_id = "supportingpatientinformation" + this.id;
     	this.supportingPatientInformation = ReferenceHelper.toModelFromArray(o.getSupportingPatientInformation(), this.supportingpatientinformation_id);
     }
     if (null != o.getModifierExtension()) {
@@ -288,11 +288,11 @@ public class ImmunizationRecommendationRecommendationModel  implements Serializa
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -304,7 +304,7 @@ public class ImmunizationRecommendationRecommendationModel  implements Serializa
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -323,7 +323,7 @@ public class ImmunizationRecommendationRecommendationModel  implements Serializa
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

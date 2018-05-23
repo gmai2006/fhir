@@ -90,9 +90,9 @@ public class BasicDaoImpl implements BasicDao {
   }
   @Override
   @Transactional
-  public void delete(Basic e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final BasicModel removed = em.find(BasicModel.class, e.getId());
+      final BasicModel removed = em.find(BasicModel.class, id);
       em.remove(removed);
   }
 

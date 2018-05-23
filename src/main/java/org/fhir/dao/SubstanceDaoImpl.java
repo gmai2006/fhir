@@ -90,9 +90,9 @@ public class SubstanceDaoImpl implements SubstanceDao {
   }
   @Override
   @Transactional
-  public void delete(Substance e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final SubstanceModel removed = em.find(SubstanceModel.class, e.getId());
+      final SubstanceModel removed = em.find(SubstanceModel.class, id);
       em.remove(removed);
   }
 

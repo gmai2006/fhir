@@ -36,7 +36,7 @@ public interface DeviceService {
   public List<Device> selectAll();
   public Device create(Device bean);
   public Device update(Device bean);
-  public void delete(Device bean);
+  public void delete(String id);
   public List<Device> findByField(QueryBuilder queryBuilder);
   public List<Device> findByUdi(QueryBuilder queryBuilder);
   public List<Device> findByType(QueryBuilder queryBuilder);

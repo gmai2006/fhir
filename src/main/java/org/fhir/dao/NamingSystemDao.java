@@ -38,7 +38,7 @@ public interface NamingSystemDao {
   public NamingSystem create(NamingSystem e);
 
   public NamingSystem update(NamingSystem e);
-  public void delete(NamingSystem e);
+  public void delete(String id);
 
   public List<NamingSystem> findByField(QueryBuilder queryBuilder);
 

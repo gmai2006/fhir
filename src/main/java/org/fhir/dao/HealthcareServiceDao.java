@@ -38,7 +38,7 @@ public interface HealthcareServiceDao {
   public HealthcareService create(HealthcareService e);
 
   public HealthcareService update(HealthcareService e);
-  public void delete(HealthcareService e);
+  public void delete(String id);
 
   public List<HealthcareService> findByField(QueryBuilder queryBuilder);
 

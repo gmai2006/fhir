@@ -36,7 +36,7 @@ public interface ImagingManifestService {
   public List<ImagingManifest> selectAll();
   public ImagingManifest create(ImagingManifest bean);
   public ImagingManifest update(ImagingManifest bean);
-  public void delete(ImagingManifest bean);
+  public void delete(String id);
   public List<ImagingManifest> findByField(QueryBuilder queryBuilder);
   public List<ImagingManifest> findByPatient(QueryBuilder queryBuilder);
   public List<ImagingManifest> findByAuthor(QueryBuilder queryBuilder);

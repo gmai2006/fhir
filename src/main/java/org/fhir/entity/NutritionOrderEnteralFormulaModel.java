@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="nutritionorderenteralformula")
 public class NutritionOrderEnteralFormulaModel  implements Serializable {
-	private static final long serialVersionUID = 151910893752180231L;
+	private static final long serialVersionUID = 151967883206960559L;
   /**
   * Description: "The type of enteral or infant formula such as an adult standard formula with fiber or a soy-based infant formula."
   */
@@ -46,7 +46,7 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
   private String baseformulatype_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="baseformulatype_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="baseformulatype_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> baseFormulaType;
 
   /**
@@ -64,7 +64,7 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
   private String additivetype_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="additivetype_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="additivetype_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> additiveType;
 
   /**
@@ -82,7 +82,7 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
   private String caloricdensity_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="caloricdensity_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="caloricdensity_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> caloricDensity;
 
   /**
@@ -93,7 +93,7 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
   private String routeofadministration_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="routeofadministration_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="routeofadministration_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> routeofAdministration;
 
   /**
@@ -104,7 +104,7 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
   private String administration_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="administration_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="administration_id", insertable=false, updatable=false)
   private java.util.List<NutritionOrderAdministrationModel> administration;
 
   /**
@@ -115,7 +115,7 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
   private String maxvolumetodeliver_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="maxvolumetodeliver_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="maxvolumetodeliver_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> maxVolumeToDeliver;
 
   /**
@@ -161,41 +161,41 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public NutritionOrderEnteralFormulaModel() {
   }
 
-  public NutritionOrderEnteralFormulaModel(NutritionOrderEnteralFormula o, String parentId) {
-  	this.parent_id = parentId;
+  public NutritionOrderEnteralFormulaModel(NutritionOrderEnteralFormula o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getBaseFormulaType() ) {
-    	this.baseformulatype_id = "baseformulatype" + this.parent_id;
+    	this.baseformulatype_id = "baseformulatype" + this.id;
     	this.baseFormulaType = CodeableConceptHelper.toModel(o.getBaseFormulaType(), this.baseformulatype_id);
     }
     this.baseFormulaProductName = o.getBaseFormulaProductName();
     if (null != o.getAdditiveType() ) {
-    	this.additivetype_id = "additivetype" + this.parent_id;
+    	this.additivetype_id = "additivetype" + this.id;
     	this.additiveType = CodeableConceptHelper.toModel(o.getAdditiveType(), this.additivetype_id);
     }
     this.additiveProductName = o.getAdditiveProductName();
     if (null != o.getCaloricDensity() ) {
-    	this.caloricdensity_id = "caloricdensity" + this.parent_id;
+    	this.caloricdensity_id = "caloricdensity" + this.id;
     	this.caloricDensity = QuantityHelper.toModel(o.getCaloricDensity(), this.caloricdensity_id);
     }
     if (null != o.getRouteofAdministration() ) {
-    	this.routeofadministration_id = "routeofadministration" + this.parent_id;
+    	this.routeofadministration_id = "routeofadministration" + this.id;
     	this.routeofAdministration = CodeableConceptHelper.toModel(o.getRouteofAdministration(), this.routeofadministration_id);
     }
     if (null != o.getAdministration() && !o.getAdministration().isEmpty()) {
-    	this.administration_id = "administration" + this.parent_id;
+    	this.administration_id = "administration" + this.id;
     	this.administration = NutritionOrderAdministrationHelper.toModelFromArray(o.getAdministration(), this.administration_id);
     }
     if (null != o.getMaxVolumeToDeliver() ) {
-    	this.maxvolumetodeliver_id = "maxvolumetodeliver" + this.parent_id;
+    	this.maxvolumetodeliver_id = "maxvolumetodeliver" + this.id;
     	this.maxVolumeToDeliver = QuantityHelper.toModel(o.getMaxVolumeToDeliver(), this.maxvolumetodeliver_id);
     }
     this.administrationInstruction = o.getAdministrationInstruction();
@@ -279,11 +279,11 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -296,7 +296,7 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -315,7 +315,7 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

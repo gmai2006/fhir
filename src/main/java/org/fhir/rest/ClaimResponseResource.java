@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class ClaimResponseResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ClaimResponse create(ClaimResponse obj) {
-		return this.service.create(obj);
+	public ClaimResponse createOrUpdate(ClaimResponse obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing ClaimResponse
+   * @param obj - instance of ClaimResponse
+   * @return ClaimResponse
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public ClaimResponse update( ClaimResponse obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing ClaimResponse
+   * @param obj - instance of ClaimResponse
+   * @return ClaimResponse
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get ClaimResponse by its ID
+   * @param id - instance of ClaimResponse
+   * @return ClaimResponse
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class ClaimResponseResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all ClaimResponse with limit of returned records
+   * @param max - number of records
+   * @return a list ClaimResponse
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class ClaimResponseResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query ClaimResponse based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of ClaimResponse
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class ClaimResponseResource {
   }
 
   /**
-  * Descr: The subject of care.
-  * Type: reference
+   * Query ClaimResponse by composite fields
+   * Descr: The subject of care.
+   * Type: reference
   */
   @GET
   @Path("patient")
@@ -167,8 +208,9 @@ public class ClaimResponseResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The organization who generated this resource
-  * Type: reference
+   * Query ClaimResponse by composite fields
+   * Descr: The organization who generated this resource
+   * Type: reference
   */
   @GET
   @Path("insurer")
@@ -193,8 +235,9 @@ public class ClaimResponseResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The Provider of the claim
-  * Type: reference
+   * Query ClaimResponse by composite fields
+   * Descr: The Provider of the claim
+   * Type: reference
   */
   @GET
   @Path("requestprovider")
@@ -219,8 +262,9 @@ public class ClaimResponseResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The claim reference
-  * Type: reference
+   * Query ClaimResponse by composite fields
+   * Descr: The claim reference
+   * Type: reference
   */
   @GET
   @Path("request")
@@ -245,8 +289,9 @@ public class ClaimResponseResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The processing outcome
-  * Type: token
+   * Query ClaimResponse by composite fields
+   * Descr: The processing outcome
+   * Type: token
   */
   @GET
   @Path("outcome")

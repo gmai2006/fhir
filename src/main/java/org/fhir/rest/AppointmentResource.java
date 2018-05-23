@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class AppointmentResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Appointment create(Appointment obj) {
-		return this.service.create(obj);
+	public Appointment createOrUpdate(Appointment obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing Appointment
+   * @param obj - instance of Appointment
+   * @return Appointment
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public Appointment update( Appointment obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing Appointment
+   * @param obj - instance of Appointment
+   * @return Appointment
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get Appointment by its ID
+   * @param id - instance of Appointment
+   * @return Appointment
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class AppointmentResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all Appointment with limit of returned records
+   * @param max - number of records
+   * @return a list Appointment
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class AppointmentResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query Appointment based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of Appointment
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class AppointmentResource {
   }
 
   /**
-  * Descr: The specific service that is to be performed during this appointment
-  * Type: token
+   * Query Appointment by composite fields
+   * Descr: The specific service that is to be performed during this appointment
+   * Type: token
   */
   @GET
   @Path("servicetype")
@@ -167,8 +208,9 @@ public class AppointmentResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The ReferralRequest provided as information to allocate to the Encounter
-  * Type: reference
+   * Query Appointment by composite fields
+   * Descr: The ReferralRequest provided as information to allocate to the Encounter
+   * Type: reference
   */
   @GET
   @Path("incomingreferral")

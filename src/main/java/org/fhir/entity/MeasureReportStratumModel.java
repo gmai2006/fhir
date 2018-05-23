@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="measurereportstratum")
 public class MeasureReportStratumModel  implements Serializable {
-	private static final long serialVersionUID = 151910893736766053L;
+	private static final long serialVersionUID = 151967883190964296L;
   /**
   * Description: "The value for this stratum, expressed as a string. When defining stratifiers on complex values, the value must be rendered such that the value for each stratum within the stratifier is unique."
   */
@@ -53,7 +53,7 @@ public class MeasureReportStratumModel  implements Serializable {
   private String population_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="population_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="population_id", insertable=false, updatable=false)
   private java.util.List<MeasureReportPopulation1Model> population;
 
   /**
@@ -100,20 +100,20 @@ public class MeasureReportStratumModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public MeasureReportStratumModel() {
   }
 
-  public MeasureReportStratumModel(MeasureReportStratum o, String parentId) {
-  	this.parent_id = parentId;
+  public MeasureReportStratumModel(MeasureReportStratum o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     this.value = o.getValue();
     if (null != o.getPopulation() && !o.getPopulation().isEmpty()) {
-    	this.population_id = "population" + this.parent_id;
+    	this.population_id = "population" + this.id;
     	this.population = MeasureReportPopulation1Helper.toModelFromArray(o.getPopulation(), this.population_id);
     }
     this.measureScore = o.getMeasureScore();
@@ -161,11 +161,11 @@ public class MeasureReportStratumModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -177,7 +177,7 @@ public class MeasureReportStratumModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -190,7 +190,7 @@ public class MeasureReportStratumModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

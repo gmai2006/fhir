@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class VisionPrescriptionResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public VisionPrescription create(VisionPrescription obj) {
-		return this.service.create(obj);
+	public VisionPrescription createOrUpdate(VisionPrescription obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing VisionPrescription
+   * @param obj - instance of VisionPrescription
+   * @return VisionPrescription
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public VisionPrescription update( VisionPrescription obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing VisionPrescription
+   * @param obj - instance of VisionPrescription
+   * @return VisionPrescription
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get VisionPrescription by its ID
+   * @param id - instance of VisionPrescription
+   * @return VisionPrescription
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class VisionPrescriptionResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all VisionPrescription with limit of returned records
+   * @param max - number of records
+   * @return a list VisionPrescription
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class VisionPrescriptionResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query VisionPrescription based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of VisionPrescription
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class VisionPrescriptionResource {
   }
 
   /**
-  * Descr: Who authorizes the vision product
-  * Type: reference
+   * Query VisionPrescription by composite fields
+   * Descr: Who authorizes the vision product
+   * Type: reference
   */
   @GET
   @Path("prescriber")

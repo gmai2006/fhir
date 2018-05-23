@@ -90,9 +90,9 @@ public class ConditionDaoImpl implements ConditionDao {
   }
   @Override
   @Transactional
-  public void delete(Condition e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ConditionModel removed = em.find(ConditionModel.class, e.getId());
+      final ConditionModel removed = em.find(ConditionModel.class, id);
       em.remove(removed);
   }
 

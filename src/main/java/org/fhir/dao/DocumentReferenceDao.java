@@ -38,7 +38,7 @@ public interface DocumentReferenceDao {
   public DocumentReference create(DocumentReference e);
 
   public DocumentReference update(DocumentReference e);
-  public void delete(DocumentReference e);
+  public void delete(String id);
 
   public List<DocumentReference> findByField(QueryBuilder queryBuilder);
 

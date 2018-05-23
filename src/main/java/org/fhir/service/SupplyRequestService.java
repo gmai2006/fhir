@@ -36,7 +36,7 @@ public interface SupplyRequestService {
   public List<SupplyRequest> selectAll();
   public SupplyRequest create(SupplyRequest bean);
   public SupplyRequest update(SupplyRequest bean);
-  public void delete(SupplyRequest bean);
+  public void delete(String id);
   public List<SupplyRequest> findByField(QueryBuilder queryBuilder);
   public List<SupplyRequest> findByCategory(QueryBuilder queryBuilder);
   public List<SupplyRequest> findByOrderedItem(QueryBuilder queryBuilder);

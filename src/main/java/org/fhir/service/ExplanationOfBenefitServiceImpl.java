@@ -97,12 +97,9 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
 
   @Override
   @Transactional
-  public void delete(ExplanationOfBenefit bean) {
-  	requireNonNull(bean);
-    logger.info("delete(ExplanationOfBenefit={}) - entered bean");
-
-    dao.delete(bean);
-
+  public void delete(String id) {
+    logger.info("delete(ExplanationOfBenefit={}) - entered id " + id);
+    dao.delete(id);
     logger.info("delete(ExplanationOfBenefit) - exited - return value={} result ");
   }
 

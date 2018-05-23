@@ -38,7 +38,7 @@ public interface ExpansionProfileDao {
   public ExpansionProfile create(ExpansionProfile e);
 
   public ExpansionProfile update(ExpansionProfile e);
-  public void delete(ExpansionProfile e);
+  public void delete(String id);
 
   public List<ExpansionProfile> findByField(QueryBuilder queryBuilder);
 

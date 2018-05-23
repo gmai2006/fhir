@@ -36,7 +36,7 @@ public interface ProcessRequestService {
   public List<ProcessRequest> selectAll();
   public ProcessRequest create(ProcessRequest bean);
   public ProcessRequest update(ProcessRequest bean);
-  public void delete(ProcessRequest bean);
+  public void delete(String id);
   public List<ProcessRequest> findByField(QueryBuilder queryBuilder);
   public List<ProcessRequest> findByTarget(QueryBuilder queryBuilder);
   public List<ProcessRequest> findByProvider(QueryBuilder queryBuilder);

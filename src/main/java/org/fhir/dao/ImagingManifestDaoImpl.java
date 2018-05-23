@@ -90,9 +90,9 @@ public class ImagingManifestDaoImpl implements ImagingManifestDao {
   }
   @Override
   @Transactional
-  public void delete(ImagingManifest e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ImagingManifestModel removed = em.find(ImagingManifestModel.class, e.getId());
+      final ImagingManifestModel removed = em.find(ImagingManifestModel.class, id);
       em.remove(removed);
   }
 

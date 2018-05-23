@@ -38,7 +38,7 @@ public interface ServiceDefinitionDao {
   public ServiceDefinition create(ServiceDefinition e);
 
   public ServiceDefinition update(ServiceDefinition e);
-  public void delete(ServiceDefinition e);
+  public void delete(String id);
 
   public List<ServiceDefinition> findByField(QueryBuilder queryBuilder);
 

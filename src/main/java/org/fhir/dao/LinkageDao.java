@@ -38,7 +38,7 @@ public interface LinkageDao {
   public Linkage create(Linkage e);
 
   public Linkage update(Linkage e);
-  public void delete(Linkage e);
+  public void delete(String id);
 
   public List<Linkage> findByField(QueryBuilder queryBuilder);
 

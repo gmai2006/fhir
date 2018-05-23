@@ -90,9 +90,9 @@ public class ExplanationOfBenefitDaoImpl implements ExplanationOfBenefitDao {
   }
   @Override
   @Transactional
-  public void delete(ExplanationOfBenefit e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ExplanationOfBenefitModel removed = em.find(ExplanationOfBenefitModel.class, e.getId());
+      final ExplanationOfBenefitModel removed = em.find(ExplanationOfBenefitModel.class, id);
       em.remove(removed);
   }
 

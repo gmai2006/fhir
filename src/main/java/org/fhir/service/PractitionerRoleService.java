@@ -36,7 +36,7 @@ public interface PractitionerRoleService {
   public List<PractitionerRole> selectAll();
   public PractitionerRole create(PractitionerRole bean);
   public PractitionerRole update(PractitionerRole bean);
-  public void delete(PractitionerRole bean);
+  public void delete(String id);
   public List<PractitionerRole> findByField(QueryBuilder queryBuilder);
   public List<PractitionerRole> findByPractitioner(QueryBuilder queryBuilder);
   public List<PractitionerRole> findByOrganization(QueryBuilder queryBuilder);

@@ -132,6 +132,9 @@ public class Slot  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getServiceCategory() && !o.getServiceCategory().isEmpty()) {
       this.serviceCategory = new CodeableConcept(o.getServiceCategory().get(0));
     }

@@ -36,7 +36,7 @@ public interface ProcessResponseService {
   public List<ProcessResponse> selectAll();
   public ProcessResponse create(ProcessResponse bean);
   public ProcessResponse update(ProcessResponse bean);
-  public void delete(ProcessResponse bean);
+  public void delete(String id);
   public List<ProcessResponse> findByField(QueryBuilder queryBuilder);
   public List<ProcessResponse> findByOrganization(QueryBuilder queryBuilder);
   public List<ProcessResponse> findByRequest(QueryBuilder queryBuilder);

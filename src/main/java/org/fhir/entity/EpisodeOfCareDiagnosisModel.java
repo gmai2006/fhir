@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="episodeofcarediagnosis")
 public class EpisodeOfCareDiagnosisModel  implements Serializable {
-	private static final long serialVersionUID = 151910893756364473L;
+	private static final long serialVersionUID = 15196788321082253L;
   /**
   * Description: "A list of conditions/problems/diagnoses that this episode of care is intended to be providing care for."
   */
@@ -46,7 +46,7 @@ public class EpisodeOfCareDiagnosisModel  implements Serializable {
   private String condition_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="condition_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="condition_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> condition;
 
   /**
@@ -57,7 +57,7 @@ public class EpisodeOfCareDiagnosisModel  implements Serializable {
   private String role_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="role_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="role_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> role;
 
   /**
@@ -104,23 +104,23 @@ public class EpisodeOfCareDiagnosisModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public EpisodeOfCareDiagnosisModel() {
   }
 
-  public EpisodeOfCareDiagnosisModel(EpisodeOfCareDiagnosis o, String parentId) {
-  	this.parent_id = parentId;
+  public EpisodeOfCareDiagnosisModel(EpisodeOfCareDiagnosis o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getCondition() ) {
-    	this.condition_id = "condition" + this.parent_id;
+    	this.condition_id = "condition" + this.id;
     	this.condition = ReferenceHelper.toModel(o.getCondition(), this.condition_id);
     }
     if (null != o.getRole() ) {
-    	this.role_id = "role" + this.parent_id;
+    	this.role_id = "role" + this.id;
     	this.role = CodeableConceptHelper.toModel(o.getRole(), this.role_id);
     }
     this.rank = o.getRank();
@@ -168,11 +168,11 @@ public class EpisodeOfCareDiagnosisModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -183,7 +183,7 @@ public class EpisodeOfCareDiagnosisModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -196,7 +196,7 @@ public class EpisodeOfCareDiagnosisModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

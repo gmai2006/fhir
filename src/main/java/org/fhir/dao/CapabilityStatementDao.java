@@ -38,7 +38,7 @@ public interface CapabilityStatementDao {
   public CapabilityStatement create(CapabilityStatement e);
 
   public CapabilityStatement update(CapabilityStatement e);
-  public void delete(CapabilityStatement e);
+  public void delete(String id);
 
   public List<CapabilityStatement> findByField(QueryBuilder queryBuilder);
 

@@ -137,6 +137,9 @@ public class FHIRList  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
@@ -163,6 +166,9 @@ public class FHIRList  extends DomainResource  {
     }
     if (null != o.getOrderedBy() && !o.getOrderedBy().isEmpty()) {
       this.orderedBy = new CodeableConcept(o.getOrderedBy().get(0));
+    }
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
     }
     if (null != o.getEntry() && !o.getEntry().isEmpty()) {
     	this.entry = ListEntryHelper.fromArray2Array(o.getEntry());

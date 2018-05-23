@@ -90,9 +90,9 @@ public class CarePlanDaoImpl implements CarePlanDao {
   }
   @Override
   @Transactional
-  public void delete(CarePlan e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final CarePlanModel removed = em.find(CarePlanModel.class, e.getId());
+      final CarePlanModel removed = em.find(CarePlanModel.class, id);
       em.remove(removed);
   }
 

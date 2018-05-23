@@ -227,6 +227,9 @@ public class VisionPrescriptionDispense  extends BackboneElement  {
     if (null != o.getBrand()) {
       this.brand = o.getBrand();
     }
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
+    }
   }
 
   public void setProduct( CodeableConcept value) {

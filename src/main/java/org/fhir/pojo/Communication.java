@@ -174,6 +174,9 @@ public class Communication  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
     	this.definition = ReferenceHelper.fromArray2Array(o.getDefinition());
     }
@@ -227,6 +230,9 @@ public class Communication  extends DomainResource  {
     }
     if (null != o.getPayload() && !o.getPayload().isEmpty()) {
     	this.payload = CommunicationPayloadHelper.fromArray2Array(o.getPayload());
+    }
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
     }
   }
 

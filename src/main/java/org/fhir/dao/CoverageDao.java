@@ -38,7 +38,7 @@ public interface CoverageDao {
   public Coverage create(Coverage e);
 
   public Coverage update(Coverage e);
-  public void delete(Coverage e);
+  public void delete(String id);
 
   public List<Coverage> findByField(QueryBuilder queryBuilder);
 

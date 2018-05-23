@@ -90,9 +90,9 @@ public class SupplyRequestDaoImpl implements SupplyRequestDao {
   }
   @Override
   @Transactional
-  public void delete(SupplyRequest e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final SupplyRequestModel removed = em.find(SupplyRequestModel.class, e.getId());
+      final SupplyRequestModel removed = em.find(SupplyRequestModel.class, id);
       em.remove(removed);
   }
 

@@ -211,6 +211,9 @@ public class HealthcareService  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getActive()) {
       this.active = o.getActive();
     }
@@ -239,6 +242,9 @@ public class HealthcareService  extends DomainResource  {
       this.extraDetails = o.getExtraDetails();
     }
     this.photo = AttachmentHelper.fromJson(o.getPhoto());
+    if (o.getTelecom() != null) {
+    	this.telecom = org.fhir.utils.JsonUtils.json2Array(o.getTelecom());
+    }
     if (null != o.getCoverageArea() && !o.getCoverageArea().isEmpty()) {
     	this.coverageArea = ReferenceHelper.fromArray2Array(o.getCoverageArea());
     }

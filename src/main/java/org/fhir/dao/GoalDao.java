@@ -38,7 +38,7 @@ public interface GoalDao {
   public Goal create(Goal e);
 
   public Goal update(Goal e);
-  public void delete(Goal e);
+  public void delete(String id);
 
   public List<Goal> findByField(QueryBuilder queryBuilder);
 

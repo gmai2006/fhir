@@ -172,6 +172,9 @@ public class CarePlan  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
     	this.definition = ReferenceHelper.fromArray2Array(o.getDefinition());
     }
@@ -223,6 +226,9 @@ public class CarePlan  extends DomainResource  {
     }
     if (null != o.getActivity() && !o.getActivity().isEmpty()) {
     	this.activity = CarePlanActivityHelper.fromArray2Array(o.getActivity());
+    }
+    if (o.getNote() != null) {
+    	this.note = org.fhir.utils.JsonUtils.json2Array(o.getNote());
     }
   }
 

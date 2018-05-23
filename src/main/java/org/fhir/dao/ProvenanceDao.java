@@ -38,7 +38,7 @@ public interface ProvenanceDao {
   public Provenance create(Provenance e);
 
   public Provenance update(Provenance e);
-  public void delete(Provenance e);
+  public void delete(String id);
 
   public List<Provenance> findByField(QueryBuilder queryBuilder);
 

@@ -90,9 +90,9 @@ public class ResearchSubjectDaoImpl implements ResearchSubjectDao {
   }
   @Override
   @Transactional
-  public void delete(ResearchSubject e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ResearchSubjectModel removed = em.find(ResearchSubjectModel.class, e.getId());
+      final ResearchSubjectModel removed = em.find(ResearchSubjectModel.class, id);
       em.remove(removed);
   }
 

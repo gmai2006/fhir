@@ -38,7 +38,7 @@ public interface PlanDefinitionDao {
   public PlanDefinition create(PlanDefinition e);
 
   public PlanDefinition update(PlanDefinition e);
-  public void delete(PlanDefinition e);
+  public void delete(String id);
 
   public List<PlanDefinition> findByField(QueryBuilder queryBuilder);
 

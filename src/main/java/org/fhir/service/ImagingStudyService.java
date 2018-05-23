@@ -36,7 +36,7 @@ public interface ImagingStudyService {
   public List<ImagingStudy> selectAll();
   public ImagingStudy create(ImagingStudy bean);
   public ImagingStudy update(ImagingStudy bean);
-  public void delete(ImagingStudy bean);
+  public void delete(String id);
   public List<ImagingStudy> findByField(QueryBuilder queryBuilder);
   public List<ImagingStudy> findByModalityList(QueryBuilder queryBuilder);
   public List<ImagingStudy> findByPatient(QueryBuilder queryBuilder);

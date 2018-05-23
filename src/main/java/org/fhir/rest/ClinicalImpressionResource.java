@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class ClinicalImpressionResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ClinicalImpression create(ClinicalImpression obj) {
-		return this.service.create(obj);
+	public ClinicalImpression createOrUpdate(ClinicalImpression obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing ClinicalImpression
+   * @param obj - instance of ClinicalImpression
+   * @return ClinicalImpression
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public ClinicalImpression update( ClinicalImpression obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing ClinicalImpression
+   * @param obj - instance of ClinicalImpression
+   * @return ClinicalImpression
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get ClinicalImpression by its ID
+   * @param id - instance of ClinicalImpression
+   * @return ClinicalImpression
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class ClinicalImpressionResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all ClinicalImpression with limit of returned records
+   * @param max - number of records
+   * @return a list ClinicalImpression
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class ClinicalImpressionResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query ClinicalImpression based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of ClinicalImpression
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class ClinicalImpressionResource {
   }
 
   /**
-  * Descr: Patient or group assessed
-  * Type: reference
+   * Query ClinicalImpression by composite fields
+   * Descr: Patient or group assessed
+   * Type: reference
   */
   @GET
   @Path("subject")
@@ -167,8 +208,9 @@ public class ClinicalImpressionResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Encounter or Episode created from
-  * Type: reference
+   * Query ClinicalImpression by composite fields
+   * Descr: Encounter or Episode created from
+   * Type: reference
   */
   @GET
   @Path("context")
@@ -193,8 +235,9 @@ public class ClinicalImpressionResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The clinician performing the assessment
-  * Type: reference
+   * Query ClinicalImpression by composite fields
+   * Descr: The clinician performing the assessment
+   * Type: reference
   */
   @GET
   @Path("assessor")
@@ -219,8 +262,9 @@ public class ClinicalImpressionResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Reference to last assessment
-  * Type: reference
+   * Query ClinicalImpression by composite fields
+   * Descr: Reference to last assessment
+   * Type: reference
   */
   @GET
   @Path("previous")
@@ -245,8 +289,9 @@ public class ClinicalImpressionResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Relevant impressions of patient state
-  * Type: reference
+   * Query ClinicalImpression by composite fields
+   * Descr: Relevant impressions of patient state
+   * Type: reference
   */
   @GET
   @Path("problem")

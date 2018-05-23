@@ -90,9 +90,9 @@ public class LinkageDaoImpl implements LinkageDao {
   }
   @Override
   @Transactional
-  public void delete(Linkage e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final LinkageModel removed = em.find(LinkageModel.class, e.getId());
+      final LinkageModel removed = em.find(LinkageModel.class, id);
       em.remove(removed);
   }
 

@@ -151,6 +151,9 @@ public class Location  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
@@ -171,6 +174,9 @@ public class Location  extends DomainResource  {
     }
     if (null != o.getType() && !o.getType().isEmpty()) {
       this.type = new CodeableConcept(o.getType().get(0));
+    }
+    if (o.getTelecom() != null) {
+    	this.telecom = org.fhir.utils.JsonUtils.json2Array(o.getTelecom());
     }
     if (null != o.getAddress() && !o.getAddress().isEmpty()) {
       this.address = new Address(o.getAddress().get(0));

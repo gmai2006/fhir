@@ -38,7 +38,7 @@ public interface ImmunizationDao {
   public Immunization create(Immunization e);
 
   public Immunization update(Immunization e);
-  public void delete(Immunization e);
+  public void delete(String id);
 
   public List<Immunization> findByField(QueryBuilder queryBuilder);
 

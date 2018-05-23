@@ -90,9 +90,9 @@ public class CodeSystemDaoImpl implements CodeSystemDao {
   }
   @Override
   @Transactional
-  public void delete(CodeSystem e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final CodeSystemModel removed = em.find(CodeSystemModel.class, e.getId());
+      final CodeSystemModel removed = em.find(CodeSystemModel.class, id);
       em.remove(removed);
   }
 

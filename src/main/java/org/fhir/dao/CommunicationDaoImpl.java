@@ -90,9 +90,9 @@ public class CommunicationDaoImpl implements CommunicationDao {
   }
   @Override
   @Transactional
-  public void delete(Communication e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final CommunicationModel removed = em.find(CommunicationModel.class, e.getId());
+      final CommunicationModel removed = em.find(CommunicationModel.class, id);
       em.remove(removed);
   }
 

@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="implementationguideresource")
 public class ImplementationGuideResourceModel  implements Serializable {
-	private static final long serialVersionUID = 151910893759852406L;
+	private static final long serialVersionUID = 151967883214298709L;
   /**
   * Description: "Whether a resource is included in the guide as part of the rules defined by the guide, or just as an example of a resource that conforms to the rules and/or help implementers understand the intent of the guide."
   */
@@ -81,7 +81,7 @@ public class ImplementationGuideResourceModel  implements Serializable {
   private String sourcereference_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="sourcereference_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="sourcereference_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> sourceReference;
 
   /**
@@ -92,7 +92,7 @@ public class ImplementationGuideResourceModel  implements Serializable {
   private String examplefor_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="examplefor_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="examplefor_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> exampleFor;
 
   /**
@@ -131,14 +131,14 @@ public class ImplementationGuideResourceModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public ImplementationGuideResourceModel() {
   }
 
-  public ImplementationGuideResourceModel(ImplementationGuideResource o, String parentId) {
-  	this.parent_id = parentId;
+  public ImplementationGuideResourceModel(ImplementationGuideResource o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
@@ -148,11 +148,11 @@ public class ImplementationGuideResourceModel  implements Serializable {
     this.acronym = o.getAcronym();
     this.sourceUri = o.getSourceUri();
     if (null != o.getSourceReference() ) {
-    	this.sourcereference_id = "sourcereference" + this.parent_id;
+    	this.sourcereference_id = "sourcereference" + this.id;
     	this.sourceReference = ReferenceHelper.toModel(o.getSourceReference(), this.sourcereference_id);
     }
     if (null != o.getExampleFor() ) {
-    	this.examplefor_id = "examplefor" + this.parent_id;
+    	this.examplefor_id = "examplefor" + this.id;
     	this.exampleFor = ReferenceHelper.toModel(o.getExampleFor(), this.examplefor_id);
     }
     if (null != o.getModifierExtension()) {
@@ -223,11 +223,11 @@ public class ImplementationGuideResourceModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -242,7 +242,7 @@ public class ImplementationGuideResourceModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -259,7 +259,7 @@ public class ImplementationGuideResourceModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

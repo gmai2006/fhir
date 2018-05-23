@@ -36,7 +36,7 @@ public interface HealthcareServiceService {
   public List<HealthcareService> selectAll();
   public HealthcareService create(HealthcareService bean);
   public HealthcareService update(HealthcareService bean);
-  public void delete(HealthcareService bean);
+  public void delete(String id);
   public List<HealthcareService> findByField(QueryBuilder queryBuilder);
   public List<HealthcareService> findByProvidedBy(QueryBuilder queryBuilder);
   public List<HealthcareService> findByCategory(QueryBuilder queryBuilder);

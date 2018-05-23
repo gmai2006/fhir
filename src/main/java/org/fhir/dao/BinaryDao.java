@@ -38,7 +38,7 @@ public interface BinaryDao {
   public Binary create(Binary e);
 
   public Binary update(Binary e);
-  public void delete(Binary e);
+  public void delete(String id);
 
   public List<Binary> findByField(QueryBuilder queryBuilder);
 

@@ -90,9 +90,9 @@ public class EpisodeOfCareDaoImpl implements EpisodeOfCareDao {
   }
   @Override
   @Transactional
-  public void delete(EpisodeOfCare e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final EpisodeOfCareModel removed = em.find(EpisodeOfCareModel.class, e.getId());
+      final EpisodeOfCareModel removed = em.find(EpisodeOfCareModel.class, id);
       em.remove(removed);
   }
 

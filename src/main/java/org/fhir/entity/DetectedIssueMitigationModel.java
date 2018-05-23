@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="detectedissuemitigation")
 public class DetectedIssueMitigationModel  implements Serializable {
-	private static final long serialVersionUID = 151910893766073166L;
+	private static final long serialVersionUID = 151967883220227794L;
   /**
   * Description: "Describes the action that was taken or the observation that was made that reduces/eliminates the risk associated with the identified issue."
   */
@@ -46,7 +46,7 @@ public class DetectedIssueMitigationModel  implements Serializable {
   private String action_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="action_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="action_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> action;
 
   /**
@@ -65,7 +65,7 @@ public class DetectedIssueMitigationModel  implements Serializable {
   private String author_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="author_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="author_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> author;
 
   /**
@@ -104,24 +104,24 @@ public class DetectedIssueMitigationModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public DetectedIssueMitigationModel() {
   }
 
-  public DetectedIssueMitigationModel(DetectedIssueMitigation o, String parentId) {
-  	this.parent_id = parentId;
+  public DetectedIssueMitigationModel(DetectedIssueMitigation o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getAction() ) {
-    	this.action_id = "action" + this.parent_id;
+    	this.action_id = "action" + this.id;
     	this.action = CodeableConceptHelper.toModel(o.getAction(), this.action_id);
     }
     this.date = o.getDate();
     if (null != o.getAuthor() ) {
-    	this.author_id = "author" + this.parent_id;
+    	this.author_id = "author" + this.id;
     	this.author = ReferenceHelper.toModel(o.getAuthor(), this.author_id);
     }
     if (null != o.getModifierExtension()) {
@@ -168,11 +168,11 @@ public class DetectedIssueMitigationModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -183,7 +183,7 @@ public class DetectedIssueMitigationModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -196,7 +196,7 @@ public class DetectedIssueMitigationModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

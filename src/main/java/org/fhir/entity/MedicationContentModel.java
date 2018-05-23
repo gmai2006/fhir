@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="medicationcontent")
 public class MedicationContentModel  implements Serializable {
-	private static final long serialVersionUID = 15191089376623204L;
+	private static final long serialVersionUID = 151967883220490692L;
   /**
   * Description: "Identifies one of the items in the package."
   */
@@ -46,7 +46,7 @@ public class MedicationContentModel  implements Serializable {
   private String itemcodeableconcept_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="itemcodeableconcept_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="itemcodeableconcept_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> itemCodeableConcept;
 
   /**
@@ -57,7 +57,7 @@ public class MedicationContentModel  implements Serializable {
   private String itemreference_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="itemreference_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="itemreference_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> itemReference;
 
   /**
@@ -68,7 +68,7 @@ public class MedicationContentModel  implements Serializable {
   private String amount_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="amount_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="amount_id", insertable=false, updatable=false)
   private java.util.List<QuantityModel> amount;
 
   /**
@@ -107,27 +107,27 @@ public class MedicationContentModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public MedicationContentModel() {
   }
 
-  public MedicationContentModel(MedicationContent o, String parentId) {
-  	this.parent_id = parentId;
+  public MedicationContentModel(MedicationContent o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     if (null != o.getItemCodeableConcept() ) {
-    	this.itemcodeableconcept_id = "itemcodeableconcept" + this.parent_id;
+    	this.itemcodeableconcept_id = "itemcodeableconcept" + this.id;
     	this.itemCodeableConcept = CodeableConceptHelper.toModel(o.getItemCodeableConcept(), this.itemcodeableconcept_id);
     }
     if (null != o.getItemReference() ) {
-    	this.itemreference_id = "itemreference" + this.parent_id;
+    	this.itemreference_id = "itemreference" + this.id;
     	this.itemReference = ReferenceHelper.toModel(o.getItemReference(), this.itemreference_id);
     }
     if (null != o.getAmount() ) {
-    	this.amount_id = "amount" + this.parent_id;
+    	this.amount_id = "amount" + this.id;
     	this.amount = QuantityHelper.toModel(o.getAmount(), this.amount_id);
     }
     if (null != o.getModifierExtension()) {
@@ -174,11 +174,11 @@ public class MedicationContentModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -188,7 +188,7 @@ public class MedicationContentModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -201,7 +201,7 @@ public class MedicationContentModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

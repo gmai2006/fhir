@@ -36,7 +36,7 @@ public interface PaymentReconciliationService {
   public List<PaymentReconciliation> selectAll();
   public PaymentReconciliation create(PaymentReconciliation bean);
   public PaymentReconciliation update(PaymentReconciliation bean);
-  public void delete(PaymentReconciliation bean);
+  public void delete(String id);
   public List<PaymentReconciliation> findByField(QueryBuilder queryBuilder);
   public List<PaymentReconciliation> findByOrganization(QueryBuilder queryBuilder);
   public List<PaymentReconciliation> findByRequest(QueryBuilder queryBuilder);

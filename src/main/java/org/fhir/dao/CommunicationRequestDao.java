@@ -38,7 +38,7 @@ public interface CommunicationRequestDao {
   public CommunicationRequest create(CommunicationRequest e);
 
   public CommunicationRequest update(CommunicationRequest e);
-  public void delete(CommunicationRequest e);
+  public void delete(String id);
 
   public List<CommunicationRequest> findByField(QueryBuilder queryBuilder);
 

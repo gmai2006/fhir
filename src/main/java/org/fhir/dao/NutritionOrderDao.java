@@ -38,7 +38,7 @@ public interface NutritionOrderDao {
   public NutritionOrder create(NutritionOrder e);
 
   public NutritionOrder update(NutritionOrder e);
-  public void delete(NutritionOrder e);
+  public void delete(String id);
 
   public List<NutritionOrder> findByField(QueryBuilder queryBuilder);
 

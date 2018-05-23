@@ -36,7 +36,7 @@ public interface BodySiteService {
   public List<BodySite> selectAll();
   public BodySite create(BodySite bean);
   public BodySite update(BodySite bean);
-  public void delete(BodySite bean);
+  public void delete(String id);
   public List<BodySite> findByField(QueryBuilder queryBuilder);
   public List<BodySite> findByCode(QueryBuilder queryBuilder);
   public List<BodySite> findByQualifier(QueryBuilder queryBuilder);

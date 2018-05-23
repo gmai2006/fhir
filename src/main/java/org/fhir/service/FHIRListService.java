@@ -36,7 +36,7 @@ public interface FHIRListService {
   public List<FHIRList> selectAll();
   public FHIRList create(FHIRList bean);
   public FHIRList update(FHIRList bean);
-  public void delete(FHIRList bean);
+  public void delete(String id);
   public List<FHIRList> findByField(QueryBuilder queryBuilder);
   public List<FHIRList> findByCode(QueryBuilder queryBuilder);
   public List<FHIRList> findBySubject(QueryBuilder queryBuilder);

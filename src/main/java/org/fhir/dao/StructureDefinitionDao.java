@@ -38,7 +38,7 @@ public interface StructureDefinitionDao {
   public StructureDefinition create(StructureDefinition e);
 
   public StructureDefinition update(StructureDefinition e);
-  public void delete(StructureDefinition e);
+  public void delete(String id);
 
   public List<StructureDefinition> findByField(QueryBuilder queryBuilder);
 

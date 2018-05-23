@@ -38,7 +38,7 @@ public interface FlagDao {
   public Flag create(Flag e);
 
   public Flag update(Flag e);
-  public void delete(Flag e);
+  public void delete(String id);
 
   public List<Flag> findByField(QueryBuilder queryBuilder);
 

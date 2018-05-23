@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="capabilitystatementrest")
 public class CapabilityStatementRestModel  implements Serializable {
-	private static final long serialVersionUID = 151910893760630714L;
+	private static final long serialVersionUID = 15196788321517104L;
   /**
   * Description: "Identifies whether this portion of the statement is describing the ability to initiate or receive restful operations."
   */
@@ -60,7 +60,7 @@ public class CapabilityStatementRestModel  implements Serializable {
   private String security_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="security_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="security_id", insertable=false, updatable=false)
   private java.util.List<CapabilityStatementSecurityModel> security;
 
   /**
@@ -71,7 +71,7 @@ public class CapabilityStatementRestModel  implements Serializable {
   private String resource_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="resource_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="resource_id", insertable=false, updatable=false)
   private java.util.List<CapabilityStatementResourceModel> resource;
 
   /**
@@ -82,7 +82,7 @@ public class CapabilityStatementRestModel  implements Serializable {
   private String interaction_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="interaction_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="interaction_id", insertable=false, updatable=false)
   private java.util.List<CapabilityStatementInteraction1Model> interaction;
 
   /**
@@ -93,7 +93,7 @@ public class CapabilityStatementRestModel  implements Serializable {
   private String searchparam_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="searchparam_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="searchparam_id", insertable=false, updatable=false)
   private java.util.List<CapabilityStatementSearchParamModel> searchParam;
 
   /**
@@ -104,7 +104,7 @@ public class CapabilityStatementRestModel  implements Serializable {
   private String operation_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="operation_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="operation_id", insertable=false, updatable=false)
   private java.util.List<CapabilityStatementOperationModel> operation;
 
   /**
@@ -150,37 +150,37 @@ public class CapabilityStatementRestModel  implements Serializable {
   */
   @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"parent_id\"")
-  private String parent_id;
+  @Column(name="\"db_container_id\"")
+  private String db_container_id;
 
   public CapabilityStatementRestModel() {
   }
 
-  public CapabilityStatementRestModel(CapabilityStatementRest o, String parentId) {
-  	this.parent_id = parentId;
+  public CapabilityStatementRestModel(CapabilityStatementRest o, String containerId) {
+  	this.db_container_id = containerId;
   	if (null == this.id) {
   		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
   	}
     this.mode = o.getMode();
     this.documentation = o.getDocumentation();
     if (null != o.getSecurity() ) {
-    	this.security_id = "security" + this.parent_id;
+    	this.security_id = "security" + this.id;
     	this.security = CapabilityStatementSecurityHelper.toModel(o.getSecurity(), this.security_id);
     }
     if (null != o.getResource() && !o.getResource().isEmpty()) {
-    	this.resource_id = "resource" + this.parent_id;
+    	this.resource_id = "resource" + this.id;
     	this.resource = CapabilityStatementResourceHelper.toModelFromArray(o.getResource(), this.resource_id);
     }
     if (null != o.getInteraction() && !o.getInteraction().isEmpty()) {
-    	this.interaction_id = "interaction" + this.parent_id;
+    	this.interaction_id = "interaction" + this.id;
     	this.interaction = CapabilityStatementInteraction1Helper.toModelFromArray(o.getInteraction(), this.interaction_id);
     }
     if (null != o.getSearchParam() && !o.getSearchParam().isEmpty()) {
-    	this.searchparam_id = "searchparam" + this.parent_id;
+    	this.searchparam_id = "searchparam" + this.id;
     	this.searchParam = CapabilityStatementSearchParamHelper.toModelFromArray(o.getSearchParam(), this.searchparam_id);
     }
     if (null != o.getOperation() && !o.getOperation().isEmpty()) {
-    	this.operation_id = "operation" + this.parent_id;
+    	this.operation_id = "operation" + this.id;
     	this.operation = CapabilityStatementOperationHelper.toModelFromArray(o.getOperation(), this.operation_id);
     }
     this.compartment = org.fhir.utils.JsonUtils.toJson(o.getCompartment());
@@ -258,11 +258,11 @@ public class CapabilityStatementRestModel  implements Serializable {
   public void setExtension( String value) {
     this.extension = value;
   }
-  public String getParent_id() {
-    return this.parent_id;
+  public String getDb_container_id() {
+    return this.db_container_id;
   }
-  public void setParent_id( String value) {
-    this.parent_id = value;
+  public void setDb_container_id( String value) {
+    this.db_container_id = value;
   }
 
   @Override
@@ -275,7 +275,7 @@ public class CapabilityStatementRestModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 
@@ -293,7 +293,7 @@ public class CapabilityStatementRestModel  implements Serializable {
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
-     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+     builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;
     return builder.toString();
   }
 }

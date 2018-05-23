@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class PlanDefinitionResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public PlanDefinition create(PlanDefinition obj) {
-		return this.service.create(obj);
+	public PlanDefinition createOrUpdate(PlanDefinition obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing PlanDefinition
+   * @param obj - instance of PlanDefinition
+   * @return PlanDefinition
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public PlanDefinition update( PlanDefinition obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing PlanDefinition
+   * @param obj - instance of PlanDefinition
+   * @return PlanDefinition
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get PlanDefinition by its ID
+   * @param id - instance of PlanDefinition
+   * @return PlanDefinition
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class PlanDefinitionResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all PlanDefinition with limit of returned records
+   * @param max - number of records
+   * @return a list PlanDefinition
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class PlanDefinitionResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query PlanDefinition based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of PlanDefinition
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class PlanDefinitionResource {
   }
 
   /**
-  * Descr: Intended jurisdiction for the plan definition
-  * Type: token
+   * Query PlanDefinition by composite fields
+   * Descr: Intended jurisdiction for the plan definition
+   * Type: token
   */
   @GET
   @Path("jurisdiction")
@@ -167,8 +208,9 @@ public class PlanDefinitionResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Topics associated with the module
-  * Type: token
+   * Query PlanDefinition by composite fields
+   * Descr: Topics associated with the module
+   * Type: token
   */
   @GET
   @Path("topic")

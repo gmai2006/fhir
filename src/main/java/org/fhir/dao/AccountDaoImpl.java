@@ -69,7 +69,6 @@ public class AccountDaoImpl implements AccountDao {
   @Override
   public List<Account> selectAll() {
       final EntityManager em = entityManagerProvider.get();
-      System.out.println("is entity manager null " + em == null);
       Query query = em.createQuery("select a from AccountModel a", AccountModel.class);
       List<AccountModel> models = query.getResultList();
       return AccountHelper.fromArray2Array(models);
@@ -91,9 +90,9 @@ public class AccountDaoImpl implements AccountDao {
   }
   @Override
   @Transactional
-  public void delete(Account e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final AccountModel removed = em.find(AccountModel.class, e.getId());
+      final AccountModel removed = em.find(AccountModel.class, id);
       em.remove(removed);
   }
 

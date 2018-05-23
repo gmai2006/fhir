@@ -90,9 +90,9 @@ public class NutritionOrderDaoImpl implements NutritionOrderDao {
   }
   @Override
   @Transactional
-  public void delete(NutritionOrder e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final NutritionOrderModel removed = em.find(NutritionOrderModel.class, e.getId());
+      final NutritionOrderModel removed = em.find(NutritionOrderModel.class, id);
       em.remove(removed);
   }
 

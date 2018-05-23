@@ -38,7 +38,7 @@ public interface AuditEventDao {
   public AuditEvent create(AuditEvent e);
 
   public AuditEvent update(AuditEvent e);
-  public void delete(AuditEvent e);
+  public void delete(String id);
 
   public List<AuditEvent> findByField(QueryBuilder queryBuilder);
 

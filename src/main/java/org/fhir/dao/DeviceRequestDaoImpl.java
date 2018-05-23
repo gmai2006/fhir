@@ -90,9 +90,9 @@ public class DeviceRequestDaoImpl implements DeviceRequestDao {
   }
   @Override
   @Transactional
-  public void delete(DeviceRequest e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final DeviceRequestModel removed = em.find(DeviceRequestModel.class, e.getId());
+      final DeviceRequestModel removed = em.find(DeviceRequestModel.class, id);
       em.remove(removed);
   }
 

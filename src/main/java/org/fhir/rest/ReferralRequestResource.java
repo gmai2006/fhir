@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class ReferralRequestResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ReferralRequest create(ReferralRequest obj) {
-		return this.service.create(obj);
+	public ReferralRequest createOrUpdate(ReferralRequest obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing ReferralRequest
+   * @param obj - instance of ReferralRequest
+   * @return ReferralRequest
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public ReferralRequest update( ReferralRequest obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing ReferralRequest
+   * @param obj - instance of ReferralRequest
+   * @return ReferralRequest
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get ReferralRequest by its ID
+   * @param id - instance of ReferralRequest
+   * @return ReferralRequest
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class ReferralRequestResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all ReferralRequest with limit of returned records
+   * @param max - number of records
+   * @return a list ReferralRequest
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class ReferralRequestResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query ReferralRequest based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of ReferralRequest
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class ReferralRequestResource {
   }
 
   /**
-  * Descr: Instantiates protocol or definition
-  * Type: reference
+   * Query ReferralRequest by composite fields
+   * Descr: Instantiates protocol or definition
+   * Type: reference
   */
   @GET
   @Path("definition")
@@ -167,8 +208,9 @@ public class ReferralRequestResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Request being fulfilled
-  * Type: reference
+   * Query ReferralRequest by composite fields
+   * Descr: Request being fulfilled
+   * Type: reference
   */
   @GET
   @Path("basedon")
@@ -193,8 +235,9 @@ public class ReferralRequestResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Request(s) replaced by this request
-  * Type: reference
+   * Query ReferralRequest by composite fields
+   * Descr: Request(s) replaced by this request
+   * Type: reference
   */
   @GET
   @Path("replaces")
@@ -219,8 +262,9 @@ public class ReferralRequestResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Actions requested as part of the referral
-  * Type: token
+   * Query ReferralRequest by composite fields
+   * Descr: Actions requested as part of the referral
+   * Type: token
   */
   @GET
   @Path("service")
@@ -245,8 +289,9 @@ public class ReferralRequestResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Patient referred to care or transfer
-  * Type: reference
+   * Query ReferralRequest by composite fields
+   * Descr: Patient referred to care or transfer
+   * Type: reference
   */
   @GET
   @Path("subject")
@@ -271,8 +316,9 @@ public class ReferralRequestResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Part of encounter or episode of care
-  * Type: reference
+   * Query ReferralRequest by composite fields
+   * Descr: Part of encounter or episode of care
+   * Type: reference
   */
   @GET
   @Path("context")
@@ -297,8 +343,9 @@ public class ReferralRequestResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The specialty that the referral is for
-  * Type: token
+   * Query ReferralRequest by composite fields
+   * Descr: The specialty that the referral is for
+   * Type: token
   */
   @GET
   @Path("specialty")
@@ -323,8 +370,9 @@ public class ReferralRequestResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The person that the referral was sent to
-  * Type: reference
+   * Query ReferralRequest by composite fields
+   * Descr: The person that the referral was sent to
+   * Type: reference
   */
   @GET
   @Path("recipient")

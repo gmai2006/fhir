@@ -38,7 +38,7 @@ public interface PractitionerDao {
   public Practitioner create(Practitioner e);
 
   public Practitioner update(Practitioner e);
-  public void delete(Practitioner e);
+  public void delete(String id);
 
   public List<Practitioner> findByField(QueryBuilder queryBuilder);
 

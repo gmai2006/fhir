@@ -36,7 +36,7 @@ public interface AdverseEventService {
   public List<AdverseEvent> selectAll();
   public AdverseEvent create(AdverseEvent bean);
   public AdverseEvent update(AdverseEvent bean);
-  public void delete(AdverseEvent bean);
+  public void delete(String id);
   public List<AdverseEvent> findByField(QueryBuilder queryBuilder);
   public List<AdverseEvent> findByType(QueryBuilder queryBuilder);
   public List<AdverseEvent> findBySubject(QueryBuilder queryBuilder);

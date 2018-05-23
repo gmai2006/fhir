@@ -195,6 +195,9 @@ public class Appointment  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
+    if (o.getIdentifier() != null) {
+    	this.identifier = org.fhir.utils.JsonUtils.json2Array(o.getIdentifier());
+    }
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
@@ -248,6 +251,9 @@ public class Appointment  extends DomainResource  {
     }
     if (null != o.getParticipant() && !o.getParticipant().isEmpty()) {
     	this.participant = AppointmentParticipantHelper.fromArray2Array(o.getParticipant());
+    }
+    if (o.getRequestedPeriod() != null) {
+    	this.requestedPeriod = org.fhir.utils.JsonUtils.json2Array(o.getRequestedPeriod());
     }
   }
 

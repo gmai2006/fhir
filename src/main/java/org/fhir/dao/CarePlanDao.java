@@ -38,7 +38,7 @@ public interface CarePlanDao {
   public CarePlan create(CarePlan e);
 
   public CarePlan update(CarePlan e);
-  public void delete(CarePlan e);
+  public void delete(String id);
 
   public List<CarePlan> findByField(QueryBuilder queryBuilder);
 

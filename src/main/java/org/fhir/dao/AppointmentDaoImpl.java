@@ -90,9 +90,9 @@ public class AppointmentDaoImpl implements AppointmentDao {
   }
   @Override
   @Transactional
-  public void delete(Appointment e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final AppointmentModel removed = em.find(AppointmentModel.class, e.getId());
+      final AppointmentModel removed = em.find(AppointmentModel.class, id);
       em.remove(removed);
   }
 

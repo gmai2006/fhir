@@ -90,9 +90,9 @@ public class ClinicalImpressionDaoImpl implements ClinicalImpressionDao {
   }
   @Override
   @Transactional
-  public void delete(ClinicalImpression e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ClinicalImpressionModel removed = em.find(ClinicalImpressionModel.class, e.getId());
+      final ClinicalImpressionModel removed = em.find(ClinicalImpressionModel.class, id);
       em.remove(removed);
   }
 

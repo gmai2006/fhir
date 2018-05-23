@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class EligibilityResponseResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public EligibilityResponse create(EligibilityResponse obj) {
-		return this.service.create(obj);
+	public EligibilityResponse createOrUpdate(EligibilityResponse obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing EligibilityResponse
+   * @param obj - instance of EligibilityResponse
+   * @return EligibilityResponse
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public EligibilityResponse update( EligibilityResponse obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing EligibilityResponse
+   * @param obj - instance of EligibilityResponse
+   * @return EligibilityResponse
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get EligibilityResponse by its ID
+   * @param id - instance of EligibilityResponse
+   * @return EligibilityResponse
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class EligibilityResponseResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all EligibilityResponse with limit of returned records
+   * @param max - number of records
+   * @return a list EligibilityResponse
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class EligibilityResponseResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query EligibilityResponse based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of EligibilityResponse
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class EligibilityResponseResource {
   }
 
   /**
-  * Descr: The EligibilityRequest provider
-  * Type: reference
+   * Query EligibilityResponse by composite fields
+   * Descr: The EligibilityRequest provider
+   * Type: reference
   */
   @GET
   @Path("requestprovider")
@@ -167,8 +208,9 @@ public class EligibilityResponseResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The EligibilityRequest organization
-  * Type: reference
+   * Query EligibilityResponse by composite fields
+   * Descr: The EligibilityRequest organization
+   * Type: reference
   */
   @GET
   @Path("requestorganization")
@@ -193,8 +235,9 @@ public class EligibilityResponseResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The EligibilityRequest reference
-  * Type: reference
+   * Query EligibilityResponse by composite fields
+   * Descr: The EligibilityRequest reference
+   * Type: reference
   */
   @GET
   @Path("request")
@@ -219,8 +262,9 @@ public class EligibilityResponseResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The processing outcome
-  * Type: token
+   * Query EligibilityResponse by composite fields
+   * Descr: The processing outcome
+   * Type: token
   */
   @GET
   @Path("outcome")
@@ -245,8 +289,9 @@ public class EligibilityResponseResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The organization which generated this resource
-  * Type: reference
+   * Query EligibilityResponse by composite fields
+   * Descr: The organization which generated this resource
+   * Type: reference
   */
   @GET
   @Path("insurer")

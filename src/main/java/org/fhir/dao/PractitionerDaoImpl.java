@@ -90,9 +90,9 @@ public class PractitionerDaoImpl implements PractitionerDao {
   }
   @Override
   @Transactional
-  public void delete(Practitioner e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final PractitionerModel removed = em.find(PractitionerModel.class, e.getId());
+      final PractitionerModel removed = em.find(PractitionerModel.class, id);
       em.remove(removed);
   }
 

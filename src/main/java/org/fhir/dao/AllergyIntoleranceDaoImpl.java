@@ -90,9 +90,9 @@ public class AllergyIntoleranceDaoImpl implements AllergyIntoleranceDao {
   }
   @Override
   @Transactional
-  public void delete(AllergyIntolerance e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final AllergyIntoleranceModel removed = em.find(AllergyIntoleranceModel.class, e.getId());
+      final AllergyIntoleranceModel removed = em.find(AllergyIntoleranceModel.class, id);
       em.remove(removed);
   }
 

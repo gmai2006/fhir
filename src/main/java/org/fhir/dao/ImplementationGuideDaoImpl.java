@@ -90,9 +90,9 @@ public class ImplementationGuideDaoImpl implements ImplementationGuideDao {
   }
   @Override
   @Transactional
-  public void delete(ImplementationGuide e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ImplementationGuideModel removed = em.find(ImplementationGuideModel.class, e.getId());
+      final ImplementationGuideModel removed = em.find(ImplementationGuideModel.class, id);
       em.remove(removed);
   }
 

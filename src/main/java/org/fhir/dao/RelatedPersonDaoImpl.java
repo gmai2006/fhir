@@ -90,9 +90,9 @@ public class RelatedPersonDaoImpl implements RelatedPersonDao {
   }
   @Override
   @Transactional
-  public void delete(RelatedPerson e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final RelatedPersonModel removed = em.find(RelatedPersonModel.class, e.getId());
+      final RelatedPersonModel removed = em.find(RelatedPersonModel.class, id);
       em.remove(removed);
   }
 

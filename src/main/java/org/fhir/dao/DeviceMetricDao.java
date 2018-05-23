@@ -38,7 +38,7 @@ public interface DeviceMetricDao {
   public DeviceMetric create(DeviceMetric e);
 
   public DeviceMetric update(DeviceMetric e);
-  public void delete(DeviceMetric e);
+  public void delete(String id);
 
   public List<DeviceMetric> findByField(QueryBuilder queryBuilder);
 

@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,18 +71,48 @@ public class ResearchStudyResource {
     this.service = service;
   }
 
+  /**
+   * Idempotent method - create or update
+   * @param obj
+   * @return
+   */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ResearchStudy create(ResearchStudy obj) {
-		return this.service.create(obj);
+	public ResearchStudy createOrUpdate(ResearchStudy obj) {
+		if (this.service.find(obj.getId()) != null) {
+			return this.service.update(obj);
+		}
+		else return this.service.create(obj);
 	}
 
+	/**
+	 * InIdempotent method
+   * Update existing ResearchStudy
+   * @param obj - instance of ResearchStudy
+   * @return ResearchStudy
+   */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public ResearchStudy update( ResearchStudy obj) {
 		return this.service.update(obj);
 	}
 
+	/**
+   * Delete existing ResearchStudy
+   * @param obj - instance of ResearchStudy
+   * @return ResearchStudy
+   */
+	@Consumes(MediaType.APPLICATION_JSON)
+	@DELETE
+	public void delete(@PathParam("id") String id) {
+		this.service.delete(id);
+	}
+
+	/**
+   * Get ResearchStudy by its ID
+   * @param id - instance of ResearchStudy
+   * @return ResearchStudy
+   */
   @GET
   @Path("{id}")
   public Response find(@PathParam("id") String id) {
@@ -93,6 +123,11 @@ public class ResearchStudyResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Select all ResearchStudy with limit of returned records
+   * @param max - number of records
+   * @return a list ResearchStudy
+   */
   @GET
   @Path("select/{max}")
   public Response findWithLimit(@PathParam("max") String max) {
@@ -109,6 +144,11 @@ public class ResearchStudyResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  /**
+   * Query ResearchStudy based on basic field names
+   * @param UriInfo - UriInfo
+   * @return list of ResearchStudy
+   */
   @GET
   public Response findByField(@Context UriInfo info) {
   	MultivaluedMap<String, String> parameters = info.getQueryParameters();
@@ -141,8 +181,9 @@ public class ResearchStudyResource {
   }
 
   /**
-  * Descr: Steps followed in executing study
-  * Type: reference
+   * Query ResearchStudy by composite fields
+   * Descr: Steps followed in executing study
+   * Type: reference
   */
   @GET
   @Path("protocol")
@@ -167,8 +208,9 @@ public class ResearchStudyResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Part of larger study
-  * Type: reference
+   * Query ResearchStudy by composite fields
+   * Descr: Part of larger study
+   * Type: reference
   */
   @GET
   @Path("partof")
@@ -193,8 +235,9 @@ public class ResearchStudyResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Drugs, devices, conditions, etc. under study
-  * Type: token
+   * Query ResearchStudy by composite fields
+   * Descr: Drugs, devices, conditions, etc. under study
+   * Type: token
   */
   @GET
   @Path("focus")
@@ -219,8 +262,9 @@ public class ResearchStudyResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Used to search for the study
-  * Type: token
+   * Query ResearchStudy by composite fields
+   * Descr: Used to search for the study
+   * Type: token
   */
   @GET
   @Path("keyword")
@@ -245,8 +289,9 @@ public class ResearchStudyResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Geographic region(s) for study
-  * Type: token
+   * Query ResearchStudy by composite fields
+   * Descr: Geographic region(s) for study
+   * Type: token
   */
   @GET
   @Path("jurisdiction")
@@ -271,8 +316,9 @@ public class ResearchStudyResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Organization responsible for the study
-  * Type: reference
+   * Query ResearchStudy by composite fields
+   * Descr: Organization responsible for the study
+   * Type: reference
   */
   @GET
   @Path("sponsor")
@@ -297,8 +343,9 @@ public class ResearchStudyResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: The individual responsible for the study
-  * Type: reference
+   * Query ResearchStudy by composite fields
+   * Descr: The individual responsible for the study
+   * Type: reference
   */
   @GET
   @Path("principalinvestigator")
@@ -323,8 +370,9 @@ public class ResearchStudyResource {
   	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
-  * Descr: Location involved in study execution
-  * Type: reference
+   * Query ResearchStudy by composite fields
+   * Descr: Location involved in study execution
+   * Type: reference
   */
   @GET
   @Path("site")

@@ -38,7 +38,7 @@ public interface ContractDao {
   public Contract create(Contract e);
 
   public Contract update(Contract e);
-  public void delete(Contract e);
+  public void delete(String id);
 
   public List<Contract> findByField(QueryBuilder queryBuilder);
 

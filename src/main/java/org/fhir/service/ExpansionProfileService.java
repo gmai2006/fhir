@@ -36,7 +36,7 @@ public interface ExpansionProfileService {
   public List<ExpansionProfile> selectAll();
   public ExpansionProfile create(ExpansionProfile bean);
   public ExpansionProfile update(ExpansionProfile bean);
-  public void delete(ExpansionProfile bean);
+  public void delete(String id);
   public List<ExpansionProfile> findByField(QueryBuilder queryBuilder);
   public List<ExpansionProfile> findByContact(QueryBuilder queryBuilder);
   public List<ExpansionProfile> findByUseContext(QueryBuilder queryBuilder);

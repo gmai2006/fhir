@@ -38,7 +38,7 @@ public interface SupplyDeliveryDao {
   public SupplyDelivery create(SupplyDelivery e);
 
   public SupplyDelivery update(SupplyDelivery e);
-  public void delete(SupplyDelivery e);
+  public void delete(String id);
 
   public List<SupplyDelivery> findByField(QueryBuilder queryBuilder);
 

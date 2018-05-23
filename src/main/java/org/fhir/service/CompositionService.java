@@ -36,7 +36,7 @@ public interface CompositionService {
   public List<Composition> selectAll();
   public Composition create(Composition bean);
   public Composition update(Composition bean);
-  public void delete(Composition bean);
+  public void delete(String id);
   public List<Composition> findByField(QueryBuilder queryBuilder);
   public List<Composition> findByType(QueryBuilder queryBuilder);
   public List<Composition> findByFHIRclass(QueryBuilder queryBuilder);

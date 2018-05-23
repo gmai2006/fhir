@@ -37,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="supplyrequest")
 public class SupplyRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151910893770585654L;
+	private static final long serialVersionUID = 151967883224717885L;
   /**
   * Description: "This is a SupplyRequest resource"
   */
@@ -70,7 +70,7 @@ public class SupplyRequestModel  implements Serializable {
   private String category_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> category;
 
   /**
@@ -89,7 +89,7 @@ public class SupplyRequestModel  implements Serializable {
   private String ordereditem_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="ordereditem_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="ordereditem_id", insertable=false, updatable=false)
   private java.util.List<SupplyRequestOrderedItemModel> orderedItem;
 
   /**
@@ -134,7 +134,7 @@ public class SupplyRequestModel  implements Serializable {
   private String requester_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="requester_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="requester_id", insertable=false, updatable=false)
   private java.util.List<SupplyRequestRequesterModel> requester;
 
   /**
@@ -145,7 +145,7 @@ public class SupplyRequestModel  implements Serializable {
   private String supplier_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="supplier_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="supplier_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> supplier;
 
   /**
@@ -156,7 +156,7 @@ public class SupplyRequestModel  implements Serializable {
   private String reasoncodeableconcept_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasoncodeableconcept_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="reasoncodeableconcept_id", insertable=false, updatable=false)
   private java.util.List<CodeableConceptModel> reasonCodeableConcept;
 
   /**
@@ -167,7 +167,7 @@ public class SupplyRequestModel  implements Serializable {
   private String reasonreference_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasonreference_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="reasonreference_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> reasonReference;
 
   /**
@@ -178,7 +178,7 @@ public class SupplyRequestModel  implements Serializable {
   private String deliverfrom_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="deliverfrom_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="deliverfrom_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> deliverFrom;
 
   /**
@@ -189,7 +189,7 @@ public class SupplyRequestModel  implements Serializable {
   private String deliverto_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="deliverto_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="deliverto_id", insertable=false, updatable=false)
   private java.util.List<ReferenceModel> deliverTo;
 
   /**
@@ -201,7 +201,7 @@ public class SupplyRequestModel  implements Serializable {
   private String text_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
   private java.util.List<NarrativeModel> text;
 
   /**
@@ -255,7 +255,7 @@ public class SupplyRequestModel  implements Serializable {
   private String meta_id;
 
   @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
-  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  @javax.persistence.JoinColumn(name = "\"db_container_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
   private java.util.List<MetaModel> meta;
 
   /**

@@ -90,9 +90,9 @@ public class BundleDaoImpl implements BundleDao {
   }
   @Override
   @Transactional
-  public void delete(Bundle e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final BundleModel removed = em.find(BundleModel.class, e.getId());
+      final BundleModel removed = em.find(BundleModel.class, id);
       em.remove(removed);
   }
 

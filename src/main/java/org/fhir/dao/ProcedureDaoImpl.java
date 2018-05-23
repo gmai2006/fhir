@@ -90,9 +90,9 @@ public class ProcedureDaoImpl implements ProcedureDao {
   }
   @Override
   @Transactional
-  public void delete(Procedure e) {
+  public void delete(String id) {
       final EntityManager em = entityManagerProvider.get();
-      final ProcedureModel removed = em.find(ProcedureModel.class, e.getId());
+      final ProcedureModel removed = em.find(ProcedureModel.class, id);
       em.remove(removed);
   }
 
