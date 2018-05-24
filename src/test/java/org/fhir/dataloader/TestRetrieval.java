@@ -304,11 +304,14 @@ public class TestRetrieval {
 
   @Test
   public void test0() throws Exception {
+  	Object local = null;
   	System.out.println("Total tests .. " + count);
   }
   @Test
   public void test310() throws Exception {
+  	Object local = null;
   	count++;
+  	System.out.println("Test retrieve Sequence");
   	result = sequenceDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Sequence [example]");
@@ -317,6 +320,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("hdlcholesterol");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [hdlcholesterol]");
@@ -325,6 +329,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Sequence");
   	result = sequenceDao.find("fda-vcfeval-comparison");
   	if (null == result) {
   		System.out.println("Not found Sequence [fda-vcfeval-comparison]");
@@ -333,6 +338,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -341,6 +347,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("familymemberhistory-severity");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [familymemberhistory-severity]");
@@ -349,6 +356,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("contract-signer-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [contract-signer-type]");
@@ -357,6 +365,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve FHIRList");
   	result = fhirlistDao.find("current-allergies");
   	if (null == result) {
   		System.out.println("Not found FHIRList [current-allergies]");
@@ -365,6 +374,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve NutritionOrder");
   	result = nutritionorderDao.find("pureeddiet");
   	if (null == result) {
   		System.out.println("Not found NutritionOrder [pureeddiet]");
@@ -373,6 +383,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -381,6 +392,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -389,6 +401,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Practitioner");
   	result = practitionerDao.find("f002");
   	if (null == result) {
   		System.out.println("Not found Practitioner [f002]");
@@ -397,6 +410,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("EligibilityResponse");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [EligibilityResponse]");
@@ -405,6 +419,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("hlaresult");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [hlaresult]");
@@ -413,6 +428,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -421,6 +437,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Measure");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Measure]");
@@ -429,6 +446,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("parameter-group");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [parameter-group]");
@@ -437,6 +455,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("device-statement-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [device-statement-status]");
@@ -445,6 +464,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("StructureMap-transform");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [StructureMap-transform]");
@@ -453,6 +473,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("v2-valuesets");
   	if (null == result) {
   		System.out.println("Not found Bundle [v2-valuesets]");
@@ -461,6 +482,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("72ac8493-52ac-41bd-8d5d-7258c289b5ea");
   	if (null == result) {
   		System.out.println("Not found Bundle [72ac8493-52ac-41bd-8d5d-7258c289b5ea]");
@@ -469,6 +491,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-ADXP-postBox");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-ADXP-postBox]");
@@ -477,6 +500,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("SearchParameter");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [SearchParameter]");
@@ -485,6 +509,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("bodytemp");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [bodytemp]");
@@ -493,6 +518,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -501,6 +527,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("condition-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [condition-category]");
@@ -509,6 +536,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("encounter-location-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [encounter-location-status]");
@@ -517,6 +545,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("contract-content-derivative");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [contract-content-derivative]");
@@ -525,6 +554,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("additional-instruction-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [additional-instruction-codes]");
@@ -533,6 +563,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("med0315");
   	if (null == result) {
   		System.out.println("Not found Medication [med0315]");
@@ -541,6 +572,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("med0308");
   	if (null == result) {
   		System.out.println("Not found Medication [med0308]");
@@ -549,6 +581,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -557,6 +590,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DiagnosticReport");
   	result = diagnosticreportDao.find("101");
   	if (null == result) {
   		System.out.println("Not found DiagnosticReport [101]");
@@ -565,6 +599,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -573,6 +608,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("search-entry-mode");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [search-entry-mode]");
@@ -581,6 +617,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("all-types");
   	if (null == result) {
   		System.out.println("Not found ValueSet [all-types]");
@@ -589,6 +626,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ActivityDefinition");
   	result = activitydefinitionDao.find("provide-mosquito-prevention-advice");
   	if (null == result) {
   		System.out.println("Not found ActivityDefinition [provide-mosquito-prevention-advice]");
@@ -597,6 +635,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("devicemetricobservation");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [devicemetricobservation]");
@@ -605,6 +644,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("bb");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [bb]");
@@ -613,6 +653,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("observation-relationshiptypes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [observation-relationshiptypes]");
@@ -621,6 +662,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("med0306");
   	if (null == result) {
   		System.out.println("Not found Medication [med0306]");
@@ -629,6 +671,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("surface");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [surface]");
@@ -637,6 +680,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("bodyweight");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [bodyweight]");
@@ -645,6 +689,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("clinical-findings");
   	if (null == result) {
   		System.out.println("Not found ValueSet [clinical-findings]");
@@ -653,6 +698,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -661,6 +707,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve FamilyMemberHistory");
   	result = familymemberhistoryDao.find("father");
   	if (null == result) {
   		System.out.println("Not found FamilyMemberHistory [father]");
@@ -669,6 +716,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("Composition-document");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [Composition-document]");
@@ -677,6 +725,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("auditevent-Anonymized");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [auditevent-Anonymized]");
@@ -685,6 +734,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("CapabilityStatement-conforms");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [CapabilityStatement-conforms]");
@@ -693,6 +743,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("entformula-additive");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [entformula-additive]");
@@ -701,6 +752,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ClinicalImpression");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ClinicalImpression]");
@@ -709,6 +761,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("elementdefinition-bestpractice");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [elementdefinition-bestpractice]");
@@ -717,6 +770,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Linkage");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Linkage]");
@@ -725,6 +779,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("humanname-own-prefix");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [humanname-own-prefix]");
@@ -733,6 +788,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve AuditEvent");
   	result = auditeventDao.find("example-pixQuery");
   	if (null == result) {
   		System.out.println("Not found AuditEvent [example-pixQuery]");
@@ -741,6 +797,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("CareTeam");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [CareTeam]");
@@ -749,6 +806,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -757,6 +815,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcedureRequest");
   	result = procedurerequestDao.find("example-pgx");
   	if (null == result) {
   		System.out.println("Not found ProcedureRequest [example-pgx]");
@@ -765,6 +824,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("cm-medication-statement-status-v3");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [cm-medication-statement-status-v3]");
@@ -773,6 +833,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Resource");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Resource]");
@@ -781,6 +842,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Sequence");
   	result = sequenceDao.find("coord-0-base");
   	if (null == result) {
   		System.out.println("Not found Sequence [coord-0-base]");
@@ -789,6 +851,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("ex-diagnosistype");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [ex-diagnosistype]");
@@ -797,6 +860,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("missing-tooth-reason");
   	if (null == result) {
   		System.out.println("Not found ValueSet [missing-tooth-reason]");
@@ -805,6 +869,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("list-item-flag");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [list-item-flag]");
@@ -813,6 +878,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("participationstatus");
   	if (null == result) {
   		System.out.println("Not found ValueSet [participationstatus]");
@@ -821,6 +887,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("bodysite-relative-location");
   	if (null == result) {
   		System.out.println("Not found ValueSet [bodysite-relative-location]");
@@ -829,6 +896,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("translation");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [translation]");
@@ -837,6 +905,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("MetadataResource");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [MetadataResource]");
@@ -845,6 +914,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ResearchSubject");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ResearchSubject]");
@@ -853,6 +923,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0328");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0328]");
@@ -861,6 +932,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve VisionPrescription");
   	result = visionprescriptionDao.find("33123");
   	if (null == result) {
   		System.out.println("Not found VisionPrescription [33123]");
@@ -869,6 +941,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Organization");
   	result = organizationDao.find("mmanu");
   	if (null == result) {
   		System.out.println("Not found Organization [mmanu]");
@@ -877,6 +950,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CarePlan");
   	result = careplanDao.find("f202");
   	if (null == result) {
   		System.out.println("Not found CarePlan [f202]");
@@ -885,6 +959,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("observation-geneticsDNARegionName");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [observation-geneticsDNARegionName]");
@@ -893,6 +968,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("testscript-operation-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [testscript-operation-codes]");
@@ -901,6 +977,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Sequence");
   	result = sequenceDao.find("graphic-example-2");
   	if (null == result) {
   		System.out.println("Not found Sequence [graphic-example-2]");
@@ -909,6 +986,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("goal-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [goal-category]");
@@ -917,6 +995,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ImmunizationRecommendation");
   	result = immunizationrecommendationDao.find("example");
   	if (null == result) {
   		System.out.println("Not found ImmunizationRecommendation [example]");
@@ -925,6 +1004,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Procedure");
   	result = procedureDao.find("biopsy");
   	if (null == result) {
   		System.out.println("Not found Procedure [biopsy]");
@@ -933,6 +1013,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("102");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [102]");
@@ -941,6 +1022,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("SupplyRequest");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [SupplyRequest]");
@@ -949,6 +1031,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ImmunizationRecommendation");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ImmunizationRecommendation]");
@@ -957,6 +1040,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("operation-parameter-use");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [operation-parameter-use]");
@@ -965,6 +1049,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve BodySite");
   	result = bodysiteDao.find("skin-patch");
   	if (null == result) {
   		System.out.println("Not found BodySite [skin-patch]");
@@ -973,6 +1058,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("digital-media-subtype");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [digital-media-subtype]");
@@ -981,6 +1067,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -989,6 +1076,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("audit-entity-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [audit-entity-type]");
@@ -997,6 +1085,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("questionnaire-usage-mode");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [questionnaire-usage-mode]");
@@ -1005,6 +1094,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Identifier");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Identifier]");
@@ -1013,6 +1103,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("yesnodontknow");
   	if (null == result) {
   		System.out.println("Not found ValueSet [yesnodontknow]");
@@ -1021,6 +1112,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Claim");
   	result = claimDao.find("660150");
   	if (null == result) {
   		System.out.println("Not found Claim [660150]");
@@ -1029,6 +1121,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("goal-relationship-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [goal-relationship-type]");
@@ -1037,6 +1130,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("variant-state");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [variant-state]");
@@ -1045,6 +1139,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("procedure-schedule");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [procedure-schedule]");
@@ -1053,6 +1148,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("activity-definition-category");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [activity-definition-category]");
@@ -1061,6 +1157,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("measure-data-usage");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [measure-data-usage]");
@@ -1069,6 +1166,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("issue-severity");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [issue-severity]");
@@ -1077,6 +1175,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("request-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [request-status]");
@@ -1085,6 +1184,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("familymemberhistory-genetic");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [familymemberhistory-genetic]");
@@ -1093,6 +1193,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("measure-scoring");
   	if (null == result) {
   		System.out.println("Not found ValueSet [measure-scoring]");
@@ -1101,6 +1202,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("http-operations");
   	if (null == result) {
   		System.out.println("Not found ValueSet [http-operations]");
@@ -1109,6 +1211,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Meta");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Meta]");
@@ -1117,6 +1220,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("observation-geneticsAminoAcidChangeType");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [observation-geneticsAminoAcidChangeType]");
@@ -1125,6 +1229,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("allergyintolerance-duration");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [allergyintolerance-duration]");
@@ -1133,6 +1238,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("inactive");
   	if (null == result) {
   		System.out.println("Not found ValueSet [inactive]");
@@ -1141,6 +1247,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("food-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [food-type]");
@@ -1149,6 +1256,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0322");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0322]");
@@ -1157,6 +1265,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("example-TPMT-haplotype-one");
   	if (null == result) {
   		System.out.println("Not found Observation [example-TPMT-haplotype-one]");
@@ -1165,6 +1274,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("response-code");
   	if (null == result) {
   		System.out.println("Not found ValueSet [response-code]");
@@ -1173,6 +1283,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("StructureDefinition");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [StructureDefinition]");
@@ -1181,6 +1292,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("communication-category");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [communication-category]");
@@ -1189,6 +1301,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("EnrollmentResponse");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [EnrollmentResponse]");
@@ -1197,6 +1310,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("name-use");
   	if (null == result) {
   		System.out.println("Not found ValueSet [name-use]");
@@ -1205,6 +1319,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Endpoint");
   	result = endpointDao.find("example-wadors");
   	if (null == result) {
   		System.out.println("Not found Endpoint [example-wadors]");
@@ -1213,6 +1328,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve QuestionnaireResponse");
   	result = questionnaireresponseDao.find("f201");
   	if (null == result) {
   		System.out.println("Not found QuestionnaireResponse [f201]");
@@ -1221,6 +1337,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("transaction-mode");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [transaction-mode]");
@@ -1229,6 +1346,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("service-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [service-category]");
@@ -1237,6 +1355,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("message-reason-encounter");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [message-reason-encounter]");
@@ -1245,6 +1364,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Substance");
   	result = substanceDao.find("f204");
   	if (null == result) {
   		System.out.println("Not found Substance [f204]");
@@ -1253,6 +1373,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve AllergyIntolerance");
   	result = allergyintoleranceDao.find("example");
   	if (null == result) {
   		System.out.println("Not found AllergyIntolerance [example]");
@@ -1261,6 +1382,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Consent");
   	result = consentDao.find("consent-example-pkb");
   	if (null == result) {
   		System.out.println("Not found Consent [consent-example-pkb]");
@@ -1269,6 +1391,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("procedure-targetBodySite");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [procedure-targetBodySite]");
@@ -1277,6 +1400,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("relatedperson-relationshiptype");
   	if (null == result) {
   		System.out.println("Not found ValueSet [relatedperson-relationshiptype]");
@@ -1285,6 +1409,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ActivityDefinition");
   	result = activitydefinitionDao.find("serum-zika-dengue-virus-igm");
   	if (null == result) {
   		System.out.println("Not found ActivityDefinition [serum-zika-dengue-virus-igm]");
@@ -1293,6 +1418,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve PlanDefinition");
   	result = plandefinitionDao.find("protocol-example");
   	if (null == result) {
   		System.out.println("Not found PlanDefinition [protocol-example]");
@@ -1301,6 +1427,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-sourceReference");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-sourceReference]");
@@ -1309,6 +1436,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve NutritionOrder");
   	result = nutritionorderDao.find("infantenteral");
   	if (null == result) {
   		System.out.println("Not found NutritionOrder [infantenteral]");
@@ -1317,6 +1445,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -1325,6 +1454,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcessRequest");
   	result = processrequestDao.find("87654");
   	if (null == result) {
   		System.out.println("Not found ProcessRequest [87654]");
@@ -1333,6 +1463,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0330");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0330]");
@@ -1341,6 +1472,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -1349,6 +1481,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -1357,6 +1490,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Group");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Group]");
@@ -1365,6 +1499,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("MedicationStatement");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [MedicationStatement]");
@@ -1373,6 +1508,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-definition");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-definition]");
@@ -1381,6 +1517,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("pharmacy-core-doseType");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [pharmacy-core-doseType]");
@@ -1389,6 +1526,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("humanname-partner-prefix");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [humanname-partner-prefix]");
@@ -1397,6 +1535,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -1405,6 +1544,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("patient-adoptionInfo");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [patient-adoptionInfo]");
@@ -1413,6 +1553,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("dataelement-sdcobjectclassproperty");
   	if (null == result) {
   		System.out.println("Not found ValueSet [dataelement-sdcobjectclassproperty]");
@@ -1421,6 +1562,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("med0311");
   	if (null == result) {
   		System.out.println("Not found Medication [med0311]");
@@ -1429,6 +1571,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -1437,6 +1580,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("consent-state-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [consent-state-codes]");
@@ -1445,6 +1589,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -1453,6 +1598,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -1461,6 +1607,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("questionnaire-answers-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [questionnaire-answers-status]");
@@ -1469,6 +1616,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("supply-item");
   	if (null == result) {
   		System.out.println("Not found ValueSet [supply-item]");
@@ -1477,6 +1625,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Contract");
   	result = contractDao.find("pcd-example-notThem");
   	if (null == result) {
   		System.out.println("Not found Contract [pcd-example-notThem]");
@@ -1485,6 +1634,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaire-optionExclusive");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaire-optionExclusive]");
@@ -1493,6 +1643,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("research-study-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [research-study-status]");
@@ -1501,6 +1652,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("flag-category");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [flag-category]");
@@ -1509,6 +1661,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("contributor-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [contributor-type]");
@@ -1517,6 +1670,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("device-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [device-status]");
@@ -1525,6 +1679,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("composite-measure-scoring");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [composite-measure-scoring]");
@@ -1533,6 +1688,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("PractitionerRole");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [PractitionerRole]");
@@ -1541,6 +1697,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve TestScript");
   	result = testscriptDao.find("testscript-example");
   	if (null == result) {
   		System.out.println("Not found TestScript [testscript-example]");
@@ -1549,6 +1706,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("careplan-activity-title");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [careplan-activity-title]");
@@ -1557,6 +1715,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("RelatedArtifact");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [RelatedArtifact]");
@@ -1565,6 +1724,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("substance-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [substance-status]");
@@ -1573,6 +1733,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("flag-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [flag-status]");
@@ -1581,6 +1742,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Device");
   	result = deviceDao.find("example-pacemaker");
   	if (null == result) {
   		System.out.println("Not found Device [example-pacemaker]");
@@ -1589,6 +1751,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ResearchStudy");
   	result = researchstudyDao.find("example");
   	if (null == result) {
   		System.out.println("Not found ResearchStudy [example]");
@@ -1597,6 +1760,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("procedurerequest-genetics");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [procedurerequest-genetics]");
@@ -1605,6 +1769,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("operational-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [operational-status]");
@@ -1613,6 +1778,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Patient");
   	result = patientDao.find("xcda");
   	if (null == result) {
   		System.out.println("Not found Patient [xcda]");
@@ -1621,6 +1787,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("supplydelivery-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [supplydelivery-type]");
@@ -1629,6 +1796,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("specimen-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [specimen-status]");
@@ -1637,6 +1805,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("example-phenotype");
   	if (null == result) {
   		System.out.println("Not found Observation [example-phenotype]");
@@ -1645,6 +1814,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Provenance");
   	result = provenanceDao.find("example-biocompute-object");
   	if (null == result) {
   		System.out.println("Not found Provenance [example-biocompute-object]");
@@ -1653,6 +1823,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("encounter-associatedEncounter");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [encounter-associatedEncounter]");
@@ -1661,6 +1832,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("risk-probability");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [risk-probability]");
@@ -1669,6 +1841,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("example-haplotype1");
   	if (null == result) {
   		System.out.println("Not found Observation [example-haplotype1]");
@@ -1677,6 +1850,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("list-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [list-status]");
@@ -1685,6 +1859,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Contract");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Contract]");
@@ -1693,6 +1868,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("11179-de-effective-period");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [11179-de-effective-period]");
@@ -1701,6 +1877,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("codesystem-subsumes");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [codesystem-subsumes]");
@@ -1709,6 +1886,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("message-events");
   	if (null == result) {
   		System.out.println("Not found ValueSet [message-events]");
@@ -1717,6 +1895,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("head-circumference");
   	if (null == result) {
   		System.out.println("Not found Observation [head-circumference]");
@@ -1725,6 +1904,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("doc-classcodes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [doc-classcodes]");
@@ -1733,6 +1913,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("vaccination-protocol-dose-status-reason");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [vaccination-protocol-dose-status-reason]");
@@ -1741,6 +1922,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("event-reasonCode");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [event-reasonCode]");
@@ -1749,6 +1931,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("markdown");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [markdown]");
@@ -1757,6 +1940,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Encounter");
   	result = encounterDao.find("emerg");
   	if (null == result) {
   		System.out.println("Not found Encounter [emerg]");
@@ -1765,6 +1949,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ExpansionProfile");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ExpansionProfile]");
@@ -1773,6 +1958,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("benefit-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [benefit-category]");
@@ -1781,6 +1967,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("response-code");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [response-code]");
@@ -1789,6 +1976,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("med0316");
   	if (null == result) {
   		System.out.println("Not found Medication [med0316]");
@@ -1797,6 +1985,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("10minute-apgar-score");
   	if (null == result) {
   		System.out.println("Not found Observation [10minute-apgar-score]");
@@ -1805,6 +1994,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("action-selection-behavior");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [action-selection-behavior]");
@@ -1813,6 +2003,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("nutrition-request-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [nutrition-request-status]");
@@ -1821,6 +2012,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("DiagnosticReport-geneticsAnalysis");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [DiagnosticReport-geneticsAnalysis]");
@@ -1829,6 +2021,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve EpisodeOfCare");
   	result = episodeofcareDao.find("example");
   	if (null == result) {
   		System.out.println("Not found EpisodeOfCare [example]");
@@ -1837,6 +2030,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("measure-scoring");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [measure-scoring]");
@@ -1845,6 +2039,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("medication-dispense-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [medication-dispense-category]");
@@ -1853,6 +2048,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("linkage-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [linkage-type]");
@@ -1861,6 +2057,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("map-source-list-mode");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [map-source-list-mode]");
@@ -1869,6 +2066,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("audit-event-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [audit-event-type]");
@@ -1877,6 +2075,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("SimpleQuantity");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [SimpleQuantity]");
@@ -1885,6 +2084,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ChargeItem");
   	result = chargeitemDao.find("example");
   	if (null == result) {
   		System.out.println("Not found ChargeItem [example]");
@@ -1893,6 +2093,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("blood-pressure");
   	if (null == result) {
   		System.out.println("Not found Observation [blood-pressure]");
@@ -1901,6 +2102,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("adverse-event-outcome");
   	if (null == result) {
   		System.out.println("Not found ValueSet [adverse-event-outcome]");
@@ -1909,6 +2111,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Sequence");
   	result = sequenceDao.find("example-TPMT-two");
   	if (null == result) {
   		System.out.println("Not found Sequence [example-TPMT-two]");
@@ -1917,6 +2120,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("consent-content-class");
   	if (null == result) {
   		System.out.println("Not found ValueSet [consent-content-class]");
@@ -1925,6 +2129,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Library");
   	result = libraryDao.find("library-fhir-helpers");
   	if (null == result) {
   		System.out.println("Not found Library [library-fhir-helpers]");
@@ -1933,6 +2138,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("resource-aggregation-mode");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [resource-aggregation-mode]");
@@ -1941,6 +2147,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("cholesterol");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [cholesterol]");
@@ -1949,6 +2156,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("list-order");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [list-order]");
@@ -1957,6 +2165,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("contract-term-subtype");
   	if (null == result) {
   		System.out.println("Not found ValueSet [contract-term-subtype]");
@@ -1965,6 +2174,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("adjudication");
   	if (null == result) {
   		System.out.println("Not found ValueSet [adjudication]");
@@ -1973,6 +2183,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("list-item-flag");
   	if (null == result) {
   		System.out.println("Not found ValueSet [list-item-flag]");
@@ -1981,6 +2192,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("bundle-example");
   	if (null == result) {
   		System.out.println("Not found Bundle [bundle-example]");
@@ -1989,6 +2201,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("search-modifier-code");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [search-modifier-code]");
@@ -1997,6 +2210,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("repository-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [repository-type]");
@@ -2005,6 +2219,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Procedure");
   	result = procedureDao.find("f002");
   	if (null == result) {
   		System.out.println("Not found Procedure [f002]");
@@ -2013,6 +2228,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("vaccine-code");
   	if (null == result) {
   		System.out.println("Not found ValueSet [vaccine-code]");
@@ -2021,6 +2237,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Practitioner");
   	result = practitionerDao.find("f006");
   	if (null == result) {
   		System.out.println("Not found Practitioner [f006]");
@@ -2029,6 +2246,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("http-operations");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [http-operations]");
@@ -2037,6 +2255,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("structuredefinition-wg");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [structuredefinition-wg]");
@@ -2045,6 +2264,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("dicom-audit-lifecycle");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [dicom-audit-lifecycle]");
@@ -2053,6 +2273,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("respiratory-rate");
   	if (null == result) {
   		System.out.println("Not found Observation [respiratory-rate]");
@@ -2061,6 +2282,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("encounter-modeOfArrival");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [encounter-modeOfArrival]");
@@ -2069,6 +2291,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("age-units");
   	if (null == result) {
   		System.out.println("Not found ValueSet [age-units]");
@@ -2077,6 +2300,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve AuditEvent");
   	result = auditeventDao.find("example-rest");
   	if (null == result) {
   		System.out.println("Not found AuditEvent [example-rest]");
@@ -2085,6 +2309,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-otherName");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-otherName]");
@@ -2093,6 +2318,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve FHIRList");
   	result = fhirlistDao.find("f201");
   	if (null == result) {
   		System.out.println("Not found FHIRList [f201]");
@@ -2101,6 +2327,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("elementdefinition-11179-DataElement-objectClass");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [elementdefinition-11179-DataElement-objectClass]");
@@ -2109,6 +2336,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Sequence");
   	result = sequenceDao.find("fda-vcf-comparison");
   	if (null == result) {
   		System.out.println("Not found Sequence [fda-vcf-comparison]");
@@ -2117,6 +2345,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("implant-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [implant-status]");
@@ -2125,6 +2354,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("claim-careteamrole");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [claim-careteamrole]");
@@ -2133,6 +2363,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcedureRequest");
   	result = procedurerequestDao.find("ob");
   	if (null == result) {
   		System.out.println("Not found ProcedureRequest [ob]");
@@ -2141,6 +2372,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("observation-genetic-Observation-dna-variant");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [observation-genetic-Observation-dna-variant]");
@@ -2149,6 +2381,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("jurisdiction");
   	if (null == result) {
   		System.out.println("Not found ValueSet [jurisdiction]");
@@ -2157,6 +2390,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Procedure");
   	result = procedureDao.find("appendectomy-narrative");
   	if (null == result) {
   		System.out.println("Not found Procedure [appendectomy-narrative]");
@@ -2165,6 +2399,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("encounter-special-arrangements");
   	if (null == result) {
   		System.out.println("Not found ValueSet [encounter-special-arrangements]");
@@ -2173,6 +2408,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("goal-category");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [goal-category]");
@@ -2181,6 +2417,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-toocostly");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-toocostly]");
@@ -2189,6 +2426,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("3141");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [3141]");
@@ -2197,6 +2435,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Claim");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Claim]");
@@ -2205,6 +2444,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("PlanDefinition-data-requirements");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [PlanDefinition-data-requirements]");
@@ -2213,6 +2453,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("metric-calibration-state");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [metric-calibration-state]");
@@ -2221,6 +2462,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("3a0707d3-549e-4467-b8b8-5a2ab3800efe");
   	if (null == result) {
   		System.out.println("Not found Bundle [3a0707d3-549e-4467-b8b8-5a2ab3800efe]");
@@ -2229,6 +2471,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Condition");
   	result = conditionDao.find("stroke");
   	if (null == result) {
   		System.out.println("Not found Condition [stroke]");
@@ -2237,6 +2480,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0315");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0315]");
@@ -2245,6 +2489,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Practitioner");
   	result = practitionerDao.find("xcda1");
   	if (null == result) {
   		System.out.println("Not found Practitioner [xcda1]");
@@ -2253,6 +2498,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("extension-context");
   	if (null == result) {
   		System.out.println("Not found ValueSet [extension-context]");
@@ -2261,6 +2507,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Consent");
   	result = consentDao.find("consent-example-Out");
   	if (null == result) {
   		System.out.println("Not found Consent [consent-example-Out]");
@@ -2269,6 +2516,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Schedule");
   	result = scheduleDao.find("exampleloc2");
   	if (null == result) {
   		System.out.println("Not found Schedule [exampleloc2]");
@@ -2277,6 +2525,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("document-mode");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [document-mode]");
@@ -2285,6 +2534,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("openEHR-management");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [openEHR-management]");
@@ -2293,6 +2543,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("claim-informationcategory");
   	if (null == result) {
   		System.out.println("Not found ValueSet [claim-informationcategory]");
@@ -2301,6 +2552,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Condition");
   	result = conditionDao.find("f001");
   	if (null == result) {
   		System.out.println("Not found Condition [f001]");
@@ -2309,6 +2561,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("codesystem-comment");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [codesystem-comment]");
@@ -2317,6 +2570,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("resource-types");
   	if (null == result) {
   		System.out.println("Not found ValueSet [resource-types]");
@@ -2325,6 +2579,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0331");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0331]");
@@ -2333,6 +2588,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Condition");
   	result = conditionDao.find("f203");
   	if (null == result) {
   		System.out.println("Not found Condition [f203]");
@@ -2341,6 +2597,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("service-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [service-type]");
@@ -2349,6 +2606,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ConceptMap");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ConceptMap]");
@@ -2357,6 +2615,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -2365,6 +2624,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -2373,6 +2633,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Coverage");
   	result = coverageDao.find("7546D");
   	if (null == result) {
   		System.out.println("Not found Coverage [7546D]");
@@ -2381,6 +2642,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve PaymentNotice");
   	result = paymentnoticeDao.find("77654");
   	if (null == result) {
   		System.out.println("Not found PaymentNotice [77654]");
@@ -2389,6 +2651,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("string");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [string]");
@@ -2397,6 +2660,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("communication-not-done-reason");
   	if (null == result) {
   		System.out.println("Not found ValueSet [communication-not-done-reason]");
@@ -2405,6 +2669,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ActivityDefinition");
   	result = activitydefinitionDao.find("administer-zika-virus-exposure-assessment");
   	if (null == result) {
   		System.out.println("Not found ActivityDefinition [administer-zika-virus-exposure-assessment]");
@@ -2413,6 +2678,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0319");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0319]");
@@ -2421,6 +2687,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("claim-subtype");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [claim-subtype]");
@@ -2429,6 +2696,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("diagnosticReport-locationPerformed");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [diagnosticReport-locationPerformed]");
@@ -2437,6 +2705,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("patient-clinicalTrial");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [patient-clinicalTrial]");
@@ -2445,6 +2714,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("cm-document-reference-status-v3");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [cm-document-reference-status-v3]");
@@ -2453,6 +2723,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DeviceComponent");
   	result = devicecomponentDao.find("example-prodspec");
   	if (null == result) {
   		System.out.println("Not found DeviceComponent [example-prodspec]");
@@ -2461,6 +2732,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DetectedIssue");
   	result = detectedissueDao.find("duplicate");
   	if (null == result) {
   		System.out.println("Not found DetectedIssue [duplicate]");
@@ -2469,6 +2741,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("marital-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [marital-status]");
@@ -2477,6 +2750,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve NutritionOrder");
   	result = nutritionorderDao.find("texturemodified");
   	if (null == result) {
   		System.out.println("Not found NutritionOrder [texturemodified]");
@@ -2485,6 +2759,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("event-performerRole");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [event-performerRole]");
@@ -2493,6 +2768,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -2501,6 +2777,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -2509,6 +2786,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("dateTime");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [dateTime]");
@@ -2517,6 +2795,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -2525,6 +2804,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("search-xpath-usage");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [search-xpath-usage]");
@@ -2533,6 +2813,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("type-derivation-rule");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [type-derivation-rule]");
@@ -2541,6 +2822,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("codesystem-warning");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [codesystem-warning]");
@@ -2549,6 +2831,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-trusted-expansion");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-trusted-expansion]");
@@ -2557,6 +2840,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -2565,6 +2849,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("additionalmaterials");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [additionalmaterials]");
@@ -2573,6 +2858,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("adverse-event-causality-assess");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [adverse-event-causality-assess]");
@@ -2581,6 +2867,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-TEL-address");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-TEL-address]");
@@ -2589,6 +2876,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve AuditEvent");
   	result = auditeventDao.find("example-disclosure");
   	if (null == result) {
   		System.out.println("Not found AuditEvent [example-disclosure]");
@@ -2597,6 +2885,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("encounter-special-arrangements");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [encounter-special-arrangements]");
@@ -2605,6 +2894,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("map-context-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [map-context-type]");
@@ -2613,6 +2903,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("ConceptMap-closure");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [ConceptMap-closure]");
@@ -2621,6 +2912,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("detectedissue-severity");
   	if (null == result) {
   		System.out.println("Not found ValueSet [detectedissue-severity]");
@@ -2629,6 +2921,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("communicationrequest-reasonRejected");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [communicationrequest-reasonRejected]");
@@ -2639,7 +2932,9 @@ public class TestRetrieval {
   }
   @Test
   public void test620() throws Exception {
+  	Object local = null;
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("CodeSystem-compose");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [CodeSystem-compose]");
@@ -2648,6 +2943,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Questionnaire");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Questionnaire]");
@@ -2656,6 +2952,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve NamingSystem");
   	result = namingsystemDao.find("example-id");
   	if (null == result) {
   		System.out.println("Not found NamingSystem [example-id]");
@@ -2664,6 +2961,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0333");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0333]");
@@ -2672,6 +2970,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("surface");
   	if (null == result) {
   		System.out.println("Not found ValueSet [surface]");
@@ -2680,6 +2979,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("observation-genetic-Observation-gene-dnavariant");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [observation-genetic-Observation-gene-dnavariant]");
@@ -2688,6 +2988,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("sequence-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [sequence-type]");
@@ -2696,6 +2997,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("issue-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [issue-type]");
@@ -2704,6 +3006,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("minValue");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [minValue]");
@@ -2712,6 +3015,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("chromosome-human");
   	if (null == result) {
   		System.out.println("Not found ValueSet [chromosome-human]");
@@ -2720,6 +3024,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("goal-status-reason");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [goal-status-reason]");
@@ -2728,6 +3033,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("observation-bodyPosition");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [observation-bodyPosition]");
@@ -2736,6 +3042,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("timing-exact");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [timing-exact]");
@@ -2744,6 +3051,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("service-referral-method");
   	if (null == result) {
   		System.out.println("Not found ValueSet [service-referral-method]");
@@ -2752,6 +3060,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("instance-availability");
   	if (null == result) {
   		System.out.println("Not found ValueSet [instance-availability]");
@@ -2760,6 +3069,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("report-participant-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [report-participant-type]");
@@ -2768,6 +3078,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("medication-statement-taken");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [medication-statement-taken]");
@@ -2776,6 +3087,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("geolocation");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [geolocation]");
@@ -2784,6 +3096,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-verification");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-verification]");
@@ -2792,6 +3105,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("object-role");
   	if (null == result) {
   		System.out.println("Not found ValueSet [object-role]");
@@ -2800,6 +3114,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("subscription-tag");
   	if (null == result) {
   		System.out.println("Not found ValueSet [subscription-tag]");
@@ -2808,6 +3123,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("heartrate");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [heartrate]");
@@ -2816,6 +3132,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("f206");
   	if (null == result) {
   		System.out.println("Not found Observation [f206]");
@@ -2824,6 +3141,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -2832,6 +3150,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("encounter-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [encounter-status]");
@@ -2840,6 +3159,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Coverage");
   	result = coverageDao.find("SP1234");
   	if (null == result) {
   		System.out.println("Not found Coverage [SP1234]");
@@ -2848,6 +3168,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ReferralRequest");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ReferralRequest]");
@@ -2856,6 +3177,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("doc-section-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [doc-section-codes]");
@@ -2864,6 +3186,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0307");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0307]");
@@ -2872,6 +3195,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("Resource-meta-add");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [Resource-meta-add]");
@@ -2880,6 +3204,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("operation-kind");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [operation-kind]");
@@ -2888,6 +3213,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("care-team-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [care-team-category]");
@@ -2896,6 +3222,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("network-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [network-type]");
@@ -2904,6 +3231,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("object-lifecycle-events");
   	if (null == result) {
   		System.out.println("Not found ValueSet [object-lifecycle-events]");
@@ -2912,6 +3240,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Procedure");
   	result = procedureDao.find("ambulation");
   	if (null == result) {
   		System.out.println("Not found Procedure [ambulation]");
@@ -2920,6 +3249,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaire-targetStructureMap");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaire-targetStructureMap]");
@@ -2928,6 +3258,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("patient-birthTime");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [patient-birthTime]");
@@ -2936,6 +3267,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("cm-medication-dispense-status-v3");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [cm-medication-dispense-status-v3]");
@@ -2944,6 +3276,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("observation-genetic-Observation-amino-acid-change");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [observation-genetic-Observation-amino-acid-change]");
@@ -2952,6 +3285,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("ValueSet-expand");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [ValueSet-expand]");
@@ -2960,6 +3294,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("messageheader-response-request");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [messageheader-response-request]");
@@ -2968,6 +3303,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("observation-statistics");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [observation-statistics]");
@@ -2976,6 +3312,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Appointment");
   	result = appointmentDao.find("2docs");
   	if (null == result) {
   		System.out.println("Not found Appointment [2docs]");
@@ -2984,6 +3321,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("claim-modifiers");
   	if (null == result) {
   		System.out.println("Not found ValueSet [claim-modifiers]");
@@ -2992,6 +3330,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("coverage-selfpay");
   	if (null == result) {
   		System.out.println("Not found ValueSet [coverage-selfpay]");
@@ -3000,6 +3339,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("allerg-intol-substance-exp-risk");
   	if (null == result) {
   		System.out.println("Not found ValueSet [allerg-intol-substance-exp-risk]");
@@ -3008,6 +3348,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("med0313");
   	if (null == result) {
   		System.out.println("Not found Medication [med0313]");
@@ -3016,6 +3357,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ExplanationOfBenefit");
   	result = explanationofbenefitDao.find("EB3500");
   	if (null == result) {
   		System.out.println("Not found ExplanationOfBenefit [EB3500]");
@@ -3024,6 +3366,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("composition-attestation-mode");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [composition-attestation-mode]");
@@ -3032,6 +3375,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Claim");
   	result = claimDao.find("100151");
   	if (null == result) {
   		System.out.println("Not found Claim [100151]");
@@ -3040,6 +3384,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("observation-genetics");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [observation-genetics]");
@@ -3048,6 +3393,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("positiveInt");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [positiveInt]");
@@ -3056,6 +3402,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("property-representation");
   	if (null == result) {
   		System.out.println("Not found ValueSet [property-representation]");
@@ -3064,6 +3411,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Endpoint");
   	result = endpointDao.find("example-iid");
   	if (null == result) {
   		System.out.println("Not found Endpoint [example-iid]");
@@ -3072,6 +3420,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("benefit-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [benefit-type]");
@@ -3080,6 +3429,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("action-participant-role");
   	if (null == result) {
   		System.out.println("Not found ValueSet [action-participant-role]");
@@ -3088,6 +3438,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -3096,6 +3447,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-CO-value");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-CO-value]");
@@ -3104,6 +3456,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -3112,6 +3465,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Location");
   	result = locationDao.find("ukp");
   	if (null == result) {
   		System.out.println("Not found Location [ukp]");
@@ -3120,6 +3474,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -3128,6 +3483,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve AuditEvent");
   	result = auditeventDao.find("example-media");
   	if (null == result) {
   		System.out.println("Not found AuditEvent [example-media]");
@@ -3136,6 +3492,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("oxygensat");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [oxygensat]");
@@ -3144,6 +3501,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Measure");
   	result = measureDao.find("composite-example");
   	if (null == result) {
   		System.out.println("Not found Measure [composite-example]");
@@ -3152,6 +3510,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("data-absent-reason");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [data-absent-reason]");
@@ -3160,6 +3519,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Flag");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Flag]");
@@ -3168,6 +3528,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("blood-pressure-cancel");
   	if (null == result) {
   		System.out.println("Not found Observation [blood-pressure-cancel]");
@@ -3176,6 +3537,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("medication-statement-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [medication-statement-category]");
@@ -3184,6 +3546,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("security-role-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [security-role-type]");
@@ -3192,6 +3555,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("report-status-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [report-status-codes]");
@@ -3200,6 +3564,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("procedurerequest-reasonRefused");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [procedurerequest-reasonRefused]");
@@ -3208,6 +3573,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve RiskAssessment");
   	result = riskassessmentDao.find("cardiac");
   	if (null == result) {
   		System.out.println("Not found RiskAssessment [cardiac]");
@@ -3216,6 +3582,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("ucum-common");
   	if (null == result) {
   		System.out.println("Not found ValueSet [ucum-common]");
@@ -3224,6 +3591,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve PlanDefinition");
   	result = plandefinitionDao.find("exclusive-breastfeeding-intervention-01");
   	if (null == result) {
   		System.out.println("Not found PlanDefinition [exclusive-breastfeeding-intervention-01]");
@@ -3232,6 +3600,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("encounter-location-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [encounter-location-status]");
@@ -3240,6 +3609,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ActivityDefinition");
   	result = activitydefinitionDao.find("citalopramPrescription");
   	if (null == result) {
   		System.out.println("Not found ActivityDefinition [citalopramPrescription]");
@@ -3248,6 +3618,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("audit-event-outcome");
   	if (null == result) {
   		System.out.println("Not found ValueSet [audit-event-outcome]");
@@ -3256,6 +3627,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("condition-clinical");
   	if (null == result) {
   		System.out.println("Not found ValueSet [condition-clinical]");
@@ -3264,6 +3636,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Appointment");
   	result = appointmentDao.find("examplereq");
   	if (null == result) {
   		System.out.println("Not found Appointment [examplereq]");
@@ -3272,6 +3645,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("metric-calibration-state");
   	if (null == result) {
   		System.out.println("Not found ValueSet [metric-calibration-state]");
@@ -3280,6 +3654,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0326");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0326]");
@@ -3288,6 +3663,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve RelatedPerson");
   	result = relatedpersonDao.find("f001");
   	if (null == result) {
   		System.out.println("Not found RelatedPerson [f001]");
@@ -3296,6 +3672,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0303");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0303]");
@@ -3304,6 +3681,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ImmunizationRecommendation");
   	result = immunizationrecommendationDao.find("example");
   	if (null == result) {
   		System.out.println("Not found ImmunizationRecommendation [example]");
@@ -3312,6 +3690,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("MedicationAdministration");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [MedicationAdministration]");
@@ -3320,6 +3699,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("immunization-reason");
   	if (null == result) {
   		System.out.println("Not found ValueSet [immunization-reason]");
@@ -3328,6 +3708,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("BodySite");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [BodySite]");
@@ -3336,6 +3717,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-ADXP-deliveryInstallationType");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-ADXP-deliveryInstallationType]");
@@ -3344,6 +3726,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("observation-geneticsInterpretation");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [observation-geneticsInterpretation]");
@@ -3352,6 +3735,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("metric-calibration-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [metric-calibration-type]");
@@ -3360,6 +3744,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("xds");
   	if (null == result) {
   		System.out.println("Not found Bundle [xds]");
@@ -3368,6 +3753,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("example-genetics-3");
   	if (null == result) {
   		System.out.println("Not found Observation [example-genetics-3]");
@@ -3376,6 +3762,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("types");
   	if (null == result) {
   		System.out.println("Not found Bundle [types]");
@@ -3384,6 +3771,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("ServiceDefinition-data-requirements");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [ServiceDefinition-data-requirements]");
@@ -3392,6 +3780,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Claim");
   	result = claimDao.find("760152");
   	if (null == result) {
   		System.out.println("Not found Claim [760152]");
@@ -3400,6 +3789,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("procedurerequest-authorizedBy");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [procedurerequest-authorizedBy]");
@@ -3408,6 +3798,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("action-cardinality-behavior");
   	if (null == result) {
   		System.out.println("Not found ValueSet [action-cardinality-behavior]");
@@ -3416,6 +3807,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("capabilitystatement-supported-system");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [capabilitystatement-supported-system]");
@@ -3424,6 +3816,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("allergy-intolerance-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [allergy-intolerance-category]");
@@ -3432,6 +3825,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("report-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [report-codes]");
@@ -3440,6 +3834,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("location-mode");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [location-mode]");
@@ -3448,6 +3843,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("address-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [address-type]");
@@ -3456,6 +3852,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("allergy-intolerance-criticality");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [allergy-intolerance-criticality]");
@@ -3464,6 +3861,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("EpisodeOfCare");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [EpisodeOfCare]");
@@ -3472,6 +3870,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("claim-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [claim-type]");
@@ -3480,6 +3879,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("reason-medication-not-taken-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [reason-medication-not-taken-codes]");
@@ -3488,6 +3888,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve BodySite");
   	result = bodysiteDao.find("fetus");
   	if (null == result) {
   		System.out.println("Not found BodySite [fetus]");
@@ -3496,6 +3897,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve AppointmentResponse");
   	result = appointmentresponseDao.find("exampleresp");
   	if (null == result) {
   		System.out.println("Not found AppointmentResponse [exampleresp]");
@@ -3504,6 +3906,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("encounter-discharge-disposition");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [encounter-discharge-disposition]");
@@ -3512,6 +3915,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-ADXP-deliveryAddressLine");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-ADXP-deliveryAddressLine]");
@@ -3520,6 +3924,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("definition-topic");
   	if (null == result) {
   		System.out.println("Not found ValueSet [definition-topic]");
@@ -3528,6 +3933,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("languages");
   	if (null == result) {
   		System.out.println("Not found ValueSet [languages]");
@@ -3536,6 +3942,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("contributor-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [contributor-type]");
@@ -3544,6 +3951,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Contract");
   	result = contractDao.find("C-123");
   	if (null == result) {
   		System.out.println("Not found Contract [C-123]");
@@ -3552,6 +3960,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Practitioner");
   	result = practitionerDao.find("f203");
   	if (null == result) {
   		System.out.println("Not found Practitioner [f203]");
@@ -3560,6 +3969,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("structuredefinition-ancestor");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [structuredefinition-ancestor]");
@@ -3568,6 +3978,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationStatement");
   	result = medicationstatementDao.find("example003");
   	if (null == result) {
   		System.out.println("Not found MedicationStatement [example003]");
@@ -3576,6 +3987,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("reason-medication-not-given-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [reason-medication-not-given-codes]");
@@ -3584,6 +3996,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("patient-nationality");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [patient-nationality]");
@@ -3592,6 +4005,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-ADXP-houseNumber");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-ADXP-houseNumber]");
@@ -3600,6 +4014,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("concept-map-equivalence");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [concept-map-equivalence]");
@@ -3608,6 +4023,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("encounter-discharge-disposition");
   	if (null == result) {
   		System.out.println("Not found ValueSet [encounter-discharge-disposition]");
@@ -3616,6 +4032,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("payment-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [payment-type]");
@@ -3624,6 +4041,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Sequence");
   	result = sequenceDao.find("graphic-example-1");
   	if (null == result) {
   		System.out.println("Not found Sequence [graphic-example-1]");
@@ -3632,6 +4050,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("practitioner-role");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [practitioner-role]");
@@ -3640,6 +4059,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("contract-term-subtype");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [contract-term-subtype]");
@@ -3648,6 +4068,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("rendering-styleSensitive");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [rendering-styleSensitive]");
@@ -3656,6 +4077,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve RiskAssessment");
   	result = riskassessmentDao.find("prognosis");
   	if (null == result) {
   		System.out.println("Not found RiskAssessment [prognosis]");
@@ -3664,6 +4086,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("history-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [history-status]");
@@ -3672,6 +4095,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("resource-type-link");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [resource-type-link]");
@@ -3680,6 +4104,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("service-modifiers");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [service-modifiers]");
@@ -3688,6 +4113,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("measure-population");
   	if (null == result) {
   		System.out.println("Not found ValueSet [measure-population]");
@@ -3696,6 +4122,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("FamilyMemberHistory");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [FamilyMemberHistory]");
@@ -3704,6 +4131,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("HumanName");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [HumanName]");
@@ -3712,6 +4140,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("regex");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [regex]");
@@ -3720,6 +4149,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("contract-actorrole");
   	if (null == result) {
   		System.out.println("Not found ValueSet [contract-actorrole]");
@@ -3728,6 +4158,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("medication-form-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [medication-form-codes]");
@@ -3736,6 +4167,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve TestScript");
   	result = testscriptDao.find("testscript-example-update");
   	if (null == result) {
   		System.out.println("Not found TestScript [testscript-example-update]");
@@ -3744,6 +4176,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaire-deMap");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaire-deMap]");
@@ -3752,6 +4185,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcedureRequest");
   	result = procedurerequestDao.find("colonoscopy");
   	if (null == result) {
   		System.out.println("Not found ProcedureRequest [colonoscopy]");
@@ -3760,6 +4194,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Distance");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Distance]");
@@ -3768,6 +4203,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("action-selection-behavior");
   	if (null == result) {
   		System.out.println("Not found ValueSet [action-selection-behavior]");
@@ -3776,6 +4212,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("encounter-reasonCancelled");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [encounter-reasonCancelled]");
@@ -3784,6 +4221,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("pharmacy-core-rateIncrement");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [pharmacy-core-rateIncrement]");
@@ -3792,6 +4230,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("action-participant-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [action-participant-type]");
@@ -3800,6 +4239,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("organization-preferredContact");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [organization-preferredContact]");
@@ -3808,6 +4248,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Narrative");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Narrative]");
@@ -3816,6 +4257,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0312");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0312]");
@@ -3824,6 +4266,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Sequence");
   	result = sequenceDao.find("example-pgx-1");
   	if (null == result) {
   		System.out.println("Not found Sequence [example-pgx-1]");
@@ -3832,6 +4275,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("cqif-evidence-quality");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [cqif-evidence-quality]");
@@ -3840,6 +4284,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("reason-medication-not-given-codes");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [reason-medication-not-given-codes]");
@@ -3848,6 +4293,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0305");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0305]");
@@ -3856,6 +4302,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("timing-abbreviation");
   	if (null == result) {
   		System.out.println("Not found ValueSet [timing-abbreviation]");
@@ -3864,6 +4311,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0320");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0320]");
@@ -3872,6 +4320,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("oid");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [oid]");
@@ -3880,6 +4329,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("all-languages");
   	if (null == result) {
   		System.out.println("Not found ValueSet [all-languages]");
@@ -3888,6 +4338,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("immunization-origin");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [immunization-origin]");
@@ -3896,6 +4347,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Slot");
   	result = slotDao.find("3");
   	if (null == result) {
   		System.out.println("Not found Slot [3]");
@@ -3904,6 +4356,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DeviceComponent");
   	result = devicecomponentDao.find("example");
   	if (null == result) {
   		System.out.println("Not found DeviceComponent [example]");
@@ -3912,6 +4365,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("message-significance-category");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [message-significance-category]");
@@ -3920,6 +4374,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("c80-practice-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [c80-practice-codes]");
@@ -3928,6 +4383,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("substance-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [substance-status]");
@@ -3936,6 +4392,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Contributor");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Contributor]");
@@ -3944,6 +4401,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Address");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Address]");
@@ -3952,6 +4410,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve QuestionnaireResponse");
   	result = questionnaireresponseDao.find("ussg-fht-answers");
   	if (null == result) {
   		System.out.println("Not found QuestionnaireResponse [ussg-fht-answers]");
@@ -3960,6 +4419,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -3968,6 +4428,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("procedurerequest-targetBodySite");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [procedurerequest-targetBodySite]");
@@ -3976,6 +4437,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("ex-onsettype");
   	if (null == result) {
   		System.out.println("Not found ValueSet [ex-onsettype]");
@@ -3984,6 +4446,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("graph-compartment-rule");
   	if (null == result) {
   		System.out.println("Not found ValueSet [graph-compartment-rule]");
@@ -3992,6 +4455,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("immunization-recommendation-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [immunization-recommendation-status]");
@@ -4000,6 +4464,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("doc-typecodes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [doc-typecodes]");
@@ -4008,6 +4473,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Patient");
   	result = patientDao.find("ch-example");
   	if (null == result) {
   		System.out.println("Not found Patient [ch-example]");
@@ -4016,6 +4482,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("codesystem-hierarchy-meaning");
   	if (null == result) {
   		System.out.println("Not found ValueSet [codesystem-hierarchy-meaning]");
@@ -4024,6 +4491,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("w3c-provenance-activity-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [w3c-provenance-activity-type]");
@@ -4032,6 +4500,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Account");
   	result = accountDao.find("ewg");
   	if (null == result) {
   		System.out.println("Not found Account [ewg]");
@@ -4040,6 +4509,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("ucum-units");
   	if (null == result) {
   		System.out.println("Not found ValueSet [ucum-units]");
@@ -4048,6 +4518,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("codesystem-sourceReference");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [codesystem-sourceReference]");
@@ -4056,6 +4527,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Basic");
   	result = basicDao.find("basic-example-narrative");
   	if (null == result) {
   		System.out.println("Not found Basic [basic-example-narrative]");
@@ -4064,6 +4536,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("resource-slicing-rules");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [resource-slicing-rules]");
@@ -4072,6 +4545,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Patient");
   	result = patientDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Patient [example]");
@@ -4080,6 +4554,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("body-height");
   	if (null == result) {
   		System.out.println("Not found Observation [body-height]");
@@ -4088,6 +4563,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CarePlan");
   	result = careplanDao.find("example");
   	if (null == result) {
   		System.out.println("Not found CarePlan [example]");
@@ -4096,6 +4572,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("match-grade");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [match-grade]");
@@ -4104,6 +4581,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ActivityDefinition");
   	result = activitydefinitionDao.find("blood-tubes-supply");
   	if (null == result) {
   		System.out.println("Not found ActivityDefinition [blood-tubes-supply]");
@@ -4112,6 +4590,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("bp");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [bp]");
@@ -4120,6 +4599,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("b248b1b2-1686-4b94-9936-37d7a5f94b51");
   	if (null == result) {
   		System.out.println("Not found Bundle [b248b1b2-1686-4b94-9936-37d7a5f94b51]");
@@ -4128,6 +4608,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("usage-context-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [usage-context-type]");
@@ -4136,6 +4617,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("message-events");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [message-events]");
@@ -4144,6 +4626,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("dataelement-sdcobjectclass");
   	if (null == result) {
   		System.out.println("Not found ValueSet [dataelement-sdcobjectclass]");
@@ -4152,6 +4635,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -4160,6 +4644,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("type-restful-interaction");
   	if (null == result) {
   		System.out.println("Not found ValueSet [type-restful-interaction]");
@@ -4168,6 +4653,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaire-maxOccurs");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaire-maxOccurs]");
@@ -4176,6 +4662,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Claim");
   	result = claimDao.find("100154");
   	if (null == result) {
   		System.out.println("Not found Claim [100154]");
@@ -4184,6 +4671,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("adverse-event-outcome");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [adverse-event-outcome]");
@@ -4192,6 +4680,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Practitioner");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Practitioner]");
@@ -4200,6 +4689,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("sequence-species");
   	if (null == result) {
   		System.out.println("Not found ValueSet [sequence-species]");
@@ -4208,6 +4698,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("event-capability-mode");
   	if (null == result) {
   		System.out.println("Not found ValueSet [event-capability-mode]");
@@ -4216,6 +4707,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("gcs");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [gcs]");
@@ -4224,6 +4716,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("name-v3-representation");
   	if (null == result) {
   		System.out.println("Not found ValueSet [name-v3-representation]");
@@ -4232,6 +4725,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve PlanDefinition");
   	result = plandefinitionDao.find("options-example");
   	if (null == result) {
   		System.out.println("Not found PlanDefinition [options-example]");
@@ -4240,6 +4734,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0304");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0304]");
@@ -4248,6 +4743,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("identifier-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [identifier-type]");
@@ -4256,6 +4752,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve PractitionerRole");
   	result = practitionerroleDao.find("example");
   	if (null == result) {
   		System.out.println("Not found PractitionerRole [example]");
@@ -4264,6 +4761,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("sibling-relationship-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [sibling-relationship-codes]");
@@ -4272,6 +4770,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("condition-clinical");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [condition-clinical]");
@@ -4280,6 +4779,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("DiagnosticReport-geneticsFamilyMemberHistory");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [DiagnosticReport-geneticsFamilyMemberHistory]");
@@ -4288,6 +4788,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve QuestionnaireResponse");
   	result = questionnaireresponseDao.find("gcs");
   	if (null == result) {
   		System.out.println("Not found QuestionnaireResponse [gcs]");
@@ -4296,6 +4797,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("location-alias");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [location-alias]");
@@ -4304,6 +4806,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("fips-county");
   	if (null == result) {
   		System.out.println("Not found ValueSet [fips-county]");
@@ -4312,6 +4815,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("constraint-severity");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [constraint-severity]");
@@ -4320,6 +4824,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Substance");
   	result = substanceDao.find("f201");
   	if (null == result) {
   		System.out.println("Not found Substance [f201]");
@@ -4328,6 +4833,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("bundle-response");
   	if (null == result) {
   		System.out.println("Not found Bundle [bundle-response]");
@@ -4336,6 +4842,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("procedure-followup");
   	if (null == result) {
   		System.out.println("Not found ValueSet [procedure-followup]");
@@ -4344,6 +4851,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("benefit-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [benefit-type]");
@@ -4352,6 +4860,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("adverse-event-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [adverse-event-type]");
@@ -4360,6 +4869,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("codesystem-hierarchy-meaning");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [codesystem-hierarchy-meaning]");
@@ -4368,6 +4878,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ElementDefinition");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ElementDefinition]");
@@ -4376,6 +4887,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Substance");
   	result = substanceDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Substance [example]");
@@ -4384,6 +4896,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -4392,6 +4905,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("list-empty-reason");
   	if (null == result) {
   		System.out.println("Not found ValueSet [list-empty-reason]");
@@ -4400,6 +4914,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("adverse-event-causality");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [adverse-event-causality]");
@@ -4408,6 +4923,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -4416,6 +4932,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -4424,6 +4941,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("familymemberhistory-type");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [familymemberhistory-type]");
@@ -4432,6 +4950,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Provenance");
   	result = provenanceDao.find("consent-signature");
   	if (null == result) {
   		System.out.println("Not found Provenance [consent-signature]");
@@ -4440,6 +4959,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("metric-color");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [metric-color]");
@@ -4448,6 +4968,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("RelatedPerson");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [RelatedPerson]");
@@ -4456,6 +4977,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Organization");
   	result = organizationDao.find("1832473e-2fe0-452d-abe9-3cdb9879522f");
   	if (null == result) {
   		System.out.println("Not found Organization [1832473e-2fe0-452d-abe9-3cdb9879522f]");
@@ -4464,6 +4986,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("ex-diagnosistype");
   	if (null == result) {
   		System.out.println("Not found ValueSet [ex-diagnosistype]");
@@ -4472,6 +4995,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("medicationdispense-validityPeriod");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [medicationdispense-validityPeriod]");
@@ -4480,6 +5004,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("remittance-outcome");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [remittance-outcome]");
@@ -4488,6 +5013,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("bundle-request-medsallergies");
   	if (null == result) {
   		System.out.println("Not found Bundle [bundle-request-medsallergies]");
@@ -4496,6 +5022,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("measure-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [measure-type]");
@@ -4504,6 +5031,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Encounter");
   	result = encounterDao.find("f001");
   	if (null == result) {
   		System.out.println("Not found Encounter [f001]");
@@ -4512,6 +5040,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("procedurerequest-geneticsItem");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [procedurerequest-geneticsItem]");
@@ -4520,6 +5049,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("coding-sctdescid");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [coding-sctdescid]");
@@ -4528,6 +5058,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("UsageContext");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [UsageContext]");
@@ -4536,6 +5067,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0309");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0309]");
@@ -4544,6 +5076,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("fundsreserve");
   	if (null == result) {
   		System.out.println("Not found ValueSet [fundsreserve]");
@@ -4552,6 +5085,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("diagnosticreport-genetics");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [diagnosticreport-genetics]");
@@ -4560,6 +5094,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("practitioner-animalSpecies");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [practitioner-animalSpecies]");
@@ -4568,6 +5103,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("procedure-progress-status-codes");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [procedure-progress-status-codes]");
@@ -4576,6 +5112,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("procedure-causedBy");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [procedure-causedBy]");
@@ -4584,6 +5121,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("vaccination-protocol-dose-status-reason");
   	if (null == result) {
   		System.out.println("Not found ValueSet [vaccination-protocol-dose-status-reason]");
@@ -4592,6 +5130,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("goal-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [goal-status]");
@@ -4600,6 +5139,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -4608,6 +5148,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Parameters");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Parameters]");
@@ -4616,6 +5157,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-system");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-system]");
@@ -4624,6 +5166,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -4632,6 +5175,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -4640,6 +5184,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -4648,6 +5193,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("measurement-principle");
   	if (null == result) {
   		System.out.println("Not found ValueSet [measurement-principle]");
@@ -4656,6 +5202,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("manifestation-or-symptom");
   	if (null == result) {
   		System.out.println("Not found ValueSet [manifestation-or-symptom]");
@@ -4664,6 +5211,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("list-example-codes");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [list-example-codes]");
@@ -4672,6 +5220,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("testscript-operation-codes");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [testscript-operation-codes]");
@@ -4680,6 +5229,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("resource-approvalDate");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [resource-approvalDate]");
@@ -4688,6 +5238,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationAdministration");
   	result = medicationadministrationDao.find("medadmin0302");
   	if (null == result) {
   		System.out.println("Not found MedicationAdministration [medadmin0302]");
@@ -4696,6 +5247,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("communicationrequest-supportingInfo");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [communicationrequest-supportingInfo]");
@@ -4704,6 +5256,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0310");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0310]");
@@ -4712,6 +5265,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("condition-extensions-Condition-part-of");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [condition-extensions-Condition-part-of]");
@@ -4720,6 +5274,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CareTeam");
   	result = careteamDao.find("example");
   	if (null == result) {
   		System.out.println("Not found CareTeam [example]");
@@ -4728,6 +5283,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("slotstatus");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [slotstatus]");
@@ -4736,6 +5292,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("condition-occurredFollowing");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [condition-occurredFollowing]");
@@ -4744,6 +5301,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("consent-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [consent-category]");
@@ -4752,6 +5310,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("goal-acceptance-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [goal-acceptance-status]");
@@ -4760,6 +5319,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Specimen");
   	result = specimenDao.find("sst");
   	if (null == result) {
   		System.out.println("Not found Specimen [sst]");
@@ -4768,6 +5328,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("allergy-intolerance-category");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [allergy-intolerance-category]");
@@ -4776,6 +5337,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("ekg");
   	if (null == result) {
   		System.out.println("Not found Observation [ekg]");
@@ -4784,6 +5346,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("CarePlan");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [CarePlan]");
@@ -4792,6 +5355,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("questionnaire-display-category");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [questionnaire-display-category]");
@@ -4800,6 +5364,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("1minute-apgar-score");
   	if (null == result) {
   		System.out.println("Not found Observation [1minute-apgar-score]");
@@ -4808,6 +5373,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("openEHR-careplan");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [openEHR-careplan]");
@@ -4816,6 +5382,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("namingsystem-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [namingsystem-type]");
@@ -4824,6 +5391,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("cm-data-absent-reason-v3");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [cm-data-absent-reason-v3]");
@@ -4832,6 +5400,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Library");
   	result = libraryDao.find("zika-virus-intervention-logic");
   	if (null == result) {
   		System.out.println("Not found Library [zika-virus-intervention-logic]");
@@ -4840,6 +5409,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Condition");
   	result = conditionDao.find("f205");
   	if (null == result) {
   		System.out.println("Not found Condition [f205]");
@@ -4848,6 +5418,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -4856,6 +5427,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Library");
   	result = libraryDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Library [example]");
@@ -4864,6 +5436,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("CodeSystem-lookup");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [CodeSystem-lookup]");
@@ -4872,6 +5445,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaire-sourceStructureMap");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaire-sourceStructureMap]");
@@ -4880,6 +5454,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Consent");
   	result = consentDao.find("consent-example-notOrg");
   	if (null == result) {
   		System.out.println("Not found Consent [consent-example-notOrg]");
@@ -4888,6 +5463,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaire-fhirType");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaire-fhirType]");
@@ -4896,6 +5472,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("related-claim-relationship");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [related-claim-relationship]");
@@ -4904,6 +5481,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("supplyrequest-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [supplyrequest-status]");
@@ -4912,6 +5490,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("bundle-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [bundle-type]");
@@ -4920,6 +5499,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -4928,6 +5508,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -4936,6 +5517,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("allergyintolerance-resolutionAge");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [allergyintolerance-resolutionAge]");
@@ -4944,6 +5526,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ActivityDefinition");
   	result = activitydefinitionDao.find("heart-valve-replacement");
   	if (null == result) {
   		System.out.println("Not found ActivityDefinition [heart-valve-replacement]");
@@ -4952,6 +5535,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("integer");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [integer]");
@@ -4960,6 +5544,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("adjudication");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [adjudication]");
@@ -4968,6 +5553,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("immunization-recommendation-date-criterion");
   	if (null == result) {
   		System.out.println("Not found ValueSet [immunization-recommendation-date-criterion]");
@@ -4976,6 +5562,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve RiskAssessment");
   	result = riskassessmentDao.find("population");
   	if (null == result) {
   		System.out.println("Not found RiskAssessment [population]");
@@ -4984,6 +5571,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve NamingSystem");
   	result = namingsystemDao.find("example-replaced");
   	if (null == result) {
   		System.out.println("Not found NamingSystem [example-replaced]");
@@ -4992,6 +5580,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-ADXP-buildingNumberSuffix");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-ADXP-buildingNumberSuffix]");
@@ -5000,6 +5589,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DiagnosticReport");
   	result = diagnosticreportDao.find("gingival-mass");
   	if (null == result) {
   		System.out.println("Not found DiagnosticReport [gingival-mass]");
@@ -5008,6 +5598,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("11179-de-change-description");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [11179-de-change-description]");
@@ -5016,6 +5607,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Flag");
   	result = flagDao.find("example-encounter");
   	if (null == result) {
   		System.out.println("Not found Flag [example-encounter]");
@@ -5024,6 +5616,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("http-response-header");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [http-response-header]");
@@ -5032,6 +5625,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("classification-or-context");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [classification-or-context]");
@@ -5042,7 +5636,9 @@ public class TestRetrieval {
   }
   @Test
   public void test930() throws Exception {
+  	Object local = null;
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-warning");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-warning]");
@@ -5051,6 +5647,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0306");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0306]");
@@ -5059,6 +5656,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("audit-event-sub-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [audit-event-sub-type]");
@@ -5067,6 +5665,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0321");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0321]");
@@ -5075,6 +5674,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Coverage");
   	result = coverageDao.find("9876B1");
   	if (null == result) {
   		System.out.println("Not found Coverage [9876B1]");
@@ -5083,6 +5683,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("postal-address-use");
   	if (null == result) {
   		System.out.println("Not found ValueSet [postal-address-use]");
@@ -5091,6 +5692,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("device-implant-status");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [device-implant-status]");
@@ -5099,6 +5701,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("observation-geneticsDNASequenceVariantType");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [observation-geneticsDNASequenceVariantType]");
@@ -5107,6 +5710,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-ADXP-unitType");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-ADXP-unitType]");
@@ -5115,6 +5719,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("auditevent-NumberOfInstances");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [auditevent-NumberOfInstances]");
@@ -5123,6 +5728,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("testscript-profile-origin-types");
   	if (null == result) {
   		System.out.println("Not found ValueSet [testscript-profile-origin-types]");
@@ -5131,6 +5737,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("RiskAssessment");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [RiskAssessment]");
@@ -5139,6 +5746,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("specimen-collection-method");
   	if (null == result) {
   		System.out.println("Not found ValueSet [specimen-collection-method]");
@@ -5147,6 +5755,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -5155,6 +5764,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -5163,6 +5773,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-caseSensitive");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-caseSensitive]");
@@ -5171,6 +5782,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaire-displayCategory");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaire-displayCategory]");
@@ -5179,6 +5791,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("care-team-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [care-team-status]");
@@ -5187,6 +5800,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("unsat");
   	if (null == result) {
   		System.out.println("Not found Observation [unsat]");
@@ -5195,6 +5809,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DeviceMetric");
   	result = devicemetricDao.find("example");
   	if (null == result) {
   		System.out.println("Not found DeviceMetric [example]");
@@ -5203,6 +5818,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("service-referral-method");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [service-referral-method]");
@@ -5211,6 +5827,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -5219,6 +5836,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("identity-assuranceLevel");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [identity-assuranceLevel]");
@@ -5227,6 +5845,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("episodeofcare-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [episodeofcare-type]");
@@ -5235,6 +5854,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("NamingSystem");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [NamingSystem]");
@@ -5243,6 +5863,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("dicom-cid29");
   	if (null == result) {
   		System.out.println("Not found ValueSet [dicom-cid29]");
@@ -5251,6 +5872,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("codesystem-content-mode");
   	if (null == result) {
   		System.out.println("Not found ValueSet [codesystem-content-mode]");
@@ -5259,6 +5881,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-SC-coding");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-SC-coding]");
@@ -5267,6 +5890,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("condition-outcome");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [condition-outcome]");
@@ -5275,6 +5899,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("med0303");
   	if (null == result) {
   		System.out.println("Not found Medication [med0303]");
@@ -5283,6 +5908,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("medication-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [medication-codes]");
@@ -5291,6 +5917,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -5299,6 +5926,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("guide-dependency-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [guide-dependency-type]");
@@ -5307,6 +5935,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("medication-request-priority");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [medication-request-priority]");
@@ -5315,6 +5944,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("CodeableConcept");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [CodeableConcept]");
@@ -5323,6 +5953,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0308");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0308]");
@@ -5331,6 +5962,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("care-plan-activity-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [care-plan-activity-category]");
@@ -5339,6 +5971,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-ADXP-censusTract");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-ADXP-censusTract]");
@@ -5347,6 +5980,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("AppointmentResponse");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [AppointmentResponse]");
@@ -5355,6 +5989,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("elementdefinition-11179-DataElement-objectClassProperty");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [elementdefinition-11179-DataElement-objectClassProperty]");
@@ -5363,6 +5998,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("observation-geneticsDNASequenceVariantName");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [observation-geneticsDNASequenceVariantName]");
@@ -5371,6 +6007,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Organization");
   	result = organizationDao.find("f001");
   	if (null == result) {
   		System.out.println("Not found Organization [f001]");
@@ -5379,6 +6016,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Measure");
   	result = measureDao.find("component-a-example");
   	if (null == result) {
   		System.out.println("Not found Measure [component-a-example]");
@@ -5387,6 +6025,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("care-plan-activity-outcome");
   	if (null == result) {
   		System.out.println("Not found ValueSet [care-plan-activity-outcome]");
@@ -5395,6 +6034,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("task-performer-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [task-performer-type]");
@@ -5403,6 +6043,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve NutritionOrder");
   	result = nutritionorderDao.find("cardiacdiet");
   	if (null == result) {
   		System.out.println("Not found NutritionOrder [cardiacdiet]");
@@ -5411,6 +6052,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("policyholder-relationship");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [policyholder-relationship]");
@@ -5419,6 +6061,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -5427,6 +6070,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("referralrequest-reasonRefused");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [referralrequest-reasonRefused]");
@@ -5435,6 +6079,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("observation-geneticsPhaseSet");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [observation-geneticsPhaseSet]");
@@ -5443,6 +6088,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("guide-dependency-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [guide-dependency-type]");
@@ -5451,6 +6097,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("elementdefinition-bindingName");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [elementdefinition-bindingName]");
@@ -5459,6 +6106,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve PlanDefinition");
   	result = plandefinitionDao.find("zika-virus-intervention-initial");
   	if (null == result) {
   		System.out.println("Not found PlanDefinition [zika-virus-intervention-initial]");
@@ -5467,6 +6115,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("map-model-mode");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [map-model-mode]");
@@ -5475,6 +6124,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("search-modifier-code");
   	if (null == result) {
   		System.out.println("Not found ValueSet [search-modifier-code]");
@@ -5483,6 +6133,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("codesystem-expirationDate");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [codesystem-expirationDate]");
@@ -5491,6 +6142,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("extension-context");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [extension-context]");
@@ -5499,6 +6151,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("payment-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [payment-type]");
@@ -5507,6 +6160,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("audit-entity-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [audit-entity-type]");
@@ -5515,6 +6169,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Extension");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Extension]");
@@ -5523,6 +6178,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("TestScript");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [TestScript]");
@@ -5531,6 +6187,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("11179-de-is-data-element-concept");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [11179-de-is-data-element-concept]");
@@ -5539,6 +6196,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcedureRequest");
   	result = procedurerequestDao.find("colon-biopsy");
   	if (null == result) {
   		System.out.println("Not found ProcedureRequest [colon-biopsy]");
@@ -5547,6 +6205,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("SupplyDelivery");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [SupplyDelivery]");
@@ -5555,6 +6214,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationAdministration");
   	result = medicationadministrationDao.find("medadmin0301");
   	if (null == result) {
   		System.out.println("Not found MedicationAdministration [medadmin0301]");
@@ -5563,6 +6223,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("subscription-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [subscription-status]");
@@ -5571,6 +6232,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("filter-operator");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [filter-operator]");
@@ -5579,6 +6241,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Procedure");
   	result = procedureDao.find("example-implant");
   	if (null == result) {
   		System.out.println("Not found Procedure [example-implant]");
@@ -5587,6 +6250,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DiagnosticReport");
   	result = diagnosticreportDao.find("102");
   	if (null == result) {
   		System.out.println("Not found DiagnosticReport [102]");
@@ -5595,6 +6259,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("flag-priority");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [flag-priority]");
@@ -5603,6 +6268,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("satO2");
   	if (null == result) {
   		System.out.println("Not found Observation [satO2]");
@@ -5611,6 +6277,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("codesystem-replacedby");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [codesystem-replacedby]");
@@ -5619,6 +6286,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("flag-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [flag-status]");
@@ -5627,6 +6295,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("coverage-selfpay");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [coverage-selfpay]");
@@ -5635,6 +6304,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -5643,6 +6313,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("composition-clindoc-otherConfidentiality");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [composition-clindoc-otherConfidentiality]");
@@ -5651,6 +6322,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("endpoint-payload-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [endpoint-payload-type]");
@@ -5659,6 +6331,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Binary");
   	result = binaryDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Binary [example]");
@@ -5667,6 +6340,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Patient");
   	result = patientDao.find("ihe-pcd");
   	if (null == result) {
   		System.out.println("Not found Patient [ihe-pcd]");
@@ -5675,6 +6349,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("example-genetics-2");
   	if (null == result) {
   		System.out.println("Not found Observation [example-genetics-2]");
@@ -5683,6 +6358,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("binding-strength");
   	if (null == result) {
   		System.out.println("Not found ValueSet [binding-strength]");
@@ -5691,6 +6367,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("iso-21089-lifecycle");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [iso-21089-lifecycle]");
@@ -5699,6 +6376,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("service-pharmacy");
   	if (null == result) {
   		System.out.println("Not found ValueSet [service-pharmacy]");
@@ -5707,6 +6385,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("assert-direction-codes");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [assert-direction-codes]");
@@ -5715,6 +6394,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("med0302");
   	if (null == result) {
   		System.out.println("Not found Medication [med0302]");
@@ -5723,6 +6403,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("service-product");
   	if (null == result) {
   		System.out.println("Not found ValueSet [service-product]");
@@ -5731,6 +6412,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("action-required-behavior");
   	if (null == result) {
   		System.out.println("Not found ValueSet [action-required-behavior]");
@@ -5739,6 +6421,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -5747,6 +6430,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaire-minOccurs");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaire-minOccurs]");
@@ -5755,6 +6439,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("fundsreserve");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [fundsreserve]");
@@ -5763,6 +6448,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("signature-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [signature-type]");
@@ -5771,6 +6457,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -5779,6 +6466,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("list-empty-reason");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [list-empty-reason]");
@@ -5787,6 +6475,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve AppointmentResponse");
   	result = appointmentresponseDao.find("example");
   	if (null == result) {
   		System.out.println("Not found AppointmentResponse [example]");
@@ -5795,6 +6484,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("organization-extensions-Organization-alias");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [organization-extensions-Organization-alias]");
@@ -5803,6 +6493,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ImplementationGuide");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ImplementationGuide]");
@@ -5811,6 +6502,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -5819,6 +6511,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("search-xpath-usage");
   	if (null == result) {
   		System.out.println("Not found ValueSet [search-xpath-usage]");
@@ -5827,6 +6520,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Claim");
   	result = claimDao.find("100153");
   	if (null == result) {
   		System.out.println("Not found Claim [100153]");
@@ -5835,6 +6529,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CarePlan");
   	result = careplanDao.find("f001");
   	if (null == result) {
   		System.out.println("Not found CarePlan [f001]");
@@ -5843,6 +6538,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve PlanDefinition");
   	result = plandefinitionDao.find("exclusive-breastfeeding-intervention-02");
   	if (null == result) {
   		System.out.println("Not found PlanDefinition [exclusive-breastfeeding-intervention-02]");
@@ -5851,6 +6547,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Task");
   	result = taskDao.find("example2");
   	if (null == result) {
   		System.out.println("Not found Task [example2]");
@@ -5859,6 +6556,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("humanname-own-name");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [humanname-own-name]");
@@ -5867,6 +6565,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("identifier-validDate");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [identifier-validDate]");
@@ -5875,6 +6574,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("conditional-delete-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [conditional-delete-status]");
@@ -5883,6 +6583,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("f203");
   	if (null == result) {
   		System.out.println("Not found Observation [f203]");
@@ -5891,6 +6592,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("sequence-quality-standardSequence");
   	if (null == result) {
   		System.out.println("Not found ValueSet [sequence-quality-standardSequence]");
@@ -5899,6 +6601,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("task-replaces");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [task-replaces]");
@@ -5907,6 +6610,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Binary");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Binary]");
@@ -5915,6 +6619,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("observation-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [observation-category]");
@@ -5923,6 +6628,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("contract-content-derivative");
   	if (null == result) {
   		System.out.println("Not found ValueSet [contract-content-derivative]");
@@ -5931,6 +6637,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -5939,6 +6646,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("hla-genotyping-results-haploid");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [hla-genotyping-results-haploid]");
@@ -5947,6 +6655,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Patient");
   	result = patientDao.find("pat3");
   	if (null == result) {
   		System.out.println("Not found Patient [pat3]");
@@ -5955,6 +6664,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("body-length");
   	if (null == result) {
   		System.out.println("Not found Observation [body-length]");
@@ -5963,6 +6673,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DiagnosticReport");
   	result = diagnosticreportDao.find("report");
   	if (null == result) {
   		System.out.println("Not found DiagnosticReport [report]");
@@ -5971,6 +6682,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("service-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [service-type]");
@@ -5979,6 +6691,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("structuredefinition-ballot-status");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [structuredefinition-ballot-status]");
@@ -5987,6 +6700,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("3ad0687e-f477-468c-afd5-fcc2bf897819");
   	if (null == result) {
   		System.out.println("Not found Bundle [3ad0687e-f477-468c-afd5-fcc2bf897819]");
@@ -5995,6 +6709,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DiagnosticReport");
   	result = diagnosticreportDao.find("f202");
   	if (null == result) {
   		System.out.println("Not found DiagnosticReport [f202]");
@@ -6003,6 +6718,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("allergy-verification-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [allergy-verification-status]");
@@ -6011,6 +6727,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ParameterDefinition");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ParameterDefinition]");
@@ -6019,6 +6736,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("teeth");
   	if (null == result) {
   		System.out.println("Not found ValueSet [teeth]");
@@ -6027,6 +6745,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("nutrient-code");
   	if (null == result) {
   		System.out.println("Not found ValueSet [nutrient-code]");
@@ -6035,6 +6754,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-ADXP-deliveryInstallationQualifier");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-ADXP-deliveryInstallationQualifier]");
@@ -6043,6 +6763,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0329");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0329]");
@@ -6051,6 +6772,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("unknown-content-code");
   	if (null == result) {
   		System.out.println("Not found ValueSet [unknown-content-code]");
@@ -6059,6 +6781,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve GraphDefinition");
   	result = graphdefinitionDao.find("example");
   	if (null == result) {
   		System.out.println("Not found GraphDefinition [example]");
@@ -6067,6 +6790,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Practitioner");
   	result = practitionerDao.find("f007");
   	if (null == result) {
   		System.out.println("Not found Practitioner [f007]");
@@ -6075,6 +6799,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Task");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Task]");
@@ -6083,6 +6808,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("consent-Witness");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [consent-Witness]");
@@ -6091,6 +6817,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("encounter-reason");
   	if (null == result) {
   		System.out.println("Not found ValueSet [encounter-reason]");
@@ -6099,6 +6826,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve NutritionOrder");
   	result = nutritionorderDao.find("enteralbolus");
   	if (null == result) {
   		System.out.println("Not found NutritionOrder [enteralbolus]");
@@ -6107,6 +6835,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("immunization-recommendation-date-criterion");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [immunization-recommendation-date-criterion]");
@@ -6115,6 +6844,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -6123,6 +6853,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Practitioner");
   	result = practitionerDao.find("f003");
   	if (null == result) {
   		System.out.println("Not found Practitioner [f003]");
@@ -6131,6 +6862,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("sequence-quality-method");
   	if (null == result) {
   		System.out.println("Not found ValueSet [sequence-quality-method]");
@@ -6139,6 +6871,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("codesystem-effectiveDate");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [codesystem-effectiveDate]");
@@ -6147,6 +6880,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("adjudication-error");
   	if (null == result) {
   		System.out.println("Not found ValueSet [adjudication-error]");
@@ -6155,6 +6889,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("procedurerequest-approachBodySite");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [procedurerequest-approachBodySite]");
@@ -6163,6 +6898,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("elementdefinition-translatable");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [elementdefinition-translatable]");
@@ -6171,6 +6907,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("trigger-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [trigger-type]");
@@ -6179,6 +6916,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -6187,6 +6925,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -6195,6 +6934,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("location-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [location-status]");
@@ -6203,6 +6943,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("pharmacy-core-rateGoal");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [pharmacy-core-rateGoal]");
@@ -6211,6 +6952,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("vaccination-protocol-dose-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [vaccination-protocol-dose-status]");
@@ -6219,6 +6961,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("structuredefinition-table-name");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [structuredefinition-table-name]");
@@ -6227,6 +6970,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("pharmacy-core-rateIncrementInterval");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [pharmacy-core-rateIncrementInterval]");
@@ -6235,6 +6979,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0317");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0317]");
@@ -6243,6 +6988,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("namingsystem-identifier-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [namingsystem-identifier-type]");
@@ -6251,6 +6997,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("MedicationDispense");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [MedicationDispense]");
@@ -6259,6 +7006,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("location-physical-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [location-physical-type]");
@@ -6267,6 +7015,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcedureRequest");
   	result = procedurerequestDao.find("appendectomy-narrative");
   	if (null == result) {
   		System.out.println("Not found ProcedureRequest [appendectomy-narrative]");
@@ -6275,6 +7024,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("StructureDefinition-questionnaire");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [StructureDefinition-questionnaire]");
@@ -6283,6 +7033,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Procedure");
   	result = procedureDao.find("colonoscopy");
   	if (null == result) {
   		System.out.println("Not found Procedure [colonoscopy]");
@@ -6291,6 +7042,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("example-genetics-5");
   	if (null == result) {
   		System.out.println("Not found Observation [example-genetics-5]");
@@ -6299,6 +7051,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DiagnosticReport");
   	result = diagnosticreportDao.find("ghp");
   	if (null == result) {
   		System.out.println("Not found DiagnosticReport [ghp]");
@@ -6307,6 +7060,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("allergy-clinical-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [allergy-clinical-status]");
@@ -6315,6 +7069,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve FHIRList");
   	result = fhirlistDao.find("med-list");
   	if (null == result) {
   		System.out.println("Not found FHIRList [med-list]");
@@ -6323,6 +7078,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("claim-exception");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [claim-exception]");
@@ -6331,6 +7087,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-expirationDate");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-expirationDate]");
@@ -6339,6 +7096,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("glasgow");
   	if (null == result) {
   		System.out.println("Not found Observation [glasgow]");
@@ -6347,6 +7105,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("codesystem-keyWord");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [codesystem-keyWord]");
@@ -6355,6 +7114,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("udi");
   	if (null == result) {
   		System.out.println("Not found ValueSet [udi]");
@@ -6363,6 +7123,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("contact-point-system");
   	if (null == result) {
   		System.out.println("Not found ValueSet [contact-point-system]");
@@ -6371,6 +7132,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Specimen");
   	result = specimenDao.find("isolate");
   	if (null == result) {
   		System.out.println("Not found Specimen [isolate]");
@@ -6379,6 +7141,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ResearchStudy");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ResearchStudy]");
@@ -6387,6 +7150,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("codesystem-extensions-CodeSystem-author");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [codesystem-extensions-CodeSystem-author]");
@@ -6395,6 +7159,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("nhin-purposeofuse");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [nhin-purposeofuse]");
@@ -6403,6 +7168,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("subscription-channel-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [subscription-channel-type]");
@@ -6411,6 +7177,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("actionlist");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [actionlist]");
@@ -6419,6 +7186,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("example");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [example]");
@@ -6427,6 +7195,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CommunicationRequest");
   	result = communicationrequestDao.find("fm-solicit");
   	if (null == result) {
   		System.out.println("Not found CommunicationRequest [fm-solicit]");
@@ -6435,6 +7204,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("c80-doc-classcodes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [c80-doc-classcodes]");
@@ -6443,6 +7213,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("cm-contact-point-use-v3");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [cm-contact-point-use-v3]");
@@ -6451,6 +7222,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DetectedIssue");
   	result = detectedissueDao.find("allergy");
   	if (null == result) {
   		System.out.println("Not found DetectedIssue [allergy]");
@@ -6459,6 +7231,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -6467,6 +7240,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Procedure");
   	result = procedureDao.find("education");
   	if (null == result) {
   		System.out.println("Not found Procedure [education]");
@@ -6475,6 +7249,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("ex-diagnosisrelatedgroup");
   	if (null == result) {
   		System.out.println("Not found ValueSet [ex-diagnosisrelatedgroup]");
@@ -6483,6 +7258,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("encounter-participant-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [encounter-participant-type]");
@@ -6491,6 +7267,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("specimen-processing-procedure");
   	if (null == result) {
   		System.out.println("Not found ValueSet [specimen-processing-procedure]");
@@ -6499,6 +7276,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("usage-context-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [usage-context-type]");
@@ -6507,6 +7285,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("versioning-policy");
   	if (null == result) {
   		System.out.println("Not found ValueSet [versioning-policy]");
@@ -6515,6 +7294,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("ServiceDefinition-evaluate");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [ServiceDefinition-evaluate]");
@@ -6523,6 +7303,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("extensions");
   	if (null == result) {
   		System.out.println("Not found Bundle [extensions]");
@@ -6531,6 +7312,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve EligibilityResponse");
   	result = eligibilityresponseDao.find("E2502");
   	if (null == result) {
   		System.out.println("Not found EligibilityResponse [E2502]");
@@ -6539,6 +7321,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("match-grade");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [match-grade]");
@@ -6547,6 +7330,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -6555,6 +7339,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -6563,6 +7348,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -6571,6 +7357,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve AllergyIntolerance");
   	result = allergyintoleranceDao.find("medication");
   	if (null == result) {
   		System.out.println("Not found AllergyIntolerance [medication]");
@@ -6579,6 +7366,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("search-comparator");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [search-comparator]");
@@ -6587,6 +7375,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("11179-de-contact-address");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [11179-de-contact-address]");
@@ -6595,6 +7384,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("structuredefinition-template-status");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [structuredefinition-template-status]");
@@ -6603,6 +7393,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Money");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Money]");
@@ -6611,6 +7402,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("adjudication-reason");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [adjudication-reason]");
@@ -6619,6 +7411,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("DeviceRequest");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [DeviceRequest]");
@@ -6627,6 +7420,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("condition-outcome");
   	if (null == result) {
   		System.out.println("Not found ValueSet [condition-outcome]");
@@ -6635,6 +7429,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CarePlan");
   	result = careplanDao.find("integrate");
   	if (null == result) {
   		System.out.println("Not found CarePlan [integrate]");
@@ -6643,6 +7438,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("clinical-impression-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [clinical-impression-status]");
@@ -6651,6 +7447,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Organization");
   	result = organizationDao.find("hl7");
   	if (null == result) {
   		System.out.println("Not found Organization [hl7]");
@@ -6659,6 +7456,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve NutritionOrder");
   	result = nutritionorderDao.find("enteralcontinuous");
   	if (null == result) {
   		System.out.println("Not found NutritionOrder [enteralcontinuous]");
@@ -6667,6 +7465,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -6675,6 +7474,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("claim-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [claim-type]");
@@ -6683,6 +7483,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve AuditEvent");
   	result = auditeventDao.find("example-logout");
   	if (null == result) {
   		System.out.println("Not found AuditEvent [example-logout]");
@@ -6691,6 +7492,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CompartmentDefinition");
   	result = compartmentdefinitionDao.find("device");
   	if (null == result) {
   		System.out.println("Not found CompartmentDefinition [device]");
@@ -6699,6 +7501,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("detectedissue-severity");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [detectedissue-severity]");
@@ -6707,6 +7510,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("note-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [note-type]");
@@ -6715,6 +7519,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("location-physical-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [location-physical-type]");
@@ -6723,6 +7528,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("adverse-event-seriousness");
   	if (null == result) {
   		System.out.println("Not found ValueSet [adverse-event-seriousness]");
@@ -6731,6 +7537,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0322");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0322]");
@@ -6739,6 +7546,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Practitioner");
   	result = practitionerDao.find("f004");
   	if (null == result) {
   		System.out.println("Not found Practitioner [f004]");
@@ -6747,6 +7555,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("condition-stage");
   	if (null == result) {
   		System.out.println("Not found ValueSet [condition-stage]");
@@ -6755,6 +7564,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Immunization");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Immunization]");
@@ -6763,6 +7573,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0327");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0327]");
@@ -6771,6 +7582,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("operation-outcome");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [operation-outcome]");
@@ -6779,6 +7591,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("research-subject-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [research-subject-status]");
@@ -6787,6 +7600,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve TestScript");
   	result = testscriptDao.find("testscript-example-readtest");
   	if (null == result) {
   		System.out.println("Not found TestScript [testscript-example-readtest]");
@@ -6795,6 +7609,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("cm-medication-request-status-v3");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [cm-medication-request-status-v3]");
@@ -6803,6 +7618,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ResearchSubject");
   	result = researchsubjectDao.find("example");
   	if (null == result) {
   		System.out.println("Not found ResearchSubject [example]");
@@ -6811,6 +7627,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0313");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0313]");
@@ -6819,6 +7636,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("condition-category");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [condition-category]");
@@ -6827,6 +7645,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ReferralRequest");
   	result = referralrequestDao.find("example");
   	if (null == result) {
   		System.out.println("Not found ReferralRequest [example]");
@@ -6835,6 +7654,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("quality-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [quality-type]");
@@ -6843,6 +7663,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("headcircum");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [headcircum]");
@@ -6851,6 +7672,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -6859,6 +7681,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("reference-version-rules");
   	if (null == result) {
   		System.out.println("Not found ValueSet [reference-version-rules]");
@@ -6867,6 +7690,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("messageheader-response-request");
   	if (null == result) {
   		System.out.println("Not found ValueSet [messageheader-response-request]");
@@ -6875,6 +7699,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("OperationDefinition");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [OperationDefinition]");
@@ -6883,6 +7708,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -6891,6 +7717,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("name-part-qualifier");
   	if (null == result) {
   		System.out.println("Not found ValueSet [name-part-qualifier]");
@@ -6899,6 +7726,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("PaymentReconciliation");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [PaymentReconciliation]");
@@ -6907,6 +7735,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("content-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [content-type]");
@@ -6915,6 +7744,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("list-example-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [list-example-codes]");
@@ -6923,6 +7753,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("procedure-progressStatus");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [procedure-progressStatus]");
@@ -6931,6 +7762,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("medication-statement-category");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [medication-statement-category]");
@@ -6939,6 +7771,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -6947,6 +7780,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Basic");
   	result = basicDao.find("referral");
   	if (null == result) {
   		System.out.println("Not found Basic [referral]");
@@ -6955,6 +7789,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("question-max-occurs");
   	if (null == result) {
   		System.out.println("Not found ValueSet [question-max-occurs]");
@@ -6963,6 +7798,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Provenance");
   	result = provenanceDao.find("example-cwl");
   	if (null == result) {
   		System.out.println("Not found Provenance [example-cwl]");
@@ -6971,6 +7807,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("elementdefinition-selector");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [elementdefinition-selector]");
@@ -6979,6 +7816,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("digital-media-subtype");
   	if (null == result) {
   		System.out.println("Not found ValueSet [digital-media-subtype]");
@@ -6987,6 +7825,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -6995,6 +7834,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Practitioner");
   	result = practitionerDao.find("f001");
   	if (null == result) {
   		System.out.println("Not found Practitioner [f001]");
@@ -7003,6 +7843,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("11179-objectClassProperty");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [11179-objectClassProperty]");
@@ -7011,6 +7852,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("medication-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [medication-status]");
@@ -7019,6 +7861,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("supplyrequest-kind");
   	if (null == result) {
   		System.out.println("Not found ValueSet [supplyrequest-kind]");
@@ -7027,6 +7870,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("codesystem-trusted-expansion");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [codesystem-trusted-expansion]");
@@ -7035,6 +7879,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("openEHR-exposureDuration");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [openEHR-exposureDuration]");
@@ -7043,6 +7888,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("parent-relationship-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [parent-relationship-codes]");
@@ -7051,6 +7897,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcedureRequest");
   	result = procedurerequestDao.find("physical-therapy");
   	if (null == result) {
   		System.out.println("Not found ProcedureRequest [physical-therapy]");
@@ -7059,6 +7906,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("history-not-done-reason");
   	if (null == result) {
   		System.out.println("Not found ValueSet [history-not-done-reason]");
@@ -7067,6 +7915,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("blood-pressure-dar");
   	if (null == result) {
   		System.out.println("Not found Observation [blood-pressure-dar]");
@@ -7075,6 +7924,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("decimal");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [decimal]");
@@ -7083,6 +7933,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("resource-slicing-rules");
   	if (null == result) {
   		System.out.println("Not found ValueSet [resource-slicing-rules]");
@@ -7091,6 +7942,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -7099,6 +7951,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("action-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [action-type]");
@@ -7107,6 +7960,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve TestScript");
   	result = testscriptDao.find("testscript-example-search");
   	if (null == result) {
   		System.out.println("Not found TestScript [testscript-example-search]");
@@ -7115,6 +7969,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("List");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [List]");
@@ -7123,6 +7978,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("referencerange-meaning");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [referencerange-meaning]");
@@ -7131,6 +7987,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Location");
   	result = locationDao.find("1");
   	if (null == result) {
   		System.out.println("Not found Location [1]");
@@ -7139,6 +7996,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0332");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0332]");
@@ -7147,6 +8005,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("basic-resource-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [basic-resource-type]");
@@ -7155,6 +8014,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DataElement");
   	result = dataelementDao.find("prothrombin");
   	if (null == result) {
   		System.out.println("Not found DataElement [prothrombin]");
@@ -7163,6 +8023,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("valueset-extensions-ValueSet-workflow");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [valueset-extensions-ValueSet-workflow]");
@@ -7171,6 +8032,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("diet-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [diet-type]");
@@ -7179,6 +8041,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Coverage");
   	result = coverageDao.find("7547E");
   	if (null == result) {
   		System.out.println("Not found Coverage [7547E]");
@@ -7187,6 +8050,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("conditional-read-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [conditional-read-status]");
@@ -7195,6 +8059,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ContactPoint");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ContactPoint]");
@@ -7203,6 +8068,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-conceptOrder");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-conceptOrder]");
@@ -7211,6 +8077,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("use-context");
   	if (null == result) {
   		System.out.println("Not found ValueSet [use-context]");
@@ -7219,6 +8086,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("11179-de-document-reference");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [11179-de-document-reference]");
@@ -7227,6 +8095,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("provenance-entity-role");
   	if (null == result) {
   		System.out.println("Not found ValueSet [provenance-entity-role]");
@@ -7235,6 +8104,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("benefit-network");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [benefit-network]");
@@ -7243,6 +8113,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Observation");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Observation]");
@@ -7251,6 +8122,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaire-choiceOrientation");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaire-choiceOrientation]");
@@ -7259,6 +8131,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0311");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0311]");
@@ -7267,6 +8140,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationAdministration");
   	result = medicationadministrationDao.find("medadmin0313");
   	if (null == result) {
   		System.out.println("Not found MedicationAdministration [medadmin0313]");
@@ -7275,6 +8149,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("base64Binary");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [base64Binary]");
@@ -7283,6 +8158,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("allergy-intolerance-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [allergy-intolerance-type]");
@@ -7291,6 +8167,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Event");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Event]");
@@ -7299,6 +8176,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("5minute-apgar-score");
   	if (null == result) {
   		System.out.println("Not found Observation [5minute-apgar-score]");
@@ -7307,6 +8185,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -7315,6 +8194,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("metric-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [metric-category]");
@@ -7323,6 +8203,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("codesystem-reference");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [codesystem-reference]");
@@ -7331,6 +8212,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("ex-revenue-center");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [ex-revenue-center]");
@@ -7339,6 +8221,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("fm-conditions");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [fm-conditions]");
@@ -7349,7 +8232,9 @@ public class TestRetrieval {
   }
   @Test
   public void test1240() throws Exception {
+  	Object local = null;
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("devicerequest-patientInstruction");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [devicerequest-patientInstruction]");
@@ -7358,6 +8243,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-comments");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-comments]");
@@ -7366,6 +8252,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("system-restful-interaction");
   	if (null == result) {
   		System.out.println("Not found ValueSet [system-restful-interaction]");
@@ -7374,6 +8261,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("administrative-gender");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [administrative-gender]");
@@ -7382,6 +8270,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("humanname-assembly-order");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [humanname-assembly-order]");
@@ -7390,6 +8279,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("detectedissue-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [detectedissue-category]");
@@ -7398,6 +8288,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("shareablevalueset");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [shareablevalueset]");
@@ -7406,6 +8297,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("resource-lastReviewDate");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [resource-lastReviewDate]");
@@ -7414,6 +8306,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ImagingStudy");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ImagingStudy]");
@@ -7422,6 +8315,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0325");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0325]");
@@ -7430,6 +8324,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaireresponse-author");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaireresponse-author]");
@@ -7438,6 +8333,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Duration");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Duration]");
@@ -7446,6 +8342,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("allergy-intolerance-criticality");
   	if (null == result) {
   		System.out.println("Not found ValueSet [allergy-intolerance-criticality]");
@@ -7454,6 +8351,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("subscription-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [subscription-status]");
@@ -7462,6 +8360,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("actionlist");
   	if (null == result) {
   		System.out.println("Not found ValueSet [actionlist]");
@@ -7470,6 +8369,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationStatement");
   	result = medicationstatementDao.find("example001");
   	if (null == result) {
   		System.out.println("Not found MedicationStatement [example001]");
@@ -7478,6 +8378,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("observation-interpretation");
   	if (null == result) {
   		System.out.println("Not found ValueSet [observation-interpretation]");
@@ -7486,6 +8387,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("detectedissue-mitigation-action");
   	if (null == result) {
   		System.out.println("Not found ValueSet [detectedissue-mitigation-action]");
@@ -7494,6 +8396,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("fm-itemtype");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [fm-itemtype]");
@@ -7502,6 +8405,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("unsignedInt");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [unsignedInt]");
@@ -7510,6 +8414,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("med0304");
   	if (null == result) {
   		System.out.println("Not found Medication [med0304]");
@@ -7518,6 +8423,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ActivityDefinition");
   	result = activitydefinitionDao.find("referralPrimaryCareMentalHealth-initial");
   	if (null == result) {
   		System.out.println("Not found ActivityDefinition [referralPrimaryCareMentalHealth-initial]");
@@ -7526,6 +8432,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve NutritionOrder");
   	result = nutritionorderDao.find("proteinsupplement");
   	if (null == result) {
   		System.out.println("Not found NutritionOrder [proteinsupplement]");
@@ -7534,6 +8441,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("codesystem-usage");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [codesystem-usage]");
@@ -7542,6 +8450,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("plan-definition-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [plan-definition-type]");
@@ -7550,6 +8459,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ImagingStudy");
   	result = imagingstudyDao.find("example-xr");
   	if (null == result) {
   		System.out.println("Not found ImagingStudy [example-xr]");
@@ -7558,6 +8468,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("content-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [content-type]");
@@ -7566,6 +8477,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-effectiveDate");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-effectiveDate]");
@@ -7574,6 +8486,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("measure-report-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [measure-report-status]");
@@ -7582,6 +8495,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("care-team-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [care-team-status]");
@@ -7590,6 +8504,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Patient");
   	result = patientDao.find("genetics-example1");
   	if (null == result) {
   		System.out.println("Not found Patient [genetics-example1]");
@@ -7598,6 +8513,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Procedure");
   	result = procedureDao.find("colon-biopsy");
   	if (null == result) {
   		System.out.println("Not found Procedure [colon-biopsy]");
@@ -7606,6 +8522,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("medication-request-intent");
   	if (null == result) {
   		System.out.println("Not found ValueSet [medication-request-intent]");
@@ -7614,6 +8531,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-ADXP-streetNameBase");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-ADXP-streetNameBase]");
@@ -7622,6 +8540,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("organization-alias");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [organization-alias]");
@@ -7630,6 +8549,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("ActivityDefinition-apply");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [ActivityDefinition-apply]");
@@ -7638,6 +8558,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("vision-eye-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [vision-eye-codes]");
@@ -7646,6 +8567,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -7654,6 +8576,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("ucum-vitals-common");
   	if (null == result) {
   		System.out.println("Not found ValueSet [ucum-vitals-common]");
@@ -7662,6 +8585,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("11179-de-registry-org");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [11179-de-registry-org]");
@@ -7670,6 +8594,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("codesystem-label");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [codesystem-label]");
@@ -7678,6 +8603,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("care-plan-activity-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [care-plan-activity-status]");
@@ -7686,6 +8612,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve FHIRList");
   	result = fhirlistDao.find("genetic");
   	if (null == result) {
   		System.out.println("Not found FHIRList [genetic]");
@@ -7694,6 +8621,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("search-comparator");
   	if (null == result) {
   		System.out.println("Not found ValueSet [search-comparator]");
@@ -7702,6 +8630,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("cm-address-use-v3");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [cm-address-use-v3]");
@@ -7710,6 +8639,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Sequence");
   	result = sequenceDao.find("graphic-example-4");
   	if (null == result) {
   		System.out.println("Not found Sequence [graphic-example-4]");
@@ -7718,6 +8648,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("formatcodes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [formatcodes]");
@@ -7726,6 +8657,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("communication-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [communication-category]");
@@ -7734,6 +8666,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Count");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Count]");
@@ -7742,6 +8675,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0306");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0306]");
@@ -7750,6 +8684,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("resprate");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [resprate]");
@@ -7758,6 +8693,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("capability-statement-kind");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [capability-statement-kind]");
@@ -7766,6 +8702,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("goal-relationship");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [goal-relationship]");
@@ -7774,6 +8711,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -7782,6 +8720,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("structuredefinition-display-hint");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [structuredefinition-display-hint]");
@@ -7790,6 +8729,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("message-significance-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [message-significance-category]");
@@ -7798,6 +8738,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ChargeItem");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ChargeItem]");
@@ -7806,6 +8747,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("account-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [account-status]");
@@ -7814,6 +8756,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaire-usageMode");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaire-usageMode]");
@@ -7822,6 +8765,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -7830,6 +8774,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("consent-except-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [consent-except-type]");
@@ -7838,6 +8783,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0303");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0303]");
@@ -7846,6 +8792,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("task-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [task-status]");
@@ -7854,6 +8801,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Communication");
   	result = communicationDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Communication [example]");
@@ -7862,6 +8810,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve RelatedPerson");
   	result = relatedpersonDao.find("benedicte");
   	if (null == result) {
   		System.out.println("Not found RelatedPerson [benedicte]");
@@ -7870,6 +8819,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("procedure-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [procedure-category]");
@@ -7878,6 +8828,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Timing");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Timing]");
@@ -7886,6 +8837,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("appointmentstatus");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [appointmentstatus]");
@@ -7894,6 +8846,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0324");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0324]");
@@ -7902,6 +8855,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("Questionnaire-populatelink");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [Questionnaire-populatelink]");
@@ -7910,6 +8864,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("chargeitem-billingcodes");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [chargeitem-billingcodes]");
@@ -7918,6 +8873,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve EligibilityRequest");
   	result = eligibilityrequestDao.find("52346");
   	if (null == result) {
   		System.out.println("Not found EligibilityRequest [52346]");
@@ -7926,6 +8882,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("SampledData");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [SampledData]");
@@ -7934,6 +8891,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationAdministration");
   	result = medicationadministrationDao.find("medadmin0306");
   	if (null == result) {
   		System.out.println("Not found MedicationAdministration [medadmin0306]");
@@ -7942,6 +8900,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("med0314");
   	if (null == result) {
   		System.out.println("Not found Medication [med0314]");
@@ -7950,6 +8909,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("quantity-comparator");
   	if (null == result) {
   		System.out.println("Not found ValueSet [quantity-comparator]");
@@ -7958,6 +8918,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("medication-dispense-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [medication-dispense-status]");
@@ -7966,6 +8927,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("questionnaire-display-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [questionnaire-display-category]");
@@ -7974,6 +8936,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("example-expansion");
   	if (null == result) {
   		System.out.println("Not found ValueSet [example-expansion]");
@@ -7982,6 +8945,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-ADXP-houseNumberNumeric");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-ADXP-houseNumberNumeric]");
@@ -7990,6 +8954,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -7998,6 +8963,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("network-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [network-type]");
@@ -8006,6 +8972,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("teeth");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [teeth]");
@@ -8014,6 +8981,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Binary");
   	result = binaryDao.find("f006");
   	if (null == result) {
   		System.out.println("Not found Binary [f006]");
@@ -8022,6 +8990,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -8030,6 +8999,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -8038,6 +9008,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Patient");
   	result = patientDao.find("pat1");
   	if (null == result) {
   		System.out.println("Not found Patient [pat1]");
@@ -8046,6 +9017,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("procedure-code");
   	if (null == result) {
   		System.out.println("Not found ValueSet [procedure-code]");
@@ -8054,6 +9026,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("observation-time-offset");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [observation-time-offset]");
@@ -8062,6 +9035,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("father");
   	if (null == result) {
   		System.out.println("Not found Bundle [father]");
@@ -8070,6 +9044,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("condition-partOf");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [condition-partOf]");
@@ -8078,6 +9053,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Encounter");
   	result = encounterDao.find("f201");
   	if (null == result) {
   		System.out.println("Not found Encounter [f201]");
@@ -8086,6 +9062,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationAdministration");
   	result = medicationadministrationDao.find("medadmin0309");
   	if (null == result) {
   		System.out.println("Not found MedicationAdministration [medadmin0309]");
@@ -8094,6 +9071,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("med0318");
   	if (null == result) {
   		System.out.println("Not found Medication [med0318]");
@@ -8102,6 +9080,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("observation-genetic-Observation-gene-amino-acid-change");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [observation-genetic-Observation-gene-amino-acid-change]");
@@ -8110,6 +9089,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Basic");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Basic]");
@@ -8118,6 +9098,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("familymemberhistory-patient-record");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [familymemberhistory-patient-record]");
@@ -8126,6 +9107,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("searchParams");
   	if (null == result) {
   		System.out.println("Not found Bundle [searchParams]");
@@ -8134,6 +9116,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Condition");
   	result = conditionDao.find("f002");
   	if (null == result) {
   		System.out.println("Not found Condition [f002]");
@@ -8142,6 +9125,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("clinicaldocument");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [clinicaldocument]");
@@ -8150,6 +9134,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -8158,6 +9143,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("codesystem-map");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [codesystem-map]");
@@ -8166,6 +9152,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("extra-activity-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [extra-activity-type]");
@@ -8174,6 +9161,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Substance");
   	result = substanceDao.find("f202");
   	if (null == result) {
   		System.out.println("Not found Substance [f202]");
@@ -8182,6 +9170,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CarePlan");
   	result = careplanDao.find("f203");
   	if (null == result) {
   		System.out.println("Not found CarePlan [f203]");
@@ -8190,6 +9179,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("device-din");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [device-din]");
@@ -8198,6 +9188,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("assert-response-code-types");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [assert-response-code-types]");
@@ -8206,6 +9197,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("system-version-processing-mode");
   	if (null == result) {
   		System.out.println("Not found ValueSet [system-version-processing-mode]");
@@ -8214,6 +9206,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("search-param-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [search-param-type]");
@@ -8222,6 +9215,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("openEHR-test");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [openEHR-test]");
@@ -8230,6 +9224,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("immunization-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [immunization-status]");
@@ -8238,6 +9233,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("structure-definition-kind");
   	if (null == result) {
   		System.out.println("Not found ValueSet [structure-definition-kind]");
@@ -8246,6 +9242,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-ADXP-deliveryInstallationArea");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-ADXP-deliveryInstallationArea]");
@@ -8254,6 +9251,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Communication");
   	result = communicationDao.find("fm-attachment");
   	if (null == result) {
   		System.out.println("Not found Communication [fm-attachment]");
@@ -8262,6 +9260,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Device");
   	result = deviceDao.find("f001");
   	if (null == result) {
   		System.out.println("Not found Device [f001]");
@@ -8270,6 +9269,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Media");
   	result = mediaDao.find("1.2.840.11361907579238403408700.3.0.14.19970327150033");
   	if (null == result) {
   		System.out.println("Not found Media [1.2.840.11361907579238403408700.3.0.14.19970327150033]");
@@ -8278,6 +9278,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("communicationrequest-relevantHistory");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [communicationrequest-relevantHistory]");
@@ -8286,6 +9287,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("b0a5e4277-83c4-4adb-87e2-e3efe3369b6f");
   	if (null == result) {
   		System.out.println("Not found Bundle [b0a5e4277-83c4-4adb-87e2-e3efe3369b6f]");
@@ -8294,6 +9296,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("contact-point-use");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [contact-point-use]");
@@ -8302,6 +9305,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Device");
   	result = deviceDao.find("ihe-pcd");
   	if (null == result) {
   		System.out.println("Not found Device [ihe-pcd]");
@@ -8310,6 +9314,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Bundle");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Bundle]");
@@ -8318,6 +9323,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve RequestGroup");
   	result = requestgroupDao.find("example");
   	if (null == result) {
   		System.out.println("Not found RequestGroup [example]");
@@ -8326,6 +9332,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("action-participant-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [action-participant-type]");
@@ -8334,6 +9341,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Device");
   	result = deviceDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Device [example]");
@@ -8342,6 +9350,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("specimen-isDryWeight");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [specimen-isDryWeight]");
@@ -8350,6 +9359,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("codesystem-deprecated");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [codesystem-deprecated]");
@@ -8358,6 +9368,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("endpoint-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [endpoint-status]");
@@ -8366,6 +9377,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("DeviceMetric");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [DeviceMetric]");
@@ -8374,6 +9386,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Signature");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Signature]");
@@ -8382,6 +9395,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("concept-properties");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [concept-properties]");
@@ -8390,6 +9404,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CarePlan");
   	result = careplanDao.find("preg");
   	if (null == result) {
   		System.out.println("Not found CarePlan [preg]");
@@ -8398,6 +9413,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("rendering-style");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [rendering-style]");
@@ -8406,6 +9422,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("subscription-channel-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [subscription-channel-type]");
@@ -8414,6 +9431,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("zika-virus-exposure-assessment");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [zika-virus-exposure-assessment]");
@@ -8422,6 +9440,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("MessageDefinition");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [MessageDefinition]");
@@ -8430,6 +9449,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("contract-subtype");
   	if (null == result) {
   		System.out.println("Not found ValueSet [contract-subtype]");
@@ -8438,6 +9458,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("forms");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [forms]");
@@ -8446,6 +9467,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("forms");
   	if (null == result) {
   		System.out.println("Not found ValueSet [forms]");
@@ -8454,6 +9476,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("terminologies");
   	if (null == result) {
   		System.out.println("Not found Bundle [terminologies]");
@@ -8462,6 +9485,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("cpt-all");
   	if (null == result) {
   		System.out.println("Not found ValueSet [cpt-all]");
@@ -8470,6 +9494,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Request");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Request]");
@@ -8478,6 +9503,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -8486,6 +9512,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -8494,6 +9521,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("action-precheck-behavior");
   	if (null == result) {
   		System.out.println("Not found ValueSet [action-precheck-behavior]");
@@ -8502,6 +9530,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0319");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0319]");
@@ -8510,6 +9539,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-ADXP-precinct");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-ADXP-precinct]");
@@ -8518,6 +9548,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -8526,6 +9557,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("clinicalimpression-prognosis");
   	if (null == result) {
   		System.out.println("Not found ValueSet [clinicalimpression-prognosis]");
@@ -8534,6 +9566,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -8542,6 +9575,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("administration-method-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [administration-method-codes]");
@@ -8550,6 +9584,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("observation-vitalsignresult");
   	if (null == result) {
   		System.out.println("Not found ValueSet [observation-vitalsignresult]");
@@ -8558,6 +9593,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Claim");
   	result = claimDao.find("100152");
   	if (null == result) {
   		System.out.println("Not found Claim [100152]");
@@ -8566,6 +9602,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -8574,6 +9611,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("observation-geneticsGene");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [observation-geneticsGene]");
@@ -8582,6 +9620,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("focal-subject");
   	if (null == result) {
   		System.out.println("Not found ValueSet [focal-subject]");
@@ -8590,6 +9629,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcedureRequest");
   	result = procedurerequestDao.find("lipid");
   	if (null == result) {
   		System.out.println("Not found ProcedureRequest [lipid]");
@@ -8598,6 +9638,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("oral-prosthodontic-material");
   	if (null == result) {
   		System.out.println("Not found ValueSet [oral-prosthodontic-material]");
@@ -8606,6 +9647,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("bodyheight");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [bodyheight]");
@@ -8614,6 +9656,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -8622,6 +9665,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Claim");
   	result = claimDao.find("960150");
   	if (null == result) {
   		System.out.println("Not found Claim [960150]");
@@ -8630,6 +9674,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaire-unit");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaire-unit]");
@@ -8638,6 +9683,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Task");
   	result = taskDao.find("example6");
   	if (null == result) {
   		System.out.println("Not found Task [example6]");
@@ -8646,6 +9692,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("guidance-response-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [guidance-response-status]");
@@ -8654,6 +9701,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("flag-priority");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [flag-priority]");
@@ -8662,6 +9710,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Sequence");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Sequence]");
@@ -8670,6 +9719,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("entformula-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [entformula-type]");
@@ -8678,6 +9728,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("contract-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [contract-status]");
@@ -8686,6 +9737,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("sequence-referenceSeq");
   	if (null == result) {
   		System.out.println("Not found ValueSet [sequence-referenceSeq]");
@@ -8694,6 +9746,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve EligibilityResponse");
   	result = eligibilityresponseDao.find("E2501");
   	if (null == result) {
   		System.out.println("Not found EligibilityResponse [E2501]");
@@ -8702,6 +9755,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("observation-methods");
   	if (null == result) {
   		System.out.println("Not found ValueSet [observation-methods]");
@@ -8710,6 +9764,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("library-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [library-type]");
@@ -8718,6 +9773,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("medication-request-intent");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [medication-request-intent]");
@@ -8726,6 +9782,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("audit-event-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [audit-event-type]");
@@ -8734,6 +9791,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("flag-detail");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [flag-detail]");
@@ -8742,6 +9800,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("device-action");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [device-action]");
@@ -8750,6 +9809,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("dicm-405-mediatype");
   	if (null == result) {
   		System.out.println("Not found ValueSet [dicm-405-mediatype]");
@@ -8758,6 +9818,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Goal");
   	result = goalDao.find("stop-smoking");
   	if (null == result) {
   		System.out.println("Not found Goal [stop-smoking]");
@@ -8766,6 +9827,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("CodeSystem-subsumes");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [CodeSystem-subsumes]");
@@ -8774,6 +9836,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Goal");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Goal]");
@@ -8782,6 +9845,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Patient");
   	result = patientDao.find("xds");
   	if (null == result) {
   		System.out.println("Not found Patient [xds]");
@@ -8790,6 +9854,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("payment-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [payment-status]");
@@ -8798,6 +9863,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Condition");
   	result = conditionDao.find("f204");
   	if (null == result) {
   		System.out.println("Not found Condition [f204]");
@@ -8806,6 +9872,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Contract");
   	result = contractDao.find("pcd-example-notAuthor");
   	if (null == result) {
   		System.out.println("Not found Contract [pcd-example-notAuthor]");
@@ -8814,6 +9881,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("diagnosticReport-addendumOf");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [diagnosticReport-addendumOf]");
@@ -8822,6 +9890,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("observation-eventTiming");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [observation-eventTiming]");
@@ -8830,6 +9899,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("goal-relationship-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [goal-relationship-type]");
@@ -8838,6 +9908,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("TriggerDefinition");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [TriggerDefinition]");
@@ -8846,6 +9917,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationAdministration");
   	result = medicationadministrationDao.find("medadmin0310");
   	if (null == result) {
   		System.out.println("Not found MedicationAdministration [medadmin0310]");
@@ -8854,6 +9926,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("location-distance");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [location-distance]");
@@ -8862,6 +9935,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("v3-valuesets");
   	if (null == result) {
   		System.out.println("Not found Bundle [v3-valuesets]");
@@ -8870,6 +9944,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Organization");
   	result = organizationDao.find("f003");
   	if (null == result) {
   		System.out.println("Not found Organization [f003]");
@@ -8878,6 +9953,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("request-intent");
   	if (null == result) {
   		System.out.println("Not found ValueSet [request-intent]");
@@ -8886,6 +9962,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("gcs-qa");
   	if (null == result) {
   		System.out.println("Not found Observation [gcs-qa]");
@@ -8894,6 +9971,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("resource-types");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [resource-types]");
@@ -8902,6 +9980,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0301");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0301]");
@@ -8910,6 +9989,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -8918,6 +9998,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("CapabilityStatement-implements");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [CapabilityStatement-implements]");
@@ -8926,6 +10007,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("history-not-done-reason");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [history-not-done-reason]");
@@ -8934,6 +10016,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("f204");
   	if (null == result) {
   		System.out.println("Not found Observation [f204]");
@@ -8942,6 +10025,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("PaymentNotice");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [PaymentNotice]");
@@ -8950,6 +10034,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("name-use");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [name-use]");
@@ -8958,6 +10043,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("med0320");
   	if (null == result) {
   		System.out.println("Not found Medication [med0320]");
@@ -8966,6 +10052,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Goal");
   	result = goalDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Goal [example]");
@@ -8974,6 +10061,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("example-haplotype2");
   	if (null == result) {
   		System.out.println("Not found Observation [example-haplotype2]");
@@ -8982,6 +10070,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("auditevent-ParticipantObjectContainsStudy");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [auditevent-ParticipantObjectContainsStudy]");
@@ -8990,6 +10079,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("measure-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [measure-type]");
@@ -8998,6 +10088,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CarePlan");
   	result = careplanDao.find("gpvisit");
   	if (null == result) {
   		System.out.println("Not found CarePlan [gpvisit]");
@@ -9006,6 +10097,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("immunization-origin");
   	if (null == result) {
   		System.out.println("Not found ValueSet [immunization-origin]");
@@ -9014,6 +10106,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("encounter-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [encounter-type]");
@@ -9022,6 +10115,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("payment-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [payment-status]");
@@ -9030,6 +10124,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("metric-category");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [metric-category]");
@@ -9038,6 +10133,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("resource-validation-mode");
   	if (null == result) {
   		System.out.println("Not found ValueSet [resource-validation-mode]");
@@ -9046,6 +10142,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("3ad0687e-f477-468c-afd5-fcc2bf897809");
   	if (null == result) {
   		System.out.println("Not found Bundle [3ad0687e-f477-468c-afd5-fcc2bf897809]");
@@ -9054,6 +10151,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("additionalmaterials");
   	if (null == result) {
   		System.out.println("Not found ValueSet [additionalmaterials]");
@@ -9062,6 +10160,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Attachment");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Attachment]");
@@ -9070,6 +10169,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationStatement");
   	result = medicationstatementDao.find("example006");
   	if (null == result) {
   		System.out.println("Not found MedicationStatement [example006]");
@@ -9078,6 +10178,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("structuredefinition-rdf-type");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [structuredefinition-rdf-type]");
@@ -9086,6 +10187,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve AuditEvent");
   	result = auditeventDao.find("example");
   	if (null == result) {
   		System.out.println("Not found AuditEvent [example]");
@@ -9094,6 +10196,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Practitioner");
   	result = practitionerDao.find("xcda-author");
   	if (null == result) {
   		System.out.println("Not found Practitioner [xcda-author]");
@@ -9102,6 +10205,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationAdministration");
   	result = medicationadministrationDao.find("medadmin0304");
   	if (null == result) {
   		System.out.println("Not found MedicationAdministration [medadmin0304]");
@@ -9110,6 +10214,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("resources");
   	if (null == result) {
   		System.out.println("Not found Bundle [resources]");
@@ -9118,6 +10223,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("procedure-approachBodySite");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [procedure-approachBodySite]");
@@ -9126,6 +10232,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("substance-code");
   	if (null == result) {
   		System.out.println("Not found ValueSet [substance-code]");
@@ -9134,6 +10241,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Element");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Element]");
@@ -9142,6 +10250,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("List-find");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [List-find]");
@@ -9150,6 +10259,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("assert-response-code-types");
   	if (null == result) {
   		System.out.println("Not found ValueSet [assert-response-code-types]");
@@ -9158,6 +10268,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -9166,6 +10277,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-ordinalValue");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-ordinalValue]");
@@ -9174,6 +10286,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DiagnosticReport");
   	result = diagnosticreportDao.find("dg2");
   	if (null == result) {
   		System.out.println("Not found DiagnosticReport [dg2]");
@@ -9182,6 +10295,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("DocumentReference");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [DocumentReference]");
@@ -9190,6 +10304,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("conditional-read-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [conditional-read-status]");
@@ -9198,6 +10313,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("action-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [action-type]");
@@ -9206,6 +10322,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("narrative-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [narrative-status]");
@@ -9214,6 +10331,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Coverage");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Coverage]");
@@ -9222,6 +10340,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0330");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0330]");
@@ -9230,6 +10349,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Organization");
   	result = organizationDao.find("f002");
   	if (null == result) {
   		System.out.println("Not found Organization [f002]");
@@ -9238,6 +10358,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("rendering-xhtml");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [rendering-xhtml]");
@@ -9246,6 +10367,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("condition-extensions-Condition-based-on");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [condition-extensions-Condition-based-on]");
@@ -9254,6 +10376,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Practitioner");
   	result = practitionerDao.find("f204");
   	if (null == result) {
   		System.out.println("Not found Practitioner [f204]");
@@ -9262,6 +10385,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("medication-statement-taken");
   	if (null == result) {
   		System.out.println("Not found ValueSet [medication-statement-taken]");
@@ -9270,6 +10394,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("service-pharmacy");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [service-pharmacy]");
@@ -9278,6 +10403,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve EligibilityResponse");
   	result = eligibilityresponseDao.find("E2503");
   	if (null == result) {
   		System.out.println("Not found EligibilityResponse [E2503]");
@@ -9286,6 +10412,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Consent");
   	result = consentDao.find("consent-example-notAuthor");
   	if (null == result) {
   		System.out.println("Not found Consent [consent-example-notAuthor]");
@@ -9294,6 +10421,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0307");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0307]");
@@ -9302,6 +10430,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("guide-page-kind");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [guide-page-kind]");
@@ -9310,6 +10439,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("benefit-subcategory");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [benefit-subcategory]");
@@ -9318,6 +10448,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("ucum-bodyweight");
   	if (null == result) {
   		System.out.println("Not found ValueSet [ucum-bodyweight]");
@@ -9326,6 +10457,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("patient-disability");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [patient-disability]");
@@ -9334,6 +10466,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("auditevent-Encrypted");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [auditevent-Encrypted]");
@@ -9342,6 +10475,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("CapabilityStatement-subset");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [CapabilityStatement-subset]");
@@ -9350,6 +10484,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Measure");
   	result = measureDao.find("measure-exclusive-breastfeeding");
   	if (null == result) {
   		System.out.println("Not found Measure [measure-exclusive-breastfeeding]");
@@ -9358,6 +10493,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("bodysite-laterality");
   	if (null == result) {
   		System.out.println("Not found ValueSet [bodysite-laterality]");
@@ -9366,6 +10502,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ServiceDefinition");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ServiceDefinition]");
@@ -9374,6 +10511,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("dataelement-stringency");
   	if (null == result) {
   		System.out.println("Not found ValueSet [dataelement-stringency]");
@@ -9382,6 +10520,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Encounter");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Encounter]");
@@ -9390,6 +10529,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("adverse-event-causality-method");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [adverse-event-causality-method]");
@@ -9398,6 +10538,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Location");
   	result = locationDao.find("2");
   	if (null == result) {
   		System.out.println("Not found Location [2]");
@@ -9406,6 +10547,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcessResponse");
   	result = processresponseDao.find("SR2500");
   	if (null == result) {
   		System.out.println("Not found ProcessResponse [SR2500]");
@@ -9414,6 +10556,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("resource-type-link");
   	if (null == result) {
   		System.out.println("Not found ValueSet [resource-type-link]");
@@ -9422,6 +10565,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve NutritionOrder");
   	result = nutritionorderDao.find("energysupplement");
   	if (null == result) {
   		System.out.println("Not found NutritionOrder [energysupplement]");
@@ -9430,6 +10574,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("quantity-comparator");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [quantity-comparator]");
@@ -9438,6 +10583,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Slot");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Slot]");
@@ -9446,6 +10592,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("observation-geneticsAlleleName");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [observation-geneticsAlleleName]");
@@ -9454,6 +10601,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("composite-measure-scoring");
   	if (null == result) {
   		System.out.println("Not found ValueSet [composite-measure-scoring]");
@@ -9462,6 +10610,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("action-condition-kind");
   	if (null == result) {
   		System.out.println("Not found ValueSet [action-condition-kind]");
@@ -9470,6 +10619,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("humanname-fathers-family");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [humanname-fathers-family]");
@@ -9478,6 +10628,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("device-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [device-status]");
@@ -9486,6 +10637,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("maxSize");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [maxSize]");
@@ -9494,6 +10646,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CarePlan");
   	result = careplanDao.find("f201");
   	if (null == result) {
   		System.out.println("Not found CarePlan [f201]");
@@ -9502,6 +10655,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("communicationrequest-orderedBy");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [communicationrequest-orderedBy]");
@@ -9510,6 +10664,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("event-partOf");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [event-partOf]");
@@ -9518,6 +10673,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("ex-program-code");
   	if (null == result) {
   		System.out.println("Not found ValueSet [ex-program-code]");
@@ -9526,6 +10682,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-systemRef");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-systemRef]");
@@ -9534,6 +10691,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("operation-kind");
   	if (null == result) {
   		System.out.println("Not found ValueSet [operation-kind]");
@@ -9542,6 +10700,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcedureRequest");
   	result = procedurerequestDao.find("subrequest");
   	if (null == result) {
   		System.out.println("Not found ProcedureRequest [subrequest]");
@@ -9550,6 +10709,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve PlanDefinition");
   	result = plandefinitionDao.find("chlamydia-screening-intervention");
   	if (null == result) {
   		System.out.println("Not found PlanDefinition [chlamydia-screening-intervention]");
@@ -9558,6 +10718,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("group-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [group-type]");
@@ -9566,6 +10727,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Library");
   	result = libraryDao.find("library-quick-model-definition");
   	if (null == result) {
   		System.out.println("Not found Library [library-quick-model-definition]");
@@ -9574,6 +10736,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -9582,6 +10745,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("auditevent-MPPS");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [auditevent-MPPS]");
@@ -9590,6 +10754,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("procedure-outcome");
   	if (null == result) {
   		System.out.println("Not found ValueSet [procedure-outcome]");
@@ -9598,6 +10763,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve QuestionnaireResponse");
   	result = questionnaireresponseDao.find("3141");
   	if (null == result) {
   		System.out.println("Not found QuestionnaireResponse [3141]");
@@ -9606,6 +10772,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationStatement");
   	result = medicationstatementDao.find("example004");
   	if (null == result) {
   		System.out.println("Not found MedicationStatement [example004]");
@@ -9614,6 +10781,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("benefit-unit");
   	if (null == result) {
   		System.out.println("Not found ValueSet [benefit-unit]");
@@ -9622,6 +10790,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("payment-adjustment-reason");
   	if (null == result) {
   		System.out.println("Not found ValueSet [payment-adjustment-reason]");
@@ -9630,6 +10799,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("cqif-recommendation-strength");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [cqif-recommendation-strength]");
@@ -9638,6 +10808,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("ex-paymenttype");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [ex-paymenttype]");
@@ -9646,6 +10817,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcessRequest");
   	result = processrequestDao.find("44654");
   	if (null == result) {
   		System.out.println("Not found ProcessRequest [44654]");
@@ -9654,6 +10826,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("list-order");
   	if (null == result) {
   		System.out.println("Not found ValueSet [list-order]");
@@ -9662,6 +10835,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -9670,6 +10844,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("capabilitystatement-expectation");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [capabilitystatement-expectation]");
@@ -9678,6 +10853,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("adverse-event-causality-result");
   	if (null == result) {
   		System.out.println("Not found ValueSet [adverse-event-causality-result]");
@@ -9686,6 +10862,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("audit-event-action");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [audit-event-action]");
@@ -9694,6 +10871,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Patient");
   	result = patientDao.find("f201");
   	if (null == result) {
   		System.out.println("Not found Patient [f201]");
@@ -9702,6 +10880,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("supplement-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [supplement-type]");
@@ -9710,6 +10889,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("vitalspanel");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [vitalspanel]");
@@ -9718,6 +10898,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DiagnosticReport");
   	result = diagnosticreportDao.find("ultrasound");
   	if (null == result) {
   		System.out.println("Not found DiagnosticReport [ultrasound]");
@@ -9726,6 +10907,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("identity-assuranceLevel");
   	if (null == result) {
   		System.out.println("Not found ValueSet [identity-assuranceLevel]");
@@ -9736,7 +10918,9 @@ public class TestRetrieval {
   }
   @Test
   public void test1550() throws Exception {
+  	Object local = null;
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("example");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [example]");
@@ -9745,6 +10929,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("organization-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [organization-type]");
@@ -9753,6 +10938,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("diagnosticreport-genetic-DiagnosticReport-assessed-condition");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [diagnosticreport-genetic-DiagnosticReport-assessed-condition]");
@@ -9761,6 +10947,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("benefit-term");
   	if (null == result) {
   		System.out.println("Not found ValueSet [benefit-term]");
@@ -9769,6 +10956,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("substance-category");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [substance-category]");
@@ -9777,6 +10965,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("time");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [time]");
@@ -9785,6 +10974,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("encounter-diet");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [encounter-diet]");
@@ -9793,6 +10983,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("animal-species");
   	if (null == result) {
   		System.out.println("Not found ValueSet [animal-species]");
@@ -9801,6 +10992,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("service-uscls");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [service-uscls]");
@@ -9809,6 +11001,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Procedure");
   	result = procedureDao.find("ob");
   	if (null == result) {
   		System.out.println("Not found Procedure [ob]");
@@ -9817,6 +11010,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -9825,6 +11019,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("goal-reasonRejected");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [goal-reasonRejected]");
@@ -9833,6 +11028,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("example-TPMT-diplotype");
   	if (null == result) {
   		System.out.println("Not found Observation [example-TPMT-diplotype]");
@@ -9841,6 +11037,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("medication-admin-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [medication-admin-status]");
@@ -9849,6 +11046,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("diagnosticReport-extends");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [diagnosticReport-extends]");
@@ -9857,6 +11055,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("goal-priority");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [goal-priority]");
@@ -9865,6 +11064,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ImagingStudy");
   	result = imagingstudyDao.find("example");
   	if (null == result) {
   		System.out.println("Not found ImagingStudy [example]");
@@ -9873,6 +11073,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Device");
   	result = deviceDao.find("example-udi4");
   	if (null == result) {
   		System.out.println("Not found Device [example-udi4]");
@@ -9881,6 +11082,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("uri");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [uri]");
@@ -9889,6 +11091,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("date");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [date]");
@@ -9897,6 +11100,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("communication-media");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [communication-media]");
@@ -9905,6 +11109,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -9913,6 +11118,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0314");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0314]");
@@ -9921,6 +11127,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("specimen-sequenceNumber");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [specimen-sequenceNumber]");
@@ -9929,6 +11136,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Organization");
   	result = organizationDao.find("f203");
   	if (null == result) {
   		System.out.println("Not found Organization [f203]");
@@ -9937,6 +11145,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("procedurerequest-reasonRejected");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [procedurerequest-reasonRejected]");
@@ -9945,6 +11154,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("observation-focal-subject");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [observation-focal-subject]");
@@ -9953,6 +11163,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("flag-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [flag-category]");
@@ -9961,6 +11172,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("filter-operator");
   	if (null == result) {
   		System.out.println("Not found ValueSet [filter-operator]");
@@ -9969,6 +11181,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0301");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0301]");
@@ -9977,6 +11190,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("patient-religion");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [patient-religion]");
@@ -9985,6 +11199,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("relationship");
   	if (null == result) {
   		System.out.println("Not found ValueSet [relationship]");
@@ -9993,6 +11208,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("item-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [item-type]");
@@ -10001,6 +11217,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("registry");
   	if (null == result) {
   		System.out.println("Not found Bundle [registry]");
@@ -10009,6 +11226,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("condition-predecessor");
   	if (null == result) {
   		System.out.println("Not found ValueSet [condition-predecessor]");
@@ -10017,6 +11235,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("adverse-event-causality-method");
   	if (null == result) {
   		System.out.println("Not found ValueSet [adverse-event-causality-method]");
@@ -10025,6 +11244,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("code");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [code]");
@@ -10033,6 +11253,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("organization-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [organization-type]");
@@ -10041,6 +11262,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0325");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0325]");
@@ -10049,6 +11271,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("choice-list-orientation");
   	if (null == result) {
   		System.out.println("Not found ValueSet [choice-list-orientation]");
@@ -10057,6 +11280,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("CommunicationRequest");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [CommunicationRequest]");
@@ -10065,6 +11289,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Subscription");
   	result = subscriptionDao.find("example-error");
   	if (null == result) {
   		System.out.println("Not found Subscription [example-error]");
@@ -10073,6 +11298,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("c80-doc-typecodes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [c80-doc-typecodes]");
@@ -10081,6 +11307,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcedureRequest");
   	result = procedurerequestDao.find("physiotherapy");
   	if (null == result) {
   		System.out.println("Not found ProcedureRequest [physiotherapy]");
@@ -10089,6 +11316,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ProcedureRequest");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ProcedureRequest]");
@@ -10097,6 +11325,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("plan-definition-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [plan-definition-type]");
@@ -10105,6 +11334,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Endpoint");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Endpoint]");
@@ -10113,6 +11343,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Encounter");
   	result = encounterDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Encounter [example]");
@@ -10121,6 +11352,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("elementdefinition-namespace");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [elementdefinition-namespace]");
@@ -10129,6 +11361,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcedureRequest");
   	result = procedurerequestDao.find("example");
   	if (null == result) {
   		System.out.println("Not found ProcedureRequest [example]");
@@ -10137,6 +11370,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("procedure-incisionDateTime");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [procedure-incisionDateTime]");
@@ -10145,6 +11379,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve BodySite");
   	result = bodysiteDao.find("tumor");
   	if (null == result) {
   		System.out.println("Not found BodySite [tumor]");
@@ -10153,6 +11388,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("conceptmap-unmapped-mode");
   	if (null == result) {
   		System.out.println("Not found ValueSet [conceptmap-unmapped-mode]");
@@ -10161,6 +11397,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("identifier-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [identifier-type]");
@@ -10169,6 +11406,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("cm-detectedissue-severity-v3");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [cm-detectedissue-severity-v3]");
@@ -10177,6 +11415,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Group");
   	result = groupDao.find("102");
   	if (null == result) {
   		System.out.println("Not found Group [102]");
@@ -10185,6 +11424,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Composition");
   	result = compositionDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Composition [example]");
@@ -10193,6 +11433,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Consent");
   	result = consentDao.find("consent-example-notThem");
   	if (null == result) {
   		System.out.println("Not found Consent [consent-example-notThem]");
@@ -10201,6 +11442,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("binding-strength");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [binding-strength]");
@@ -10209,6 +11451,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("rendered-value");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [rendered-value]");
@@ -10217,6 +11460,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("trigger-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [trigger-type]");
@@ -10225,6 +11469,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve FHIRList");
   	result = fhirlistDao.find("example");
   	if (null == result) {
   		System.out.println("Not found FHIRList [example]");
@@ -10233,6 +11478,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcedureRequest");
   	result = procedurerequestDao.find("ambulation");
   	if (null == result) {
   		System.out.println("Not found ProcedureRequest [ambulation]");
@@ -10241,6 +11487,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("intervention");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [intervention]");
@@ -10249,6 +11496,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("codesystem-extensions-CodeSystem-keyword");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [codesystem-extensions-CodeSystem-keyword]");
@@ -10257,6 +11505,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("action-relationship-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [action-relationship-type]");
@@ -10265,6 +11514,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("publication-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [publication-status]");
@@ -10273,6 +11523,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("AllergyIntolerance");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [AllergyIntolerance]");
@@ -10281,6 +11532,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve NutritionOrder");
   	result = nutritionorderDao.find("fiberrestricteddiet");
   	if (null == result) {
   		System.out.println("Not found NutritionOrder [fiberrestricteddiet]");
@@ -10289,6 +11541,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("procedure-method");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [procedure-method]");
@@ -10297,6 +11550,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CompartmentDefinition");
   	result = compartmentdefinitionDao.find("patient");
   	if (null == result) {
   		System.out.println("Not found CompartmentDefinition [patient]");
@@ -10305,6 +11559,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Procedure");
   	result = procedureDao.find("f003");
   	if (null == result) {
   		System.out.println("Not found Procedure [f003]");
@@ -10313,6 +11568,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("operationoutcome-issue-source");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [operationoutcome-issue-source]");
@@ -10321,6 +11577,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("event-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [event-status]");
@@ -10329,6 +11586,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("bundle-transaction");
   	if (null == result) {
   		System.out.println("Not found Bundle [bundle-transaction]");
@@ -10337,6 +11595,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("definition-topic");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [definition-topic]");
@@ -10345,6 +11604,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Encounter");
   	result = encounterDao.find("f003");
   	if (null == result) {
   		System.out.println("Not found Encounter [f003]");
@@ -10353,6 +11613,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("encounter-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [encounter-status]");
@@ -10361,6 +11622,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("compartment-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [compartment-type]");
@@ -10369,6 +11631,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("probability-distribution-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [probability-distribution-type]");
@@ -10377,6 +11640,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("service-modifiers");
   	if (null == result) {
   		System.out.println("Not found ValueSet [service-modifiers]");
@@ -10385,6 +11649,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaireresponse-note");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaireresponse-note]");
@@ -10393,6 +11658,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("consent-NotificationEndpoint");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [consent-NotificationEndpoint]");
@@ -10401,6 +11667,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("udi-entry-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [udi-entry-type]");
@@ -10409,6 +11676,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("device-action");
   	if (null == result) {
   		System.out.println("Not found ValueSet [device-action]");
@@ -10417,6 +11685,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("map-input-mode");
   	if (null == result) {
   		System.out.println("Not found ValueSet [map-input-mode]");
@@ -10425,6 +11694,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("supplydelivery-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [supplydelivery-type]");
@@ -10433,6 +11703,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("ex-revenue-center");
   	if (null == result) {
   		System.out.println("Not found ValueSet [ex-revenue-center]");
@@ -10441,6 +11712,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("sequence-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [sequence-type]");
@@ -10449,6 +11721,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0318");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0318]");
@@ -10457,6 +11730,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-label");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-label]");
@@ -10465,6 +11739,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("consent-data-meaning");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [consent-data-meaning]");
@@ -10473,6 +11748,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("VisionPrescription");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [VisionPrescription]");
@@ -10481,6 +11757,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Account");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Account]");
@@ -10489,6 +11766,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcessRequest");
   	result = processrequestDao.find("1113");
   	if (null == result) {
   		System.out.println("Not found ProcessRequest [1113]");
@@ -10497,6 +11775,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("2minute-apgar-score");
   	if (null == result) {
   		System.out.println("Not found Observation [2minute-apgar-score]");
@@ -10505,6 +11784,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("library-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [library-type]");
@@ -10513,6 +11793,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("structuredefinition-annotation");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [structuredefinition-annotation]");
@@ -10521,6 +11802,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("GraphDefinition");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [GraphDefinition]");
@@ -10529,6 +11811,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaire-hidden");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaire-hidden]");
@@ -10537,6 +11820,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Substance");
   	result = substanceDao.find("f205");
   	if (null == result) {
   		System.out.println("Not found Substance [f205]");
@@ -10545,6 +11829,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("supplydelivery-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [supplydelivery-status]");
@@ -10553,6 +11838,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("pharmacy-core-refillsRemaining");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [pharmacy-core-refillsRemaining]");
@@ -10561,6 +11847,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Library");
   	result = libraryDao.find("library-cms146-example");
   	if (null == result) {
   		System.out.println("Not found Library [library-cms146-example]");
@@ -10569,6 +11856,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("openEHR-exposureDate");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [openEHR-exposureDate]");
@@ -10577,6 +11865,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaire-optionPrefix");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaire-optionPrefix]");
@@ -10585,6 +11874,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Condition");
   	result = conditionDao.find("f003");
   	if (null == result) {
   		System.out.println("Not found Condition [f003]");
@@ -10593,6 +11883,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0326");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0326]");
@@ -10601,6 +11892,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -10609,6 +11901,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("specimen-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [specimen-status]");
@@ -10617,6 +11910,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("composition-attestation-mode");
   	if (null == result) {
   		System.out.println("Not found ValueSet [composition-attestation-mode]");
@@ -10625,6 +11919,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CapabilityStatement");
   	result = capabilitystatementDao.find("terminology-server");
   	if (null == result) {
   		System.out.println("Not found CapabilityStatement [terminology-server]");
@@ -10633,6 +11928,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("encounter-admit-source");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [encounter-admit-source]");
@@ -10641,6 +11937,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("care-plan-intent");
   	if (null == result) {
   		System.out.println("Not found ValueSet [care-plan-intent]");
@@ -10649,6 +11946,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("chromosome-human");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [chromosome-human]");
@@ -10657,6 +11955,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("encounter-diet");
   	if (null == result) {
   		System.out.println("Not found ValueSet [encounter-diet]");
@@ -10665,6 +11964,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Consent");
   	result = consentDao.find("consent-example-signature");
   	if (null == result) {
   		System.out.println("Not found Consent [consent-example-signature]");
@@ -10673,6 +11973,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("pharmacy-core-maxDeliveryVolume");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [pharmacy-core-maxDeliveryVolume]");
@@ -10681,6 +11982,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("reference-handling-policy");
   	if (null == result) {
   		System.out.println("Not found ValueSet [reference-handling-policy]");
@@ -10689,6 +11991,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("example");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [example]");
@@ -10697,6 +12000,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("endpoint-connection-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [endpoint-connection-type]");
@@ -10705,6 +12009,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("specification-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [specification-type]");
@@ -10713,6 +12018,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Location");
   	result = locationDao.find("ph");
   	if (null == result) {
   		System.out.println("Not found Location [ph]");
@@ -10721,6 +12027,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Procedure");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Procedure]");
@@ -10729,6 +12036,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("date-lastmp");
   	if (null == result) {
   		System.out.println("Not found Observation [date-lastmp]");
@@ -10737,6 +12045,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("condition-criticality");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [condition-criticality]");
@@ -10745,6 +12054,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -10753,6 +12063,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("conformance-expectation");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [conformance-expectation]");
@@ -10761,6 +12072,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Consent");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Consent]");
@@ -10769,6 +12081,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ProcessRequest");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ProcessRequest]");
@@ -10777,6 +12090,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("document-relationship-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [document-relationship-type]");
@@ -10785,6 +12099,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0335");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0335]");
@@ -10793,6 +12108,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("f205");
   	if (null == result) {
   		System.out.println("Not found Observation [f205]");
@@ -10801,6 +12117,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CapabilityStatement");
   	result = capabilitystatementDao.find("messagedefinition");
   	if (null == result) {
   		System.out.println("Not found CapabilityStatement [messagedefinition]");
@@ -10809,6 +12126,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MessageDefinition");
   	result = messagedefinitionDao.find("patient-link-notification");
   	if (null == result) {
   		System.out.println("Not found MessageDefinition [patient-link-notification]");
@@ -10817,6 +12135,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("search-param-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [search-param-type]");
@@ -10825,6 +12144,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("icd-10");
   	if (null == result) {
   		System.out.println("Not found ValueSet [icd-10]");
@@ -10833,6 +12153,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("definition-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [definition-status]");
@@ -10841,6 +12162,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("Questionnaire-populate");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [Questionnaire-populate]");
@@ -10849,6 +12171,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("contactentity-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [contactentity-type]");
@@ -10857,6 +12180,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("message-transport");
   	if (null == result) {
   		System.out.println("Not found ValueSet [message-transport]");
@@ -10865,6 +12189,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("codesystem-comments");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [codesystem-comments]");
@@ -10873,6 +12198,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("example-genetics-1");
   	if (null == result) {
   		System.out.println("Not found Observation [example-genetics-1]");
@@ -10881,6 +12207,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("episodeofcare-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [episodeofcare-type]");
@@ -10889,6 +12216,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve RiskAssessment");
   	result = riskassessmentDao.find("genetic");
   	if (null == result) {
   		System.out.println("Not found RiskAssessment [genetic]");
@@ -10897,6 +12225,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0323");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0323]");
@@ -10905,6 +12234,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DiagnosticReport");
   	result = diagnosticreportDao.find("lipids");
   	if (null == result) {
   		System.out.println("Not found DiagnosticReport [lipids]");
@@ -10913,6 +12243,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve TestScript");
   	result = testscriptDao.find("testscript-example-rule");
   	if (null == result) {
   		System.out.println("Not found TestScript [testscript-example-rule]");
@@ -10921,6 +12252,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("condition-ver-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [condition-ver-status]");
@@ -10929,6 +12261,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0305");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0305]");
@@ -10937,6 +12270,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Consent");
   	result = consentDao.find("consent-example-notThis");
   	if (null == result) {
   		System.out.println("Not found Consent [consent-example-notThis]");
@@ -10945,6 +12279,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0324");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0324]");
@@ -10953,6 +12288,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DeviceRequest");
   	result = devicerequestDao.find("insulinpump");
   	if (null == result) {
   		System.out.println("Not found DeviceRequest [insulinpump]");
@@ -10961,6 +12297,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Sequence");
   	result = sequenceDao.find("example-pgx-2");
   	if (null == result) {
   		System.out.println("Not found Sequence [example-pgx-2]");
@@ -10969,6 +12306,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("structuredefinition-explicit-type-name");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [structuredefinition-explicit-type-name]");
@@ -10977,6 +12315,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("f002");
   	if (null == result) {
   		System.out.println("Not found Observation [f002]");
@@ -10985,6 +12324,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("immunization-recommendation-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [immunization-recommendation-status]");
@@ -10993,6 +12333,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("med0317");
   	if (null == result) {
   		System.out.println("Not found Medication [med0317]");
@@ -11001,6 +12342,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Schedule");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Schedule]");
@@ -11009,6 +12351,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("observation-geneticsDNAVariantId");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [observation-geneticsDNAVariantId]");
@@ -11017,6 +12360,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("example-reference");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [example-reference]");
@@ -11025,6 +12369,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("adverse-event-causality-result");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [adverse-event-causality-result]");
@@ -11033,6 +12378,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("audit-event-action");
   	if (null == result) {
   		System.out.println("Not found ValueSet [audit-event-action]");
@@ -11041,6 +12387,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Slot");
   	result = slotDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Slot [example]");
@@ -11049,6 +12396,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MessageDefinition");
   	result = messagedefinitionDao.find("patient-link-response");
   	if (null == result) {
   		System.out.println("Not found MessageDefinition [patient-link-response]");
@@ -11057,6 +12405,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -11065,6 +12414,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ClinicalImpression");
   	result = clinicalimpressionDao.find("example");
   	if (null == result) {
   		System.out.println("Not found ClinicalImpression [example]");
@@ -11073,6 +12423,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Endpoint");
   	result = endpointDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Endpoint [example]");
@@ -11081,6 +12432,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0316");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0316]");
@@ -11089,6 +12441,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("policyholder-relationship");
   	if (null == result) {
   		System.out.println("Not found ValueSet [policyholder-relationship]");
@@ -11097,6 +12450,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("reaction-event-certainty");
   	if (null == result) {
   		System.out.println("Not found ValueSet [reaction-event-certainty]");
@@ -11105,6 +12459,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("namingsystem-identifier-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [namingsystem-identifier-type]");
@@ -11113,6 +12468,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("metric-calibration-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [metric-calibration-type]");
@@ -11121,6 +12477,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("consent-content-code");
   	if (null == result) {
   		System.out.println("Not found ValueSet [consent-content-code]");
@@ -11129,6 +12486,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("request-priority");
   	if (null == result) {
   		System.out.println("Not found ValueSet [request-priority]");
@@ -11137,6 +12495,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("medication-statement-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [medication-statement-status]");
@@ -11145,6 +12504,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("observation-genetic-Observation-gene-identifier");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [observation-genetic-Observation-gene-identifier]");
@@ -11153,6 +12513,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("DeviceComponent");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [DeviceComponent]");
@@ -11161,6 +12522,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("data-types");
   	if (null == result) {
   		System.out.println("Not found ValueSet [data-types]");
@@ -11169,6 +12531,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Slot");
   	result = slotDao.find("1");
   	if (null == result) {
   		System.out.println("Not found Slot [1]");
@@ -11177,6 +12540,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("patient-extensions-Patient-mothersMaidenName");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [patient-extensions-Patient-mothersMaidenName]");
@@ -11185,6 +12549,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("f004");
   	if (null == result) {
   		System.out.println("Not found Observation [f004]");
@@ -11193,6 +12558,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("assert-direction-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [assert-direction-codes]");
@@ -11201,6 +12567,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("observation-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [observation-status]");
@@ -11209,6 +12576,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("auditevent-SOPClass");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [auditevent-SOPClass]");
@@ -11217,6 +12585,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("diagnosticReport-summaryOf");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [diagnosticReport-summaryOf]");
@@ -11225,6 +12594,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0316");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0316]");
@@ -11233,6 +12603,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Device");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Device]");
@@ -11241,6 +12612,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("MedicationRequest");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [MedicationRequest]");
@@ -11249,6 +12621,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("signature-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [signature-type]");
@@ -11257,6 +12630,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve PlanDefinition");
   	result = plandefinitionDao.find("low-suicide-risk-order-set");
   	if (null == result) {
   		System.out.println("Not found PlanDefinition [low-suicide-risk-order-set]");
@@ -11265,6 +12639,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Measure");
   	result = measureDao.find("component-b-example");
   	if (null == result) {
   		System.out.println("Not found Measure [component-b-example]");
@@ -11273,6 +12648,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("location-mode");
   	if (null == result) {
   		System.out.println("Not found ValueSet [location-mode]");
@@ -11281,6 +12657,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ClaimResponse");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ClaimResponse]");
@@ -11289,6 +12666,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0314");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0314]");
@@ -11297,6 +12675,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("patient-mothersMaidenName");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [patient-mothersMaidenName]");
@@ -11305,6 +12684,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Condition");
   	result = conditionDao.find("f202");
   	if (null == result) {
   		System.out.println("Not found Condition [f202]");
@@ -11313,6 +12693,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Location");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Location]");
@@ -11321,6 +12702,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -11329,6 +12711,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("unknown-content-code");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [unknown-content-code]");
@@ -11337,6 +12720,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("metric-operational-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [metric-operational-status]");
@@ -11345,6 +12729,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("allerg-intol-substance-exp-risk");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [allerg-intol-substance-exp-risk]");
@@ -11353,6 +12738,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Condition");
   	result = conditionDao.find("f201");
   	if (null == result) {
   		System.out.println("Not found Condition [f201]");
@@ -11361,6 +12747,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CompartmentDefinition");
   	result = compartmentdefinitionDao.find("encounter");
   	if (null == result) {
   		System.out.println("Not found CompartmentDefinition [encounter]");
@@ -11369,6 +12756,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("goal-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [goal-status]");
@@ -11377,6 +12765,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("MeasureReport");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [MeasureReport]");
@@ -11385,6 +12774,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("valueset-extensions-ValueSet-end");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [valueset-extensions-ValueSet-end]");
@@ -11393,6 +12783,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Period");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Period]");
@@ -11401,6 +12792,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("claim-exception");
   	if (null == result) {
   		System.out.println("Not found ValueSet [claim-exception]");
@@ -11409,6 +12801,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Procedure");
   	result = procedureDao.find("f201");
   	if (null == result) {
   		System.out.println("Not found Procedure [f201]");
@@ -11417,6 +12810,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("bmi");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [bmi]");
@@ -11425,6 +12819,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("report-result-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [report-result-codes]");
@@ -11433,6 +12828,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("immunization-recommendation-target-disease");
   	if (null == result) {
   		System.out.println("Not found ValueSet [immunization-recommendation-target-disease]");
@@ -11441,6 +12837,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("10bb101f-a121-4264-a920-67be9cb82c74");
   	if (null == result) {
   		System.out.println("Not found Bundle [10bb101f-a121-4264-a920-67be9cb82c74]");
@@ -11449,6 +12846,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve NutritionOrder");
   	result = nutritionorderDao.find("pureeddiet-simple");
   	if (null == result) {
   		System.out.println("Not found NutritionOrder [pureeddiet-simple]");
@@ -11457,6 +12855,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CarePlan");
   	result = careplanDao.find("obesity-narrative");
   	if (null == result) {
   		System.out.println("Not found CarePlan [obesity-narrative]");
@@ -11465,6 +12864,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("GuidanceResponse");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [GuidanceResponse]");
@@ -11473,6 +12873,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Range");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Range]");
@@ -11481,6 +12882,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -11489,6 +12891,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Communication");
   	result = communicationDao.find("fm-solicited");
   	if (null == result) {
   		System.out.println("Not found Communication [fm-solicited]");
@@ -11497,6 +12900,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("vision-product");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [vision-product]");
@@ -11505,6 +12909,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ImagingManifest");
   	result = imagingmanifestDao.find("example");
   	if (null == result) {
   		System.out.println("Not found ImagingManifest [example]");
@@ -11513,6 +12918,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureMap");
   	result = structuremapDao.find("supplyrequest-transform");
   	if (null == result) {
   		System.out.println("Not found StructureMap [supplyrequest-transform]");
@@ -11521,6 +12927,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("medication-admin-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [medication-admin-status]");
@@ -11529,6 +12936,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("Patient-everything");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [Patient-everything]");
@@ -11537,6 +12945,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DataElement");
   	result = dataelementDao.find("gender");
   	if (null == result) {
   		System.out.println("Not found DataElement [gender]");
@@ -11545,6 +12954,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("MessageHeader-process-message");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [MessageHeader-process-message]");
@@ -11553,6 +12963,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("medication-request-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [medication-request-status]");
@@ -11561,6 +12972,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -11569,6 +12981,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("audit-event-outcome");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [audit-event-outcome]");
@@ -11577,6 +12990,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("restful-capability-mode");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [restful-capability-mode]");
@@ -11585,6 +12999,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-EN-representation");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-EN-representation]");
@@ -11593,6 +13008,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("intervention");
   	if (null == result) {
   		System.out.println("Not found ValueSet [intervention]");
@@ -11601,6 +13017,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ImplementationGuide");
   	result = implementationguideDao.find("example");
   	if (null == result) {
   		System.out.println("Not found ImplementationGuide [example]");
@@ -11609,6 +13026,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("publication-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [publication-status]");
@@ -11617,6 +13035,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Library");
   	result = libraryDao.find("library-exclusive-breastfeeding-cqm-logic");
   	if (null == result) {
   		System.out.println("Not found Library [library-exclusive-breastfeeding-cqm-logic]");
@@ -11625,6 +13044,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("history-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [history-status]");
@@ -11633,6 +13053,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-unclosed");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-unclosed]");
@@ -11641,6 +13062,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("composition-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [composition-status]");
@@ -11649,6 +13071,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Device");
   	result = deviceDao.find("example-udi1");
   	if (null == result) {
   		System.out.println("Not found Device [example-udi1]");
@@ -11657,6 +13080,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("usps-state");
   	if (null == result) {
   		System.out.println("Not found ValueSet [usps-state]");
@@ -11665,6 +13089,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("action-grouping-behavior");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [action-grouping-behavior]");
@@ -11673,6 +13098,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("dataelements");
   	if (null == result) {
   		System.out.println("Not found Bundle [dataelements]");
@@ -11681,6 +13107,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -11689,6 +13116,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MeasureReport");
   	result = measurereportDao.find("measurereport-cms146-cat1-example");
   	if (null == result) {
   		System.out.println("Not found MeasureReport [measurereport-cms146-cat1-example]");
@@ -11697,6 +13125,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("claim-careteamrole");
   	if (null == result) {
   		System.out.println("Not found ValueSet [claim-careteamrole]");
@@ -11705,6 +13134,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("11179-objectClass");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [11179-objectClass]");
@@ -11713,6 +13143,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0329");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0329]");
@@ -11721,6 +13152,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("reaction-event-severity");
   	if (null == result) {
   		System.out.println("Not found ValueSet [reaction-event-severity]");
@@ -11729,6 +13161,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("condition-extensions-Condition-definition");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [condition-extensions-Condition-definition]");
@@ -11737,6 +13170,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("heart-rate");
   	if (null == result) {
   		System.out.println("Not found Observation [heart-rate]");
@@ -11745,6 +13179,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("3ad0687e-f477-468c-afd5-fcc2bf897808");
   	if (null == result) {
   		System.out.println("Not found Bundle [3ad0687e-f477-468c-afd5-fcc2bf897808]");
@@ -11753,6 +13188,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Coding");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Coding]");
@@ -11761,6 +13197,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Measure");
   	result = measureDao.find("measure-cms146-example");
   	if (null == result) {
   		System.out.println("Not found Measure [measure-cms146-example]");
@@ -11769,6 +13206,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("relationship");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [relationship]");
@@ -11777,6 +13215,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("device-safety");
   	if (null == result) {
   		System.out.println("Not found ValueSet [device-safety]");
@@ -11785,6 +13224,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("goal-start-event");
   	if (null == result) {
   		System.out.println("Not found ValueSet [goal-start-event]");
@@ -11793,6 +13233,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ldlcholesterol");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ldlcholesterol]");
@@ -11801,6 +13242,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("chargeitem-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [chargeitem-status]");
@@ -11809,6 +13251,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("report-action-result-codes");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [report-action-result-codes]");
@@ -11817,6 +13260,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CompartmentDefinition");
   	result = compartmentdefinitionDao.find("practitioner");
   	if (null == result) {
   		System.out.println("Not found CompartmentDefinition [practitioner]");
@@ -11825,6 +13269,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("profile-code");
   	if (null == result) {
   		System.out.println("Not found ValueSet [profile-code]");
@@ -11833,6 +13278,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("episode-of-care-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [episode-of-care-status]");
@@ -11841,6 +13287,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-ADXP-direction");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-ADXP-direction]");
@@ -11849,6 +13296,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Consent");
   	result = consentDao.find("consent-example-notTime");
   	if (null == result) {
   		System.out.println("Not found Consent [consent-example-notTime]");
@@ -11857,6 +13305,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve EnrollmentRequest");
   	result = enrollmentrequestDao.find("22345");
   	if (null == result) {
   		System.out.println("Not found EnrollmentRequest [22345]");
@@ -11865,6 +13314,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("questionnaire-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [questionnaire-category]");
@@ -11873,6 +13323,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("resource-validation-mode");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [resource-validation-mode]");
@@ -11881,6 +13332,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DiagnosticReport");
   	result = diagnosticreportDao.find("example-pgx");
   	if (null == result) {
   		System.out.println("Not found DiagnosticReport [example-pgx]");
@@ -11889,6 +13341,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-ADXP-delimiter");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-ADXP-delimiter]");
@@ -11897,6 +13350,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("care-plan-intent");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [care-plan-intent]");
@@ -11905,6 +13359,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("patient-citizenship");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [patient-citizenship]");
@@ -11913,6 +13368,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -11921,6 +13377,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("elementdefinition-equivalence");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [elementdefinition-equivalence]");
@@ -11929,6 +13386,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("Library-data-requirements");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [Library-data-requirements]");
@@ -11937,6 +13395,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("common-tags");
   	if (null == result) {
   		System.out.println("Not found ValueSet [common-tags]");
@@ -11945,6 +13404,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("conditional-delete-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [conditional-delete-status]");
@@ -11953,6 +13413,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SupplyRequest");
   	result = supplyrequestDao.find("simpleorder");
   	if (null == result) {
   		System.out.println("Not found SupplyRequest [simpleorder]");
@@ -11961,6 +13422,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("103");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [103]");
@@ -11969,6 +13431,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("example-diplotype1");
   	if (null == result) {
   		System.out.println("Not found Observation [example-diplotype1]");
@@ -11977,6 +13440,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("summary");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [summary]");
@@ -11985,6 +13449,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("uuid");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [uuid]");
@@ -11993,6 +13458,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("definition-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [definition-status]");
@@ -12001,6 +13467,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("animal-genderstatus");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [animal-genderstatus]");
@@ -12009,6 +13476,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("observation-geneticsGenomicSourceClass");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [observation-geneticsGenomicSourceClass]");
@@ -12017,6 +13485,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DocumentReference");
   	result = documentreferenceDao.find("example");
   	if (null == result) {
   		System.out.println("Not found DocumentReference [example]");
@@ -12025,6 +13494,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("adverse-event-causality-assess");
   	if (null == result) {
   		System.out.println("Not found ValueSet [adverse-event-causality-assess]");
@@ -12033,6 +13503,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationAdministration");
   	result = medicationadministrationDao.find("medadmin0311");
   	if (null == result) {
   		System.out.println("Not found MedicationAdministration [medadmin0311]");
@@ -12041,6 +13512,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("copy-number-event");
   	if (null == result) {
   		System.out.println("Not found ValueSet [copy-number-event]");
@@ -12049,6 +13521,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("Questionnaire-populatehtml");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [Questionnaire-populatehtml]");
@@ -12057,6 +13530,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("observation-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [observation-status]");
@@ -12065,6 +13539,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaire-studyprotocolIdentifier");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaire-studyprotocolIdentifier]");
@@ -12073,6 +13548,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("goal-priority");
   	if (null == result) {
   		System.out.println("Not found ValueSet [goal-priority]");
@@ -12083,7 +13559,9 @@ public class TestRetrieval {
   }
   @Test
   public void test1860() throws Exception {
+  	Object local = null;
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("classification-or-context");
   	if (null == result) {
   		System.out.println("Not found ValueSet [classification-or-context]");
@@ -12092,6 +13570,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("cm-contact-point-use-v2");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [cm-contact-point-use-v2]");
@@ -12100,6 +13579,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0312");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0312]");
@@ -12108,6 +13588,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("capabilitystatement-prohibited");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [capabilitystatement-prohibited]");
@@ -12116,6 +13597,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Group");
   	result = groupDao.find("101");
   	if (null == result) {
   		System.out.println("Not found Group [101]");
@@ -12124,6 +13606,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("contract-action");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [contract-action]");
@@ -12132,6 +13615,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("days-of-week");
   	if (null == result) {
   		System.out.println("Not found ValueSet [days-of-week]");
@@ -12140,6 +13624,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("example-TPMT-haplotype-two");
   	if (null == result) {
   		System.out.println("Not found Observation [example-TPMT-haplotype-two]");
@@ -12148,6 +13633,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("action-required-behavior");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [action-required-behavior]");
@@ -12156,6 +13642,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("rendering-markdown");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [rendering-markdown]");
@@ -12164,6 +13651,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("conceptmaps");
   	if (null == result) {
   		System.out.println("Not found Bundle [conceptmaps]");
@@ -12172,6 +13660,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("task-performer-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [task-performer-type]");
@@ -12180,6 +13669,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("assert-operator-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [assert-operator-codes]");
@@ -12188,6 +13678,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Practitioner");
   	result = practitionerDao.find("f202");
   	if (null == result) {
   		System.out.println("Not found Practitioner [f202]");
@@ -12196,6 +13687,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("address-use");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [address-use]");
@@ -12204,6 +13696,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CapabilityStatement");
   	result = capabilitystatementDao.find("base");
   	if (null == result) {
   		System.out.println("Not found CapabilityStatement [base]");
@@ -12212,6 +13705,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("tooth");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [tooth]");
@@ -12220,6 +13714,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("note-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [note-type]");
@@ -12228,6 +13723,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("diagnosis-role");
   	if (null == result) {
   		System.out.println("Not found ValueSet [diagnosis-role]");
@@ -12236,6 +13732,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("coverage-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [coverage-type]");
@@ -12244,6 +13741,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("adverse-event-category");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [adverse-event-category]");
@@ -12252,6 +13750,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Person");
   	result = personDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Person [example]");
@@ -12260,6 +13759,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -12268,6 +13768,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CapabilityStatement");
   	result = capabilitystatementDao.find("knowledge-repository");
   	if (null == result) {
   		System.out.println("Not found CapabilityStatement [knowledge-repository]");
@@ -12276,6 +13777,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("id");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [id]");
@@ -12284,6 +13786,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("care-plan-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [care-plan-status]");
@@ -12292,6 +13795,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("structuredefinition-fmm");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [structuredefinition-fmm]");
@@ -12300,6 +13804,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("family-member-history-genetics-parent");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [family-member-history-genetics-parent]");
@@ -12308,6 +13813,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("service-place");
   	if (null == result) {
   		System.out.println("Not found ValueSet [service-place]");
@@ -12316,6 +13822,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("PlanDefinition");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [PlanDefinition]");
@@ -12324,6 +13831,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve EligibilityResponse");
   	result = eligibilityresponseDao.find("E2500");
   	if (null == result) {
   		System.out.println("Not found EligibilityResponse [E2500]");
@@ -12332,6 +13840,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Organization");
   	result = organizationDao.find("f201");
   	if (null == result) {
   		System.out.println("Not found Organization [f201]");
@@ -12340,6 +13849,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve GuidanceResponse");
   	result = guidanceresponseDao.find("example");
   	if (null == result) {
   		System.out.println("Not found GuidanceResponse [example]");
@@ -12348,6 +13858,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Person");
   	result = personDao.find("grahame");
   	if (null == result) {
   		System.out.println("Not found Person [grahame]");
@@ -12356,6 +13867,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("care-plan-activity-category");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [care-plan-activity-category]");
@@ -12364,6 +13876,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Organization");
   	result = organizationDao.find("2.16.840.1.113883.19.5");
   	if (null == result) {
   		System.out.println("Not found Organization [2.16.840.1.113883.19.5]");
@@ -12372,6 +13885,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("participantrequired");
   	if (null == result) {
   		System.out.println("Not found ValueSet [participantrequired]");
@@ -12380,6 +13894,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("contract-term-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [contract-term-type]");
@@ -12388,6 +13903,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("service-provision-conditions");
   	if (null == result) {
   		System.out.println("Not found ValueSet [service-provision-conditions]");
@@ -12396,6 +13912,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Sequence");
   	result = sequenceDao.find("graphic-example-3");
   	if (null == result) {
   		System.out.println("Not found Sequence [graphic-example-3]");
@@ -12404,6 +13921,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("icd-10-procedures");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [icd-10-procedures]");
@@ -12412,6 +13930,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("map-transform");
   	if (null == result) {
   		System.out.println("Not found ValueSet [map-transform]");
@@ -12420,6 +13939,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("observation-statistics");
   	if (null == result) {
   		System.out.println("Not found ValueSet [observation-statistics]");
@@ -12428,6 +13948,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("cm-address-type-v3");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [cm-address-type-v3]");
@@ -12436,6 +13957,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0308");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0308]");
@@ -12444,6 +13966,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("transaction-mode");
   	if (null == result) {
   		System.out.println("Not found ValueSet [transaction-mode]");
@@ -12452,6 +13975,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Consent");
   	result = consentDao.find("consent-example-grantor");
   	if (null == result) {
   		System.out.println("Not found Consent [consent-example-grantor]");
@@ -12460,6 +13984,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("nutrition-request-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [nutrition-request-status]");
@@ -12468,6 +13993,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -12476,6 +14002,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("referencerange-meaning");
   	if (null == result) {
   		System.out.println("Not found ValueSet [referencerange-meaning]");
@@ -12484,6 +14011,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("goal-pertainsToGoal");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [goal-pertainsToGoal]");
@@ -12492,6 +14020,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("procedure-progress-status-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [procedure-progress-status-codes]");
@@ -12500,6 +14029,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("activity-reason");
   	if (null == result) {
   		System.out.println("Not found ValueSet [activity-reason]");
@@ -12508,6 +14038,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("request-intent");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [request-intent]");
@@ -12516,6 +14047,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -12524,6 +14056,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("match-grade");
   	if (null == result) {
   		System.out.println("Not found ValueSet [match-grade]");
@@ -12532,6 +14065,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("concept-property-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [concept-property-type]");
@@ -12540,6 +14074,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("patient-extensions-Patient-age");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [patient-extensions-Patient-age]");
@@ -12548,6 +14083,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Claim");
   	result = claimDao.find("760151");
   	if (null == result) {
   		System.out.println("Not found Claim [760151]");
@@ -12556,6 +14092,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Specimen");
   	result = specimenDao.find("vma-urine");
   	if (null == result) {
   		System.out.println("Not found Specimen [vma-urine]");
@@ -12564,6 +14101,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -12572,6 +14110,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("bodylength");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [bodylength]");
@@ -12580,6 +14119,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Sequence");
   	result = sequenceDao.find("sequence-complex-variant");
   	if (null == result) {
   		System.out.println("Not found Sequence [sequence-complex-variant]");
@@ -12588,6 +14128,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("ucum-bodylength");
   	if (null == result) {
   		System.out.println("Not found ValueSet [ucum-bodylength]");
@@ -12596,6 +14137,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("bmi");
   	if (null == result) {
   		System.out.println("Not found Observation [bmi]");
@@ -12604,6 +14146,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("condition-cause");
   	if (null == result) {
   		System.out.println("Not found ValueSet [condition-cause]");
@@ -12612,6 +14155,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CapabilityStatement");
   	result = capabilitystatementDao.find("measure-processor");
   	if (null == result) {
   		System.out.println("Not found CapabilityStatement [measure-processor]");
@@ -12620,6 +14164,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("resource-effectivePeriod");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [resource-effectivePeriod]");
@@ -12628,6 +14173,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("ValueSet-validate-code");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [ValueSet-validate-code]");
@@ -12636,6 +14182,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("map-context-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [map-context-type]");
@@ -12644,6 +14191,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("issue-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [issue-type]");
@@ -12652,6 +14200,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MeasureReport");
   	result = measurereportDao.find("measurereport-cms146-cat2-example");
   	if (null == result) {
   		System.out.println("Not found MeasureReport [measurereport-cms146-cat2-example]");
@@ -12660,6 +14209,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Patient");
   	result = patientDao.find("animal");
   	if (null == result) {
   		System.out.println("Not found Patient [animal]");
@@ -12668,6 +14218,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("constraint-severity");
   	if (null == result) {
   		System.out.println("Not found ValueSet [constraint-severity]");
@@ -12676,6 +14227,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("mapSourcePublisher");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [mapSourcePublisher]");
@@ -12684,6 +14236,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("endpoint-connection-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [endpoint-connection-type]");
@@ -12692,6 +14245,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("device-kind");
   	if (null == result) {
   		System.out.println("Not found ValueSet [device-kind]");
@@ -12700,6 +14254,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Library");
   	result = libraryDao.find("suiciderisk-orderset-logic");
   	if (null == result) {
   		System.out.println("Not found Library [suiciderisk-orderset-logic]");
@@ -12708,6 +14263,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcessRequest");
   	result = processrequestDao.find("1114");
   	if (null == result) {
   		System.out.println("Not found ProcessRequest [1114]");
@@ -12716,6 +14272,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Patient");
   	result = patientDao.find("f001");
   	if (null == result) {
   		System.out.println("Not found Patient [f001]");
@@ -12724,6 +14281,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("observation-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [observation-codes]");
@@ -12732,6 +14290,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("episode-of-care-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [episode-of-care-status]");
@@ -12740,6 +14299,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("action-cardinality-behavior");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [action-cardinality-behavior]");
@@ -12748,6 +14308,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("NutritionOrder");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [NutritionOrder]");
@@ -12756,6 +14317,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("BackboneElement");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [BackboneElement]");
@@ -12764,6 +14326,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -12772,6 +14335,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcessRequest");
   	result = processrequestDao.find("87655");
   	if (null == result) {
   		System.out.println("Not found ProcessRequest [87655]");
@@ -12780,6 +14344,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Reference");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Reference]");
@@ -12788,6 +14353,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("operational-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [operational-status]");
@@ -12796,6 +14362,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("questionnaire-usage-mode");
   	if (null == result) {
   		System.out.println("Not found ValueSet [questionnaire-usage-mode]");
@@ -12804,6 +14371,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("linkage-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [linkage-type]");
@@ -12812,6 +14380,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("allergy-clinical-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [allergy-clinical-status]");
@@ -12820,6 +14389,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-history");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-history]");
@@ -12828,6 +14398,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("related-artifact-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [related-artifact-type]");
@@ -12836,6 +14407,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("specification-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [specification-type]");
@@ -12844,6 +14416,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("20minute-apgar-score");
   	if (null == result) {
   		System.out.println("Not found Observation [20minute-apgar-score]");
@@ -12852,6 +14425,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("restful-security-service");
   	if (null == result) {
   		System.out.println("Not found ValueSet [restful-security-service]");
@@ -12860,6 +14434,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationStatement");
   	result = medicationstatementDao.find("example005");
   	if (null == result) {
   		System.out.println("Not found MedicationStatement [example005]");
@@ -12868,6 +14443,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("name-assembly-order");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [name-assembly-order]");
@@ -12876,6 +14452,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("example");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [example]");
@@ -12884,6 +14461,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Encounter");
   	result = encounterDao.find("f202");
   	if (null == result) {
   		System.out.println("Not found Encounter [f202]");
@@ -12892,6 +14470,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("explanationofbenefit-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [explanationofbenefit-status]");
@@ -12900,6 +14479,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-systemName");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-systemName]");
@@ -12908,6 +14488,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("ucum-bodytemp");
   	if (null == result) {
   		System.out.println("Not found ValueSet [ucum-bodytemp]");
@@ -12916,6 +14497,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("benefit-category");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [benefit-category]");
@@ -12924,6 +14506,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("contract-actorrole");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [contract-actorrole]");
@@ -12932,6 +14515,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("condition-state");
   	if (null == result) {
   		System.out.println("Not found ValueSet [condition-state]");
@@ -12940,6 +14524,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("contract-subtype");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [contract-subtype]");
@@ -12948,6 +14533,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve PlanDefinition");
   	result = plandefinitionDao.find("exclusive-breastfeeding-intervention-04");
   	if (null == result) {
   		System.out.println("Not found PlanDefinition [exclusive-breastfeeding-intervention-04]");
@@ -12956,6 +14542,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-nullFlavor");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-nullFlavor]");
@@ -12964,6 +14551,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -12972,6 +14560,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve PaymentReconciliation");
   	result = paymentreconciliationDao.find("ER2500");
   	if (null == result) {
   		System.out.println("Not found PaymentReconciliation [ER2500]");
@@ -12980,6 +14569,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("hla-genotyping-results-method");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [hla-genotyping-results-method]");
@@ -12988,6 +14578,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("f201");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [f201]");
@@ -12996,6 +14587,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp008");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp008]");
@@ -13004,6 +14596,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("ussg-fht");
   	if (null == result) {
   		System.out.println("Not found Bundle [ussg-fht]");
@@ -13012,6 +14605,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Subscription");
   	result = subscriptionDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Subscription [example]");
@@ -13020,6 +14614,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("contactentity-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [contactentity-type]");
@@ -13028,6 +14623,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Device");
   	result = deviceDao.find("software");
   	if (null == result) {
   		System.out.println("Not found Device [software]");
@@ -13036,6 +14632,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("contract-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [contract-type]");
@@ -13044,6 +14641,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve TestReport");
   	result = testreportDao.find("testreport-example");
   	if (null == result) {
   		System.out.println("Not found TestReport [testreport-example]");
@@ -13052,6 +14650,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("med0310");
   	if (null == result) {
   		System.out.println("Not found Medication [med0310]");
@@ -13060,6 +14659,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("payeetype");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [payeetype]");
@@ -13068,6 +14668,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("patient-importance");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [patient-importance]");
@@ -13076,6 +14677,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -13084,6 +14686,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("RequestGroup");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [RequestGroup]");
@@ -13092,6 +14695,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("example-intensional");
   	if (null == result) {
   		System.out.println("Not found ValueSet [example-intensional]");
@@ -13100,6 +14704,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve RequestGroup");
   	result = requestgroupDao.find("kdn5-example");
   	if (null == result) {
   		System.out.println("Not found RequestGroup [kdn5-example]");
@@ -13108,6 +14713,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcessRequest");
   	result = processrequestDao.find("1110");
   	if (null == result) {
   		System.out.println("Not found ProcessRequest [1110]");
@@ -13116,6 +14722,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ExpansionProfile");
   	result = expansionprofileDao.find("example");
   	if (null == result) {
   		System.out.println("Not found ExpansionProfile [example]");
@@ -13124,6 +14731,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Provenance");
   	result = provenanceDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Provenance [example]");
@@ -13132,6 +14740,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve PlanDefinition");
   	result = plandefinitionDao.find("KDN5");
   	if (null == result) {
   		System.out.println("Not found PlanDefinition [KDN5]");
@@ -13140,6 +14749,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcessResponse");
   	result = processresponseDao.find("SR2349");
   	if (null == result) {
   		System.out.println("Not found ProcessResponse [SR2349]");
@@ -13148,6 +14758,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("procedure-not-performed-reason");
   	if (null == result) {
   		System.out.println("Not found ValueSet [procedure-not-performed-reason]");
@@ -13156,6 +14767,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("communication-not-done-reason");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [communication-not-done-reason]");
@@ -13164,6 +14776,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("conceptmap-unmapped-mode");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [conceptmap-unmapped-mode]");
@@ -13172,6 +14785,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcessResponse");
   	result = processresponseDao.find("SR2499");
   	if (null == result) {
   		System.out.println("Not found ProcessResponse [SR2499]");
@@ -13180,6 +14794,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CompartmentDefinition");
   	result = compartmentdefinitionDao.find("example");
   	if (null == result) {
   		System.out.println("Not found CompartmentDefinition [example]");
@@ -13188,6 +14803,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("operationoutcome-authority");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [operationoutcome-authority]");
@@ -13196,6 +14812,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-author");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-author]");
@@ -13204,6 +14821,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("11179-permitted-value-conceptmap");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [11179-permitted-value-conceptmap]");
@@ -13212,6 +14830,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("xhtml");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [xhtml]");
@@ -13220,6 +14839,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("group-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [group-type]");
@@ -13228,6 +14848,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("observation-geneticsAllelicState");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [observation-geneticsAllelicState]");
@@ -13236,6 +14857,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("ex-payee-resource-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [ex-payee-resource-type]");
@@ -13244,6 +14866,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("minLength");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [minLength]");
@@ -13252,6 +14875,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("medication-dispense-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [medication-dispense-status]");
@@ -13260,6 +14884,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("contract-signer-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [contract-signer-type]");
@@ -13268,6 +14893,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("basic-resource-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [basic-resource-type]");
@@ -13276,6 +14902,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("coverage-level");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [coverage-level]");
@@ -13284,6 +14911,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("procedurerequest-precondition");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [procedurerequest-precondition]");
@@ -13292,6 +14920,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0331");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0331]");
@@ -13300,6 +14929,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaire-ordinalValue");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaire-ordinalValue]");
@@ -13308,6 +14938,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("related-artifact-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [related-artifact-type]");
@@ -13316,6 +14947,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Procedure");
   	result = procedureDao.find("physical-therapy");
   	if (null == result) {
   		System.out.println("Not found Procedure [physical-therapy]");
@@ -13324,6 +14956,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve PlanDefinition");
   	result = plandefinitionDao.find("zika-virus-intervention");
   	if (null == result) {
   		System.out.println("Not found PlanDefinition [zika-virus-intervention]");
@@ -13332,6 +14965,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("oral-prosthodontic-material");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [oral-prosthodontic-material]");
@@ -13340,6 +14974,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -13348,6 +14983,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("event-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [event-status]");
@@ -13356,6 +14992,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("extra-security-role-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [extra-security-role-type]");
@@ -13364,6 +15001,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("restful-security-service");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [restful-security-service]");
@@ -13372,6 +15010,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("boolean");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [boolean]");
@@ -13380,6 +15019,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("property-representation");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [property-representation]");
@@ -13388,6 +15028,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("consent-state-codes");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [consent-state-codes]");
@@ -13396,6 +15037,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("contract-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [contract-status]");
@@ -13404,6 +15046,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("issue-severity");
   	if (null == result) {
   		System.out.println("Not found ValueSet [issue-severity]");
@@ -13412,6 +15055,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("11179-de-submitter-org");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [11179-de-submitter-org]");
@@ -13420,6 +15064,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("supplydelivery-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [supplydelivery-status]");
@@ -13428,6 +15073,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("no-immunization-reason");
   	if (null == result) {
   		System.out.println("Not found ValueSet [no-immunization-reason]");
@@ -13436,6 +15082,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("type-derivation-rule");
   	if (null == result) {
   		System.out.println("Not found ValueSet [type-derivation-rule]");
@@ -13444,6 +15091,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ClaimResponse");
   	result = claimresponseDao.find("R3500");
   	if (null == result) {
   		System.out.println("Not found ClaimResponse [R3500]");
@@ -13452,6 +15100,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("vitalsigns");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [vitalsigns]");
@@ -13460,6 +15109,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Person");
   	result = personDao.find("pp");
   	if (null == result) {
   		System.out.println("Not found Person [pp]");
@@ -13468,6 +15118,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("EnrollmentRequest");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [EnrollmentRequest]");
@@ -13476,6 +15127,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("codesystem-author");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [codesystem-author]");
@@ -13484,6 +15136,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("slotstatus");
   	if (null == result) {
   		System.out.println("Not found ValueSet [slotstatus]");
@@ -13492,6 +15145,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0320");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0320]");
@@ -13500,6 +15154,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("example-extension");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [example-extension]");
@@ -13508,6 +15163,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("udi");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [udi]");
@@ -13516,6 +15172,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("ex-paymenttype");
   	if (null == result) {
   		System.out.println("Not found ValueSet [ex-paymenttype]");
@@ -13524,6 +15181,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("reference-handling-policy");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [reference-handling-policy]");
@@ -13532,6 +15190,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("encounter-admit-source");
   	if (null == result) {
   		System.out.println("Not found ValueSet [encounter-admit-source]");
@@ -13540,6 +15199,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationStatement");
   	result = medicationstatementDao.find("example002");
   	if (null == result) {
   		System.out.println("Not found MedicationStatement [example002]");
@@ -13548,6 +15208,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Sequence");
   	result = sequenceDao.find("coord-1-base");
   	if (null == result) {
   		System.out.println("Not found Sequence [coord-1-base]");
@@ -13556,6 +15217,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("care-team-category");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [care-team-category]");
@@ -13564,6 +15226,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("hla-1");
   	if (null == result) {
   		System.out.println("Not found Bundle [hla-1]");
@@ -13572,6 +15235,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("humanname-mothers-family");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [humanname-mothers-family]");
@@ -13580,6 +15244,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0328");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0328]");
@@ -13588,6 +15253,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Device");
   	result = deviceDao.find("example-udi2");
   	if (null == result) {
   		System.out.println("Not found Device [example-udi2]");
@@ -13596,6 +15262,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("digital-media-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [digital-media-type]");
@@ -13604,6 +15271,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("system-version-processing-mode");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [system-version-processing-mode]");
@@ -13612,6 +15280,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("administrative-gender");
   	if (null == result) {
   		System.out.println("Not found ValueSet [administrative-gender]");
@@ -13620,6 +15289,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("communicationrequest-definition");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [communicationrequest-definition]");
@@ -13628,6 +15298,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Organization");
   	result = organizationDao.find("1");
   	if (null == result) {
   		System.out.println("Not found Organization [1]");
@@ -13636,6 +15307,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("bundle-response-simplesummary");
   	if (null == result) {
   		System.out.println("Not found Bundle [bundle-response-simplesummary]");
@@ -13644,6 +15316,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("eye-color");
   	if (null == result) {
   		System.out.println("Not found Observation [eye-color]");
@@ -13652,6 +15325,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-ADXP-deliveryModeIdentifier");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-ADXP-deliveryModeIdentifier]");
@@ -13660,6 +15334,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0310");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0310]");
@@ -13668,6 +15343,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("service-uscls");
   	if (null == result) {
   		System.out.println("Not found ValueSet [service-uscls]");
@@ -13676,6 +15352,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("device-statement-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [device-statement-status]");
@@ -13684,6 +15361,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Immunization");
   	result = immunizationDao.find("historical");
   	if (null == result) {
   		System.out.println("Not found Immunization [historical]");
@@ -13692,6 +15370,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationStatement");
   	result = medicationstatementDao.find("example007");
   	if (null == result) {
   		System.out.println("Not found MedicationStatement [example007]");
@@ -13700,6 +15379,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("consent-action");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [consent-action]");
@@ -13708,6 +15388,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("f202");
   	if (null == result) {
   		System.out.println("Not found Observation [f202]");
@@ -13716,6 +15397,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("pharmacy-core-minDosePerPeriod");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [pharmacy-core-minDosePerPeriod]");
@@ -13724,6 +15406,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("medication-request-category");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [medication-request-category]");
@@ -13732,6 +15415,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("list-mode");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [list-mode]");
@@ -13740,6 +15424,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("kos-title");
   	if (null == result) {
   		System.out.println("Not found ValueSet [kos-title]");
@@ -13748,6 +15433,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("care-plan-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [care-plan-status]");
@@ -13756,6 +15442,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -13764,6 +15451,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("map-target-list-mode");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [map-target-list-mode]");
@@ -13772,6 +15460,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Person");
   	result = personDao.find("pd");
   	if (null == result) {
   		System.out.println("Not found Person [pd]");
@@ -13780,6 +15469,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CommunicationRequest");
   	result = communicationrequestDao.find("example");
   	if (null == result) {
   		System.out.println("Not found CommunicationRequest [example]");
@@ -13788,6 +15478,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("identifier-use");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [identifier-use]");
@@ -13796,6 +15487,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("adjudication-reason");
   	if (null == result) {
   		System.out.println("Not found ValueSet [adjudication-reason]");
@@ -13804,6 +15496,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Person");
   	result = personDao.find("f002");
   	if (null == result) {
   		System.out.println("Not found Person [f002]");
@@ -13812,6 +15505,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("document-mode");
   	if (null == result) {
   		System.out.println("Not found ValueSet [document-mode]");
@@ -13820,6 +15514,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Claim");
   	result = claimDao.find("760150");
   	if (null == result) {
   		System.out.println("Not found Claim [760150]");
@@ -13828,6 +15523,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("performer-role");
   	if (null == result) {
   		System.out.println("Not found ValueSet [performer-role]");
@@ -13836,6 +15532,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcedureRequest");
   	result = procedurerequestDao.find("og-example1");
   	if (null == result) {
   		System.out.println("Not found ProcedureRequest [og-example1]");
@@ -13844,6 +15541,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("medication-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [medication-status]");
@@ -13852,6 +15550,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("codesystem-workflowStatus");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [codesystem-workflowStatus]");
@@ -13860,6 +15559,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Library");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Library]");
@@ -13868,6 +15568,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Provenance");
   	result = provenanceDao.find("signature");
   	if (null == result) {
   		System.out.println("Not found Provenance [signature]");
@@ -13876,6 +15577,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-usage");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-usage]");
@@ -13884,6 +15586,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("ex-onsettype");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [ex-onsettype]");
@@ -13892,6 +15595,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("modified-foodtype");
   	if (null == result) {
   		System.out.println("Not found ValueSet [modified-foodtype]");
@@ -13900,6 +15604,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("example-genetics-4");
   	if (null == result) {
   		System.out.println("Not found Observation [example-genetics-4]");
@@ -13908,6 +15613,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureMap");
   	result = structuremapDao.find("example");
   	if (null == result) {
   		System.out.println("Not found StructureMap [example]");
@@ -13916,6 +15622,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("composition-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [composition-status]");
@@ -13924,6 +15631,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("condition-dueTo");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [condition-dueTo]");
@@ -13932,6 +15640,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("consent-data-meaning");
   	if (null == result) {
   		System.out.println("Not found ValueSet [consent-data-meaning]");
@@ -13940,6 +15649,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -13948,6 +15658,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("action-precheck-behavior");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [action-precheck-behavior]");
@@ -13956,6 +15667,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("benefit-unit");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [benefit-unit]");
@@ -13964,6 +15676,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve NutritionOrder");
   	result = nutritionorderDao.find("renaldiet");
   	if (null == result) {
   		System.out.println("Not found NutritionOrder [renaldiet]");
@@ -13972,6 +15685,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("link-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [link-type]");
@@ -13980,6 +15694,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ActivityDefinition");
   	result = activitydefinitionDao.find("referralPrimaryCareMentalHealth");
   	if (null == result) {
   		System.out.println("Not found ActivityDefinition [referralPrimaryCareMentalHealth]");
@@ -13988,6 +15703,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -13996,6 +15712,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("dataelement-stringency");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [dataelement-stringency]");
@@ -14004,6 +15721,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("claim-modifiers");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [claim-modifiers]");
@@ -14012,6 +15730,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("consent-category");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [consent-category]");
@@ -14020,6 +15739,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcessRequest");
   	result = processrequestDao.find("1115");
   	if (null == result) {
   		System.out.println("Not found ProcessRequest [1115]");
@@ -14028,6 +15748,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -14036,6 +15757,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("name-assembly-order");
   	if (null == result) {
   		System.out.println("Not found ValueSet [name-assembly-order]");
@@ -14044,6 +15766,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DocumentManifest");
   	result = documentmanifestDao.find("654789");
   	if (null == result) {
   		System.out.println("Not found DocumentManifest [654789]");
@@ -14052,6 +15775,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("adjudication-error");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [adjudication-error]");
@@ -14060,6 +15784,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("template-status-code");
   	if (null == result) {
   		System.out.println("Not found ValueSet [template-status-code]");
@@ -14068,6 +15793,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ValueSet");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ValueSet]");
@@ -14076,6 +15802,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Linkage");
   	result = linkageDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Linkage [example]");
@@ -14084,6 +15811,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("b0a5e4277-83c4-4adb-87e2-e3efe3369b6f");
   	if (null == result) {
   		System.out.println("Not found Bundle [b0a5e4277-83c4-4adb-87e2-e3efe3369b6f]");
@@ -14092,6 +15820,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("payment-adjustment-reason");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [payment-adjustment-reason]");
@@ -14100,6 +15829,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("entryFormat");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [entryFormat]");
@@ -14108,6 +15838,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-map");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-map]");
@@ -14116,6 +15847,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -14124,6 +15856,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("valuesets");
   	if (null == result) {
   		System.out.println("Not found Bundle [valuesets]");
@@ -14132,6 +15865,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("hl7-work-group");
   	if (null == result) {
   		System.out.println("Not found ValueSet [hl7-work-group]");
@@ -14140,6 +15874,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-ADXP-additionalLocator");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-ADXP-additionalLocator]");
@@ -14148,6 +15883,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("location-extensions-Location-alias");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [location-extensions-Location-alias]");
@@ -14156,6 +15892,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("map-group-type-mode");
   	if (null == result) {
   		System.out.println("Not found ValueSet [map-group-type-mode]");
@@ -14164,6 +15901,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -14172,6 +15910,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("DetectedIssue");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [DetectedIssue]");
@@ -14180,6 +15919,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DiagnosticReport");
   	result = diagnosticreportDao.find("f001");
   	if (null == result) {
   		System.out.println("Not found DiagnosticReport [f001]");
@@ -14188,6 +15928,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Claim");
   	result = claimDao.find("100156");
   	if (null == result) {
   		System.out.println("Not found Claim [100156]");
@@ -14196,6 +15937,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -14204,6 +15946,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("chargeitem-billingcodes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [chargeitem-billingcodes]");
@@ -14212,6 +15955,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("goal-acceptance");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [goal-acceptance]");
@@ -14220,6 +15964,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("namingsystem-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [namingsystem-type]");
@@ -14228,6 +15973,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -14236,6 +15982,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("contact-point-use");
   	if (null == result) {
   		System.out.println("Not found ValueSet [contact-point-use]");
@@ -14244,6 +15991,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Account");
   	result = accountDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Account [example]");
@@ -14252,6 +16000,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Library");
   	result = libraryDao.find("composition-example");
   	if (null == result) {
   		System.out.println("Not found Library [composition-example]");
@@ -14260,6 +16009,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("specimen-processingTime");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [specimen-processingTime]");
@@ -14268,6 +16018,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("diagnostic-service-sections");
   	if (null == result) {
   		System.out.println("Not found ValueSet [diagnostic-service-sections]");
@@ -14276,6 +16027,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -14284,6 +16036,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("med0321");
   	if (null == result) {
   		System.out.println("Not found Medication [med0321]");
@@ -14292,6 +16045,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ImagingManifest");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ImagingManifest]");
@@ -14300,6 +16054,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("discriminator-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [discriminator-type]");
@@ -14308,6 +16063,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("fm-itemtype");
   	if (null == result) {
   		System.out.println("Not found ValueSet [fm-itemtype]");
@@ -14316,6 +16072,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("structuredefinition-summary");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [structuredefinition-summary]");
@@ -14324,6 +16081,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MessageHeader");
   	result = messageheaderDao.find("1cbdfb97-5859-48a4-8301-d54eab818d68");
   	if (null == result) {
   		System.out.println("Not found MessageHeader [1cbdfb97-5859-48a4-8301-d54eab818d68]");
@@ -14332,6 +16090,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("media-view");
   	if (null == result) {
   		System.out.println("Not found ValueSet [media-view]");
@@ -14340,6 +16099,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("maxDecimalPlaces");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [maxDecimalPlaces]");
@@ -14348,6 +16108,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("openEHR-location");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [openEHR-location]");
@@ -14356,6 +16117,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Library");
   	result = libraryDao.find("library-exclusive-breastfeeding-cds-logic");
   	if (null == result) {
   		System.out.println("Not found Library [library-exclusive-breastfeeding-cds-logic]");
@@ -14364,6 +16126,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("implant-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [implant-status]");
@@ -14372,6 +16135,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("messageheader-response-request");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [messageheader-response-request]");
@@ -14380,6 +16144,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("codesystem-content-mode");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [codesystem-content-mode]");
@@ -14388,6 +16153,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve RelatedPerson");
   	result = relatedpersonDao.find("f002");
   	if (null == result) {
   		System.out.println("Not found RelatedPerson [f002]");
@@ -14396,6 +16162,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("appointmentstatus");
   	if (null == result) {
   		System.out.println("Not found ValueSet [appointmentstatus]");
@@ -14406,7 +16173,9 @@ public class TestRetrieval {
   }
   @Test
   public void test2170() throws Exception {
+  	Object local = null;
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("udi-entry-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [udi-entry-type]");
@@ -14415,6 +16184,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("provider-qualification");
   	if (null == result) {
   		System.out.println("Not found ValueSet [provider-qualification]");
@@ -14423,6 +16193,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Substance");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Substance]");
@@ -14431,6 +16202,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("encounter-participant-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [encounter-participant-type]");
@@ -14439,6 +16211,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-comment");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-comment]");
@@ -14447,6 +16220,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("practitioner-specialty");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [practitioner-specialty]");
@@ -14455,6 +16229,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("organization-period");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [organization-period]");
@@ -14463,6 +16238,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("practitioner-specialty");
   	if (null == result) {
   		System.out.println("Not found ValueSet [practitioner-specialty]");
@@ -14471,6 +16247,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0309");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0309]");
@@ -14479,6 +16256,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("document-relationship-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [document-relationship-type]");
@@ -14487,6 +16265,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("observation-geneticsAminoAcidChangeName");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [observation-geneticsAminoAcidChangeName]");
@@ -14495,6 +16274,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("medication-as-needed-reason");
   	if (null == result) {
   		System.out.println("Not found ValueSet [medication-as-needed-reason]");
@@ -14503,6 +16283,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("observation-valueabsentreason");
   	if (null == result) {
   		System.out.println("Not found ValueSet [observation-valueabsentreason]");
@@ -14511,6 +16292,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationAdministration");
   	result = medicationadministrationDao.find("medadmin0307");
   	if (null == result) {
   		System.out.println("Not found MedicationAdministration [medadmin0307]");
@@ -14519,6 +16301,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("audit-source-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [audit-source-type]");
@@ -14527,6 +16310,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("StructureMap");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [StructureMap]");
@@ -14535,6 +16319,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("vision-product");
   	if (null == result) {
   		System.out.println("Not found ValueSet [vision-product]");
@@ -14543,6 +16328,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("dicom-dcim");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [dicom-dcim]");
@@ -14551,6 +16337,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -14559,6 +16346,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("ldlcholesterol-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [ldlcholesterol-codes]");
@@ -14567,6 +16355,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("devicemetric-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [devicemetric-type]");
@@ -14575,6 +16364,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("care-plan-activity-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [care-plan-activity-status]");
@@ -14583,6 +16373,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("datadictionary");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [datadictionary]");
@@ -14591,6 +16382,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -14599,6 +16391,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -14607,6 +16400,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve RelatedPerson");
   	result = relatedpersonDao.find("peter");
   	if (null == result) {
   		System.out.println("Not found RelatedPerson [peter]");
@@ -14615,6 +16409,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("QuestionnaireResponse");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [QuestionnaireResponse]");
@@ -14623,6 +16418,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Location");
   	result = locationDao.find("amb");
   	if (null == result) {
   		System.out.println("Not found Location [amb]");
@@ -14631,6 +16427,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("TestReport");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [TestReport]");
@@ -14639,6 +16436,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("cm-composition-status-v3");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [cm-composition-status-v3]");
@@ -14647,6 +16445,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("restful-interaction");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [restful-interaction]");
@@ -14655,6 +16454,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("valueset-extensions-ValueSet-author");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [valueset-extensions-ValueSet-author]");
@@ -14663,6 +16463,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaire-itemControl");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaire-itemControl]");
@@ -14671,6 +16472,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Media");
   	result = mediaDao.find("xray");
   	if (null == result) {
   		System.out.println("Not found Media [xray]");
@@ -14679,6 +16481,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("patient-extensions-Patient-birthOrderBoolean");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [patient-extensions-Patient-birthOrderBoolean]");
@@ -14687,6 +16490,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -14695,6 +16499,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Location");
   	result = locationDao.find("hl7");
   	if (null == result) {
   		System.out.println("Not found Location [hl7]");
@@ -14703,6 +16508,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -14711,6 +16517,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("task-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [task-status]");
@@ -14719,6 +16526,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("practitionerrole-primaryInd");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [practitionerrole-primaryInd]");
@@ -14727,6 +16535,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("goal-status-reason");
   	if (null == result) {
   		System.out.println("Not found ValueSet [goal-status-reason]");
@@ -14735,6 +16544,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("variant-state");
   	if (null == result) {
   		System.out.println("Not found ValueSet [variant-state]");
@@ -14743,6 +16553,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Sequence");
   	result = sequenceDao.find("example-TPMT-one");
   	if (null == result) {
   		System.out.println("Not found Sequence [example-TPMT-one]");
@@ -14751,6 +16562,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("data-absent-reason");
   	if (null == result) {
   		System.out.println("Not found ValueSet [data-absent-reason]");
@@ -14759,6 +16571,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaire-lookupQuestionnaire");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaire-lookupQuestionnaire]");
@@ -14767,6 +16580,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("practitioner-classification");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [practitioner-classification]");
@@ -14775,6 +16589,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("referral-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [referral-type]");
@@ -14783,6 +16598,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("questionnaire-item-control");
   	if (null == result) {
   		System.out.println("Not found ValueSet [questionnaire-item-control]");
@@ -14791,6 +16607,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Patient");
   	result = patientDao.find("pat4");
   	if (null == result) {
   		System.out.println("Not found Patient [pat4]");
@@ -14799,6 +16616,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("body-site-instance");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [body-site-instance]");
@@ -14807,6 +16625,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("animal-genderstatus");
   	if (null == result) {
   		System.out.println("Not found ValueSet [animal-genderstatus]");
@@ -14815,6 +16634,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("choice-list-orientation");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [choice-list-orientation]");
@@ -14823,6 +16643,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0334");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0334]");
@@ -14831,6 +16652,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("link-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [link-type]");
@@ -14839,6 +16661,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaire-allowedProfile");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaire-allowedProfile]");
@@ -14847,6 +16670,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("body-temperature");
   	if (null == result) {
   		System.out.println("Not found Observation [body-temperature]");
@@ -14855,6 +16679,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("allergy-verification-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [allergy-verification-status]");
@@ -14863,6 +16688,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("adverse-event-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [adverse-event-category]");
@@ -14871,6 +16697,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0315");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0315]");
@@ -14879,6 +16706,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MeasureReport");
   	result = measurereportDao.find("measurereport-cms146-cat3-example");
   	if (null == result) {
   		System.out.println("Not found MeasureReport [measurereport-cms146-cat3-example]");
@@ -14887,6 +16715,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("report-result-codes");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [report-result-codes]");
@@ -14895,6 +16724,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-ADXP-unitID");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-ADXP-unitID]");
@@ -14903,6 +16733,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("claim-informationcategory");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [claim-informationcategory]");
@@ -14911,6 +16742,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("missing-tooth-reason");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [missing-tooth-reason]");
@@ -14919,6 +16751,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("auditevent-Instance");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [auditevent-Instance]");
@@ -14927,6 +16760,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("icd-10-procedures");
   	if (null == result) {
   		System.out.println("Not found ValueSet [icd-10-procedures]");
@@ -14935,6 +16769,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Encounter");
   	result = encounterDao.find("f203");
   	if (null == result) {
   		System.out.println("Not found Encounter [f203]");
@@ -14943,6 +16778,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("clinical-impression-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [clinical-impression-status]");
@@ -14951,6 +16787,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("participantrequired");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [participantrequired]");
@@ -14959,6 +16796,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("object-role");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [object-role]");
@@ -14967,6 +16805,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -14975,6 +16814,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("data-absent-reason");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [data-absent-reason]");
@@ -14983,6 +16823,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -14991,6 +16832,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("elementdefinition-isCommonBinding");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [elementdefinition-isCommonBinding]");
@@ -14999,6 +16841,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("message-reason-encounter");
   	if (null == result) {
   		System.out.println("Not found ValueSet [message-reason-encounter]");
@@ -15007,6 +16850,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("participant-role");
   	if (null == result) {
   		System.out.println("Not found ValueSet [participant-role]");
@@ -15015,6 +16859,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("defined-types");
   	if (null == result) {
   		System.out.println("Not found ValueSet [defined-types]");
@@ -15023,6 +16868,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("f005");
   	if (null == result) {
   		System.out.println("Not found Observation [f005]");
@@ -15031,6 +16877,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -15039,6 +16886,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve NutritionOrder");
   	result = nutritionorderDao.find("diabeticsupplement");
   	if (null == result) {
   		System.out.println("Not found NutritionOrder [diabeticsupplement]");
@@ -15047,6 +16895,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("medication-request-priority");
   	if (null == result) {
   		System.out.println("Not found ValueSet [medication-request-priority]");
@@ -15055,6 +16904,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("codesystem-extensions-CodeSystem-end");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [codesystem-extensions-CodeSystem-end]");
@@ -15063,6 +16913,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("practitioner-role");
   	if (null == result) {
   		System.out.println("Not found ValueSet [practitioner-role]");
@@ -15071,6 +16922,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("family-member-history-genetics-sibling");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [family-member-history-genetics-sibling]");
@@ -15079,6 +16931,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("action-relationship-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [action-relationship-type]");
@@ -15087,6 +16940,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("list-mode");
   	if (null == result) {
   		System.out.println("Not found ValueSet [list-mode]");
@@ -15095,6 +16949,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CapabilityStatement");
   	result = capabilitystatementDao.find("example");
   	if (null == result) {
   		System.out.println("Not found CapabilityStatement [example]");
@@ -15103,6 +16958,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0321");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0321]");
@@ -15111,6 +16967,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("care-plan-activity");
   	if (null == result) {
   		System.out.println("Not found ValueSet [care-plan-activity]");
@@ -15119,6 +16976,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("research-subject-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [research-subject-status]");
@@ -15127,6 +16985,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("elementdefinition-identifier");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [elementdefinition-identifier]");
@@ -15135,6 +16994,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("Measure-evaluate-measure");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [Measure-evaluate-measure]");
@@ -15143,6 +17003,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("consistency-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [consistency-type]");
@@ -15151,6 +17012,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("adverse-event-seriousness");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [adverse-event-seriousness]");
@@ -15159,6 +17021,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve FHIRList");
   	result = fhirlistDao.find("example-empty");
   	if (null == result) {
   		System.out.println("Not found FHIRList [example-empty]");
@@ -15167,6 +17030,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Media");
   	result = mediaDao.find("sound");
   	if (null == result) {
   		System.out.println("Not found Media [sound]");
@@ -15175,6 +17039,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("enteral-route");
   	if (null == result) {
   		System.out.println("Not found ValueSet [enteral-route]");
@@ -15183,6 +17048,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("patient-congregation");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [patient-congregation]");
@@ -15191,6 +17057,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Condition");
   	result = conditionDao.find("family-history");
   	if (null == result) {
   		System.out.println("Not found Condition [family-history]");
@@ -15199,6 +17066,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationAdministration");
   	result = medicationadministrationDao.find("medadmin0305");
   	if (null == result) {
   		System.out.println("Not found MedicationAdministration [medadmin0305]");
@@ -15207,6 +17075,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("address-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [address-type]");
@@ -15215,6 +17084,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -15223,6 +17093,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("request-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [request-status]");
@@ -15231,6 +17102,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("concept-bidirectional");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [concept-bidirectional]");
@@ -15239,6 +17111,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Appointment");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Appointment]");
@@ -15247,6 +17120,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("Resource-validate");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [Resource-validate]");
@@ -15255,6 +17129,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("concept-property-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [concept-property-type]");
@@ -15263,6 +17138,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("goal-acceptance-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [goal-acceptance-status]");
@@ -15271,6 +17147,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Media");
   	result = mediaDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Media [example]");
@@ -15279,6 +17156,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Encounter");
   	result = encounterDao.find("home");
   	if (null == result) {
   		System.out.println("Not found Encounter [home]");
@@ -15287,6 +17165,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("contract-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [contract-type]");
@@ -15295,6 +17174,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("observation-geneticsSequence");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [observation-geneticsSequence]");
@@ -15303,6 +17183,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Definition");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Definition]");
@@ -15311,6 +17192,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("allergyintolerance-reasonRefuted");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [allergyintolerance-reasonRefuted]");
@@ -15319,6 +17201,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("EligibilityRequest");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [EligibilityRequest]");
@@ -15327,6 +17210,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-reference");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-reference]");
@@ -15335,6 +17219,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("familymemberhistory-abatement");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [familymemberhistory-abatement]");
@@ -15343,6 +17228,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcedureRequest");
   	result = procedurerequestDao.find("ft4");
   	if (null == result) {
   		System.out.println("Not found ProcedureRequest [ft4]");
@@ -15351,6 +17237,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Patient");
   	result = patientDao.find("glossy");
   	if (null == result) {
   		System.out.println("Not found Patient [glossy]");
@@ -15359,6 +17246,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("special-values");
   	if (null == result) {
   		System.out.println("Not found ValueSet [special-values]");
@@ -15367,6 +17255,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("usagecontext-group");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [usagecontext-group]");
@@ -15375,6 +17264,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("example-extensional");
   	if (null == result) {
   		System.out.println("Not found ValueSet [example-extensional]");
@@ -15383,6 +17273,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve EligibilityRequest");
   	result = eligibilityrequestDao.find("52345");
   	if (null == result) {
   		System.out.println("Not found EligibilityRequest [52345]");
@@ -15391,6 +17282,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("copy-number-event");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [copy-number-event]");
@@ -15399,6 +17291,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("PlanDefinition-apply");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [PlanDefinition-apply]");
@@ -15407,6 +17300,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Contract");
   	result = contractDao.find("pcd-example-notThis");
   	if (null == result) {
   		System.out.println("Not found Contract [pcd-example-notThis]");
@@ -15415,6 +17309,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("coverage-level");
   	if (null == result) {
   		System.out.println("Not found ValueSet [coverage-level]");
@@ -15423,6 +17318,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Age");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Age]");
@@ -15431,6 +17327,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("capabilitystatement-websocket");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [capabilitystatement-websocket]");
@@ -15439,6 +17336,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("specimen-collectionPriority");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [specimen-collectionPriority]");
@@ -15447,6 +17345,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve VisionPrescription");
   	result = visionprescriptionDao.find("33124");
   	if (null == result) {
   		System.out.println("Not found VisionPrescription [33124]");
@@ -15455,6 +17354,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("claim-use");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [claim-use]");
@@ -15463,6 +17363,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("map-target-list-mode");
   	if (null == result) {
   		System.out.println("Not found ValueSet [map-target-list-mode]");
@@ -15471,6 +17372,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ExplanationOfBenefit");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ExplanationOfBenefit]");
@@ -15479,6 +17381,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Medication");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Medication]");
@@ -15487,6 +17390,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("operation-outcome");
   	if (null == result) {
   		System.out.println("Not found ValueSet [operation-outcome]");
@@ -15495,6 +17399,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("research-study-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [research-study-status]");
@@ -15503,6 +17408,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("diagnostic-report-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [diagnostic-report-status]");
@@ -15511,6 +17417,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("account-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [account-status]");
@@ -15519,6 +17426,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("HealthcareService");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [HealthcareService]");
@@ -15527,6 +17435,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -15535,6 +17444,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("structuredefinition-regex");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [structuredefinition-regex]");
@@ -15543,6 +17453,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Condition");
   	result = conditionDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Condition [example]");
@@ -15551,6 +17462,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("structuredefinition-xml-type");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [structuredefinition-xml-type]");
@@ -15559,6 +17471,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -15567,6 +17480,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0302");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0302]");
@@ -15575,6 +17489,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve FHIRList");
   	result = fhirlistDao.find("example-double-cousin-relationship");
   	if (null == result) {
   		System.out.println("Not found FHIRList [example-double-cousin-relationship]");
@@ -15583,6 +17498,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("explanationofbenefit-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [explanationofbenefit-status]");
@@ -15591,6 +17507,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-preferred");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-preferred]");
@@ -15599,6 +17516,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("auditevent-Accession");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [auditevent-Accession]");
@@ -15607,6 +17525,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("account-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [account-type]");
@@ -15615,6 +17534,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("elementdefinition-question");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [elementdefinition-question]");
@@ -15623,6 +17543,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DeviceRequest");
   	result = devicerequestDao.find("example");
   	if (null == result) {
   		System.out.println("Not found DeviceRequest [example]");
@@ -15631,6 +17552,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("codesystem-extensions-CodeSystem-workflow");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [codesystem-extensions-CodeSystem-workflow]");
@@ -15639,6 +17561,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Provenance");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Provenance]");
@@ -15647,6 +17570,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("vaccination-protocol-dose-target");
   	if (null == result) {
   		System.out.println("Not found ValueSet [vaccination-protocol-dose-target]");
@@ -15655,6 +17579,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-ADXP-streetAddressLine");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-ADXP-streetAddressLine]");
@@ -15663,6 +17588,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("event-reasonReference");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [event-reasonReference]");
@@ -15671,6 +17597,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CompartmentDefinition");
   	result = compartmentdefinitionDao.find("relatedPerson");
   	if (null == result) {
   		System.out.println("Not found CompartmentDefinition [relatedPerson]");
@@ -15679,6 +17606,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcedureRequest");
   	result = procedurerequestDao.find("benchpress");
   	if (null == result) {
   		System.out.println("Not found ProcedureRequest [benchpress]");
@@ -15687,6 +17615,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("Patient-match");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [Patient-match]");
@@ -15695,6 +17624,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Consent");
   	result = consentDao.find("consent-example-Emergency");
   	if (null == result) {
   		System.out.println("Not found Consent [consent-example-Emergency]");
@@ -15703,6 +17633,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve NamingSystem");
   	result = namingsystemDao.find("example");
   	if (null == result) {
   		System.out.println("Not found NamingSystem [example]");
@@ -15711,6 +17642,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -15719,6 +17651,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("action-grouping-behavior");
   	if (null == result) {
   		System.out.println("Not found ValueSet [action-grouping-behavior]");
@@ -15727,6 +17660,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("map-model-mode");
   	if (null == result) {
   		System.out.println("Not found ValueSet [map-model-mode]");
@@ -15735,6 +17669,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -15743,6 +17678,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Subscription");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Subscription]");
@@ -15751,6 +17687,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("digital-media-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [digital-media-type]");
@@ -15759,6 +17696,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -15767,6 +17705,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("procedurerequest-questionnaireRequest");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [procedurerequest-questionnaireRequest]");
@@ -15775,6 +17714,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Task");
   	result = taskDao.find("example1");
   	if (null == result) {
   		System.out.println("Not found Task [example1]");
@@ -15783,6 +17723,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ServiceDefinition");
   	result = servicedefinitionDao.find("example");
   	if (null == result) {
   		System.out.println("Not found ServiceDefinition [example]");
@@ -15791,6 +17732,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationAdministration");
   	result = medicationadministrationDao.find("medadmin0308");
   	if (null == result) {
   		System.out.println("Not found MedicationAdministration [medadmin0308]");
@@ -15799,6 +17741,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("Measure-data-requirements");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [Measure-data-requirements]");
@@ -15807,6 +17750,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("fm-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [fm-status]");
@@ -15815,6 +17759,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("supplyrequest-reason");
   	if (null == result) {
   		System.out.println("Not found ValueSet [supplyrequest-reason]");
@@ -15823,6 +17768,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("family-member-history-genetics-observation");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [family-member-history-genetics-observation]");
@@ -15831,6 +17777,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("observation-category");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [observation-category]");
@@ -15839,6 +17786,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("condition-code");
   	if (null == result) {
   		System.out.println("Not found ValueSet [condition-code]");
@@ -15847,6 +17795,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("procedure-reason");
   	if (null == result) {
   		System.out.println("Not found ValueSet [procedure-reason]");
@@ -15855,6 +17804,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("structuredefinition-fmm-no-warnings");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [structuredefinition-fmm-no-warnings]");
@@ -15863,6 +17813,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("ex-payee-resource-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [ex-payee-resource-type]");
@@ -15871,6 +17822,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("observation-relationshiptypes");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [observation-relationshiptypes]");
@@ -15879,6 +17831,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("diagnosticReport-replaces");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [diagnosticReport-replaces]");
@@ -15887,6 +17840,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("med0305");
   	if (null == result) {
   		System.out.println("Not found Medication [med0305]");
@@ -15895,6 +17849,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("service-place");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [service-place]");
@@ -15903,6 +17858,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("structuredefinition-json-type");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [structuredefinition-json-type]");
@@ -15911,6 +17867,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("specimen-specialHandling");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [specimen-specialHandling]");
@@ -15919,6 +17876,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Annotation");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Annotation]");
@@ -15927,6 +17885,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-ADXP-streetName");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-ADXP-streetName]");
@@ -15935,6 +17894,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("bundle-response-medsallergies");
   	if (null == result) {
   		System.out.println("Not found Bundle [bundle-response-medsallergies]");
@@ -15943,6 +17903,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("humanname-partner-name");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [humanname-partner-name]");
@@ -15951,6 +17912,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Practitioner");
   	result = practitionerDao.find("f005");
   	if (null == result) {
   		System.out.println("Not found Practitioner [f005]");
@@ -15959,6 +17921,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("cm-address-use-v2");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [cm-address-use-v2]");
@@ -15967,6 +17930,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("task-candidateList");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [task-candidateList]");
@@ -15975,6 +17939,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("questionnaire-questions");
   	if (null == result) {
   		System.out.println("Not found ValueSet [questionnaire-questions]");
@@ -15983,6 +17948,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("substance-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [substance-category]");
@@ -15991,6 +17957,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("care-plan-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [care-plan-category]");
@@ -15999,6 +17966,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DiagnosticReport");
   	result = diagnosticreportDao.find("f201");
   	if (null == result) {
   		System.out.println("Not found DiagnosticReport [f201]");
@@ -16007,6 +17975,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Dosage");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Dosage]");
@@ -16015,6 +17984,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("tooth");
   	if (null == result) {
   		System.out.println("Not found ValueSet [tooth]");
@@ -16023,6 +17993,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("message-transport");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [message-transport]");
@@ -16031,6 +18002,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("entformula-additive");
   	if (null == result) {
   		System.out.println("Not found ValueSet [entformula-additive]");
@@ -16039,6 +18011,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("condition-ruledOut");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [condition-ruledOut]");
@@ -16047,6 +18020,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -16055,6 +18029,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("hla-genotyping-results-allele-database");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [hla-genotyping-results-allele-database]");
@@ -16063,6 +18038,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ActivityDefinition");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ActivityDefinition]");
@@ -16071,6 +18047,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -16079,6 +18056,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("medication-package-form");
   	if (null == result) {
   		System.out.println("Not found ValueSet [medication-package-form]");
@@ -16087,6 +18065,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("immunization-route");
   	if (null == result) {
   		System.out.println("Not found ValueSet [immunization-route]");
@@ -16095,6 +18074,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("units-of-time");
   	if (null == result) {
   		System.out.println("Not found ValueSet [units-of-time]");
@@ -16103,6 +18083,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("question-max-occurs");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [question-max-occurs]");
@@ -16111,6 +18092,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-uncertaintyType");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-uncertaintyType]");
@@ -16119,6 +18101,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("cm-observation-relationshiptypes-v3");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [cm-observation-relationshiptypes-v3]");
@@ -16127,6 +18110,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -16135,6 +18119,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("http-verb");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [http-verb]");
@@ -16143,6 +18128,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Measure");
   	result = measureDao.find("measure-predecessor-example");
   	if (null == result) {
   		System.out.println("Not found Measure [measure-predecessor-example]");
@@ -16151,6 +18137,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("referencerange-appliesto");
   	if (null == result) {
   		System.out.println("Not found ValueSet [referencerange-appliesto]");
@@ -16159,6 +18146,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("bundle-request-simplesummary");
   	if (null == result) {
   		System.out.println("Not found Bundle [bundle-request-simplesummary]");
@@ -16167,6 +18155,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DeviceUseStatement");
   	result = deviceusestatementDao.find("example");
   	if (null == result) {
   		System.out.println("Not found DeviceUseStatement [example]");
@@ -16175,6 +18164,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SupplyDelivery");
   	result = supplydeliveryDao.find("simpledelivery");
   	if (null == result) {
   		System.out.println("Not found SupplyDelivery [simpledelivery]");
@@ -16183,6 +18173,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("quality-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [quality-type]");
@@ -16191,6 +18182,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CarePlan");
   	result = careplanDao.find("f003");
   	if (null == result) {
   		System.out.println("Not found CarePlan [f003]");
@@ -16199,6 +18191,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MessageDefinition");
   	result = messagedefinitionDao.find("example");
   	if (null == result) {
   		System.out.println("Not found MessageDefinition [example]");
@@ -16207,6 +18200,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-ADXP-streetNameType");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-ADXP-streetNameType]");
@@ -16215,6 +18209,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("specimen-container-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [specimen-container-type]");
@@ -16223,6 +18218,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("maxValue");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [maxValue]");
@@ -16231,6 +18227,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcessRequest");
   	result = processrequestDao.find("1111");
   	if (null == result) {
   		System.out.println("Not found ProcessRequest [1111]");
@@ -16239,6 +18236,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-expansionSource");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-expansionSource]");
@@ -16247,6 +18245,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("elementdefinition-maxValueSet");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [elementdefinition-maxValueSet]");
@@ -16255,6 +18254,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Specimen");
   	result = specimenDao.find("101");
   	if (null == result) {
   		System.out.println("Not found Specimen [101]");
@@ -16263,6 +18263,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve HealthcareService");
   	result = healthcareserviceDao.find("example");
   	if (null == result) {
   		System.out.println("Not found HealthcareService [example]");
@@ -16271,6 +18272,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("codesystem-conceptOrder");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [codesystem-conceptOrder]");
@@ -16279,6 +18281,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("route-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [route-codes]");
@@ -16287,6 +18290,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("claim-subtype");
   	if (null == result) {
   		System.out.println("Not found ValueSet [claim-subtype]");
@@ -16295,6 +18299,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve AuditEvent");
   	result = auditeventDao.find("example-search");
   	if (null == result) {
   		System.out.println("Not found AuditEvent [example-search]");
@@ -16303,6 +18308,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("condition-definition");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [condition-definition]");
@@ -16311,6 +18317,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-workflowStatus");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-workflowStatus]");
@@ -16319,6 +18326,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("condition-basedOn");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [condition-basedOn]");
@@ -16327,6 +18335,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("guidance-response-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [guidance-response-status]");
@@ -16335,6 +18344,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("map-group-type-mode");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [map-group-type-mode]");
@@ -16343,6 +18353,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("report-action-result-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [report-action-result-codes]");
@@ -16351,6 +18362,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("observation-geneticsCopyNumberEvent");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [observation-geneticsCopyNumberEvent]");
@@ -16359,6 +18371,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("questionnaire-answers-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [questionnaire-answers-status]");
@@ -16367,6 +18380,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("pharmacy-core-infuseOver");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [pharmacy-core-infuseOver]");
@@ -16375,6 +18389,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-AD-use");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-AD-use]");
@@ -16383,6 +18398,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("map-transform");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [map-transform]");
@@ -16391,6 +18407,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("allergyintolerance-code");
   	if (null == result) {
   		System.out.println("Not found ValueSet [allergyintolerance-code]");
@@ -16399,6 +18416,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("location-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [location-status]");
@@ -16407,6 +18425,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("consentdirective");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [consentdirective]");
@@ -16415,6 +18434,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("c80-facilitycodes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [c80-facilitycodes]");
@@ -16423,6 +18443,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("condition-severity");
   	if (null == result) {
   		System.out.println("Not found ValueSet [condition-severity]");
@@ -16431,6 +18452,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaireresponse-reason");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaireresponse-reason]");
@@ -16439,6 +18461,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("AuditEvent");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [AuditEvent]");
@@ -16447,6 +18470,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("ConceptMap-translate");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [ConceptMap-translate]");
@@ -16455,6 +18479,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Patient");
   	result = patientDao.find("dicom");
   	if (null == result) {
   		System.out.println("Not found Patient [dicom]");
@@ -16463,6 +18488,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("condition-targetBodySite");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [condition-targetBodySite]");
@@ -16471,6 +18497,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("measure-report-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [measure-report-type]");
@@ -16479,6 +18506,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("list-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [list-status]");
@@ -16487,6 +18515,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("service-product");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [service-product]");
@@ -16495,6 +18524,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("measure-report-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [measure-report-status]");
@@ -16503,6 +18533,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Communication");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Communication]");
@@ -16511,6 +18542,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcessRequest");
   	result = processrequestDao.find("1112");
   	if (null == result) {
   		System.out.println("Not found ProcessRequest [1112]");
@@ -16519,6 +18551,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("allergyintolerance-certainty");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [allergyintolerance-certainty]");
@@ -16527,6 +18560,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0311");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0311]");
@@ -16535,6 +18569,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Contract");
   	result = contractDao.find("pcd-example-notLabs");
   	if (null == result) {
   		System.out.println("Not found Contract [pcd-example-notLabs]");
@@ -16543,6 +18578,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("elementdefinition-minValueSet");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [elementdefinition-minValueSet]");
@@ -16551,6 +18587,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve TestScript");
   	result = testscriptDao.find("testscript-example-multisystem");
   	if (null == result) {
   		System.out.println("Not found TestScript [testscript-example-multisystem]");
@@ -16559,6 +18596,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("medication-package-form");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [medication-package-form]");
@@ -16567,6 +18605,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("days-of-week");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [days-of-week]");
@@ -16575,6 +18614,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("medication-admin-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [medication-admin-category]");
@@ -16583,6 +18623,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("f001");
   	if (null == result) {
   		System.out.println("Not found Observation [f001]");
@@ -16591,6 +18632,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("f003");
   	if (null == result) {
   		System.out.println("Not found Observation [f003]");
@@ -16599,6 +18641,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("hl7-work-group");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [hl7-work-group]");
@@ -16607,6 +18650,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("elementdefinition-de");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [elementdefinition-de]");
@@ -16615,6 +18659,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("address-use");
   	if (null == result) {
   		System.out.println("Not found ValueSet [address-use]");
@@ -16623,6 +18668,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("event-timing");
   	if (null == result) {
   		System.out.println("Not found ValueSet [event-timing]");
@@ -16631,6 +18677,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("reaction-event-severity");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [reaction-event-severity]");
@@ -16639,6 +18686,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("texture-code");
   	if (null == result) {
   		System.out.println("Not found ValueSet [texture-code]");
@@ -16647,6 +18695,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("Observation-stats");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [Observation-stats]");
@@ -16655,6 +18704,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("hla-genotyping-results-glstring");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [hla-genotyping-results-glstring]");
@@ -16663,6 +18713,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("item-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [item-type]");
@@ -16671,6 +18722,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("AdverseEvent");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [AdverseEvent]");
@@ -16679,6 +18731,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("fm-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [fm-status]");
@@ -16687,6 +18740,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("consent-action");
   	if (null == result) {
   		System.out.println("Not found ValueSet [consent-action]");
@@ -16695,6 +18749,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("document-reference-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [document-reference-status]");
@@ -16703,6 +18758,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("event-timing");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [event-timing]");
@@ -16711,6 +18767,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("metric-operational-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [metric-operational-status]");
@@ -16719,6 +18776,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("elementdefinition-allowedUnits");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [elementdefinition-allowedUnits]");
@@ -16727,6 +18785,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve TestScript");
   	result = testscriptDao.find("testscript-example-history");
   	if (null == result) {
   		System.out.println("Not found TestScript [testscript-example-history]");
@@ -16735,6 +18794,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("provider-qualification");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [provider-qualification]");
@@ -16743,6 +18803,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Observation [example]");
@@ -16751,6 +18812,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("DeviceUseStatement");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [DeviceUseStatement]");
@@ -16759,6 +18821,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Immunization");
   	result = immunizationDao.find("notGiven");
   	if (null == result) {
   		System.out.println("Not found Immunization [notGiven]");
@@ -16767,6 +18830,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("med0319");
   	if (null == result) {
   		System.out.println("Not found Medication [med0319]");
@@ -16775,6 +18839,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("provenance-entity-role");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [provenance-entity-role]");
@@ -16783,6 +18848,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("reason-medication-given-codes");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [reason-medication-given-codes]");
@@ -16793,7 +18859,9 @@ public class TestRetrieval {
   }
   @Test
   public void test2480() throws Exception {
+  	Object local = null;
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("vitals-panel");
   	if (null == result) {
   		System.out.println("Not found Observation [vitals-panel]");
@@ -16802,6 +18870,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("codesystem-ordinalValue");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [codesystem-ordinalValue]");
@@ -16810,6 +18879,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -16818,6 +18888,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("mimeType");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [mimeType]");
@@ -16826,6 +18897,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("medication-admin-category");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [medication-admin-category]");
@@ -16834,6 +18906,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Slot");
   	result = slotDao.find("2");
   	if (null == result) {
   		System.out.println("Not found Slot [2]");
@@ -16842,6 +18915,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("testscript-profile-destination-types");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [testscript-profile-destination-types]");
@@ -16850,6 +18924,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0304");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0304]");
@@ -16858,6 +18933,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Claim");
   	result = claimDao.find("960151");
   	if (null == result) {
   		System.out.println("Not found Claim [960151]");
@@ -16866,6 +18942,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("designation-use");
   	if (null == result) {
   		System.out.println("Not found ValueSet [designation-use]");
@@ -16874,6 +18951,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcedureRequest");
   	result = procedurerequestDao.find("example-implant");
   	if (null == result) {
   		System.out.println("Not found ProcedureRequest [example-implant]");
@@ -16882,6 +18960,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ActivityDefinition");
   	result = activitydefinitionDao.find("serum-dengue-virus-igm");
   	if (null == result) {
   		System.out.println("Not found ActivityDefinition [serum-dengue-virus-igm]");
@@ -16890,6 +18969,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Appointment");
   	result = appointmentDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Appointment [example]");
@@ -16898,6 +18978,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("operationoutcome-detectedIssue");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [operationoutcome-detectedIssue]");
@@ -16906,6 +18987,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("narrative-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [narrative-status]");
@@ -16914,6 +18996,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("remittance-outcome");
   	if (null == result) {
   		System.out.println("Not found ValueSet [remittance-outcome]");
@@ -16922,6 +19005,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("vision-base-codes");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [vision-base-codes]");
@@ -16930,6 +19014,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("CapabilityStatement");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [CapabilityStatement]");
@@ -16938,6 +19023,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("DataRequirement");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [DataRequirement]");
@@ -16946,6 +19032,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Consent");
   	result = consentDao.find("consent-example-basic");
   	if (null == result) {
   		System.out.println("Not found Consent [consent-example-basic]");
@@ -16954,6 +19041,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("medication-statement-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [medication-statement-status]");
@@ -16962,6 +19050,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("service-category");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [service-category]");
@@ -16970,6 +19059,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Condition");
   	result = conditionDao.find("example2");
   	if (null == result) {
   		System.out.println("Not found Condition [example2]");
@@ -16978,6 +19068,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve NutritionOrder");
   	result = nutritionorderDao.find("diabeticdiet");
   	if (null == result) {
   		System.out.println("Not found NutritionOrder [diabeticdiet]");
@@ -16986,6 +19077,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("subscription-tag");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [subscription-tag]");
@@ -16994,6 +19086,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("cm-administrative-gender-v2");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [cm-administrative-gender-v2]");
@@ -17002,6 +19095,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -17010,6 +19104,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("encounter-primaryDiagnosis");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [encounter-primaryDiagnosis]");
@@ -17018,6 +19113,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("immunization-role");
   	if (null == result) {
   		System.out.println("Not found ValueSet [immunization-role]");
@@ -17026,6 +19122,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Condition");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Condition]");
@@ -17034,6 +19131,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DocumentManifest");
   	result = documentmanifestDao.find("example");
   	if (null == result) {
   		System.out.println("Not found DocumentManifest [example]");
@@ -17042,6 +19140,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("patient-cadavericDonor");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [patient-cadavericDonor]");
@@ -17050,6 +19149,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("DiagnosticReport");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [DiagnosticReport]");
@@ -17058,6 +19158,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("ex-program-code");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [ex-program-code]");
@@ -17066,6 +19167,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("medication-request-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [medication-request-status]");
@@ -17074,6 +19176,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("pharmacy-core-maxDeliveryRate");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [pharmacy-core-maxDeliveryRate]");
@@ -17082,6 +19185,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("supplyrequest-kind");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [supplyrequest-kind]");
@@ -17090,6 +19194,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("animal-species");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [animal-species]");
@@ -17098,6 +19203,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("med0301");
   	if (null == result) {
   		System.out.println("Not found Medication [med0301]");
@@ -17106,6 +19212,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("CodeSystem");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [CodeSystem]");
@@ -17114,6 +19221,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("process-priority");
   	if (null == result) {
   		System.out.println("Not found ValueSet [process-priority]");
@@ -17122,6 +19230,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve FamilyMemberHistory");
   	result = familymemberhistoryDao.find("mother");
   	if (null == result) {
   		System.out.println("Not found FamilyMemberHistory [mother]");
@@ -17130,6 +19239,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("report-status-codes");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [report-status-codes]");
@@ -17138,6 +19248,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcedureRequest");
   	result = procedurerequestDao.find("di");
   	if (null == result) {
   		System.out.println("Not found ProcedureRequest [di]");
@@ -17146,6 +19257,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -17154,6 +19266,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Contract");
   	result = contractDao.find("C-2121");
   	if (null == result) {
   		System.out.println("Not found Contract [C-2121]");
@@ -17162,6 +19275,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("abstract-types");
   	if (null == result) {
   		System.out.println("Not found ValueSet [abstract-types]");
@@ -17170,6 +19284,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -17178,6 +19293,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcedureRequest");
   	result = procedurerequestDao.find("education");
   	if (null == result) {
   		System.out.println("Not found ProcedureRequest [education]");
@@ -17186,6 +19302,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("med0307");
   	if (null == result) {
   		System.out.println("Not found Medication [med0307]");
@@ -17194,6 +19311,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("resource-aggregation-mode");
   	if (null == result) {
   		System.out.println("Not found ValueSet [resource-aggregation-mode]");
@@ -17202,6 +19320,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -17210,6 +19329,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("marital-status");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [marital-status]");
@@ -17218,6 +19338,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("concept-map-equivalence");
   	if (null == result) {
   		System.out.println("Not found ValueSet [concept-map-equivalence]");
@@ -17226,6 +19347,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("ex-diagnosisrelatedgroup");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [ex-diagnosisrelatedgroup]");
@@ -17234,6 +19356,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("service-provision-conditions");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [service-provision-conditions]");
@@ -17242,6 +19365,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("reaction-event-certainty");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [reaction-event-certainty]");
@@ -17250,6 +19374,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("cm-name-use-v3");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [cm-name-use-v3]");
@@ -17258,6 +19383,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Composition");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Composition]");
@@ -17266,6 +19392,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("bundle-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [bundle-type]");
@@ -17274,6 +19401,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Task");
   	result = taskDao.find("example5");
   	if (null == result) {
   		System.out.println("Not found Task [example5]");
@@ -17282,6 +19410,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve AllergyIntolerance");
   	result = allergyintoleranceDao.find("fishallergy");
   	if (null == result) {
   		System.out.println("Not found AllergyIntolerance [fishallergy]");
@@ -17290,6 +19419,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -17298,6 +19428,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("investigation-sets");
   	if (null == result) {
   		System.out.println("Not found ValueSet [investigation-sets]");
@@ -17306,6 +19437,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaireresponse-reviewer");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaireresponse-reviewer]");
@@ -17314,6 +19446,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("consent-except-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [consent-except-type]");
@@ -17322,6 +19455,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("lipidprofile");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [lipidprofile]");
@@ -17330,6 +19464,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-uncertainty");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-uncertainty]");
@@ -17338,6 +19473,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("identifier-use");
   	if (null == result) {
   		System.out.println("Not found ValueSet [identifier-use]");
@@ -17346,6 +19482,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("measure-report-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [measure-report-type]");
@@ -17354,6 +19491,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve QuestionnaireResponse");
   	result = questionnaireresponseDao.find("bb");
   	if (null == result) {
   		System.out.println("Not found QuestionnaireResponse [bb]");
@@ -17362,6 +19500,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("document-reference-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [document-reference-status]");
@@ -17370,6 +19509,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("report-participant-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [report-participant-type]");
@@ -17378,6 +19518,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-ADXP-deliveryMode");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-ADXP-deliveryMode]");
@@ -17386,6 +19527,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("supplyrequest-reason");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [supplyrequest-reason]");
@@ -17394,6 +19536,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("measure-population");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [measure-population]");
@@ -17402,6 +19545,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("participationstatus");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [participationstatus]");
@@ -17410,6 +19554,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("allergy-intolerance-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [allergy-intolerance-type]");
@@ -17418,6 +19563,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Quantity");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Quantity]");
@@ -17426,6 +19572,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Ratio");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Ratio]");
@@ -17434,6 +19581,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Schedule");
   	result = scheduleDao.find("exampleloc1");
   	if (null == result) {
   		System.out.println("Not found Schedule [exampleloc1]");
@@ -17442,6 +19590,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("medication-request-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [medication-request-category]");
@@ -17450,6 +19599,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("abstract-types");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [abstract-types]");
@@ -17458,6 +19608,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("consent-location");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [consent-location]");
@@ -17466,6 +19617,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("activity-definition-category");
   	if (null == result) {
   		System.out.println("Not found ValueSet [activity-definition-category]");
@@ -17474,6 +19626,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("search-entry-mode");
   	if (null == result) {
   		System.out.println("Not found ValueSet [search-entry-mode]");
@@ -17482,6 +19635,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("repository-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [repository-type]");
@@ -17490,6 +19644,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Procedure");
   	result = procedureDao.find("f004");
   	if (null == result) {
   		System.out.println("Not found Procedure [f004]");
@@ -17498,6 +19653,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("parameter-group");
   	if (null == result) {
   		System.out.println("Not found ValueSet [parameter-group]");
@@ -17506,6 +19662,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("testscript-profile-origin-types");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [testscript-profile-origin-types]");
@@ -17514,6 +19671,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("immunization-site");
   	if (null == result) {
   		System.out.println("Not found ValueSet [immunization-site]");
@@ -17522,6 +19680,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("implementationguide-page");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [implementationguide-page]");
@@ -17530,6 +19689,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("MessageHeader");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [MessageHeader]");
@@ -17538,6 +19698,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("operation-parameter-use");
   	if (null == result) {
   		System.out.println("Not found ValueSet [operation-parameter-use]");
@@ -17546,6 +19707,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("provider-taxonomy");
   	if (null == result) {
   		System.out.println("Not found ValueSet [provider-taxonomy]");
@@ -17554,6 +19716,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Substance");
   	result = substanceDao.find("f203");
   	if (null == result) {
   		System.out.println("Not found Substance [f203]");
@@ -17562,6 +19725,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("cm-medication-admin-status-v3");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [cm-medication-admin-status-v3]");
@@ -17570,6 +19734,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaire-baseType");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaire-baseType]");
@@ -17578,6 +19743,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("contact-point-system");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [contact-point-system]");
@@ -17586,6 +19752,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("contract-action");
   	if (null == result) {
   		System.out.println("Not found ValueSet [contract-action]");
@@ -17594,6 +19761,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("Resource-meta-delete");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [Resource-meta-delete]");
@@ -17602,6 +19770,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("map-source-list-mode");
   	if (null == result) {
   		System.out.println("Not found ValueSet [map-source-list-mode]");
@@ -17610,6 +19779,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Claim");
   	result = claimDao.find("660152");
   	if (null == result) {
   		System.out.println("Not found Claim [660152]");
@@ -17618,6 +19788,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0327");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0327]");
@@ -17626,6 +19797,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve EnrollmentResponse");
   	result = enrollmentresponseDao.find("ER2500");
   	if (null == result) {
   		System.out.println("Not found EnrollmentResponse [ER2500]");
@@ -17634,6 +19806,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("valueset-extensions-ValueSet-effective");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [valueset-extensions-ValueSet-effective]");
@@ -17642,6 +19815,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0313");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0313]");
@@ -17650,6 +19824,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Library");
   	result = libraryDao.find("library-fhir-model-definition");
   	if (null == result) {
   		System.out.println("Not found Library [library-fhir-model-definition]");
@@ -17658,6 +19833,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("valueset-keyWord");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [valueset-keyWord]");
@@ -17666,6 +19842,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Procedure");
   	result = procedureDao.find("f001");
   	if (null == result) {
   		System.out.println("Not found Procedure [f001]");
@@ -17674,6 +19851,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("vision-eye-codes");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [vision-eye-codes]");
@@ -17682,6 +19860,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Claim");
   	result = claimDao.find("100150");
   	if (null == result) {
   		System.out.println("Not found Claim [100150]");
@@ -17690,6 +19869,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("elementdefinition-inheritedExtensibleValueSet");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [elementdefinition-inheritedExtensibleValueSet]");
@@ -17698,6 +19878,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("codesystem-extensions-CodeSystem-effective");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [codesystem-extensions-CodeSystem-effective]");
@@ -17706,6 +19887,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("payeetype");
   	if (null == result) {
   		System.out.println("Not found ValueSet [payeetype]");
@@ -17714,6 +19896,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -17722,6 +19905,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("measure-data-usage");
   	if (null == result) {
   		System.out.println("Not found ValueSet [measure-data-usage]");
@@ -17730,6 +19914,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("allergyintolerance-substanceExposureRisk");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [allergyintolerance-substanceExposureRisk]");
@@ -17738,6 +19923,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -17746,6 +19932,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ContactDetail");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ContactDetail]");
@@ -17754,6 +19941,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -17762,6 +19950,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("request-priority");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [request-priority]");
@@ -17770,6 +19959,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("ProcessResponse");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [ProcessResponse]");
@@ -17778,6 +19968,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("openEHR-exposureDescription");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [openEHR-exposureDescription]");
@@ -17786,6 +19977,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Specimen");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Specimen]");
@@ -17794,6 +19986,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("cm-name-use-v2");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [cm-name-use-v2]");
@@ -17802,6 +19995,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("benefit-subcategory");
   	if (null == result) {
   		System.out.println("Not found ValueSet [benefit-subcategory]");
@@ -17810,6 +20004,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("CompartmentDefinition");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [CompartmentDefinition]");
@@ -17818,6 +20013,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CapabilityStatement");
   	result = capabilitystatementDao.find("base2");
   	if (null == result) {
   		System.out.println("Not found CapabilityStatement [base2]");
@@ -17826,6 +20022,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("measurement-principle");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [measurement-principle]");
@@ -17834,6 +20031,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("vaccination-protocol-dose-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [vaccination-protocol-dose-status]");
@@ -17842,6 +20040,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Practitioner");
   	result = practitionerDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Practitioner [example]");
@@ -17850,6 +20049,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("event-capability-mode");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [event-capability-mode]");
@@ -17858,6 +20058,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("endpoint-payload-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [endpoint-payload-type]");
@@ -17866,6 +20067,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("timing-daysOfCycle");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [timing-daysOfCycle]");
@@ -17874,6 +20076,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -17882,6 +20085,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("DiagnosticReport-geneticsAssessedCondition");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [DiagnosticReport-geneticsAssessedCondition]");
@@ -17890,6 +20094,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("11179-de-classification-or-context");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [11179-de-classification-or-context]");
@@ -17898,6 +20103,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -17906,6 +20112,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx002");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx002]");
@@ -17914,6 +20121,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("provenance-activity-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [provenance-activity-type]");
@@ -17922,6 +20130,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Claim");
   	result = claimDao.find("100155");
   	if (null == result) {
   		System.out.println("Not found Claim [100155]");
@@ -17930,6 +20139,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -17938,6 +20148,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("questionnaire-item-control");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [questionnaire-item-control]");
@@ -17946,6 +20157,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("medication-usualRoute");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [medication-usualRoute]");
@@ -17954,6 +20166,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("flag-code");
   	if (null == result) {
   		System.out.println("Not found ValueSet [flag-code]");
@@ -17962,6 +20175,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("fm-conditions");
   	if (null == result) {
   		System.out.println("Not found ValueSet [fm-conditions]");
@@ -17970,6 +20184,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve FHIRList");
   	result = fhirlistDao.find("example-simple-empty");
   	if (null == result) {
   		System.out.println("Not found FHIRList [example-simple-empty]");
@@ -17978,6 +20193,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Procedure");
   	result = procedureDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Procedure [example]");
@@ -17986,6 +20202,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0302");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0302]");
@@ -17994,6 +20211,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -18002,6 +20220,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("medication-dispense-category");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [medication-dispense-category]");
@@ -18010,6 +20229,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationAdministration");
   	result = medicationadministrationDao.find("medadminexample03");
   	if (null == result) {
   		System.out.println("Not found MedicationAdministration [medadminexample03]");
@@ -18018,6 +20238,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("cm-contact-point-system-v2");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [cm-contact-point-system-v2]");
@@ -18026,6 +20247,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("questionnaire-answers");
   	if (null == result) {
   		System.out.println("Not found ValueSet [questionnaire-answers]");
@@ -18034,6 +20256,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("supplyrequest-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [supplyrequest-status]");
@@ -18042,6 +20265,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Claim");
   	result = claimDao.find("860150");
   	if (null == result) {
   		System.out.println("Not found Claim [860150]");
@@ -18050,6 +20274,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("contract-term-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [contract-term-type]");
@@ -18058,6 +20283,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve PlanDefinition");
   	result = plandefinitionDao.find("exclusive-breastfeeding-intervention-03");
   	if (null == result) {
   		System.out.println("Not found PlanDefinition [exclusive-breastfeeding-intervention-03]");
@@ -18066,6 +20292,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("codesystem-history");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [codesystem-history]");
@@ -18074,6 +20301,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("map-input-mode");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [map-input-mode]");
@@ -18082,6 +20310,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("diagnostic-report-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [diagnostic-report-status]");
@@ -18090,6 +20319,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Immunization");
   	result = immunizationDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Immunization [example]");
@@ -18098,6 +20328,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("metric-color");
   	if (null == result) {
   		System.out.println("Not found ValueSet [metric-color]");
@@ -18106,6 +20337,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("animal-breeds");
   	if (null == result) {
   		System.out.println("Not found ValueSet [animal-breeds]");
@@ -18114,6 +20346,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("process-priority");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [process-priority]");
@@ -18122,6 +20355,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Schedule");
   	result = scheduleDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Schedule [example]");
@@ -18130,6 +20364,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("cm-administrative-gender-v3");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [cm-administrative-gender-v3]");
@@ -18138,6 +20373,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("observation-delta");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [observation-delta]");
@@ -18146,6 +20382,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("Encounter-everything");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [Encounter-everything]");
@@ -18154,6 +20391,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("special-values");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [special-values]");
@@ -18162,6 +20400,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Task");
   	result = taskDao.find("example3");
   	if (null == result) {
   		System.out.println("Not found Task [example3]");
@@ -18170,6 +20409,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -18178,6 +20418,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("DomainResource");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [DomainResource]");
@@ -18186,6 +20427,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("benefit-network");
   	if (null == result) {
   		System.out.println("Not found ValueSet [benefit-network]");
@@ -18194,6 +20436,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("DataElement");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [DataElement]");
@@ -18202,6 +20445,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("snomedct");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [snomedct]");
@@ -18210,6 +20454,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ServiceDefinition");
   	result = servicedefinitionDao.find("infobutton");
   	if (null == result) {
   		System.out.println("Not found ServiceDefinition [infobutton]");
@@ -18218,6 +20463,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("med0312");
   	if (null == result) {
   		System.out.println("Not found Medication [med0312]");
@@ -18226,6 +20472,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("observation-geneticsAllelicFrequency");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [observation-geneticsAllelicFrequency]");
@@ -18234,6 +20481,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DetectedIssue");
   	result = detectedissueDao.find("ddi");
   	if (null == result) {
   		System.out.println("Not found DetectedIssue [ddi]");
@@ -18242,6 +20490,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("process-outcome");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [process-outcome]");
@@ -18250,6 +20499,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SupplyDelivery");
   	result = supplydeliveryDao.find("pumpdelivery");
   	if (null == result) {
   		System.out.println("Not found SupplyDelivery [pumpdelivery]");
@@ -18258,6 +20508,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Media");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Media]");
@@ -18266,6 +20517,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("mbp");
   	if (null == result) {
   		System.out.println("Not found Observation [mbp]");
@@ -18274,6 +20526,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("assert-operator-codes");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [assert-operator-codes]");
@@ -18282,6 +20535,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DiagnosticReport");
   	result = diagnosticreportDao.find("micro");
   	if (null == result) {
   		System.out.println("Not found DiagnosticReport [micro]");
@@ -18290,6 +20544,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("encounter-special-courtesy");
   	if (null == result) {
   		System.out.println("Not found ValueSet [encounter-special-courtesy]");
@@ -18298,6 +20553,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("reason-medication-given-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [reason-medication-given-codes]");
@@ -18306,6 +20562,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -18314,6 +20571,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve AuditEvent");
   	result = auditeventDao.find("example-login");
   	if (null == result) {
   		System.out.println("Not found AuditEvent [example-login]");
@@ -18322,6 +20580,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("Observation-lastn");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [Observation-lastn]");
@@ -18330,6 +20589,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Flag");
   	result = flagDao.find("example");
   	if (null == result) {
   		System.out.println("Not found Flag [example]");
@@ -18338,6 +20598,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("11179-permitted-value-valueset");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [11179-permitted-value-valueset]");
@@ -18346,6 +20607,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DiagnosticReport");
   	result = diagnosticreportDao.find("pap");
   	if (null == result) {
   		System.out.println("Not found DiagnosticReport [pap]");
@@ -18354,6 +20616,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("body-site");
   	if (null == result) {
   		System.out.println("Not found ValueSet [body-site]");
@@ -18362,6 +20625,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("shareablecodesystem");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [shareablecodesystem]");
@@ -18370,6 +20634,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("audit-source-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [audit-source-type]");
@@ -18378,6 +20643,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("structuredefinition-category");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [structuredefinition-category]");
@@ -18386,6 +20652,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("versioning-policy");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [versioning-policy]");
@@ -18394,6 +20661,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("vision-base-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [vision-base-codes]");
@@ -18402,6 +20670,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationRequest");
   	result = medicationrequestDao.find("medrx0318");
   	if (null == result) {
   		System.out.println("Not found MedicationRequest [medrx0318]");
@@ -18410,6 +20679,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("graph-compartment-rule");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [graph-compartment-rule]");
@@ -18418,6 +20688,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Contract");
   	result = contractDao.find("pcd-example-notOrg");
   	if (null == result) {
   		System.out.println("Not found Contract [pcd-example-notOrg]");
@@ -18426,6 +20697,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("related-claim-relationship");
   	if (null == result) {
   		System.out.println("Not found ValueSet [related-claim-relationship]");
@@ -18434,6 +20706,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaire-referenceFilter");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaire-referenceFilter]");
@@ -18442,6 +20715,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("communication-reasonNotPerformed");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [communication-reasonNotPerformed]");
@@ -18450,6 +20724,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Task");
   	result = taskDao.find("example4");
   	if (null == result) {
   		System.out.println("Not found Task [example4]");
@@ -18458,6 +20733,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("triglyceride");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [triglyceride]");
@@ -18466,6 +20742,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Organization");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Organization]");
@@ -18474,6 +20751,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("risk-probability");
   	if (null == result) {
   		System.out.println("Not found ValueSet [risk-probability]");
@@ -18482,6 +20760,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("DocumentManifest");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [DocumentManifest]");
@@ -18490,6 +20769,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("approach-site-codes");
   	if (null == result) {
   		System.out.println("Not found ValueSet [approach-site-codes]");
@@ -18498,6 +20778,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("compartment-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [compartment-type]");
@@ -18506,6 +20787,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Basic");
   	result = basicDao.find("classModel");
   	if (null == result) {
   		System.out.println("Not found Basic [classModel]");
@@ -18514,6 +20796,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("data-types");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [data-types]");
@@ -18522,6 +20805,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("birthPlace");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [birthPlace]");
@@ -18530,6 +20814,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("chargeitem-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [chargeitem-status]");
@@ -18538,6 +20823,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("security-labels");
   	if (null == result) {
   		System.out.println("Not found ValueSet [security-labels]");
@@ -18546,6 +20832,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -18554,6 +20841,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaire-allowedResource");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaire-allowedResource]");
@@ -18562,6 +20850,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("device-extensions-Device-din");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [device-extensions-Device-din]");
@@ -18570,6 +20859,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("codesystem-otherName");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [codesystem-otherName]");
@@ -18578,6 +20868,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Bundle");
   	result = bundleDao.find("profiles-others");
   	if (null == result) {
   		System.out.println("Not found Bundle [profiles-others]");
@@ -18586,6 +20877,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationAdministration");
   	result = medicationadministrationDao.find("medadmin0312");
   	if (null == result) {
   		System.out.println("Not found MedicationAdministration [medadmin0312]");
@@ -18594,6 +20886,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Organization");
   	result = organizationDao.find("2");
   	if (null == result) {
   		System.out.println("Not found Organization [2]");
@@ -18602,6 +20895,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Sequence");
   	result = sequenceDao.find("graphic-example-5");
   	if (null == result) {
   		System.out.println("Not found Sequence [graphic-example-5]");
@@ -18610,6 +20904,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve DetectedIssue");
   	result = detectedissueDao.find("lab");
   	if (null == result) {
   		System.out.println("Not found DetectedIssue [lab]");
@@ -18618,6 +20913,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve FHIRList");
   	result = fhirlistDao.find("prognosis");
   	if (null == result) {
   		System.out.println("Not found FHIRList [prognosis]");
@@ -18626,6 +20922,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-ADXP-careOf");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-ADXP-careOf]");
@@ -18634,6 +20931,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Patient");
   	result = patientDao.find("pat2");
   	if (null == result) {
   		System.out.println("Not found Patient [pat2]");
@@ -18642,6 +20940,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("ActivityDefinition-data-requirements");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [ActivityDefinition-data-requirements]");
@@ -18650,6 +20949,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Patient");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Patient]");
@@ -18658,6 +20958,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("example2");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [example2]");
@@ -18666,6 +20967,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve SearchParameter");
   	result = searchparameterDao.find("valueset-extensions-ValueSet-keyword");
   	if (null == result) {
   		System.out.println("Not found SearchParameter [valueset-extensions-ValueSet-keyword]");
@@ -18674,6 +20976,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("diagnosis-role");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [diagnosis-role]");
@@ -18682,6 +20985,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("openEHR-administration");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [openEHR-administration]");
@@ -18690,6 +20994,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("http-verb");
   	if (null == result) {
   		System.out.println("Not found ValueSet [http-verb]");
@@ -18698,6 +21003,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Consent");
   	result = consentDao.find("consent-example-smartonfhir");
   	if (null == result) {
   		System.out.println("Not found Consent [consent-example-smartonfhir]");
@@ -18706,6 +21012,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("medexample015");
   	if (null == result) {
   		System.out.println("Not found Medication [medexample015]");
@@ -18714,6 +21021,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("devicerequest-reasonRejected");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [devicerequest-reasonRejected]");
@@ -18722,6 +21030,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationAdministration");
   	result = medicationadministrationDao.find("medadmin0303");
   	if (null == result) {
   		System.out.println("Not found MedicationAdministration [medadmin0303]");
@@ -18730,6 +21039,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("med0309");
   	if (null == result) {
   		System.out.println("Not found Medication [med0309]");
@@ -18738,6 +21048,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("specimen-collection-priority");
   	if (null == result) {
   		System.out.println("Not found ValueSet [specimen-collection-priority]");
@@ -18746,6 +21057,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("reference-version-rules");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [reference-version-rules]");
@@ -18754,6 +21066,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("process-outcome");
   	if (null == result) {
   		System.out.println("Not found ValueSet [process-outcome]");
@@ -18762,6 +21075,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Claim");
   	result = claimDao.find("660151");
   	if (null == result) {
   		System.out.println("Not found Claim [660151]");
@@ -18770,6 +21084,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("discriminator-type");
   	if (null == result) {
   		System.out.println("Not found ValueSet [discriminator-type]");
@@ -18778,6 +21093,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -18786,6 +21102,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -18794,6 +21111,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("condition-state");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [condition-state]");
@@ -18802,6 +21120,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("instant");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [instant]");
@@ -18810,6 +21129,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Sequence");
   	result = sequenceDao.find("fda-example");
   	if (null == result) {
   		System.out.println("Not found Sequence [fda-example]");
@@ -18818,6 +21138,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("benefit-term");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [benefit-term]");
@@ -18826,6 +21147,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Patient");
   	result = patientDao.find("proband");
   	if (null == result) {
   		System.out.println("Not found Patient [proband]");
@@ -18834,6 +21156,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve AdverseEvent");
   	result = adverseeventDao.find("example");
   	if (null == result) {
   		System.out.println("Not found AdverseEvent [example]");
@@ -18842,6 +21165,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("encounter-type");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [encounter-type]");
@@ -18850,6 +21174,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ConceptMap");
   	result = conceptmapDao.find("101");
   	if (null == result) {
   		System.out.println("Not found ConceptMap [101]");
@@ -18858,6 +21183,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("iso21090-EN-qualifier");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [iso21090-EN-qualifier]");
@@ -18866,6 +21192,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("patient-interpreterRequired");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [patient-interpreterRequired]");
@@ -18874,6 +21201,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ProcedureRequest");
   	result = procedurerequestDao.find("do-not-turn");
   	if (null == result) {
   		System.out.println("Not found ProcedureRequest [do-not-turn]");
@@ -18882,6 +21210,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Observation");
   	result = observationDao.find("bmd");
   	if (null == result) {
   		System.out.println("Not found Observation [bmd]");
@@ -18890,6 +21219,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("capability-statement-kind");
   	if (null == result) {
   		System.out.println("Not found ValueSet [capability-statement-kind]");
@@ -18898,6 +21228,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("event-OnBehalfOf");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [event-OnBehalfOf]");
@@ -18906,6 +21237,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("flag-priority");
   	if (null == result) {
   		System.out.println("Not found ValueSet [flag-priority]");
@@ -18914,6 +21246,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CarePlan");
   	result = careplanDao.find("f002");
   	if (null == result) {
   		System.out.println("Not found CarePlan [f002]");
@@ -18922,6 +21255,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("claim-use");
   	if (null == result) {
   		System.out.println("Not found ValueSet [claim-use]");
@@ -18930,6 +21264,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("conformance-expectation");
   	if (null == result) {
   		System.out.println("Not found ValueSet [conformance-expectation]");
@@ -18938,6 +21273,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("event-definition");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [event-definition]");
@@ -18946,6 +21282,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("condition-ver-status");
   	if (null == result) {
   		System.out.println("Not found ValueSet [condition-ver-status]");
@@ -18954,6 +21291,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("action-condition-kind");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [action-condition-kind]");
@@ -18962,6 +21300,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Encounter");
   	result = encounterDao.find("f002");
   	if (null == result) {
   		System.out.println("Not found Encounter [f002]");
@@ -18970,6 +21309,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("guide-page-kind");
   	if (null == result) {
   		System.out.println("Not found ValueSet [guide-page-kind]");
@@ -18978,6 +21318,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("event-notDone");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [event-notDone]");
@@ -18986,6 +21327,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("adverse-event-causality");
   	if (null == result) {
   		System.out.println("Not found ValueSet [adverse-event-causality]");
@@ -18994,6 +21336,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Medication");
   	result = medicationDao.find("medicationexample1");
   	if (null == result) {
   		System.out.println("Not found Medication [medicationexample1]");
@@ -19002,6 +21345,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("Person");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [Person]");
@@ -19010,6 +21354,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("nhin-purposeofuse");
   	if (null == result) {
   		System.out.println("Not found ValueSet [nhin-purposeofuse]");
@@ -19018,6 +21363,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -19026,6 +21372,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("structure-definition-kind");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [structure-definition-kind]");
@@ -19034,6 +21381,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CodeSystem");
   	result = codesystemDao.find("common-tags");
   	if (null == result) {
   		System.out.println("Not found CodeSystem [common-tags]");
@@ -19042,6 +21390,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("medicationstatement-Prescriber");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [medicationstatement-Prescriber]");
@@ -19050,6 +21399,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve OperationDefinition");
   	result = operationdefinitionDao.find("Resource-meta");
   	if (null == result) {
   		System.out.println("Not found OperationDefinition [Resource-meta]");
@@ -19058,6 +21408,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Library");
   	result = libraryDao.find("library-fhir-helpers-predecessor");
   	if (null == result) {
   		System.out.println("Not found Library [library-fhir-helpers-predecessor]");
@@ -19066,6 +21417,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Practitioner");
   	result = practitionerDao.find("f201");
   	if (null == result) {
   		System.out.println("Not found Practitioner [f201]");
@@ -19074,6 +21426,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("11179-de-administrative-status");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [11179-de-administrative-status]");
@@ -19082,6 +21435,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("testscript-profile-destination-types");
   	if (null == result) {
   		System.out.println("Not found ValueSet [testscript-profile-destination-types]");
@@ -19090,6 +21444,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve ValueSet");
   	result = valuesetDao.find("restful-capability-mode");
   	if (null == result) {
   		System.out.println("Not found ValueSet [restful-capability-mode]");
@@ -19098,6 +21453,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve Questionnaire");
   	result = questionnaireDao.find("qs1");
   	if (null == result) {
   		System.out.println("Not found Questionnaire [qs1]");
@@ -19106,6 +21462,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve CapabilityStatement");
   	result = capabilitystatementDao.find("phr");
   	if (null == result) {
   		System.out.println("Not found CapabilityStatement [phr]");
@@ -19114,6 +21471,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("capabilitystatement-search-parameter-combination");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [capabilitystatement-search-parameter-combination]");
@@ -19122,6 +21480,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("OperationOutcome");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [OperationOutcome]");
@@ -19130,6 +21489,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve MedicationDispense");
   	result = medicationdispenseDao.find("meddisp0317");
   	if (null == result) {
   		System.out.println("Not found MedicationDispense [meddisp0317]");
@@ -19138,6 +21498,7 @@ public class TestRetrieval {
   	}
 
   	count++;
+  	System.out.println("Test retrieve StructureDefinition");
   	result = structuredefinitionDao.find("questionnaire-supportLink");
   	if (null == result) {
   		System.out.println("Not found StructureDefinition [questionnaire-supportLink]");
