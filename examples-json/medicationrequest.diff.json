@@ -1,0 +1,174 @@
+﻿{
+  "types": [
+    "MedicationRequest"
+  ],
+  "MedicationRequest": {
+    "old-name": "MedicationOrder",
+    "elements": {
+      "MedicationRequest.definition": {
+        "status": "new"
+      },
+      "MedicationRequest.basedOn": {
+        "status": "new"
+      },
+      "MedicationRequest.groupIdentifier": {
+        "status": "new"
+      },
+      "MedicationRequest.status": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/medication-order-status",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/medication-request-status",
+          "strength": "required"
+        }
+      },
+      "MedicationRequest.intent": {
+        "status": "new"
+      },
+      "MedicationRequest.category": {
+        "status": "new"
+      },
+      "MedicationRequest.priority": {
+        "status": "new"
+      },
+      "MedicationRequest.subject": {
+        "status": "new"
+      },
+      "MedicationRequest.context": {
+        "status": "new"
+      },
+      "MedicationRequest.supportingInformation": {
+        "status": "new"
+      },
+      "MedicationRequest.authoredOn": {
+        "status": "new"
+      },
+      "MedicationRequest.requester": {
+        "status": "new"
+      },
+      "MedicationRequest.requester.agent": {
+        "status": "new"
+      },
+      "MedicationRequest.requester.onBehalfOf": {
+        "status": "new"
+      },
+      "MedicationRequest.recorder": {
+        "status": "new"
+      },
+      "MedicationRequest.reasonCode": {
+        "status": "new"
+      },
+      "MedicationRequest.reasonReference": {
+        "status": "new"
+      },
+      "MedicationRequest.note": {
+        "old-max": "1",
+        "new-max": "*",
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "Annotation"
+        ]
+      },
+      "MedicationRequest.dosageInstruction": {
+        "removed-types": [
+          "BackboneElement"
+        ],
+        "added-types": [
+          "Dosage"
+        ]
+      },
+      "MedicationRequest.dispenseRequest.expectedSupplyDuration": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Duration}"
+        ],
+        "added-types": [
+          "Duration"
+        ]
+      },
+      "MedicationRequest.dispenseRequest.performer": {
+        "status": "new"
+      },
+      "MedicationRequest.substitution.allowed": {
+        "status": "new"
+      },
+      "MedicationRequest.priorPrescription": {
+        "removed-types": [
+          "Reference(MedicationOrder)"
+        ],
+        "added-types": [
+          "Reference(MedicationRequest)"
+        ]
+      },
+      "MedicationRequest.detectedIssue": {
+        "status": "new"
+      },
+      "MedicationRequest.eventHistory": {
+        "status": "new"
+      },
+      "MedicationOrder.dateWritten": {
+        "status": "deleted"
+      },
+      "MedicationOrder.dateEnded": {
+        "status": "deleted"
+      },
+      "MedicationOrder.reasonEnded": {
+        "status": "deleted"
+      },
+      "MedicationOrder.patient": {
+        "status": "deleted"
+      },
+      "MedicationOrder.prescriber": {
+        "status": "deleted"
+      },
+      "MedicationOrder.encounter": {
+        "status": "deleted"
+      },
+      "MedicationOrder.reason[x]": {
+        "status": "deleted"
+      },
+      "MedicationOrder.dosageInstruction.text": {
+        "status": "deleted"
+      },
+      "MedicationOrder.dosageInstruction.additionalInstructions": {
+        "status": "deleted"
+      },
+      "MedicationOrder.dosageInstruction.timing": {
+        "status": "deleted"
+      },
+      "MedicationOrder.dosageInstruction.asNeeded[x]": {
+        "status": "deleted"
+      },
+      "MedicationOrder.dosageInstruction.site[x]": {
+        "status": "deleted"
+      },
+      "MedicationOrder.dosageInstruction.route": {
+        "status": "deleted"
+      },
+      "MedicationOrder.dosageInstruction.method": {
+        "status": "deleted"
+      },
+      "MedicationOrder.dosageInstruction.dose[x]": {
+        "status": "deleted"
+      },
+      "MedicationOrder.dosageInstruction.rate[x]": {
+        "status": "deleted"
+      },
+      "MedicationOrder.dosageInstruction.maxDosePerPeriod": {
+        "status": "deleted"
+      },
+      "MedicationOrder.dispenseRequest.medication[x]": {
+        "status": "deleted"
+      },
+      "MedicationOrder.substitution.type": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

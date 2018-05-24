@@ -1,0 +1,88 @@
+﻿{
+  "types": [
+    "ImplementationGuide"
+  ],
+  "ImplementationGuide": {
+    "elements": {
+      "ImplementationGuide.status": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/conformance-resource-status",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/publication-status",
+          "strength": "required"
+        }
+      },
+      "ImplementationGuide.experimental": {
+        "modifier": "added"
+      },
+      "ImplementationGuide.contact": {
+        "removed-types": [
+          "BackboneElement"
+        ],
+        "added-types": [
+          "ContactDetail"
+        ]
+      },
+      "ImplementationGuide.description": {
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "markdown"
+        ]
+      },
+      "ImplementationGuide.useContext": {
+        "removed-types": [
+          "CodeableConcept"
+        ],
+        "added-types": [
+          "UsageContext"
+        ],
+        "binding-status": "removed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/use-context",
+          "strength": "extensible"
+        }
+      },
+      "ImplementationGuide.jurisdiction": {
+        "status": "new"
+      },
+      "ImplementationGuide.copyright": {
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "markdown"
+        ]
+      },
+      "ImplementationGuide.package": {
+        "old-min": 1,
+        "new-min": 0
+      },
+      "ImplementationGuide.package.resource.example": {
+        "status": "new"
+      },
+      "ImplementationGuide.page": {
+        "old-min": 1,
+        "new-min": 0
+      },
+      "ImplementationGuide.page.title": {
+        "old-name": "name"
+      },
+      "ImplementationGuide.contact.name": {
+        "status": "deleted"
+      },
+      "ImplementationGuide.contact.telecom": {
+        "status": "deleted"
+      },
+      "ImplementationGuide.package.resource.purpose": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

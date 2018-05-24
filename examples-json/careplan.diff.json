@@ -1,0 +1,102 @@
+﻿{
+  "types": [
+    "CarePlan"
+  ],
+  "CarePlan": {
+    "elements": {
+      "CarePlan.definition": {
+        "status": "new"
+      },
+      "CarePlan.basedOn": {
+        "status": "new"
+      },
+      "CarePlan.replaces": {
+        "status": "new"
+      },
+      "CarePlan.partOf": {
+        "status": "new"
+      },
+      "CarePlan.intent": {
+        "status": "new"
+      },
+      "CarePlan.title": {
+        "status": "new"
+      },
+      "CarePlan.subject": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "CarePlan.author": {
+        "added-types": [
+          "Reference(CareTeam)"
+        ]
+      },
+      "CarePlan.careTeam": {
+        "status": "new"
+      },
+      "CarePlan.supportingInfo": {
+        "old-name": "support"
+      },
+      "CarePlan.activity.outcomeCodeableConcept": {
+        "status": "new"
+      },
+      "CarePlan.activity.outcomeReference": {
+        "old-name": "actionResulting"
+      },
+      "CarePlan.activity.reference": {
+        "removed-types": [
+          "Reference(DiagnosticOrder)",
+          "Reference(MedicationOrder)",
+          "Reference(Order)",
+          "Reference(ProcessRequest)",
+          "Reference(SupplyRequest)"
+        ],
+        "added-types": [
+          "Reference(MedicationRequest)",
+          "Reference(Task)",
+          "Reference(RequestGroup)"
+        ]
+      },
+      "CarePlan.activity.detail.definition": {
+        "status": "new"
+      },
+      "CarePlan.activity.detail.status": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "CarePlan.activity.detail.statusReason": {
+        "removed-types": [
+          "CodeableConcept"
+        ],
+        "added-types": [
+          "string"
+        ]
+      },
+      "CarePlan.activity.detail.prohibited": {
+        "old-min": 1,
+        "new-min": 0,
+        "default": "added",
+        "new-default": "\"false\""
+      },
+      "CarePlan.activity.detail.performer": {
+        "added-types": [
+          "Reference(CareTeam)"
+        ]
+      },
+      "CarePlan.note": {
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "CarePlan.modified": {
+        "status": "deleted"
+      },
+      "CarePlan.relatedPlan": {
+        "status": "deleted"
+      },
+      "CarePlan.participant": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

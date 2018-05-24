@@ -1,0 +1,95 @@
+﻿{
+  "types": [
+    "SearchParameter"
+  ],
+  "SearchParameter": {
+    "elements": {
+      "SearchParameter.version": {
+        "status": "new"
+      },
+      "SearchParameter.status": {
+        "old-min": 0,
+        "new-min": 1,
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/conformance-resource-status",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/publication-status",
+          "strength": "required"
+        }
+      },
+      "SearchParameter.experimental": {
+        "modifier": "added"
+      },
+      "SearchParameter.contact": {
+        "removed-types": [
+          "BackboneElement"
+        ],
+        "added-types": [
+          "ContactDetail"
+        ]
+      },
+      "SearchParameter.useContext": {
+        "status": "new"
+      },
+      "SearchParameter.jurisdiction": {
+        "status": "new"
+      },
+      "SearchParameter.purpose": {
+        "old-name": "requirements",
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "markdown"
+        ]
+      },
+      "SearchParameter.base": {
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "SearchParameter.derivedFrom": {
+        "status": "new"
+      },
+      "SearchParameter.description": {
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "markdown"
+        ]
+      },
+      "SearchParameter.expression": {
+        "status": "new"
+      },
+      "SearchParameter.comparator": {
+        "status": "new"
+      },
+      "SearchParameter.modifier": {
+        "status": "new"
+      },
+      "SearchParameter.chain": {
+        "status": "new"
+      },
+      "SearchParameter.component": {
+        "status": "new"
+      },
+      "SearchParameter.component.definition": {
+        "status": "new"
+      },
+      "SearchParameter.component.expression": {
+        "status": "new"
+      },
+      "SearchParameter.contact.name": {
+        "status": "deleted"
+      },
+      "SearchParameter.contact.telecom": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

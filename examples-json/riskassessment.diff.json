@@ -1,0 +1,48 @@
+﻿{
+  "types": [
+    "RiskAssessment"
+  ],
+  "RiskAssessment": {
+    "elements": {
+      "RiskAssessment.basedOn": {
+        "status": "new"
+      },
+      "RiskAssessment.parent": {
+        "status": "new"
+      },
+      "RiskAssessment.status": {
+        "status": "new"
+      },
+      "RiskAssessment.code": {
+        "status": "new"
+      },
+      "RiskAssessment.context": {
+        "old-name": "encounter",
+        "added-types": [
+          "Reference(EpisodeOfCare)"
+        ]
+      },
+      "RiskAssessment.occurrence[x]": {
+        "status": "new"
+      },
+      "RiskAssessment.reason[x]": {
+        "status": "new"
+      },
+      "RiskAssessment.prediction.probability[x]": {
+        "removed-types": [
+          "CodeableConcept"
+        ]
+      },
+      "RiskAssessment.prediction.qualitativeRisk": {
+        "status": "new"
+      },
+      "RiskAssessment.comment": {
+        "status": "new"
+      },
+      "RiskAssessment.date": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

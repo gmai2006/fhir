@@ -1,0 +1,29 @@
+﻿{
+  "types": [
+    "VisionPrescription"
+  ],
+  "VisionPrescription": {
+    "elements": {
+      "VisionPrescription.status": {
+        "status": "new"
+      },
+      "VisionPrescription.dispense.product": {
+        "old-min": 1,
+        "new-min": 0,
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "VisionPrescription.dispense.note": {
+        "status": "new"
+      },
+      "VisionPrescription.dispense.notes": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

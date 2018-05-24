@@ -1,0 +1,8 @@
+﻿{
+  "types": [
+    "RequestGroup"
+  ],
+  "RequestGroup": {
+    "status": "new"
+  }
+}

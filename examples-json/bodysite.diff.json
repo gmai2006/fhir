@@ -1,0 +1,16 @@
+﻿{
+  "types": [
+    "BodySite"
+  ],
+  "BodySite": {
+    "elements": {
+      "BodySite.active": {
+        "status": "new"
+      },
+      "BodySite.qualifier": {
+        "old-name": "modifier"
+      }
+    },
+    "status": "changed"
+  }
+}

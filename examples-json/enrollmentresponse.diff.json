@@ -1,0 +1,27 @@
+﻿{
+  "types": [
+    "EnrollmentResponse"
+  ],
+  "EnrollmentResponse": {
+    "elements": {
+      "EnrollmentResponse.status": {
+        "status": "new"
+      },
+      "EnrollmentResponse.outcome": {
+        "removed-types": [
+          "code"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "EnrollmentResponse.ruleset": {
+        "status": "deleted"
+      },
+      "EnrollmentResponse.originalRuleset": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

@@ -1,0 +1,60 @@
+﻿{
+  "types": [
+    "AllergyIntolerance"
+  ],
+  "AllergyIntolerance": {
+    "elements": {
+      "AllergyIntolerance.clinicalStatus": {
+        "status": "new"
+      },
+      "AllergyIntolerance.verificationStatus": {
+        "status": "new"
+      },
+      "AllergyIntolerance.category": {
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "AllergyIntolerance.code": {
+        "old-name": "substance",
+        "old-min": 1,
+        "new-min": 0
+      },
+      "AllergyIntolerance.onset[x]": {
+        "old-name": "onset",
+        "added-types": [
+          "Age",
+          "Period",
+          "Range",
+          "string"
+        ]
+      },
+      "AllergyIntolerance.assertedDate": {
+        "status": "new"
+      },
+      "AllergyIntolerance.asserter": {
+        "old-name": "reporter"
+      },
+      "AllergyIntolerance.lastOccurrence": {
+        "old-name": "lastOccurence"
+      },
+      "AllergyIntolerance.note": {
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "AllergyIntolerance.reaction.note": {
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "AllergyIntolerance.recordedDate": {
+        "status": "deleted"
+      },
+      "AllergyIntolerance.status": {
+        "status": "deleted"
+      },
+      "AllergyIntolerance.reaction.certainty": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

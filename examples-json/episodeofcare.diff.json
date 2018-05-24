@@ -1,0 +1,46 @@
+﻿{
+  "types": [
+    "EpisodeOfCare"
+  ],
+  "EpisodeOfCare": {
+    "elements": {
+      "EpisodeOfCare.diagnosis": {
+        "status": "new"
+      },
+      "EpisodeOfCare.diagnosis.condition": {
+        "status": "new"
+      },
+      "EpisodeOfCare.diagnosis.role": {
+        "status": "new"
+      },
+      "EpisodeOfCare.diagnosis.rank": {
+        "status": "new"
+      },
+      "EpisodeOfCare.team": {
+        "old-name": "careTeam",
+        "removed-types": [
+          "BackboneElement"
+        ],
+        "added-types": [
+          "Reference(CareTeam)"
+        ]
+      },
+      "EpisodeOfCare.account": {
+        "status": "new"
+      },
+      "EpisodeOfCare.condition": {
+        "status": "deleted"
+      },
+      "EpisodeOfCare.careTeam.role": {
+        "status": "deleted"
+      },
+      "EpisodeOfCare.careTeam.period": {
+        "status": "deleted"
+      },
+      "EpisodeOfCare.careTeam.member": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

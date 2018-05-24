@@ -1,0 +1,509 @@
+﻿{
+  "types": [
+    "ExplanationOfBenefit"
+  ],
+  "ExplanationOfBenefit": {
+    "elements": {
+      "ExplanationOfBenefit.status": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.type": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.subType": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.patient": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.billablePeriod": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.enterer": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.insurer": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.provider": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.referral": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.facility": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.claim": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.claimResponse": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.outcome": {
+        "removed-types": [
+          "code"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ],
+        "binding-status": "removed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/remittance-outcome",
+          "strength": "required"
+        }
+      },
+      "ExplanationOfBenefit.related": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.related.claim": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.related.relationship": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.related.reference": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.prescription": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.originalPrescription": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.payee": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.payee.type": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.payee.resourceType": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.payee.party": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.information": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.information.sequence": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.information.category": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.information.code": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.information.timing[x]": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.information.value[x]": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.information.reason": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.careTeam": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.careTeam.sequence": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.careTeam.provider": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.careTeam.responsible": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.careTeam.role": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.careTeam.qualification": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.diagnosis": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.diagnosis.sequence": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.diagnosis.diagnosis[x]": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.diagnosis.type": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.diagnosis.packageCode": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.procedure": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.procedure.sequence": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.procedure.date": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.procedure.procedure[x]": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.precedence": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.insurance": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.insurance.coverage": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.insurance.preAuthRef": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.accident": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.accident.date": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.accident.type": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.accident.location[x]": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.employmentImpacted": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.hospitalization": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.sequence": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.careTeamLinkId": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.diagnosisLinkId": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.procedureLinkId": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.informationLinkId": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.revenue": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.category": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.service": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.modifier": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.programCode": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.serviced[x]": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.location[x]": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.quantity": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.unitPrice": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.factor": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.net": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.udi": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.bodySite": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.subSite": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.encounter": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.noteNumber": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.adjudication": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.adjudication.category": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.adjudication.reason": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.adjudication.amount": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.adjudication.value": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.sequence": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.type": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.revenue": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.category": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.service": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.modifier": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.programCode": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.quantity": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.unitPrice": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.factor": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.net": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.udi": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.noteNumber": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.adjudication": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.subDetail": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.subDetail.sequence": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.subDetail.type": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.subDetail.revenue": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.subDetail.category": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.subDetail.service": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.subDetail.modifier": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.subDetail.programCode": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.subDetail.quantity": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.subDetail.unitPrice": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.subDetail.factor": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.subDetail.net": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.subDetail.udi": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.subDetail.noteNumber": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.item.detail.subDetail.adjudication": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.addItem": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.addItem.sequenceLinkId": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.addItem.revenue": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.addItem.category": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.addItem.service": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.addItem.modifier": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.addItem.fee": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.addItem.noteNumber": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.addItem.adjudication": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.addItem.detail": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.addItem.detail.revenue": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.addItem.detail.category": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.addItem.detail.service": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.addItem.detail.modifier": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.addItem.detail.fee": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.addItem.detail.noteNumber": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.addItem.detail.adjudication": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.totalCost": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.unallocDeductable": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.totalBenefit": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.payment": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.payment.type": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.payment.adjustment": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.payment.adjustmentReason": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.payment.date": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.payment.amount": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.payment.identifier": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.form": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.processNote": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.processNote.number": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.processNote.type": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.processNote.text": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.processNote.language": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.benefitBalance": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.benefitBalance.category": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.benefitBalance.subCategory": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.benefitBalance.excluded": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.benefitBalance.name": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.benefitBalance.description": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.benefitBalance.network": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.benefitBalance.unit": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.benefitBalance.term": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.benefitBalance.financial": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.benefitBalance.financial.type": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.benefitBalance.financial.allowed[x]": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.benefitBalance.financial.used[x]": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.request": {
+        "status": "deleted"
+      },
+      "ExplanationOfBenefit.ruleset": {
+        "status": "deleted"
+      },
+      "ExplanationOfBenefit.originalRuleset": {
+        "status": "deleted"
+      },
+      "ExplanationOfBenefit.requestProvider": {
+        "status": "deleted"
+      },
+      "ExplanationOfBenefit.requestOrganization": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

@@ -1,0 +1,111 @@
+﻿{
+  "types": [
+    "ReferralRequest"
+  ],
+  "ReferralRequest": {
+    "elements": {
+      "ReferralRequest.definition": {
+        "status": "new"
+      },
+      "ReferralRequest.basedOn": {
+        "status": "new"
+      },
+      "ReferralRequest.replaces": {
+        "status": "new"
+      },
+      "ReferralRequest.groupIdentifier": {
+        "status": "new"
+      },
+      "ReferralRequest.status": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/referralstatus",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/request-status",
+          "strength": "required"
+        }
+      },
+      "ReferralRequest.intent": {
+        "status": "new"
+      },
+      "ReferralRequest.priority": {
+        "removed-types": [
+          "CodeableConcept"
+        ],
+        "added-types": [
+          "code"
+        ],
+        "binding-status": "added",
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/request-priority",
+          "strength": "required"
+        }
+      },
+      "ReferralRequest.subject": {
+        "old-name": "patient",
+        "old-min": 0,
+        "new-min": 1,
+        "added-types": [
+          "Reference(Group)"
+        ]
+      },
+      "ReferralRequest.context": {
+        "old-name": "encounter",
+        "added-types": [
+          "Reference(EpisodeOfCare)"
+        ]
+      },
+      "ReferralRequest.occurrence[x]": {
+        "status": "new"
+      },
+      "ReferralRequest.authoredOn": {
+        "old-name": "date"
+      },
+      "ReferralRequest.requester": {
+        "removed-types": [
+          "Reference(Practitioner)",
+          "Reference(Organization)",
+          "Reference(Patient)"
+        ]
+      },
+      "ReferralRequest.requester.agent": {
+        "status": "new"
+      },
+      "ReferralRequest.requester.onBehalfOf": {
+        "status": "new"
+      },
+      "ReferralRequest.recipient": {
+        "added-types": [
+          "Reference(HealthcareService)"
+        ]
+      },
+      "ReferralRequest.reasonCode": {
+        "old-name": "reason",
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "ReferralRequest.reasonReference": {
+        "status": "new"
+      },
+      "ReferralRequest.supportingInfo": {
+        "old-name": "supportingInformation"
+      },
+      "ReferralRequest.note": {
+        "status": "new"
+      },
+      "ReferralRequest.relevantHistory": {
+        "status": "new"
+      },
+      "ReferralRequest.dateSent": {
+        "status": "deleted"
+      },
+      "ReferralRequest.fulfillmentTime": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

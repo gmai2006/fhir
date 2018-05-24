@@ -1,0 +1,25 @@
+﻿{
+  "types": [
+    "ImmunizationRecommendation"
+  ],
+  "ImmunizationRecommendation": {
+    "elements": {
+      "ImmunizationRecommendation.recommendation.vaccineCode": {
+        "old-min": 1,
+        "new-min": 0
+      },
+      "ImmunizationRecommendation.recommendation.targetDisease": {
+        "status": "new"
+      },
+      "ImmunizationRecommendation.recommendation.protocol.doseSequence": {
+        "removed-types": [
+          "integer"
+        ],
+        "added-types": [
+          "positiveInt"
+        ]
+      }
+    },
+    "status": "changed"
+  }
+}

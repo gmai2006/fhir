@@ -1,0 +1,8 @@
+﻿{
+  "types": [
+    "MessageDefinition"
+  ],
+  "MessageDefinition": {
+    "status": "new"
+  }
+}

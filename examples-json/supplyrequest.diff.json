@@ -1,0 +1,64 @@
+﻿{
+  "types": [
+    "SupplyRequest"
+  ],
+  "SupplyRequest": {
+    "elements": {
+      "SupplyRequest.category": {
+        "old-name": "kind",
+        "binding-status": "removed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/supplyrequest-kind",
+          "strength": "required"
+        }
+      },
+      "SupplyRequest.priority": {
+        "status": "new"
+      },
+      "SupplyRequest.orderedItem": {
+        "removed-types": [
+          "Reference(Medication)",
+          "Reference(Substance)",
+          "Reference(Device)"
+        ]
+      },
+      "SupplyRequest.orderedItem.quantity": {
+        "status": "new"
+      },
+      "SupplyRequest.orderedItem.item[x]": {
+        "status": "new"
+      },
+      "SupplyRequest.occurrence[x]": {
+        "status": "new"
+      },
+      "SupplyRequest.authoredOn": {
+        "old-name": "date"
+      },
+      "SupplyRequest.requester": {
+        "status": "new"
+      },
+      "SupplyRequest.requester.agent": {
+        "status": "new"
+      },
+      "SupplyRequest.requester.onBehalfOf": {
+        "status": "new"
+      },
+      "SupplyRequest.deliverFrom": {
+        "status": "new"
+      },
+      "SupplyRequest.deliverTo": {
+        "status": "new"
+      },
+      "SupplyRequest.patient": {
+        "status": "deleted"
+      },
+      "SupplyRequest.source": {
+        "status": "deleted"
+      },
+      "SupplyRequest.when": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

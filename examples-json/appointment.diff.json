@@ -1,0 +1,60 @@
+﻿{
+  "types": [
+    "Appointment"
+  ],
+  "Appointment": {
+    "elements": {
+      "Appointment.serviceCategory": {
+        "status": "new"
+      },
+      "Appointment.serviceType": {
+        "old-name": "type",
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "Appointment.specialty": {
+        "status": "new"
+      },
+      "Appointment.appointmentType": {
+        "status": "new"
+      },
+      "Appointment.reason": {
+        "old-max": "1",
+        "new-max": "*",
+        "binding-status": "removed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/encounter-reason",
+          "strength": "required"
+        }
+      },
+      "Appointment.indication": {
+        "status": "new"
+      },
+      "Appointment.supportingInformation": {
+        "status": "new"
+      },
+      "Appointment.created": {
+        "status": "new"
+      },
+      "Appointment.incomingReferral": {
+        "status": "new"
+      },
+      "Appointment.participant.type": {
+        "binding-strength-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/encounter-participant-type",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/encounter-participant-type",
+          "strength": "extensible"
+        }
+      },
+      "Appointment.requestedPeriod": {
+        "status": "new"
+      }
+    },
+    "status": "changed"
+  }
+}

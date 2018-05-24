@@ -1,0 +1,119 @@
+﻿{
+  "types": [
+    "MedicationDispense"
+  ],
+  "MedicationDispense": {
+    "elements": {
+      "MedicationDispense.identifier": {
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "MedicationDispense.partOf": {
+        "status": "new"
+      },
+      "MedicationDispense.category": {
+        "status": "new"
+      },
+      "MedicationDispense.subject": {
+        "old-name": "patient",
+        "added-types": [
+          "Reference(Group)"
+        ]
+      },
+      "MedicationDispense.context": {
+        "status": "new"
+      },
+      "MedicationDispense.supportingInformation": {
+        "status": "new"
+      },
+      "MedicationDispense.performer": {
+        "status": "new"
+      },
+      "MedicationDispense.performer.actor": {
+        "status": "new"
+      },
+      "MedicationDispense.performer.onBehalfOf": {
+        "status": "new"
+      },
+      "MedicationDispense.authorizingPrescription": {
+        "removed-types": [
+          "Reference(MedicationOrder)"
+        ],
+        "added-types": [
+          "Reference(MedicationRequest)"
+        ]
+      },
+      "MedicationDispense.note": {
+        "old-max": "1",
+        "new-max": "*",
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "Annotation"
+        ]
+      },
+      "MedicationDispense.dosageInstruction": {
+        "removed-types": [
+          "BackboneElement"
+        ],
+        "added-types": [
+          "Dosage"
+        ]
+      },
+      "MedicationDispense.substitution.wasSubstituted": {
+        "status": "new"
+      },
+      "MedicationDispense.substitution.type": {
+        "old-min": 1,
+        "new-min": 0
+      },
+      "MedicationDispense.detectedIssue": {
+        "status": "new"
+      },
+      "MedicationDispense.notDone": {
+        "status": "new"
+      },
+      "MedicationDispense.notDoneReason[x]": {
+        "status": "new"
+      },
+      "MedicationDispense.eventHistory": {
+        "status": "new"
+      },
+      "MedicationDispense.dispenser": {
+        "status": "deleted"
+      },
+      "MedicationDispense.dosageInstruction.text": {
+        "status": "deleted"
+      },
+      "MedicationDispense.dosageInstruction.additionalInstructions": {
+        "status": "deleted"
+      },
+      "MedicationDispense.dosageInstruction.timing": {
+        "status": "deleted"
+      },
+      "MedicationDispense.dosageInstruction.asNeeded[x]": {
+        "status": "deleted"
+      },
+      "MedicationDispense.dosageInstruction.site[x]": {
+        "status": "deleted"
+      },
+      "MedicationDispense.dosageInstruction.route": {
+        "status": "deleted"
+      },
+      "MedicationDispense.dosageInstruction.method": {
+        "status": "deleted"
+      },
+      "MedicationDispense.dosageInstruction.dose[x]": {
+        "status": "deleted"
+      },
+      "MedicationDispense.dosageInstruction.rate[x]": {
+        "status": "deleted"
+      },
+      "MedicationDispense.dosageInstruction.maxDosePerPeriod": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

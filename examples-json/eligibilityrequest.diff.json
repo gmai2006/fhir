@@ -1,0 +1,52 @@
+﻿{
+  "types": [
+    "EligibilityRequest"
+  ],
+  "EligibilityRequest": {
+    "elements": {
+      "EligibilityRequest.status": {
+        "status": "new"
+      },
+      "EligibilityRequest.priority": {
+        "status": "new"
+      },
+      "EligibilityRequest.patient": {
+        "status": "new"
+      },
+      "EligibilityRequest.serviced[x]": {
+        "status": "new"
+      },
+      "EligibilityRequest.enterer": {
+        "status": "new"
+      },
+      "EligibilityRequest.insurer": {
+        "status": "new"
+      },
+      "EligibilityRequest.facility": {
+        "status": "new"
+      },
+      "EligibilityRequest.coverage": {
+        "status": "new"
+      },
+      "EligibilityRequest.businessArrangement": {
+        "status": "new"
+      },
+      "EligibilityRequest.benefitCategory": {
+        "status": "new"
+      },
+      "EligibilityRequest.benefitSubCategory": {
+        "status": "new"
+      },
+      "EligibilityRequest.ruleset": {
+        "status": "deleted"
+      },
+      "EligibilityRequest.originalRuleset": {
+        "status": "deleted"
+      },
+      "EligibilityRequest.target": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

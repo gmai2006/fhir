@@ -1,0 +1,8 @@
+﻿{
+  "types": [
+    "PractitionerRole"
+  ],
+  "PractitionerRole": {
+    "status": "new"
+  }
+}

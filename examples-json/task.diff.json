@@ -1,0 +1,8 @@
+﻿{
+  "types": [
+    "Task"
+  ],
+  "Task": {
+    "status": "new"
+  }
+}

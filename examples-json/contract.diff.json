@@ -1,0 +1,99 @@
+﻿{
+  "types": [
+    "Contract"
+  ],
+  "Contract": {
+    "elements": {
+      "Contract.status": {
+        "status": "new"
+      },
+      "Contract.topic": {
+        "status": "new"
+      },
+      "Contract.decisionType": {
+        "status": "new"
+      },
+      "Contract.contentDerivative": {
+        "status": "new"
+      },
+      "Contract.securityLabel": {
+        "status": "new"
+      },
+      "Contract.agent": {
+        "status": "new"
+      },
+      "Contract.agent.actor": {
+        "status": "new"
+      },
+      "Contract.agent.role": {
+        "status": "new"
+      },
+      "Contract.signer.signature": {
+        "old-max": "1",
+        "new-max": "*",
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "Signature"
+        ]
+      },
+      "Contract.valuedItem.unitPrice": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Money}"
+        ],
+        "added-types": [
+          "Money"
+        ]
+      },
+      "Contract.valuedItem.net": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Money}"
+        ],
+        "added-types": [
+          "Money"
+        ]
+      },
+      "Contract.term.topic": {
+        "old-name": "subject",
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "Contract.term.securityLabel": {
+        "status": "new"
+      },
+      "Contract.term.agent": {
+        "status": "new"
+      },
+      "Contract.term.agent.actor": {
+        "status": "new"
+      },
+      "Contract.term.agent.role": {
+        "status": "new"
+      },
+      "Contract.term.valuedItem.unitPrice": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Money}"
+        ],
+        "added-types": [
+          "Money"
+        ]
+      },
+      "Contract.term.valuedItem.net": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Money}"
+        ],
+        "added-types": [
+          "Money"
+        ]
+      },
+      "Contract.actor": {
+        "status": "deleted"
+      },
+      "Contract.term.actor": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

@@ -1,0 +1,13 @@
+﻿{
+  "types": [
+    "Binary"
+  ],
+  "Binary": {
+    "elements": {
+      "Binary.securityContext": {
+        "status": "new"
+      }
+    },
+    "status": "changed"
+  }
+}

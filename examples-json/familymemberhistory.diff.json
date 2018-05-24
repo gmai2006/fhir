@@ -1,0 +1,60 @@
+﻿{
+  "types": [
+    "FamilyMemberHistory"
+  ],
+  "FamilyMemberHistory": {
+    "elements": {
+      "FamilyMemberHistory.definition": {
+        "status": "new"
+      },
+      "FamilyMemberHistory.notDone": {
+        "status": "new"
+      },
+      "FamilyMemberHistory.notDoneReason": {
+        "status": "new"
+      },
+      "FamilyMemberHistory.age[x]": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Age}"
+        ],
+        "added-types": [
+          "Age"
+        ]
+      },
+      "FamilyMemberHistory.estimatedAge": {
+        "status": "new"
+      },
+      "FamilyMemberHistory.deceased[x]": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Age}"
+        ],
+        "added-types": [
+          "Age"
+        ]
+      },
+      "FamilyMemberHistory.reasonCode": {
+        "status": "new"
+      },
+      "FamilyMemberHistory.reasonReference": {
+        "status": "new"
+      },
+      "FamilyMemberHistory.note": {
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "FamilyMemberHistory.condition.onset[x]": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Age}"
+        ],
+        "added-types": [
+          "Age"
+        ]
+      },
+      "FamilyMemberHistory.condition.note": {
+        "old-max": "1",
+        "new-max": "*"
+      }
+    },
+    "status": "changed"
+  }
+}

@@ -1,0 +1,13 @@
+﻿{
+  "types": [
+    "DetectedIssue"
+  ],
+  "DetectedIssue": {
+    "elements": {
+      "DetectedIssue.status": {
+        "status": "new"
+      }
+    },
+    "status": "changed"
+  }
+}

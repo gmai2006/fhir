@@ -1,0 +1,25 @@
+﻿{
+  "types": [
+    "MessageHeader"
+  ],
+  "MessageHeader": {
+    "elements": {
+      "MessageHeader.event": {
+        "modifier": "removed"
+      },
+      "MessageHeader.sender": {
+        "status": "new"
+      },
+      "MessageHeader.response": {
+        "modifier": "removed"
+      },
+      "MessageHeader.response.code": {
+        "modifier": "removed"
+      },
+      "MessageHeader.focus": {
+        "old-name": "data"
+      }
+    },
+    "status": "changed"
+  }
+}

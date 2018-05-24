@@ -1,0 +1,40 @@
+﻿{
+  "types": [
+    "HealthcareService"
+  ],
+  "HealthcareService": {
+    "elements": {
+      "HealthcareService.active": {
+        "status": "new"
+      },
+      "HealthcareService.category": {
+        "old-name": "serviceCategory"
+      },
+      "HealthcareService.type": {
+        "status": "new"
+      },
+      "HealthcareService.specialty": {
+        "status": "new"
+      },
+      "HealthcareService.location": {
+        "old-min": 1,
+        "new-min": 0,
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "HealthcareService.name": {
+        "old-name": "serviceName"
+      },
+      "HealthcareService.endpoint": {
+        "status": "new"
+      },
+      "HealthcareService.serviceType": {
+        "status": "deleted"
+      },
+      "HealthcareService.publicKey": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

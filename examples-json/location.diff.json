@@ -1,0 +1,19 @@
+﻿{
+  "types": [
+    "Location"
+  ],
+  "Location": {
+    "elements": {
+      "Location.operationalStatus": {
+        "status": "new"
+      },
+      "Location.alias": {
+        "status": "new"
+      },
+      "Location.endpoint": {
+        "status": "new"
+      }
+    },
+    "status": "changed"
+  }
+}

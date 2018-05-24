@@ -1,0 +1,84 @@
+﻿{
+  "types": [
+    "PaymentReconciliation"
+  ],
+  "PaymentReconciliation": {
+    "elements": {
+      "PaymentReconciliation.status": {
+        "status": "new"
+      },
+      "PaymentReconciliation.outcome": {
+        "removed-types": [
+          "code"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "PaymentReconciliation.detail.type": {
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "PaymentReconciliation.detail.response": {
+        "status": "new"
+      },
+      "PaymentReconciliation.detail.amount": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Money}"
+        ],
+        "added-types": [
+          "Money"
+        ]
+      },
+      "PaymentReconciliation.form": {
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ],
+        "binding-status": "removed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/forms",
+          "strength": "required"
+        }
+      },
+      "PaymentReconciliation.total": {
+        "old-min": 1,
+        "new-min": 0,
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Money}"
+        ],
+        "added-types": [
+          "Money"
+        ]
+      },
+      "PaymentReconciliation.processNote": {
+        "status": "new"
+      },
+      "PaymentReconciliation.processNote.type": {
+        "status": "new"
+      },
+      "PaymentReconciliation.processNote.text": {
+        "status": "new"
+      },
+      "PaymentReconciliation.ruleset": {
+        "status": "deleted"
+      },
+      "PaymentReconciliation.originalRuleset": {
+        "status": "deleted"
+      },
+      "PaymentReconciliation.detail.responce": {
+        "status": "deleted"
+      },
+      "PaymentReconciliation.note": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

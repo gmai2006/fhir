@@ -1,0 +1,128 @@
+﻿{
+  "types": [
+    "Coverage"
+  ],
+  "Coverage": {
+    "elements": {
+      "Coverage.status": {
+        "status": "new"
+      },
+      "Coverage.type": {
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "Coverage.policyHolder": {
+        "status": "new"
+      },
+      "Coverage.subscriber": {
+        "added-types": [
+          "Reference(RelatedPerson)"
+        ],
+        "modifier": "removed"
+      },
+      "Coverage.subscriberId": {
+        "removed-types": [
+          "Identifier"
+        ],
+        "added-types": [
+          "string"
+        ]
+      },
+      "Coverage.beneficiary": {
+        "status": "new"
+      },
+      "Coverage.relationship": {
+        "status": "new"
+      },
+      "Coverage.payor": {
+        "status": "new"
+      },
+      "Coverage.grouping": {
+        "status": "new"
+      },
+      "Coverage.grouping.group": {
+        "status": "new"
+      },
+      "Coverage.grouping.groupDisplay": {
+        "status": "new"
+      },
+      "Coverage.grouping.subGroup": {
+        "status": "new"
+      },
+      "Coverage.grouping.subGroupDisplay": {
+        "status": "new"
+      },
+      "Coverage.grouping.plan": {
+        "status": "new"
+      },
+      "Coverage.grouping.planDisplay": {
+        "status": "new"
+      },
+      "Coverage.grouping.subPlan": {
+        "status": "new"
+      },
+      "Coverage.grouping.subPlanDisplay": {
+        "status": "new"
+      },
+      "Coverage.grouping.class": {
+        "status": "new"
+      },
+      "Coverage.grouping.classDisplay": {
+        "status": "new"
+      },
+      "Coverage.grouping.subClass": {
+        "status": "new"
+      },
+      "Coverage.grouping.subClassDisplay": {
+        "status": "new"
+      },
+      "Coverage.dependent": {
+        "removed-types": [
+          "positiveInt"
+        ],
+        "added-types": [
+          "string"
+        ]
+      },
+      "Coverage.sequence": {
+        "removed-types": [
+          "positiveInt"
+        ],
+        "added-types": [
+          "string"
+        ]
+      },
+      "Coverage.order": {
+        "status": "new"
+      },
+      "Coverage.network": {
+        "removed-types": [
+          "Identifier"
+        ],
+        "added-types": [
+          "string"
+        ]
+      },
+      "Coverage.issuer": {
+        "status": "deleted"
+      },
+      "Coverage.bin": {
+        "status": "deleted"
+      },
+      "Coverage.group": {
+        "status": "deleted"
+      },
+      "Coverage.plan": {
+        "status": "deleted"
+      },
+      "Coverage.subPlan": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

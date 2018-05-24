@@ -1,0 +1,23 @@
+﻿{
+  "types": [
+    "ProcessRequest"
+  ],
+  "ProcessRequest": {
+    "elements": {
+      "ProcessRequest.status": {
+        "status": "new"
+      },
+      "ProcessRequest.action": {
+        "old-min": 1,
+        "new-min": 0
+      },
+      "ProcessRequest.ruleset": {
+        "status": "deleted"
+      },
+      "ProcessRequest.originalRuleset": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

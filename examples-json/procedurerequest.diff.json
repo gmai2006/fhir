@@ -1,0 +1,120 @@
+﻿{
+  "types": [
+    "ProcedureRequest"
+  ],
+  "ProcedureRequest": {
+    "elements": {
+      "ProcedureRequest.definition": {
+        "status": "new"
+      },
+      "ProcedureRequest.basedOn": {
+        "status": "new"
+      },
+      "ProcedureRequest.replaces": {
+        "status": "new"
+      },
+      "ProcedureRequest.requisition": {
+        "status": "new"
+      },
+      "ProcedureRequest.status": {
+        "old-min": 0,
+        "new-min": 1,
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/procedure-request-status",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/request-status",
+          "strength": "required"
+        }
+      },
+      "ProcedureRequest.intent": {
+        "status": "new"
+      },
+      "ProcedureRequest.priority": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/procedure-request-priority",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/request-priority",
+          "strength": "required"
+        }
+      },
+      "ProcedureRequest.doNotPerform": {
+        "status": "new"
+      },
+      "ProcedureRequest.category": {
+        "status": "new"
+      },
+      "ProcedureRequest.subject": {
+        "added-types": [
+          "Reference(Location)",
+          "Reference(Device)"
+        ]
+      },
+      "ProcedureRequest.context": {
+        "old-name": "encounter",
+        "added-types": [
+          "Reference(EpisodeOfCare)"
+        ]
+      },
+      "ProcedureRequest.occurrence[x]": {
+        "status": "new"
+      },
+      "ProcedureRequest.authoredOn": {
+        "old-name": "orderedOn"
+      },
+      "ProcedureRequest.requester": {
+        "status": "new"
+      },
+      "ProcedureRequest.requester.agent": {
+        "status": "new"
+      },
+      "ProcedureRequest.requester.onBehalfOf": {
+        "status": "new"
+      },
+      "ProcedureRequest.performerType": {
+        "status": "new"
+      },
+      "ProcedureRequest.performer": {
+        "added-types": [
+          "Reference(Device)",
+          "Reference(HealthcareService)"
+        ]
+      },
+      "ProcedureRequest.reasonCode": {
+        "status": "new"
+      },
+      "ProcedureRequest.reasonReference": {
+        "status": "new"
+      },
+      "ProcedureRequest.supportingInfo": {
+        "status": "new"
+      },
+      "ProcedureRequest.specimen": {
+        "status": "new"
+      },
+      "ProcedureRequest.note": {
+        "old-name": "notes"
+      },
+      "ProcedureRequest.relevantHistory": {
+        "status": "new"
+      },
+      "ProcedureRequest.reason[x]": {
+        "status": "deleted"
+      },
+      "ProcedureRequest.scheduled[x]": {
+        "status": "deleted"
+      },
+      "ProcedureRequest.orderer": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

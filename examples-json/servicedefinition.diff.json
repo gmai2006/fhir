@@ -1,0 +1,8 @@
+﻿{
+  "types": [
+    "ServiceDefinition"
+  ],
+  "ServiceDefinition": {
+    "status": "new"
+  }
+}

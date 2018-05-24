@@ -1,0 +1,234 @@
+﻿{
+  "types": [
+    "TestScript"
+  ],
+  "TestScript": {
+    "elements": {
+      "TestScript.title": {
+        "status": "new"
+      },
+      "TestScript.status": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/conformance-resource-status",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/publication-status",
+          "strength": "required"
+        }
+      },
+      "TestScript.experimental": {
+        "modifier": "added"
+      },
+      "TestScript.contact": {
+        "removed-types": [
+          "BackboneElement"
+        ],
+        "added-types": [
+          "ContactDetail"
+        ]
+      },
+      "TestScript.description": {
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "markdown"
+        ]
+      },
+      "TestScript.useContext": {
+        "removed-types": [
+          "CodeableConcept"
+        ],
+        "added-types": [
+          "UsageContext"
+        ],
+        "binding-status": "removed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/use-context",
+          "strength": "extensible"
+        }
+      },
+      "TestScript.jurisdiction": {
+        "status": "new"
+      },
+      "TestScript.purpose": {
+        "status": "new"
+      },
+      "TestScript.copyright": {
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "markdown"
+        ]
+      },
+      "TestScript.origin": {
+        "status": "new"
+      },
+      "TestScript.origin.index": {
+        "status": "new"
+      },
+      "TestScript.origin.profile": {
+        "status": "new"
+      },
+      "TestScript.destination": {
+        "status": "new"
+      },
+      "TestScript.destination.index": {
+        "status": "new"
+      },
+      "TestScript.destination.profile": {
+        "status": "new"
+      },
+      "TestScript.metadata.capability.origin": {
+        "status": "new"
+      },
+      "TestScript.metadata.capability.capabilities": {
+        "status": "new"
+      },
+      "TestScript.fixture.autocreate": {
+        "default": "added",
+        "new-default": "\"false\""
+      },
+      "TestScript.fixture.autodelete": {
+        "default": "added",
+        "new-default": "\"false\""
+      },
+      "TestScript.variable.defaultValue": {
+        "status": "new"
+      },
+      "TestScript.variable.description": {
+        "status": "new"
+      },
+      "TestScript.variable.expression": {
+        "status": "new"
+      },
+      "TestScript.variable.hint": {
+        "status": "new"
+      },
+      "TestScript.rule": {
+        "status": "new"
+      },
+      "TestScript.rule.resource": {
+        "status": "new"
+      },
+      "TestScript.rule.param": {
+        "status": "new"
+      },
+      "TestScript.rule.param.name": {
+        "status": "new"
+      },
+      "TestScript.rule.param.value": {
+        "status": "new"
+      },
+      "TestScript.ruleset": {
+        "status": "new"
+      },
+      "TestScript.ruleset.resource": {
+        "status": "new"
+      },
+      "TestScript.ruleset.rule": {
+        "status": "new"
+      },
+      "TestScript.ruleset.rule.ruleId": {
+        "status": "new"
+      },
+      "TestScript.ruleset.rule.param": {
+        "status": "new"
+      },
+      "TestScript.ruleset.rule.param.name": {
+        "status": "new"
+      },
+      "TestScript.ruleset.rule.param.value": {
+        "status": "new"
+      },
+      "TestScript.setup.action.operation.destination": {
+        "default": "removed",
+        "old-default": "\"0\""
+      },
+      "TestScript.setup.action.operation.origin": {
+        "status": "new"
+      },
+      "TestScript.setup.action.operation.requestId": {
+        "status": "new"
+      },
+      "TestScript.setup.action.assert.compareToSourceExpression": {
+        "status": "new"
+      },
+      "TestScript.setup.action.assert.expression": {
+        "status": "new"
+      },
+      "TestScript.setup.action.assert.requestMethod": {
+        "status": "new"
+      },
+      "TestScript.setup.action.assert.requestURL": {
+        "status": "new"
+      },
+      "TestScript.setup.action.assert.rule": {
+        "status": "new"
+      },
+      "TestScript.setup.action.assert.rule.ruleId": {
+        "status": "new"
+      },
+      "TestScript.setup.action.assert.rule.param": {
+        "status": "new"
+      },
+      "TestScript.setup.action.assert.rule.param.name": {
+        "status": "new"
+      },
+      "TestScript.setup.action.assert.rule.param.value": {
+        "status": "new"
+      },
+      "TestScript.setup.action.assert.ruleset": {
+        "status": "new"
+      },
+      "TestScript.setup.action.assert.ruleset.rulesetId": {
+        "status": "new"
+      },
+      "TestScript.setup.action.assert.ruleset.rule": {
+        "status": "new"
+      },
+      "TestScript.setup.action.assert.ruleset.rule.ruleId": {
+        "status": "new"
+      },
+      "TestScript.setup.action.assert.ruleset.rule.param": {
+        "status": "new"
+      },
+      "TestScript.setup.action.assert.ruleset.rule.param.name": {
+        "status": "new"
+      },
+      "TestScript.setup.action.assert.ruleset.rule.param.value": {
+        "status": "new"
+      },
+      "TestScript.teardown.action.operation": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "TestScript.contact.name": {
+        "status": "deleted"
+      },
+      "TestScript.contact.telecom": {
+        "status": "deleted"
+      },
+      "TestScript.requirements": {
+        "status": "deleted"
+      },
+      "TestScript.metadata.capability.conformance": {
+        "status": "deleted"
+      },
+      "TestScript.multiserver": {
+        "status": "deleted"
+      },
+      "TestScript.setup.metadata": {
+        "status": "deleted"
+      },
+      "TestScript.test.metadata": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

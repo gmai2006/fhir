@@ -1,0 +1,8 @@
+﻿{
+  "types": [
+    "ResearchStudy"
+  ],
+  "ResearchStudy": {
+    "status": "new"
+  }
+}

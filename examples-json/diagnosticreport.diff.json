@@ -1,0 +1,64 @@
+﻿{
+  "types": [
+    "DiagnosticReport"
+  ],
+  "DiagnosticReport": {
+    "elements": {
+      "DiagnosticReport.basedOn": {
+        "old-name": "request",
+        "removed-types": [
+          "Reference(DiagnosticOrder)"
+        ],
+        "added-types": [
+          "Reference(CarePlan)",
+          "Reference(ImmunizationRecommendation)",
+          "Reference(MedicationRequest)",
+          "Reference(NutritionOrder)"
+        ]
+      },
+      "DiagnosticReport.subject": {
+        "old-min": 1,
+        "new-min": 0
+      },
+      "DiagnosticReport.context": {
+        "old-name": "encounter",
+        "added-types": [
+          "Reference(EpisodeOfCare)"
+        ]
+      },
+      "DiagnosticReport.effective[x]": {
+        "old-min": 1,
+        "new-min": 0
+      },
+      "DiagnosticReport.issued": {
+        "old-min": 1,
+        "new-min": 0
+      },
+      "DiagnosticReport.performer": {
+        "old-min": 1,
+        "new-min": 0,
+        "old-max": "1",
+        "new-max": "*",
+        "removed-types": [
+          "Reference(Practitioner)",
+          "Reference(Organization)"
+        ]
+      },
+      "DiagnosticReport.performer.role": {
+        "status": "new"
+      },
+      "DiagnosticReport.performer.actor": {
+        "status": "new"
+      },
+      "DiagnosticReport.imagingStudy": {
+        "removed-types": [
+          "Reference(ImagingObjectSelection)"
+        ],
+        "added-types": [
+          "Reference(ImagingManifest)"
+        ]
+      }
+    },
+    "status": "changed"
+  }
+}

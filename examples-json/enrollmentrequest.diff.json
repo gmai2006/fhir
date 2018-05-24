@@ -1,0 +1,36 @@
+﻿{
+  "types": [
+    "EnrollmentRequest"
+  ],
+  "EnrollmentRequest": {
+    "elements": {
+      "EnrollmentRequest.status": {
+        "status": "new"
+      },
+      "EnrollmentRequest.insurer": {
+        "status": "new"
+      },
+      "EnrollmentRequest.subject": {
+        "old-min": 1,
+        "new-min": 0
+      },
+      "EnrollmentRequest.coverage": {
+        "old-min": 1,
+        "new-min": 0
+      },
+      "EnrollmentRequest.ruleset": {
+        "status": "deleted"
+      },
+      "EnrollmentRequest.originalRuleset": {
+        "status": "deleted"
+      },
+      "EnrollmentRequest.target": {
+        "status": "deleted"
+      },
+      "EnrollmentRequest.relationship": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

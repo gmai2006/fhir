@@ -1,0 +1,8 @@
+﻿{
+  "types": [
+    "DeviceMetric"
+  ],
+  "DeviceMetric": {
+    "status": "no-change"
+  }
+}

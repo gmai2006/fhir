@@ -1,0 +1,20 @@
+﻿{
+  "types": [
+    "Organization"
+  ],
+  "Organization": {
+    "elements": {
+      "Organization.type": {
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "Organization.alias": {
+        "status": "new"
+      },
+      "Organization.endpoint": {
+        "status": "new"
+      }
+    },
+    "status": "changed"
+  }
+}

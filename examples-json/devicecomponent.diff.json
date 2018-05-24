@@ -1,0 +1,48 @@
+﻿{
+  "types": [
+    "DeviceComponent"
+  ],
+  "DeviceComponent": {
+    "elements": {
+      "DeviceComponent.lastSystemChange": {
+        "old-min": 1,
+        "new-min": 0
+      },
+      "DeviceComponent.operationalStatus": {
+        "binding-status": "added",
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/operational-status",
+          "strength": "extensible"
+        }
+      },
+      "DeviceComponent.parameterGroup": {
+        "binding-status": "added",
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/parameter-group",
+          "strength": "extensible"
+        }
+      },
+      "DeviceComponent.productionSpecification.specType": {
+        "binding-status": "added",
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/specification-type",
+          "strength": "extensible"
+        }
+      },
+      "DeviceComponent.languageCode": {
+        "binding-strength-changed": true,
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://tools.ietf.org/html/bcp47",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/languages",
+          "strength": "extensible"
+        }
+      }
+    },
+    "status": "changed"
+  }
+}

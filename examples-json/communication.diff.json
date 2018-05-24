@@ -1,0 +1,74 @@
+﻿{
+  "types": [
+    "Communication"
+  ],
+  "Communication": {
+    "elements": {
+      "Communication.definition": {
+        "status": "new"
+      },
+      "Communication.basedOn": {
+        "old-name": "requestDetail",
+        "old-max": "1",
+        "new-max": "*",
+        "removed-types": [
+          "Reference(CommunicationRequest)"
+        ],
+        "added-types": [
+          "Reference(Resource)"
+        ]
+      },
+      "Communication.partOf": {
+        "status": "new"
+      },
+      "Communication.status": {
+        "old-min": 0,
+        "new-min": 1,
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/communication-status",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/event-status",
+          "strength": "required"
+        }
+      },
+      "Communication.notDone": {
+        "status": "new"
+      },
+      "Communication.notDoneReason": {
+        "status": "new"
+      },
+      "Communication.category": {
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "Communication.subject": {
+        "added-types": [
+          "Reference(Group)"
+        ]
+      },
+      "Communication.topic": {
+        "status": "new"
+      },
+      "Communication.context": {
+        "old-name": "encounter",
+        "added-types": [
+          "Reference(EpisodeOfCare)"
+        ]
+      },
+      "Communication.reasonCode": {
+        "old-name": "reason"
+      },
+      "Communication.reasonReference": {
+        "status": "new"
+      },
+      "Communication.note": {
+        "status": "new"
+      }
+    },
+    "status": "changed"
+  }
+}

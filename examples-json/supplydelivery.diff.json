@@ -1,0 +1,46 @@
+﻿{
+  "types": [
+    "SupplyDelivery"
+  ],
+  "SupplyDelivery": {
+    "elements": {
+      "SupplyDelivery.basedOn": {
+        "status": "new"
+      },
+      "SupplyDelivery.partOf": {
+        "status": "new"
+      },
+      "SupplyDelivery.suppliedItem": {
+        "removed-types": [
+          "Reference(Medication)",
+          "Reference(Substance)",
+          "Reference(Device)"
+        ]
+      },
+      "SupplyDelivery.suppliedItem.quantity": {
+        "status": "new"
+      },
+      "SupplyDelivery.suppliedItem.item[x]": {
+        "status": "new"
+      },
+      "SupplyDelivery.occurrence[x]": {
+        "status": "new"
+      },
+      "SupplyDelivery.supplier": {
+        "added-types": [
+          "Reference(Organization)"
+        ]
+      },
+      "SupplyDelivery.quantity": {
+        "status": "deleted"
+      },
+      "SupplyDelivery.whenPrepared": {
+        "status": "deleted"
+      },
+      "SupplyDelivery.time": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

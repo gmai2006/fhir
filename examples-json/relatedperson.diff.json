@@ -1,0 +1,24 @@
+﻿{
+  "types": [
+    "RelatedPerson"
+  ],
+  "RelatedPerson": {
+    "elements": {
+      "RelatedPerson.active": {
+        "status": "new"
+      },
+      "RelatedPerson.relationship": {
+        "binding-status": "removed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/relatedperson-relationshiptype",
+          "strength": "required"
+        }
+      },
+      "RelatedPerson.name": {
+        "old-max": "1",
+        "new-max": "*"
+      }
+    },
+    "status": "changed"
+  }
+}

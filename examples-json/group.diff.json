@@ -1,0 +1,13 @@
+﻿{
+  "types": [
+    "Group"
+  ],
+  "Group": {
+    "elements": {
+      "Group.active": {
+        "status": "new"
+      }
+    },
+    "status": "changed"
+  }
+}

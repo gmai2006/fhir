@@ -1,0 +1,22 @@
+﻿{
+  "types": [
+    "DocumentReference"
+  ],
+  "DocumentReference": {
+    "elements": {
+      "DocumentReference.docStatus": {
+        "removed-types": [
+          "CodeableConcept"
+        ],
+        "added-types": [
+          "code"
+        ]
+      },
+      "DocumentReference.content.format": {
+        "old-max": "*",
+        "new-max": "1"
+      }
+    },
+    "status": "changed"
+  }
+}

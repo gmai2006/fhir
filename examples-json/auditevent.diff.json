@@ -1,0 +1,84 @@
+﻿{
+  "types": [
+    "AuditEvent"
+  ],
+  "AuditEvent": {
+    "elements": {
+      "AuditEvent.type": {
+        "status": "new"
+      },
+      "AuditEvent.subtype": {
+        "status": "new"
+      },
+      "AuditEvent.action": {
+        "status": "new"
+      },
+      "AuditEvent.recorded": {
+        "status": "new"
+      },
+      "AuditEvent.outcome": {
+        "status": "new"
+      },
+      "AuditEvent.outcomeDesc": {
+        "status": "new"
+      },
+      "AuditEvent.purposeOfEvent": {
+        "status": "new"
+      },
+      "AuditEvent.agent": {
+        "old-name": "participant"
+      },
+      "AuditEvent.agent.role": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/dicm-402-roleid",
+          "strength": "extensible"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/security-role-type",
+          "strength": "extensible"
+        }
+      },
+      "AuditEvent.agent.purposeOfUse": {
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "AuditEvent.entity": {
+        "old-name": "object"
+      },
+      "AuditEvent.entity.type": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/object-type",
+          "strength": "extensible"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/audit-entity-type",
+          "strength": "extensible"
+        }
+      },
+      "AuditEvent.entity.lifecycle": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/object-lifecycle",
+          "strength": "extensible"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/object-lifecycle-events",
+          "strength": "extensible"
+        }
+      },
+      "AuditEvent.event": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

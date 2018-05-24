@@ -1,0 +1,109 @@
+﻿{
+  "types": [
+    "OperationDefinition"
+  ],
+  "OperationDefinition": {
+    "elements": {
+      "OperationDefinition.status": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/conformance-resource-status",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/publication-status",
+          "strength": "required"
+        }
+      },
+      "OperationDefinition.experimental": {
+        "modifier": "added"
+      },
+      "OperationDefinition.contact": {
+        "removed-types": [
+          "BackboneElement"
+        ],
+        "added-types": [
+          "ContactDetail"
+        ]
+      },
+      "OperationDefinition.description": {
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "markdown"
+        ]
+      },
+      "OperationDefinition.useContext": {
+        "status": "new"
+      },
+      "OperationDefinition.jurisdiction": {
+        "status": "new"
+      },
+      "OperationDefinition.purpose": {
+        "old-name": "requirements",
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "markdown"
+        ]
+      },
+      "OperationDefinition.comment": {
+        "old-name": "notes"
+      },
+      "OperationDefinition.resource": {
+        "old-name": "type"
+      },
+      "OperationDefinition.type": {
+        "old-min": 0,
+        "new-min": 1,
+        "old-max": "*",
+        "new-max": "1",
+        "removed-types": [
+          "code"
+        ],
+        "added-types": [
+          "boolean"
+        ],
+        "binding-status": "removed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/resource-types",
+          "strength": "required"
+        }
+      },
+      "OperationDefinition.parameter.type": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/operation-parameter-type",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/all-types",
+          "strength": "required"
+        }
+      },
+      "OperationDefinition.parameter.searchType": {
+        "status": "new"
+      },
+      "OperationDefinition.overload": {
+        "status": "new"
+      },
+      "OperationDefinition.overload.parameterName": {
+        "status": "new"
+      },
+      "OperationDefinition.overload.comment": {
+        "status": "new"
+      },
+      "OperationDefinition.contact.name": {
+        "status": "deleted"
+      },
+      "OperationDefinition.contact.telecom": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

@@ -1,0 +1,20 @@
+﻿{
+  "types": [
+    "List"
+  ],
+  "List": {
+    "elements": {
+      "List.note": {
+        "old-max": "1",
+        "new-max": "*",
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "Annotation"
+        ]
+      }
+    },
+    "status": "changed"
+  }
+}

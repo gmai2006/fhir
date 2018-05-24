@@ -1,0 +1,16 @@
+﻿{
+  "types": [
+    "Bundle"
+  ],
+  "Bundle": {
+    "elements": {
+      "Bundle.identifier": {
+        "status": "new"
+      },
+      "Bundle.entry.response.outcome": {
+        "status": "new"
+      }
+    },
+    "status": "changed"
+  }
+}

@@ -1,0 +1,19 @@
+﻿{
+  "types": [
+    "Parameters"
+  ],
+  "Parameters": {
+    "elements": {
+      "Parameters.parameter.value[x]": {
+        "added-types": [
+          "Age",
+          "Count",
+          "Distance",
+          "Duration",
+          "Money"
+        ]
+      }
+    },
+    "status": "changed"
+  }
+}

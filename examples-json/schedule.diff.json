@@ -1,0 +1,29 @@
+﻿{
+  "types": [
+    "Schedule"
+  ],
+  "Schedule": {
+    "elements": {
+      "Schedule.active": {
+        "status": "new"
+      },
+      "Schedule.serviceCategory": {
+        "status": "new"
+      },
+      "Schedule.serviceType": {
+        "old-name": "type"
+      },
+      "Schedule.specialty": {
+        "status": "new"
+      },
+      "Schedule.actor": {
+        "old-max": "1",
+        "new-max": "*",
+        "added-types": [
+          "Reference(PractitionerRole)"
+        ]
+      }
+    },
+    "status": "changed"
+  }
+}

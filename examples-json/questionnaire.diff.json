@@ -1,0 +1,135 @@
+﻿{
+  "types": [
+    "Questionnaire"
+  ],
+  "Questionnaire": {
+    "elements": {
+      "Questionnaire.url": {
+        "status": "new"
+      },
+      "Questionnaire.name": {
+        "status": "new"
+      },
+      "Questionnaire.title": {
+        "status": "new"
+      },
+      "Questionnaire.status": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/questionnaire-status",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/publication-status",
+          "strength": "required"
+        }
+      },
+      "Questionnaire.experimental": {
+        "status": "new"
+      },
+      "Questionnaire.description": {
+        "status": "new"
+      },
+      "Questionnaire.purpose": {
+        "status": "new"
+      },
+      "Questionnaire.approvalDate": {
+        "status": "new"
+      },
+      "Questionnaire.lastReviewDate": {
+        "status": "new"
+      },
+      "Questionnaire.effectivePeriod": {
+        "status": "new"
+      },
+      "Questionnaire.useContext": {
+        "status": "new"
+      },
+      "Questionnaire.jurisdiction": {
+        "status": "new"
+      },
+      "Questionnaire.contact": {
+        "status": "new"
+      },
+      "Questionnaire.copyright": {
+        "status": "new"
+      },
+      "Questionnaire.code": {
+        "status": "new"
+      },
+      "Questionnaire.item": {
+        "old-name": "group",
+        "old-min": 1,
+        "new-min": 0,
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "Questionnaire.item.linkId": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "Questionnaire.item.definition": {
+        "status": "new"
+      },
+      "Questionnaire.item.code": {
+        "status": "new"
+      },
+      "Questionnaire.item.prefix": {
+        "status": "new"
+      },
+      "Questionnaire.item.type": {
+        "status": "new"
+      },
+      "Questionnaire.item.enableWhen": {
+        "status": "new"
+      },
+      "Questionnaire.item.enableWhen.question": {
+        "status": "new"
+      },
+      "Questionnaire.item.enableWhen.hasAnswer": {
+        "status": "new"
+      },
+      "Questionnaire.item.enableWhen.answer[x]": {
+        "status": "new"
+      },
+      "Questionnaire.item.readOnly": {
+        "status": "new"
+      },
+      "Questionnaire.item.maxLength": {
+        "status": "new"
+      },
+      "Questionnaire.item.options": {
+        "status": "new"
+      },
+      "Questionnaire.item.option": {
+        "status": "new"
+      },
+      "Questionnaire.item.option.value[x]": {
+        "status": "new"
+      },
+      "Questionnaire.item.initial[x]": {
+        "status": "new"
+      },
+      "Questionnaire.item.item": {
+        "status": "new"
+      },
+      "Questionnaire.telecom": {
+        "status": "deleted"
+      },
+      "Questionnaire.group.title": {
+        "status": "deleted"
+      },
+      "Questionnaire.group.concept": {
+        "status": "deleted"
+      },
+      "Questionnaire.group.group": {
+        "status": "deleted"
+      },
+      "Questionnaire.group.question": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

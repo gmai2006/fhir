@@ -1,0 +1,37 @@
+﻿{
+  "types": [
+    "Specimen"
+  ],
+  "Specimen": {
+    "elements": {
+      "Specimen.request": {
+        "status": "new"
+      },
+      "Specimen.processing": {
+        "status": "new"
+      },
+      "Specimen.processing.description": {
+        "status": "new"
+      },
+      "Specimen.processing.procedure": {
+        "status": "new"
+      },
+      "Specimen.processing.additive": {
+        "status": "new"
+      },
+      "Specimen.processing.time[x]": {
+        "status": "new"
+      },
+      "Specimen.note": {
+        "status": "new"
+      },
+      "Specimen.collection.comment": {
+        "status": "deleted"
+      },
+      "Specimen.treatment": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

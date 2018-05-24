@@ -1,0 +1,100 @@
+﻿{
+  "types": [
+    "Encounter"
+  ],
+  "Encounter": {
+    "elements": {
+      "Encounter.status": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/encounter-state",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/encounter-status",
+          "strength": "required"
+        }
+      },
+      "Encounter.statusHistory.status": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/encounter-state",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/encounter-status",
+          "strength": "required"
+        }
+      },
+      "Encounter.class": {
+        "removed-types": [
+          "code"
+        ],
+        "added-types": [
+          "Coding"
+        ],
+        "binding-strength-changed": true,
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/encounter-class",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/v3-ActEncounterCode",
+          "strength": "extensible"
+        }
+      },
+      "Encounter.classHistory": {
+        "status": "new"
+      },
+      "Encounter.classHistory.class": {
+        "status": "new"
+      },
+      "Encounter.classHistory.period": {
+        "status": "new"
+      },
+      "Encounter.subject": {
+        "old-name": "patient",
+        "added-types": [
+          "Reference(Group)"
+        ]
+      },
+      "Encounter.length": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Duration}"
+        ],
+        "added-types": [
+          "Duration"
+        ]
+      },
+      "Encounter.diagnosis": {
+        "status": "new"
+      },
+      "Encounter.diagnosis.condition": {
+        "status": "new"
+      },
+      "Encounter.diagnosis.role": {
+        "status": "new"
+      },
+      "Encounter.diagnosis.rank": {
+        "status": "new"
+      },
+      "Encounter.account": {
+        "status": "new"
+      },
+      "Encounter.indication": {
+        "status": "deleted"
+      },
+      "Encounter.hospitalization.admittingDiagnosis": {
+        "status": "deleted"
+      },
+      "Encounter.hospitalization.dischargeDiagnosis": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

@@ -1,0 +1,322 @@
+﻿{
+  "types": [
+    "ClaimResponse"
+  ],
+  "ClaimResponse": {
+    "elements": {
+      "ClaimResponse.status": {
+        "status": "new"
+      },
+      "ClaimResponse.patient": {
+        "status": "new"
+      },
+      "ClaimResponse.insurer": {
+        "status": "new"
+      },
+      "ClaimResponse.outcome": {
+        "removed-types": [
+          "code"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ],
+        "binding-status": "removed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/remittance-outcome",
+          "strength": "required"
+        }
+      },
+      "ClaimResponse.payeeType": {
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "ClaimResponse.item.adjudication.category": {
+        "status": "new"
+      },
+      "ClaimResponse.item.adjudication.reason": {
+        "status": "new"
+      },
+      "ClaimResponse.item.adjudication.amount": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Money}"
+        ],
+        "added-types": [
+          "Money"
+        ]
+      },
+      "ClaimResponse.item.detail.noteNumber": {
+        "status": "new"
+      },
+      "ClaimResponse.item.detail.adjudication": {
+        "removed-types": [
+          "BackboneElement"
+        ]
+      },
+      "ClaimResponse.item.detail.subDetail.noteNumber": {
+        "status": "new"
+      },
+      "ClaimResponse.item.detail.subDetail.adjudication": {
+        "removed-types": [
+          "BackboneElement"
+        ]
+      },
+      "ClaimResponse.addItem.revenue": {
+        "status": "new"
+      },
+      "ClaimResponse.addItem.category": {
+        "status": "new"
+      },
+      "ClaimResponse.addItem.service": {
+        "old-min": 1,
+        "new-min": 0,
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "ClaimResponse.addItem.modifier": {
+        "status": "new"
+      },
+      "ClaimResponse.addItem.fee": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Money}"
+        ],
+        "added-types": [
+          "Money"
+        ]
+      },
+      "ClaimResponse.addItem.noteNumber": {
+        "status": "new"
+      },
+      "ClaimResponse.addItem.adjudication": {
+        "removed-types": [
+          "BackboneElement"
+        ]
+      },
+      "ClaimResponse.addItem.detail.revenue": {
+        "status": "new"
+      },
+      "ClaimResponse.addItem.detail.category": {
+        "status": "new"
+      },
+      "ClaimResponse.addItem.detail.service": {
+        "old-min": 1,
+        "new-min": 0,
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "ClaimResponse.addItem.detail.modifier": {
+        "status": "new"
+      },
+      "ClaimResponse.addItem.detail.fee": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Money}"
+        ],
+        "added-types": [
+          "Money"
+        ]
+      },
+      "ClaimResponse.addItem.detail.noteNumber": {
+        "status": "new"
+      },
+      "ClaimResponse.addItem.detail.adjudication": {
+        "removed-types": [
+          "BackboneElement"
+        ]
+      },
+      "ClaimResponse.error.code": {
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ],
+        "binding-status": "removed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/adjudication-error",
+          "strength": "required"
+        }
+      },
+      "ClaimResponse.totalCost": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Money}"
+        ],
+        "added-types": [
+          "Money"
+        ]
+      },
+      "ClaimResponse.unallocDeductable": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Money}"
+        ],
+        "added-types": [
+          "Money"
+        ]
+      },
+      "ClaimResponse.totalBenefit": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Money}"
+        ],
+        "added-types": [
+          "Money"
+        ]
+      },
+      "ClaimResponse.payment": {
+        "status": "new"
+      },
+      "ClaimResponse.payment.type": {
+        "status": "new"
+      },
+      "ClaimResponse.payment.adjustment": {
+        "status": "new"
+      },
+      "ClaimResponse.payment.adjustmentReason": {
+        "status": "new"
+      },
+      "ClaimResponse.payment.date": {
+        "status": "new"
+      },
+      "ClaimResponse.payment.amount": {
+        "status": "new"
+      },
+      "ClaimResponse.payment.identifier": {
+        "status": "new"
+      },
+      "ClaimResponse.form": {
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ],
+        "binding-status": "removed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/forms",
+          "strength": "required"
+        }
+      },
+      "ClaimResponse.processNote": {
+        "status": "new"
+      },
+      "ClaimResponse.processNote.number": {
+        "status": "new"
+      },
+      "ClaimResponse.processNote.type": {
+        "status": "new"
+      },
+      "ClaimResponse.processNote.text": {
+        "status": "new"
+      },
+      "ClaimResponse.processNote.language": {
+        "status": "new"
+      },
+      "ClaimResponse.communicationRequest": {
+        "status": "new"
+      },
+      "ClaimResponse.insurance": {
+        "status": "new"
+      },
+      "ClaimResponse.insurance.sequence": {
+        "status": "new"
+      },
+      "ClaimResponse.insurance.focal": {
+        "status": "new"
+      },
+      "ClaimResponse.insurance.coverage": {
+        "status": "new"
+      },
+      "ClaimResponse.insurance.businessArrangement": {
+        "status": "new"
+      },
+      "ClaimResponse.insurance.preAuthRef": {
+        "status": "new"
+      },
+      "ClaimResponse.insurance.claimResponse": {
+        "status": "new"
+      },
+      "ClaimResponse.ruleset": {
+        "status": "deleted"
+      },
+      "ClaimResponse.originalRuleset": {
+        "status": "deleted"
+      },
+      "ClaimResponse.organization": {
+        "status": "deleted"
+      },
+      "ClaimResponse.item.adjudication.code": {
+        "status": "deleted"
+      },
+      "ClaimResponse.item.detail.adjudication.code": {
+        "status": "deleted"
+      },
+      "ClaimResponse.item.detail.adjudication.amount": {
+        "status": "deleted"
+      },
+      "ClaimResponse.item.detail.adjudication.value": {
+        "status": "deleted"
+      },
+      "ClaimResponse.item.detail.subDetail.adjudication.code": {
+        "status": "deleted"
+      },
+      "ClaimResponse.item.detail.subDetail.adjudication.amount": {
+        "status": "deleted"
+      },
+      "ClaimResponse.item.detail.subDetail.adjudication.value": {
+        "status": "deleted"
+      },
+      "ClaimResponse.addItem.noteNumberLinkId": {
+        "status": "deleted"
+      },
+      "ClaimResponse.addItem.adjudication.code": {
+        "status": "deleted"
+      },
+      "ClaimResponse.addItem.adjudication.amount": {
+        "status": "deleted"
+      },
+      "ClaimResponse.addItem.adjudication.value": {
+        "status": "deleted"
+      },
+      "ClaimResponse.addItem.detail.adjudication.code": {
+        "status": "deleted"
+      },
+      "ClaimResponse.addItem.detail.adjudication.amount": {
+        "status": "deleted"
+      },
+      "ClaimResponse.addItem.detail.adjudication.value": {
+        "status": "deleted"
+      },
+      "ClaimResponse.paymentAdjustment": {
+        "status": "deleted"
+      },
+      "ClaimResponse.paymentAdjustmentReason": {
+        "status": "deleted"
+      },
+      "ClaimResponse.paymentDate": {
+        "status": "deleted"
+      },
+      "ClaimResponse.paymentAmount": {
+        "status": "deleted"
+      },
+      "ClaimResponse.paymentRef": {
+        "status": "deleted"
+      },
+      "ClaimResponse.note": {
+        "status": "deleted"
+      },
+      "ClaimResponse.coverage": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

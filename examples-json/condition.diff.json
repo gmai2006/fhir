@@ -1,0 +1,88 @@
+﻿{
+  "types": [
+    "Condition"
+  ],
+  "Condition": {
+    "elements": {
+      "Condition.clinicalStatus": {
+        "binding-status": "added",
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/condition-clinical",
+          "strength": "required"
+        }
+      },
+      "Condition.verificationStatus": {
+        "old-min": 1,
+        "new-min": 0,
+        "default": "added",
+        "new-default": "\"unknown\""
+      },
+      "Condition.category": {
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "Condition.code": {
+        "old-min": 1,
+        "new-min": 0
+      },
+      "Condition.subject": {
+        "old-name": "patient",
+        "added-types": [
+          "Reference(Group)"
+        ]
+      },
+      "Condition.context": {
+        "old-name": "encounter",
+        "added-types": [
+          "Reference(EpisodeOfCare)"
+        ]
+      },
+      "Condition.onset[x]": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Age}"
+        ],
+        "added-types": [
+          "Age"
+        ]
+      },
+      "Condition.abatement[x]": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Age}"
+        ],
+        "added-types": [
+          "Age"
+        ]
+      },
+      "Condition.assertedDate": {
+        "old-name": "dateRecorded",
+        "removed-types": [
+          "date"
+        ],
+        "added-types": [
+          "dateTime"
+        ]
+      },
+      "Condition.asserter": {
+        "added-types": [
+          "Reference(RelatedPerson)"
+        ]
+      },
+      "Condition.evidence.code": {
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "Condition.note": {
+        "old-name": "notes",
+        "old-max": "1",
+        "new-max": "*",
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "Annotation"
+        ]
+      }
+    },
+    "status": "changed"
+  }
+}

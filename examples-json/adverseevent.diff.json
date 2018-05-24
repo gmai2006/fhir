@@ -1,0 +1,8 @@
+﻿{
+  "types": [
+    "AdverseEvent"
+  ],
+  "AdverseEvent": {
+    "status": "new"
+  }
+}

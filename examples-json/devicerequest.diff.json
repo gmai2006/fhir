@@ -1,0 +1,127 @@
+﻿{
+  "types": [
+    "DeviceRequest"
+  ],
+  "DeviceRequest": {
+    "elements": {
+      "DeviceRequest.definition": {
+        "status": "new"
+      },
+      "DeviceRequest.basedOn": {
+        "status": "new"
+      },
+      "DeviceRequest.priorRequest": {
+        "status": "new"
+      },
+      "DeviceRequest.groupIdentifier": {
+        "status": "new"
+      },
+      "DeviceRequest.status": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/device-use-request-status",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/request-status",
+          "strength": "required"
+        }
+      },
+      "DeviceRequest.intent": {
+        "status": "new"
+      },
+      "DeviceRequest.priority": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/device-use-request-priority",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/request-priority",
+          "strength": "required"
+        },
+        "default": "added",
+        "new-default": "\"If missing, normal priority\""
+      },
+      "DeviceRequest.code[x]": {
+        "status": "new"
+      },
+      "DeviceRequest.subject": {
+        "added-types": [
+          "Reference(Group)",
+          "Reference(Location)",
+          "Reference(Device)"
+        ]
+      },
+      "DeviceRequest.context": {
+        "old-name": "encounter",
+        "added-types": [
+          "Reference(EpisodeOfCare)"
+        ]
+      },
+      "DeviceRequest.occurrence[x]": {
+        "status": "new"
+      },
+      "DeviceRequest.authoredOn": {
+        "status": "new"
+      },
+      "DeviceRequest.requester": {
+        "status": "new"
+      },
+      "DeviceRequest.requester.agent": {
+        "status": "new"
+      },
+      "DeviceRequest.requester.onBehalfOf": {
+        "status": "new"
+      },
+      "DeviceRequest.performerType": {
+        "status": "new"
+      },
+      "DeviceRequest.performer": {
+        "status": "new"
+      },
+      "DeviceRequest.reasonCode": {
+        "old-name": "indication"
+      },
+      "DeviceRequest.reasonReference": {
+        "status": "new"
+      },
+      "DeviceRequest.supportingInfo": {
+        "status": "new"
+      },
+      "DeviceRequest.note": {
+        "old-name": "notes",
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "Annotation"
+        ]
+      },
+      "DeviceRequest.relevantHistory": {
+        "status": "new"
+      },
+      "DeviceRequest.bodySite[x]": {
+        "status": "deleted"
+      },
+      "DeviceRequest.device": {
+        "status": "deleted"
+      },
+      "DeviceRequest.prnReason": {
+        "status": "deleted"
+      },
+      "DeviceRequest.orderedOn": {
+        "status": "deleted"
+      },
+      "DeviceRequest.recordedOn": {
+        "status": "deleted"
+      },
+      "DeviceRequest.timing[x]": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

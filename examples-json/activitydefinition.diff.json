@@ -1,0 +1,8 @@
+﻿{
+  "types": [
+    "ActivityDefinition"
+  ],
+  "ActivityDefinition": {
+    "status": "new"
+  }
+}

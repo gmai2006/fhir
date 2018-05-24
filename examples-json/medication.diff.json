@@ -1,0 +1,52 @@
+﻿{
+  "types": [
+    "Medication"
+  ],
+  "Medication": {
+    "elements": {
+      "Medication.status": {
+        "status": "new"
+      },
+      "Medication.isOverTheCounter": {
+        "status": "new"
+      },
+      "Medication.form": {
+        "status": "new"
+      },
+      "Medication.ingredient": {
+        "status": "new"
+      },
+      "Medication.ingredient.item[x]": {
+        "status": "new"
+      },
+      "Medication.ingredient.isActive": {
+        "status": "new"
+      },
+      "Medication.ingredient.amount": {
+        "status": "new"
+      },
+      "Medication.package.content.item[x]": {
+        "old-name": "item",
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "Medication.package.batch": {
+        "status": "new"
+      },
+      "Medication.package.batch.lotNumber": {
+        "status": "new"
+      },
+      "Medication.package.batch.expirationDate": {
+        "status": "new"
+      },
+      "Medication.image": {
+        "status": "new"
+      },
+      "Medication.product": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

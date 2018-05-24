@@ -1,0 +1,17 @@
+﻿{
+  "types": [
+    "Flag"
+  ],
+  "Flag": {
+    "elements": {
+      "Flag.subject": {
+        "added-types": [
+          "Reference(PlanDefinition)",
+          "Reference(Medication)",
+          "Reference(Procedure)"
+        ]
+      }
+    },
+    "status": "changed"
+  }
+}

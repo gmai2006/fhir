@@ -1,0 +1,55 @@
+﻿{
+  "types": [
+    "QuestionnaireResponse"
+  ],
+  "QuestionnaireResponse": {
+    "elements": {
+      "QuestionnaireResponse.basedOn": {
+        "status": "new"
+      },
+      "QuestionnaireResponse.parent": {
+        "status": "new"
+      },
+      "QuestionnaireResponse.context": {
+        "old-name": "encounter",
+        "added-types": [
+          "Reference(EpisodeOfCare)"
+        ]
+      },
+      "QuestionnaireResponse.item": {
+        "old-name": "group",
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "QuestionnaireResponse.item.linkId": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "QuestionnaireResponse.item.definition": {
+        "status": "new"
+      },
+      "QuestionnaireResponse.item.answer": {
+        "status": "new"
+      },
+      "QuestionnaireResponse.item.answer.value[x]": {
+        "status": "new"
+      },
+      "QuestionnaireResponse.item.answer.item": {
+        "status": "new"
+      },
+      "QuestionnaireResponse.item.item": {
+        "status": "new"
+      },
+      "QuestionnaireResponse.group.title": {
+        "status": "deleted"
+      },
+      "QuestionnaireResponse.group.group": {
+        "status": "deleted"
+      },
+      "QuestionnaireResponse.group.question": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

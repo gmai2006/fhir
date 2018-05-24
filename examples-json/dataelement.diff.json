@@ -1,0 +1,69 @@
+﻿{
+  "types": [
+    "DataElement"
+  ],
+  "DataElement": {
+    "elements": {
+      "DataElement.status": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/conformance-resource-status",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/publication-status",
+          "strength": "required"
+        }
+      },
+      "DataElement.experimental": {
+        "modifier": "added"
+      },
+      "DataElement.title": {
+        "status": "new"
+      },
+      "DataElement.contact": {
+        "removed-types": [
+          "BackboneElement"
+        ],
+        "added-types": [
+          "ContactDetail"
+        ]
+      },
+      "DataElement.useContext": {
+        "removed-types": [
+          "CodeableConcept"
+        ],
+        "added-types": [
+          "UsageContext"
+        ],
+        "binding-status": "removed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/use-context",
+          "strength": "extensible"
+        }
+      },
+      "DataElement.jurisdiction": {
+        "status": "new"
+      },
+      "DataElement.copyright": {
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "markdown"
+        ]
+      },
+      "DataElement.mapping.comment": {
+        "old-name": "comments"
+      },
+      "DataElement.contact.name": {
+        "status": "deleted"
+      },
+      "DataElement.contact.telecom": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

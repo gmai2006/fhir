@@ -1,0 +1,92 @@
+﻿{
+  "types": [
+    "ClinicalImpression"
+  ],
+  "ClinicalImpression": {
+    "elements": {
+      "ClinicalImpression.identifier": {
+        "status": "new"
+      },
+      "ClinicalImpression.code": {
+        "status": "new"
+      },
+      "ClinicalImpression.subject": {
+        "old-name": "patient",
+        "added-types": [
+          "Reference(Group)"
+        ]
+      },
+      "ClinicalImpression.context": {
+        "status": "new"
+      },
+      "ClinicalImpression.effective[x]": {
+        "status": "new"
+      },
+      "ClinicalImpression.investigation": {
+        "status": "new"
+      },
+      "ClinicalImpression.investigation.code": {
+        "status": "new"
+      },
+      "ClinicalImpression.investigation.item": {
+        "status": "new"
+      },
+      "ClinicalImpression.protocol": {
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "ClinicalImpression.finding.item[x]": {
+        "old-name": "item",
+        "added-types": [
+          "Reference(Condition)",
+          "Reference(Observation)"
+        ]
+      },
+      "ClinicalImpression.finding.basis": {
+        "status": "new"
+      },
+      "ClinicalImpression.prognosisCodeableConcept": {
+        "status": "new"
+      },
+      "ClinicalImpression.prognosisReference": {
+        "status": "new"
+      },
+      "ClinicalImpression.action": {
+        "removed-types": [
+          "Reference(MedicationOrder)",
+          "Reference(DiagnosticOrder)",
+          "Reference(NutritionOrder)",
+          "Reference(SupplyRequest)"
+        ],
+        "added-types": [
+          "Reference(MedicationRequest)"
+        ]
+      },
+      "ClinicalImpression.note": {
+        "status": "new"
+      },
+      "ClinicalImpression.trigger[x]": {
+        "status": "deleted"
+      },
+      "ClinicalImpression.investigations": {
+        "status": "deleted"
+      },
+      "ClinicalImpression.finding.cause": {
+        "status": "deleted"
+      },
+      "ClinicalImpression.resolved": {
+        "status": "deleted"
+      },
+      "ClinicalImpression.ruledOut": {
+        "status": "deleted"
+      },
+      "ClinicalImpression.prognosis": {
+        "status": "deleted"
+      },
+      "ClinicalImpression.plan": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

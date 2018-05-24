@@ -1,0 +1,33 @@
+﻿{
+  "types": [
+    "DeviceUseStatement"
+  ],
+  "DeviceUseStatement": {
+    "elements": {
+      "DeviceUseStatement.status": {
+        "status": "new"
+      },
+      "DeviceUseStatement.subject": {
+        "added-types": [
+          "Reference(Group)"
+        ]
+      },
+      "DeviceUseStatement.source": {
+        "status": "new"
+      },
+      "DeviceUseStatement.bodySite": {
+        "old-name": "bodySite[x]",
+        "removed-types": [
+          "Reference(BodySite)"
+        ]
+      },
+      "DeviceUseStatement.note": {
+        "status": "new"
+      },
+      "DeviceUseStatement.notes": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

@@ -1,0 +1,59 @@
+﻿{
+  "types": [
+    "Patient"
+  ],
+  "Patient": {
+    "elements": {
+      "Patient.maritalStatus": {
+        "binding-strength-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/marital-status",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/marital-status",
+          "strength": "extensible"
+        }
+      },
+      "Patient.contact.relationship": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/patient-contact-relationship",
+          "strength": "extensible"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/v2-0131",
+          "strength": "extensible"
+        }
+      },
+      "Patient.communication.language": {
+        "binding-strength-changed": true,
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://tools.ietf.org/html/bcp47",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/languages",
+          "strength": "extensible"
+        }
+      },
+      "Patient.generalPractitioner": {
+        "old-name": "careProvider"
+      },
+      "Patient.link.other": {
+        "added-types": [
+          "Reference(RelatedPerson)"
+        ],
+        "modifier": "removed"
+      },
+      "Patient.link.type": {
+        "modifier": "removed"
+      }
+    },
+    "status": "changed"
+  }
+}

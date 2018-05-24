@@ -1,0 +1,19 @@
+﻿{
+  "types": [
+    "Substance"
+  ],
+  "Substance": {
+    "elements": {
+      "Substance.status": {
+        "status": "new"
+      },
+      "Substance.ingredient.substance[x]": {
+        "old-name": "substance",
+        "added-types": [
+          "CodeableConcept"
+        ]
+      }
+    },
+    "status": "changed"
+  }
+}

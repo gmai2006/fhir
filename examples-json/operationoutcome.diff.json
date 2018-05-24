@@ -1,0 +1,13 @@
+﻿{
+  "types": [
+    "OperationOutcome"
+  ],
+  "OperationOutcome": {
+    "elements": {
+      "OperationOutcome.issue.expression": {
+        "status": "new"
+      }
+    },
+    "status": "changed"
+  }
+}

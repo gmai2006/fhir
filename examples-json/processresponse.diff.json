@@ -1,0 +1,68 @@
+﻿{
+  "types": [
+    "ProcessResponse"
+  ],
+  "ProcessResponse": {
+    "elements": {
+      "ProcessResponse.status": {
+        "status": "new"
+      },
+      "ProcessResponse.outcome": {
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "ProcessResponse.form": {
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ],
+        "binding-status": "removed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/forms",
+          "strength": "required"
+        }
+      },
+      "ProcessResponse.processNote": {
+        "status": "new"
+      },
+      "ProcessResponse.processNote.type": {
+        "status": "new"
+      },
+      "ProcessResponse.processNote.text": {
+        "status": "new"
+      },
+      "ProcessResponse.error": {
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ],
+        "binding-status": "removed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/adjudication-error",
+          "strength": "required"
+        }
+      },
+      "ProcessResponse.communicationRequest": {
+        "status": "new"
+      },
+      "ProcessResponse.ruleset": {
+        "status": "deleted"
+      },
+      "ProcessResponse.originalRuleset": {
+        "status": "deleted"
+      },
+      "ProcessResponse.notes": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

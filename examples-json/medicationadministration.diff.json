@@ -1,0 +1,106 @@
+﻿{
+  "types": [
+    "MedicationAdministration"
+  ],
+  "MedicationAdministration": {
+    "elements": {
+      "MedicationAdministration.definition": {
+        "status": "new"
+      },
+      "MedicationAdministration.partOf": {
+        "status": "new"
+      },
+      "MedicationAdministration.category": {
+        "status": "new"
+      },
+      "MedicationAdministration.subject": {
+        "old-name": "patient",
+        "added-types": [
+          "Reference(Group)"
+        ]
+      },
+      "MedicationAdministration.context": {
+        "old-name": "encounter",
+        "added-types": [
+          "Reference(EpisodeOfCare)"
+        ]
+      },
+      "MedicationAdministration.supportingInformation": {
+        "status": "new"
+      },
+      "MedicationAdministration.effective[x]": {
+        "status": "new"
+      },
+      "MedicationAdministration.performer": {
+        "old-name": "practitioner",
+        "old-max": "1",
+        "new-max": "*",
+        "removed-types": [
+          "Reference(Practitioner)",
+          "Reference(Patient)",
+          "Reference(RelatedPerson)"
+        ]
+      },
+      "MedicationAdministration.performer.actor": {
+        "status": "new"
+      },
+      "MedicationAdministration.performer.onBehalfOf": {
+        "status": "new"
+      },
+      "MedicationAdministration.notGiven": {
+        "old-name": "wasNotGiven"
+      },
+      "MedicationAdministration.reasonCode": {
+        "status": "new"
+      },
+      "MedicationAdministration.reasonReference": {
+        "status": "new"
+      },
+      "MedicationAdministration.prescription": {
+        "removed-types": [
+          "Reference(MedicationOrder)"
+        ],
+        "added-types": [
+          "Reference(MedicationRequest)"
+        ]
+      },
+      "MedicationAdministration.note": {
+        "old-max": "1",
+        "new-max": "*",
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "Annotation"
+        ]
+      },
+      "MedicationAdministration.dosage.site": {
+        "old-name": "site[x]",
+        "removed-types": [
+          "Reference(BodySite)"
+        ]
+      },
+      "MedicationAdministration.dosage.dose": {
+        "old-name": "quantity"
+      },
+      "MedicationAdministration.dosage.rate[x]": {
+        "removed-types": [
+          "Range"
+        ],
+        "added-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/SimpleQuantity}"
+        ]
+      },
+      "MedicationAdministration.eventHistory": {
+        "status": "new"
+      },
+      "MedicationAdministration.reasonGiven": {
+        "status": "deleted"
+      },
+      "MedicationAdministration.effectiveTime[x]": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

@@ -1,0 +1,71 @@
+﻿{
+  "types": [
+    "ImagingStudy"
+  ],
+  "ImagingStudy": {
+    "elements": {
+      "ImagingStudy.context": {
+        "old-name": "order",
+        "old-max": "*",
+        "new-max": "1",
+        "removed-types": [
+          "Reference(DiagnosticOrder)"
+        ],
+        "added-types": [
+          "Reference(Encounter)",
+          "Reference(EpisodeOfCare)"
+        ]
+      },
+      "ImagingStudy.basedOn": {
+        "status": "new"
+      },
+      "ImagingStudy.interpreter": {
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "ImagingStudy.endpoint": {
+        "status": "new"
+      },
+      "ImagingStudy.numberOfSeries": {
+        "old-min": 1,
+        "new-min": 0
+      },
+      "ImagingStudy.numberOfInstances": {
+        "old-min": 1,
+        "new-min": 0
+      },
+      "ImagingStudy.procedureReference": {
+        "old-name": "procedure"
+      },
+      "ImagingStudy.procedureCode": {
+        "status": "new"
+      },
+      "ImagingStudy.reason": {
+        "status": "new"
+      },
+      "ImagingStudy.series.numberOfInstances": {
+        "old-min": 1,
+        "new-min": 0
+      },
+      "ImagingStudy.series.endpoint": {
+        "status": "new"
+      },
+      "ImagingStudy.series.performer": {
+        "status": "new"
+      },
+      "ImagingStudy.url": {
+        "status": "deleted"
+      },
+      "ImagingStudy.series.url": {
+        "status": "deleted"
+      },
+      "ImagingStudy.series.instance.type": {
+        "status": "deleted"
+      },
+      "ImagingStudy.series.instance.content": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

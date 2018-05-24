@@ -1,0 +1,8 @@
+﻿{
+  "types": [
+    "CompartmentDefinition"
+  ],
+  "CompartmentDefinition": {
+    "status": "new"
+  }
+}

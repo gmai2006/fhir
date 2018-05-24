@@ -1,0 +1,54 @@
+﻿{
+  "types": [
+    "Goal"
+  ],
+  "Goal": {
+    "elements": {
+      "Goal.description": {
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "Goal.target": {
+        "old-name": "target[x]",
+        "removed-types": [
+          "date",
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Duration}"
+        ]
+      },
+      "Goal.target.measure": {
+        "status": "new"
+      },
+      "Goal.target.detail[x]": {
+        "status": "new"
+      },
+      "Goal.target.due[x]": {
+        "status": "new"
+      },
+      "Goal.statusReason": {
+        "removed-types": [
+          "CodeableConcept"
+        ],
+        "added-types": [
+          "string"
+        ]
+      },
+      "Goal.expressedBy": {
+        "old-name": "author"
+      },
+      "Goal.outcomeCode": {
+        "status": "new"
+      },
+      "Goal.outcomeReference": {
+        "status": "new"
+      },
+      "Goal.outcome": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

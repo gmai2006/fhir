@@ -1,0 +1,47 @@
+﻿{
+  "types": [
+    "Observation"
+  ],
+  "Observation": {
+    "elements": {
+      "Observation.basedOn": {
+        "status": "new"
+      },
+      "Observation.category": {
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "Observation.context": {
+        "old-name": "encounter",
+        "added-types": [
+          "Reference(EpisodeOfCare)"
+        ]
+      },
+      "Observation.value[x]": {
+        "added-types": [
+          "boolean"
+        ]
+      },
+      "Observation.comment": {
+        "old-name": "comments"
+      },
+      "Observation.referenceRange.type": {
+        "status": "new"
+      },
+      "Observation.referenceRange.appliesTo": {
+        "old-name": "meaning",
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "Observation.related.target": {
+        "added-types": [
+          "Reference(Sequence)"
+        ]
+      },
+      "Observation.component.interpretation": {
+        "status": "new"
+      }
+    },
+    "status": "changed"
+  }
+}

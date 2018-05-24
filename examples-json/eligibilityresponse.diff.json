@@ -1,0 +1,93 @@
+﻿{
+  "types": [
+    "EligibilityResponse"
+  ],
+  "EligibilityResponse": {
+    "elements": {
+      "EligibilityResponse.status": {
+        "status": "new"
+      },
+      "EligibilityResponse.outcome": {
+        "removed-types": [
+          "code"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "EligibilityResponse.insurer": {
+        "status": "new"
+      },
+      "EligibilityResponse.inforce": {
+        "status": "new"
+      },
+      "EligibilityResponse.insurance": {
+        "status": "new"
+      },
+      "EligibilityResponse.insurance.coverage": {
+        "status": "new"
+      },
+      "EligibilityResponse.insurance.contract": {
+        "status": "new"
+      },
+      "EligibilityResponse.insurance.benefitBalance": {
+        "status": "new"
+      },
+      "EligibilityResponse.insurance.benefitBalance.category": {
+        "status": "new"
+      },
+      "EligibilityResponse.insurance.benefitBalance.subCategory": {
+        "status": "new"
+      },
+      "EligibilityResponse.insurance.benefitBalance.excluded": {
+        "status": "new"
+      },
+      "EligibilityResponse.insurance.benefitBalance.name": {
+        "status": "new"
+      },
+      "EligibilityResponse.insurance.benefitBalance.description": {
+        "status": "new"
+      },
+      "EligibilityResponse.insurance.benefitBalance.network": {
+        "status": "new"
+      },
+      "EligibilityResponse.insurance.benefitBalance.unit": {
+        "status": "new"
+      },
+      "EligibilityResponse.insurance.benefitBalance.term": {
+        "status": "new"
+      },
+      "EligibilityResponse.insurance.benefitBalance.financial": {
+        "status": "new"
+      },
+      "EligibilityResponse.insurance.benefitBalance.financial.type": {
+        "status": "new"
+      },
+      "EligibilityResponse.insurance.benefitBalance.financial.allowed[x]": {
+        "status": "new"
+      },
+      "EligibilityResponse.insurance.benefitBalance.financial.used[x]": {
+        "status": "new"
+      },
+      "EligibilityResponse.form": {
+        "status": "new"
+      },
+      "EligibilityResponse.error": {
+        "status": "new"
+      },
+      "EligibilityResponse.error.code": {
+        "status": "new"
+      },
+      "EligibilityResponse.ruleset": {
+        "status": "deleted"
+      },
+      "EligibilityResponse.originalRuleset": {
+        "status": "deleted"
+      },
+      "EligibilityResponse.organization": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

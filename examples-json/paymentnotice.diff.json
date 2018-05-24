@@ -1,0 +1,32 @@
+﻿{
+  "types": [
+    "PaymentNotice"
+  ],
+  "PaymentNotice": {
+    "elements": {
+      "PaymentNotice.status": {
+        "status": "new"
+      },
+      "PaymentNotice.statusDate": {
+        "status": "new"
+      },
+      "PaymentNotice.paymentStatus": {
+        "old-min": 1,
+        "new-min": 0,
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "PaymentNotice.ruleset": {
+        "status": "deleted"
+      },
+      "PaymentNotice.originalRuleset": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

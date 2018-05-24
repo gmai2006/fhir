@@ -1,0 +1,18 @@
+﻿{
+  "types": [
+    "Subscription"
+  ],
+  "Subscription": {
+    "elements": {
+      "Subscription.channel.payload": {
+        "old-min": 1,
+        "new-min": 0
+      },
+      "Subscription.channel.header": {
+        "old-max": "1",
+        "new-max": "*"
+      }
+    },
+    "status": "changed"
+  }
+}

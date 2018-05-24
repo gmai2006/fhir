@@ -1,0 +1,8 @@
+﻿{
+  "types": [
+    "StructureMap"
+  ],
+  "StructureMap": {
+    "status": "new"
+  }
+}

@@ -1,0 +1,27 @@
+﻿{
+  "types": [
+    "Slot"
+  ],
+  "Slot": {
+    "elements": {
+      "Slot.serviceCategory": {
+        "status": "new"
+      },
+      "Slot.serviceType": {
+        "old-name": "type",
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "Slot.specialty": {
+        "status": "new"
+      },
+      "Slot.appointmentType": {
+        "status": "new"
+      },
+      "Slot.status": {
+        "old-name": "freeBusyType"
+      }
+    },
+    "status": "changed"
+  }
+}

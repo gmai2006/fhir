@@ -1,0 +1,484 @@
+﻿{
+  "types": [
+    "Claim"
+  ],
+  "Claim": {
+    "elements": {
+      "Claim.status": {
+        "status": "new"
+      },
+      "Claim.type": {
+        "old-min": 1,
+        "new-min": 0,
+        "removed-types": [
+          "code"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ],
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/claim-type-link",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/claim-type",
+          "strength": "required"
+        }
+      },
+      "Claim.subType": {
+        "status": "new"
+      },
+      "Claim.use": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/claim-use-link",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/claim-use",
+          "strength": "required"
+        }
+      },
+      "Claim.patient": {
+        "old-min": 1,
+        "new-min": 0
+      },
+      "Claim.billablePeriod": {
+        "status": "new"
+      },
+      "Claim.insurer": {
+        "status": "new"
+      },
+      "Claim.priority": {
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "Claim.fundsReserve": {
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "Claim.related": {
+        "status": "new"
+      },
+      "Claim.related.claim": {
+        "status": "new"
+      },
+      "Claim.related.relationship": {
+        "status": "new"
+      },
+      "Claim.related.reference": {
+        "status": "new"
+      },
+      "Claim.prescription": {
+        "removed-types": [
+          "Reference(MedicationOrder)"
+        ],
+        "added-types": [
+          "Reference(MedicationRequest)"
+        ]
+      },
+      "Claim.originalPrescription": {
+        "removed-types": [
+          "Reference(MedicationOrder)"
+        ],
+        "added-types": [
+          "Reference(MedicationRequest)"
+        ]
+      },
+      "Claim.payee.type": {
+        "old-min": 0,
+        "new-min": 1,
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "Claim.payee.resourceType": {
+        "status": "new"
+      },
+      "Claim.payee.party": {
+        "status": "new"
+      },
+      "Claim.careTeam": {
+        "status": "new"
+      },
+      "Claim.careTeam.sequence": {
+        "status": "new"
+      },
+      "Claim.careTeam.provider": {
+        "status": "new"
+      },
+      "Claim.careTeam.responsible": {
+        "status": "new"
+      },
+      "Claim.careTeam.role": {
+        "status": "new"
+      },
+      "Claim.careTeam.qualification": {
+        "status": "new"
+      },
+      "Claim.information": {
+        "status": "new"
+      },
+      "Claim.information.sequence": {
+        "status": "new"
+      },
+      "Claim.information.category": {
+        "status": "new"
+      },
+      "Claim.information.code": {
+        "status": "new"
+      },
+      "Claim.information.timing[x]": {
+        "status": "new"
+      },
+      "Claim.information.value[x]": {
+        "status": "new"
+      },
+      "Claim.information.reason": {
+        "status": "new"
+      },
+      "Claim.diagnosis.diagnosis[x]": {
+        "old-name": "diagnosis",
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept",
+          "Reference(Condition)"
+        ]
+      },
+      "Claim.diagnosis.type": {
+        "status": "new"
+      },
+      "Claim.diagnosis.packageCode": {
+        "status": "new"
+      },
+      "Claim.procedure": {
+        "status": "new"
+      },
+      "Claim.procedure.sequence": {
+        "status": "new"
+      },
+      "Claim.procedure.date": {
+        "status": "new"
+      },
+      "Claim.procedure.procedure[x]": {
+        "status": "new"
+      },
+      "Claim.insurance": {
+        "status": "new"
+      },
+      "Claim.insurance.sequence": {
+        "status": "new"
+      },
+      "Claim.insurance.focal": {
+        "status": "new"
+      },
+      "Claim.insurance.coverage": {
+        "status": "new"
+      },
+      "Claim.insurance.businessArrangement": {
+        "status": "new"
+      },
+      "Claim.insurance.preAuthRef": {
+        "status": "new"
+      },
+      "Claim.insurance.claimResponse": {
+        "status": "new"
+      },
+      "Claim.accident": {
+        "removed-types": [
+          "date"
+        ],
+        "added-types": [
+          "BackboneElement"
+        ]
+      },
+      "Claim.accident.date": {
+        "status": "new"
+      },
+      "Claim.accident.type": {
+        "status": "new"
+      },
+      "Claim.accident.location[x]": {
+        "status": "new"
+      },
+      "Claim.employmentImpacted": {
+        "status": "new"
+      },
+      "Claim.hospitalization": {
+        "status": "new"
+      },
+      "Claim.item.careTeamLinkId": {
+        "status": "new"
+      },
+      "Claim.item.procedureLinkId": {
+        "status": "new"
+      },
+      "Claim.item.informationLinkId": {
+        "status": "new"
+      },
+      "Claim.item.revenue": {
+        "status": "new"
+      },
+      "Claim.item.category": {
+        "status": "new"
+      },
+      "Claim.item.service": {
+        "old-min": 1,
+        "new-min": 0,
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "Claim.item.modifier": {
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "Claim.item.programCode": {
+        "status": "new"
+      },
+      "Claim.item.serviced[x]": {
+        "status": "new"
+      },
+      "Claim.item.location[x]": {
+        "status": "new"
+      },
+      "Claim.item.unitPrice": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Money}"
+        ],
+        "added-types": [
+          "Money"
+        ]
+      },
+      "Claim.item.net": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Money}"
+        ],
+        "added-types": [
+          "Money"
+        ]
+      },
+      "Claim.item.udi": {
+        "old-max": "1",
+        "new-max": "*",
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "Reference(Device)"
+        ]
+      },
+      "Claim.item.bodySite": {
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "Claim.item.subSite": {
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "Claim.item.encounter": {
+        "status": "new"
+      },
+      "Claim.item.detail.revenue": {
+        "status": "new"
+      },
+      "Claim.item.detail.category": {
+        "status": "new"
+      },
+      "Claim.item.detail.service": {
+        "old-min": 1,
+        "new-min": 0,
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "Claim.item.detail.modifier": {
+        "status": "new"
+      },
+      "Claim.item.detail.programCode": {
+        "status": "new"
+      },
+      "Claim.item.detail.unitPrice": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Money}"
+        ],
+        "added-types": [
+          "Money"
+        ]
+      },
+      "Claim.item.detail.net": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Money}"
+        ],
+        "added-types": [
+          "Money"
+        ]
+      },
+      "Claim.item.detail.udi": {
+        "old-max": "1",
+        "new-max": "*",
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "Reference(Device)"
+        ]
+      },
+      "Claim.item.detail.subDetail.revenue": {
+        "status": "new"
+      },
+      "Claim.item.detail.subDetail.category": {
+        "status": "new"
+      },
+      "Claim.item.detail.subDetail.service": {
+        "old-min": 1,
+        "new-min": 0,
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "Claim.item.detail.subDetail.modifier": {
+        "status": "new"
+      },
+      "Claim.item.detail.subDetail.programCode": {
+        "status": "new"
+      },
+      "Claim.item.detail.subDetail.unitPrice": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Money}"
+        ],
+        "added-types": [
+          "Money"
+        ]
+      },
+      "Claim.item.detail.subDetail.net": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Money}"
+        ],
+        "added-types": [
+          "Money"
+        ]
+      },
+      "Claim.item.detail.subDetail.udi": {
+        "old-max": "1",
+        "new-max": "*",
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "Reference(Device)"
+        ]
+      },
+      "Claim.total": {
+        "status": "new"
+      },
+      "Claim.ruleset": {
+        "status": "deleted"
+      },
+      "Claim.originalRuleset": {
+        "status": "deleted"
+      },
+      "Claim.target": {
+        "status": "deleted"
+      },
+      "Claim.payee.provider": {
+        "status": "deleted"
+      },
+      "Claim.payee.organization": {
+        "status": "deleted"
+      },
+      "Claim.payee.person": {
+        "status": "deleted"
+      },
+      "Claim.condition": {
+        "status": "deleted"
+      },
+      "Claim.coverage": {
+        "status": "deleted"
+      },
+      "Claim.exception": {
+        "status": "deleted"
+      },
+      "Claim.school": {
+        "status": "deleted"
+      },
+      "Claim.accidentType": {
+        "status": "deleted"
+      },
+      "Claim.interventionException": {
+        "status": "deleted"
+      },
+      "Claim.item.type": {
+        "status": "deleted"
+      },
+      "Claim.item.provider": {
+        "status": "deleted"
+      },
+      "Claim.item.serviceDate": {
+        "status": "deleted"
+      },
+      "Claim.item.points": {
+        "status": "deleted"
+      },
+      "Claim.item.detail.type": {
+        "status": "deleted"
+      },
+      "Claim.item.detail.points": {
+        "status": "deleted"
+      },
+      "Claim.item.detail.subDetail.type": {
+        "status": "deleted"
+      },
+      "Claim.item.detail.subDetail.points": {
+        "status": "deleted"
+      },
+      "Claim.item.prosthesis": {
+        "status": "deleted"
+      },
+      "Claim.additionalMaterials": {
+        "status": "deleted"
+      },
+      "Claim.missingTeeth": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

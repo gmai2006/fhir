@@ -1,0 +1,96 @@
+﻿{
+  "types": [
+    "MedicationStatement"
+  ],
+  "MedicationStatement": {
+    "elements": {
+      "MedicationStatement.basedOn": {
+        "status": "new"
+      },
+      "MedicationStatement.partOf": {
+        "status": "new"
+      },
+      "MedicationStatement.context": {
+        "status": "new"
+      },
+      "MedicationStatement.category": {
+        "status": "new"
+      },
+      "MedicationStatement.informationSource": {
+        "added-types": [
+          "Reference(Organization)"
+        ]
+      },
+      "MedicationStatement.subject": {
+        "old-name": "patient",
+        "added-types": [
+          "Reference(Group)"
+        ]
+      },
+      "MedicationStatement.derivedFrom": {
+        "old-name": "supportingInformation"
+      },
+      "MedicationStatement.taken": {
+        "status": "new"
+      },
+      "MedicationStatement.reasonCode": {
+        "status": "new"
+      },
+      "MedicationStatement.reasonReference": {
+        "status": "new"
+      },
+      "MedicationStatement.note": {
+        "old-max": "1",
+        "new-max": "*",
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "Annotation"
+        ]
+      },
+      "MedicationStatement.dosage": {
+        "removed-types": [
+          "BackboneElement"
+        ],
+        "added-types": [
+          "Dosage"
+        ]
+      },
+      "MedicationStatement.wasNotTaken": {
+        "status": "deleted"
+      },
+      "MedicationStatement.reasonForUse[x]": {
+        "status": "deleted"
+      },
+      "MedicationStatement.dosage.text": {
+        "status": "deleted"
+      },
+      "MedicationStatement.dosage.timing": {
+        "status": "deleted"
+      },
+      "MedicationStatement.dosage.asNeeded[x]": {
+        "status": "deleted"
+      },
+      "MedicationStatement.dosage.site[x]": {
+        "status": "deleted"
+      },
+      "MedicationStatement.dosage.route": {
+        "status": "deleted"
+      },
+      "MedicationStatement.dosage.method": {
+        "status": "deleted"
+      },
+      "MedicationStatement.dosage.quantity[x]": {
+        "status": "deleted"
+      },
+      "MedicationStatement.dosage.rate[x]": {
+        "status": "deleted"
+      },
+      "MedicationStatement.dosage.maxDosePerPeriod": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

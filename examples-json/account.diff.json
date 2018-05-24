@@ -1,0 +1,58 @@
+﻿{
+  "types": [
+    "Account"
+  ],
+  "Account": {
+    "elements": {
+      "Account.status": {
+        "binding-status": "added",
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/account-status",
+          "strength": "required"
+        }
+      },
+      "Account.period": {
+        "status": "new"
+      },
+      "Account.active": {
+        "old-name": "activePeriod"
+      },
+      "Account.balance": {
+        "removed-types": [
+          "Quantity{http://hl7.org/fhir/StructureDefinition/Money}"
+        ],
+        "added-types": [
+          "Money"
+        ]
+      },
+      "Account.coverage": {
+        "status": "new"
+      },
+      "Account.coverage.coverage": {
+        "status": "new"
+      },
+      "Account.coverage.priority": {
+        "status": "new"
+      },
+      "Account.guarantor": {
+        "status": "new"
+      },
+      "Account.guarantor.party": {
+        "status": "new"
+      },
+      "Account.guarantor.onHold": {
+        "status": "new"
+      },
+      "Account.guarantor.period": {
+        "status": "new"
+      },
+      "Account.currency": {
+        "status": "deleted"
+      },
+      "Account.coveragePeriod": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}
