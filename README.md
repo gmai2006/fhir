@@ -1,5 +1,54 @@
 # [FHIR](www.FHIR.org) - BETA version
-Update:
+
+
+## Instruction
+All instructions should be run in a terminal
+
+- Clone the project
+```git clone https://github.com/gmai2006/fhir.git```
+
+- Run the gradle build to download all dependencies and setup your eclipse .classpath
+```gradle dependencies eclipse```
+
+- Create a FHIR database
+  Go to src/main/databases directory and start your mysql client.
+  
+  Then run the database creation script
+```source ./database-creation.sql```
+
+- load FHIR test data into the newly created database.
+
+  Exit the mysql client.  
+  
+  Open a terminal and cd to src/main/database then run the following command
+```mysql -u <sqluserid> -p --database fhir  < ./fhir-2018-02-19.sql```
+
+- Test the RESTful services
+
+  Prerequisites
+  
+  If you do not have apache tomcat 9.0.8 installed in your computer.  You can download from here
+  
+  [tomcat 9.0.8] (http://www-us.apache.org/dist/tomcat/tomcat-9/v9.0.8/bin/apache-tomcat-9.0.8.tar.gz)
+
+  IN the terminal, cd back to the project directory
+  
+  run the following gradle command
+  
+  ``` gradle war```
+  
+  cd to build/libs directory and copy the FHIR.war to your tomcat9/webapps
+  
+  Start your tomcat 
+  
+  cd to <your tomcat dir>/bin and run ./startup.sh
+  
+  [Enter this URL into your browser address] (http://localhost:8080/FHIR/rest/Account?status=active)
+  
+  You should see data returned in JSON format
+
+
+##Update:
 - Added REST layer validator
 
 
@@ -35,21 +84,4 @@ Visualforce Component                1              0              0            
 SUM:                              3543          51266          99722         662210
 -----------------------------------------------------------------------------------
 </pre>
-
-## Instruction
-All instructions should be run in a terminal
-
-- Clone the project
-```git clone https://github.com/gmai2006/fhir.git```
-
-- Run the gradle build to download all dependencies and setup your eclipse .classpath
-```gradle dependencies eclipse```
-
-- Create a FHIR database
-  Go to src/main/databases directory and start your mysql client.  Then run the database creation script
-```source ./database-creation.sql```
-
-- load FHIR test data into the newly created database
-  Exit the mysql client.  Then run following command
-```mysql -u <sqluserid> -p --database fhir  < ./fhir-2018-02-19.sql```
 
