@@ -21,7 +21,7 @@ All instructions should be run in a terminal
   Exit the mysql client.  
   
   Open a terminal and cd to src/main/database then run the following command
-```mysql -u <sqluserid> -p --database fhir  < ./fhir-2018-02-19.sql```
+```mysql -u <sqluserid> -p --database fhir  < ./fhir-<timestamp>.sql```
 
 ### Test the RESTful services
 
