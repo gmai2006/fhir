@@ -48,7 +48,7 @@ All instructions should be run in a terminal
   You should see data returned in JSON format
 
 
-##Update:
+## Update:
 - Added REST layer validator
 
 
