@@ -37,7 +37,7 @@ All instructions should be run in a terminal
   
   ``` gradle war```
   
-  cd to build/libs directory and copy the FHIR.war to your tomcat9/webapps
+  cd to build/libs directory and copy the FHIR.war to <your tomcat 9.0.8 dir>/webapps
   
   Start your tomcat 
   
