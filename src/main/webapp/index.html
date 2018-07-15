@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Datascience9 LLC</title>    
+        <!-- Plugins CSS -->
+        <link href="css/plugins/plugins.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <script type="text/javascript">
+            var baseURL = "https://open-ic.epic.com/FHIR/api/FHIR/DSTU2";
+        </script>
+        
+        <script type="text/javascript">
+            tabModel = {
+                baseName: "patient",
+                whichURL: "$ curl \"" + baseURL + "/Patient/" + "Tbt3KuCY0B5PSrJvCu2j-PlK.aiHsu2xUjUM8bWpetXoB" + "\"",
+                boxSample: '{"resourceType":"Patient","birthDate":"1985-08-01T00:00:00Z","active":true,"gender":"male","deceased":{"deceasedBoolean":false},"careProvider":[{"display":"Physician Family Medicine","reference":"https://open-ic.epic.com/FHIR/api/FHIR/DSTU2/Practitioner/T3Mz3KLBDVXXgaRoee3EKAAB"}],"name":[{"use":"usual","family":["Argonaut"],"given":["Jason"]}],"identifier":[{"use":"usual","system":"urn:oid:1.2.840.114350.1.13.327.1.7.5.737384.0","value":"E3826"},{"use":"usual","system":"urn:oid:1.2.3.4","value":"203579"}],"address":[{"use":"home","line":["1979 Milky Way Dr."],"city":"Verona","state":"WI","postalCode":"53593","country":"US"}],"telecom":[{"system":"phone","value":"608-271-9000","use":"home"},{"system":"phone","value":"608-771-9000","use":"work"},{"system":"email","value":"open@epic.com"}],"maritalStatus":{"text":"Married","coding":[{"system":"urn:oid:2.16.840.1.113883.6.99","display":"Married"}]},"communication":[{"preferred":true,"language":{"text":"English","coding":[{"system":"urn:oid:2.16.840.1.113883.6.99","code":"en","display":"English"}]}}]}',
+                interactions: [ 
+                   {
+                       path: "/Patient",
+                       queryParams: {
+                           _id: {
+                               type: "token",
+                               token: "^.+|.+$"
+                           },
+                           identifier: {
+                               type: "token",
+                               token: "^.+|.+$"
+                           },
+                           family: {
+                               type: "string"
+                           },
+                           given: {
+                               type: "string"
+                           },
+                           birthdate: {
+                               type: "date"
+                           },
+                           gender: {
+                               type: "code",
+                               code: ["M","F","UN"]
+                           },
+                           address: {
+                               type: "string"
+                           },
+                           telecom: {
+                               type: "string"
+                           }
+                       }
+                   }
+                   ,
+                   {
+                       path: "/Practitioner",
+                       queryparams: {
+                           _id: {
+                               type: "token",
+                               token: "^.+|.+$"
+                           }
+                       }
+                   } 
+                   
+                ]
+            };
+                
+            function isValid(userEnteredUrl) {
+                return validateFhirAndQueryString(userEnteredUrl);            
+            };
+            $(document).ready(function () {
+                init();
+            });
+        </script>
+    
+    </head>
+
+    <body>
+        <div id="preloader">
+            <div id="preloader-inner"></div>
+        </div><!--/preloader-->
+
+        <!-- Pushy Menu -->
+        <aside class="pushy pushy-right">
+            <div class="cart-content">
+                <div class="clearfix">
+                    <a href="javascript:void(0)" class="pushy-link text-white-gray">Close</a>
+                </div>
+                <ul class="list-unstyled">
+                    <li class="clearfix">
+                        <a href="#" class="float-left">
+                            <img src="images/shop/p1.jpg" class="img-fluid" alt="" width="60">
+                        </a>
+                        <div class="oHidden">
+                            <span class="close"><i class="ti-close"></i></span>
+                            <h4><a href="#">Men's Special Watch</a></h4>
+                            <p class="text-white-gray"><strong>$299.00</strong> x 1</p>
+                        </div>
+                    </li><!--/cart item-->
+                    <li class="clearfix">
+                        <a href="#" class="float-left">
+                            <img src="images/shop/p2.jpg" class="img-fluid" alt="" width="60">
+                        </a>
+                        <div class="oHidden">
+                            <span class="close"><i class="ti-close"></i></span>
+                            <h4><a href="#">Men's tour beg</a></h4>
+                            <p class="text-white-gray"><strong>$99.00</strong> x 1</p>
+                        </div>
+                    </li><!--/cart item-->
+                    <li class="clearfix">
+                        <a href="#" class="float-left">
+                            <img src="images/shop/p3.jpg" class="img-fluid" alt="" width="60">
+                        </a>
+                        <div class="oHidden">
+                            <span class="close"><i class="ti-close"></i></span>
+                            <h4><a href="#">Women's T-shirts</a></h4>
+                            <p class="text-white-gray"><strong>$199.00</strong> x 1</p>
+                        </div>
+                    </li><!--/cart item-->
+                    <li class="clearfix">
+
+                        <div class="float-right">
+                            <a href="#" class="btn btn-primary">Checkout</a>
+                        </div>
+                        <h4  class="text-white">
+                            <small>Subtotal - </small> $49.99
+                        </h4>
+                    </li><!--/cart item-->
+                </ul>
+            </div>
+        </aside>
+        <!-- Site Overlay -->
+        <div class="site-overlay"></div>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-faded">
+            
+            <div class="container">
+
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><img src="" alt="Datascience9"></a>
+                <div  id="navbarNavDropdown" class="navbar-collapse collapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Home</a>
+                           
+                        </li>
+                        <li class="nav-item dropdown dropdown-full-width">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+                                Pages 
+                            </a>
+                    
+                        </li>
+                        <li class="nav-item dropdown dropdown-full-width">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+                                Portfolio  
+                            </a>
+                            
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Blog</a>
+                           
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Features</a>
+                          
+                        </li>
+                       
+                    </ul>        
+                </div>
+               
+             
+            </div>
+        </nav>
+
+        
+
+        <div class="container mb70">
+            <div class="row mb30">
+                <div class="col-lg-12 mb40">
+                    <div class="fancy-title mb30">
+                        <h4>Play with <strong>FHIR &reg;</strong>
+                        </h4>
+                        <small>A lightweight REST-based access layer for standard HL7-defined data models. Read the spec</small>
+                        <div class="fancy-title-sep gray-sep"></div>
+                    </div><!--title-->
+                    <div>
+                        <p>Get FHIR'd up! Epic's Sandbox now supports DSTU2 resources. All resources below are supported in Epic's 2015 release and forward.
+
+                            New to FHIR? Check out our tutorial to get started!</p>
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs tabs-default mb30" role="tablist">
+                            <li class="nav-item" role="presentation"><a class="active nav-link" href="#home" aria-controls="home" role="tab" data-toggle="tab">Account</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Patient</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active show fade" id="home">
+                                <div style="display: block;">
+                                    <input id="curlIt" class="fhir-code" style="display: inline-block; width:806px; height:34px; margin-bottom:5px; border:1px solid black; overflow-x:hidden;" value="$ curl" />
+                                
+                                    <button type="button" class="btn btn-primary btn-small btn-try pull-right" id="tryIt" style="width:180px;" onclick="putMeInScript(); return false;">Try It Out!</button>
+                                </div>
+                                <div id="exampleOutput" style="min-height: 200px; max-height: 200px; height: auto; overflow: scroll;">
+                                    <pre><code class="fhir-code"> Click the button. Go on.</code></pre>
+                                </div>
+                                    <a class="expandbutton" href="#exampleOutput">
+                                        <img src="/Scripts/fancybox/fancybox_expand.png" alt="See more" />
+                                    </a>
+                                
+                                
+                                <script>
+                                    function putMeInScript() {
+                                        var url = getWhichUrl(false);
+                                        if (url == "") {
+                                            $("#exampleOutput").empty();
+                                            $("#exampleOutput").append('<pre><code class="fhir-code"> That won\'t work. \n Read the documentation below to find appropriate endpoints<br /> and syntax for ' + baseURL + '</pre></code>');
+                                            return 0;
+                                        }
+                                        $('#tryIt').empty();
+                                        $('#tryIt').append("...Wait for it");
+                                        if (/binary/i.test(url)) {
+                                            $.ajax(url, {
+                                                accepts: "text/xml",
+                                                success: function (data) {
+                                                    $("#exampleOutput").empty();
+                                                    
+                                                    var xml = formatXml(data).replace(/&/g, "&amp;")
+                                                                             .replace(/</g, '&lt;')
+                                                                             .replace(/>/g, '&gt;')
+                                                                             .replace(/"/g, '&quot;')
+                                                                             .replace(/'/g, '&apos;');
+                                
+                                                    $("#exampleOutput").append('<pre><code class="fhir-code">' + xml + '</pre></code>');
+                                                    highlightCode();
+                                                    $('#tryIt').empty();
+                                                    $('#tryIt').append("Try It Out!");
+                                                    return 0;
+                                                }
+                                            }).error(function (response) {
+                                                onError(response);
+                                                $('#tryIt').empty();
+                                                $('#tryIt').append("Try It Out!");
+                                                return 0;
+                                            });
+                                        }
+                                        else {
+                                
+                                            $.getJSON(url, function (data) {
+                                                $("#exampleOutput").empty();
+                                                $("#exampleOutput").append('<pre><code class="fhir-code">' + JSON.stringify(data, null, "  ") + '</pre></code>');
+                                                highlightCode();
+                                                $('#tryIt').empty();
+                                                $('#tryIt').append("Try It Out!");
+                                                return 0;
+                                            })
+                                            .error(function (response) {
+                                                onError(response);
+                                                $('#tryIt').empty();
+                                                $('#tryIt').append("Try It Out!");
+                                                return 0;
+                                            });
+                                
+                                        }
+                                    
+                                        return 0; 
+                                    };
+                                    
+                                </script>      
+                                
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="profile">
+                                <div style="display: block;">
+                                    <input id="curlIt" class="fhir-code" style="display: inline-block; width:806px; height:34px; margin-bottom:5px; border:1px solid black; overflow-x:hidden;" value="$ curl" />
+                                
+                                    <button type="button" class="btn btn-primary btn-small btn-try pull-right" id="tryIt" style="width:180px;" onclick="putMeInScript(); return false;">Try It Out!</button>
+                                </div>
+                                <div id="exampleOutput" style="min-height: 200px; max-height: 200px; height: auto; overflow: scroll;">
+                                    <pre><code class="fhir-code"> Click the button. Go on.</code></pre>
+                                </div>
+                                    <a class="expandbutton" href="#exampleOutput">
+                                        <img src="/Scripts/fancybox/fancybox_expand.png" alt="See more" />
+                                    </a>
+                                
+                                
+                                <script>
+                                    function putMeInScript() {
+                                        var url = getWhichUrl(false);
+                                        if (url == "") {
+                                            $("#exampleOutput").empty();
+                                            $("#exampleOutput").append('<pre><code class="fhir-code"> That won\'t work. \n Read the documentation below to find appropriate endpoints<br /> and syntax for ' + baseURL + '</pre></code>');
+                                            return 0;
+                                        }
+                                        $('#tryIt').empty();
+                                        $('#tryIt').append("...Wait for it");
+                                        if (/binary/i.test(url)) {
+                                            $.ajax(url, {
+                                                accepts: "text/xml",
+                                                success: function (data) {
+                                                    $("#exampleOutput").empty();
+                                                    
+                                                    var xml = formatXml(data).replace(/&/g, "&amp;")
+                                                                             .replace(/</g, '&lt;')
+                                                                             .replace(/>/g, '&gt;')
+                                                                             .replace(/"/g, '&quot;')
+                                                                             .replace(/'/g, '&apos;');
+                                
+                                                    $("#exampleOutput").append('<pre><code class="fhir-code">' + xml + '</pre></code>');
+                                                    highlightCode();
+                                                    $('#tryIt').empty();
+                                                    $('#tryIt').append("Try It Out!");
+                                                    return 0;
+                                                }
+                                            }).error(function (response) {
+                                                onError(response);
+                                                $('#tryIt').empty();
+                                                $('#tryIt').append("Try It Out!");
+                                                return 0;
+                                            });
+                                        }
+                                        else {
+                                
+                                            $.getJSON(url, function (data) {
+                                                $("#exampleOutput").empty();
+                                                $("#exampleOutput").append('<pre><code class="fhir-code">' + JSON.stringify(data, null, "  ") + '</pre></code>');
+                                                highlightCode();
+                                                $('#tryIt').empty();
+                                                $('#tryIt').append("Try It Out!");
+                                                return 0;
+                                            })
+                                            .error(function (response) {
+                                                onError(response);
+                                                $('#tryIt').empty();
+                                                $('#tryIt').append("Try It Out!");
+                                                return 0;
+                                            });
+                                
+                                        }
+                                    
+                                        return 0; 
+                                    };
+                                    
+                                </script>      
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>  
+        <footer class="footer footer-dark pt50 pb30">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6  ml-auto mr-auto text-center">
+                        <ul class="social-icons list-inline">
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fa fa-facebook"></i>Facebook
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fa fa-twitter"></i>twitter
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fa fa-instagram"></i>instagram
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fa fa-behance"></i>Behance
+                                </a>
+                            </li>
+                        </ul>
+                        <h4><i class="fa fa-phone"></i> 425 770-6899</h4>
+                        <h4><i class="fa fa-envelope"></i> paul.mai@datascience9.com</h4>
+                        <p>&copy; Copyright 2017.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!--back to top-->
+        <a href="#" class="back-to-top hidden-xs-down" id="back-to-top"><i class="ti-angle-up"></i></a>
+        <!-- jQuery first, then Tether, then Bootstrap JS. -->
+        <script src="js/plugins/plugins.js"></script> 
+        <script src="js/assan.custom.js"></script> 
+        
+    </body>
+</html>
