@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, etc."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="organization")
 public class OrganizationModel  implements Serializable {
-	private static final long serialVersionUID = 151967883208386074L;
+	private static final long serialVersionUID = 153159210209940756L;
   /**
   * Description: "This is a Organization resource"
   */
@@ -421,20 +422,13 @@ public class OrganizationModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("active" + "->" + this.active + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("alias" + "->" + this.alias + "\n"); 
      builder.append("telecom" + "->" + this.telecom + "\n"); 
-     builder.append("address" + "->" + this.address + "\n"); 
-     builder.append("partOf" + "->" + this.partOf + "\n"); 
-     builder.append("contact" + "->" + this.contact + "\n"); 
-     builder.append("endpoint" + "->" + this.endpoint + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

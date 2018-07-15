@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "An order or request for both supply of the medication and the instructions for administration of the medication to a patient. The resource is called \"MedicationRequest\" rather than \"MedicationPrescription\" or \"MedicationOrder\" to generalize the use across inpatient and outpatient settings, including care plans, etc., and to harmonize with workflow patterns."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="medicationrequestsubstitution")
 public class MedicationRequestSubstitutionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883209373502L;
+	private static final long serialVersionUID = 153159210210946015L;
   /**
   * Description: "True if the prescriber allows a different drug to be dispensed from what was prescribed."
   */
@@ -169,7 +170,6 @@ public class MedicationRequestSubstitutionModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[MedicationRequestSubstitutionModel]:" + "\n");
      builder.append("allowed" + "->" + this.allowed + "\n"); 
-     builder.append("reason" + "->" + this.reason + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

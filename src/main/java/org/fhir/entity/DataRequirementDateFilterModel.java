@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Describes a required data item for evaluation in terms of the type of data, and optional code or date-based filters of the data."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="datarequirementdatefilter")
 public class DataRequirementDateFilterModel  implements Serializable {
-	private static final long serialVersionUID = 151967883186678204L;
+	private static final long serialVersionUID = 153159210190048839L;
   /**
   * Description: "The date-valued attribute of the filter. The specified path must be resolvable from the type of the required data. The path is allowed to contain qualifiers (.) to traverse sub-elements, as well as indexers ([x]) to traverse multiple-cardinality sub-elements. Note that the index must be an integer constant. The path must resolve to an element of type dateTime, Period, Schedule, or Timing."
   */

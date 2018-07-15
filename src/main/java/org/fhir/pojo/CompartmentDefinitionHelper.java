@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.CompartmentDefinitionModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class CompartmentDefinitionHelper {
 	public static java.util.List<CompartmentDefinition> fromArray2Array(java.util.List<CompartmentDefinitionModel> list) {
     return

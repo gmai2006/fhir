@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Describes the event of a patient consuming or otherwise being administered a medication.  This may be as simple as swallowing a tablet or it may be a long running infusion.  Related resources tie this event to the authorizing prescription, and the specific encounter between patient and health care practitioner."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="medicationadministrationperformer")
 public class MedicationAdministrationPerformerModel  implements Serializable {
-	private static final long serialVersionUID = 151967883157199254L;
+	private static final long serialVersionUID = 153159210159729631L;
   /**
   * Description: "The device, practitioner, etc. who performed the action."
   */
@@ -174,8 +175,6 @@ public class MedicationAdministrationPerformerModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[MedicationAdministrationPerformerModel]:" + "\n");
-     builder.append("actor" + "->" + this.actor + "\n"); 
-     builder.append("onBehalfOf" + "->" + this.onBehalfOf + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

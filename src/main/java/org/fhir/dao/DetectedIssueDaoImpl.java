@@ -28,6 +28,7 @@ package org.fhir.dao;
 
 import static java.util.Objects.requireNonNull;
 import java.util.List;
+import java.util.logging.Logger;
 import org.fhir.entity.*;
 import javax.inject.Inject;
 import com.google.inject.persist.Transactional;
@@ -39,9 +40,13 @@ import org.fhir.entity.DetectedIssueModel;
 import org.fhir.pojo.DetectedIssue;
 import org.fhir.pojo.DetectedIssueHelper;
 import org.fhir.utils.QueryBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/12/2018
+ */
 public class DetectedIssueDaoImpl implements DetectedIssueDao {
-    private final Provider<EntityManager> entityManagerProvider;
+	private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private final Provider<EntityManager> entityManagerProvider;
 
   @Inject
   public DetectedIssueDaoImpl (final Provider<EntityManager> entityManagerProvider) {
@@ -143,6 +148,7 @@ public class DetectedIssueDaoImpl implements DetectedIssueDao {
   public List<DetectedIssue> findByField(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from DetectedIssueModel a " + queryBuilder.getWhereClause();
+  	logger.info(queryStr);
     return findByQuery(queryBuilder, queryStr);
   }
 

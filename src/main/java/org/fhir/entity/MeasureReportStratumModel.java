@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The MeasureReport resource contains the results of evaluating a measure."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="measurereportstratum")
 public class MeasureReportStratumModel  implements Serializable {
-	private static final long serialVersionUID = 151967883190964296L;
+	private static final long serialVersionUID = 153159210193828678L;
   /**
   * Description: "The value for this stratum, expressed as a string. When defining stratifiers on complex values, the value must be rendered such that the value for each stratum within the stratifier is unique."
   */
@@ -185,7 +186,6 @@ public class MeasureReportStratumModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[MeasureReportStratumModel]:" + "\n");
      builder.append("value" + "->" + this.value + "\n"); 
-     builder.append("population" + "->" + this.population + "\n"); 
      builder.append("measureScore" + "->" + this.measureScore + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

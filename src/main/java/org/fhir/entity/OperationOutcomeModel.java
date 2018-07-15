@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A collection of error, warning or information messages that result from a system action."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="operationoutcome")
 public class OperationOutcomeModel  implements Serializable {
-	private static final long serialVersionUID = 151967883203674771L;
+	private static final long serialVersionUID = 153159210205456823L;
   /**
   * Description: "This is a OperationOutcome resource"
   */
@@ -252,13 +253,10 @@ public class OperationOutcomeModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[OperationOutcomeModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
-     builder.append("issue" + "->" + this.issue + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

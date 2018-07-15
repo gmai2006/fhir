@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.PaymentReconciliationDetailModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class PaymentReconciliationDetailHelper {
 	public static java.util.List<PaymentReconciliationDetail> fromArray2Array(java.util.List<PaymentReconciliationDetailModel> list) {
     return

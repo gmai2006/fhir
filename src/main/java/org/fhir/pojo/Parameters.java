@@ -29,6 +29,7 @@ import com.google.gson.GsonBuilder;
 import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "This special resource type is used to represent an operation request and response (operations.html). It has no other use, and there is no RESTful endpoint associated with it."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Parameters  extends Resource  {

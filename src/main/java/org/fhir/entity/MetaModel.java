@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The metadata about a resource. This is content in the resource that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="meta")
 public class MetaModel  implements Serializable {
-	private static final long serialVersionUID = 151967883181871436L;
+	private static final long serialVersionUID = 153159210184889537L;
   /**
   * Description: "The version specific identifier, as it appears in the version portion of the URL. This values changes when the resource is created, updated, or deleted."
   */
@@ -201,8 +202,6 @@ public class MetaModel  implements Serializable {
      builder.append("versionId" + "->" + this.versionId + "\n"); 
      builder.append("lastUpdated" + "->" + this.lastUpdated + "\n"); 
      builder.append("profile" + "->" + this.profile + "\n"); 
-     builder.append("security" + "->" + this.security + "\n"); 
-     builder.append("tag" + "->" + this.tag + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;

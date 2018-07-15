@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "An occurrence of information being transmitted; e.g. an alert that was sent to a responsible provider, a public health agency was notified about a reportable condition."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlRootElement
@@ -419,6 +420,10 @@ public class Communication  extends DomainResource  {
     return builder.toString();
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum ResourceTypeEnum {
   	Communication,
   	UNKNOWN;

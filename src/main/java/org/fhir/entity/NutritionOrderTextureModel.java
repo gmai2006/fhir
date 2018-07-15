@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="nutritionordertexture")
 public class NutritionOrderTextureModel  implements Serializable {
-	private static final long serialVersionUID = 151967883152973961L;
+	private static final long serialVersionUID = 153159210155044250L;
   /**
   * Description: "Any texture modifications (for solid foods) that should be made, e.g. easy to chew, chopped, ground, and pureed."
   */
@@ -174,8 +175,6 @@ public class NutritionOrderTextureModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[NutritionOrderTextureModel]:" + "\n");
-     builder.append("modifier" + "->" + this.modifier + "\n"); 
-     builder.append("foodType" + "->" + this.foodType + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A collection of error, warning or information messages that result from a system action."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="operationoutcomeissue")
 public class OperationOutcomeIssueModel  implements Serializable {
-	private static final long serialVersionUID = 151967883198034244L;
+	private static final long serialVersionUID = 153159210200457367L;
   /**
   * Description: "Indicates whether the issue indicates a variation from successful processing."
   */
@@ -230,7 +231,6 @@ public class OperationOutcomeIssueModel  implements Serializable {
     builder.append("[OperationOutcomeIssueModel]:" + "\n");
      builder.append("severity" + "->" + this.severity + "\n"); 
      builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("details" + "->" + this.details + "\n"); 
      builder.append("diagnostics" + "->" + this.diagnostics + "\n"); 
      builder.append("location" + "->" + this.location + "\n"); 
      builder.append("expression" + "->" + this.expression + "\n"); 

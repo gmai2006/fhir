@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This special resource type is used to represent an operation request and response (operations.html). It has no other use, and there is no RESTful endpoint associated with it."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlRootElement

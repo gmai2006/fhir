@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.MeasurePopulationModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class MeasurePopulationHelper {
 	public static java.util.List<MeasurePopulation> fromArray2Array(java.util.List<MeasurePopulationModel> list) {
     return

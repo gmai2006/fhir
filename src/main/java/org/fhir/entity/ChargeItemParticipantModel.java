@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The resource ChargeItem describes the provision of healthcare provider products for a certain patient, therefore referring not only to the product, but containing in addition details of the provision, like date, time, amounts and participating organizations and persons. Main Usage of the ChargeItem is to enable the billing process and internal cost allocation."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="chargeitemparticipant")
 public class ChargeItemParticipantModel  implements Serializable {
-	private static final long serialVersionUID = 15196788320382139L;
+	private static final long serialVersionUID = 153159210205634064L;
   /**
   * Description: "Describes the type of performance or participation(e.g. primary surgeon, anaesthesiologiest, etc.)."
   */
@@ -174,8 +175,6 @@ public class ChargeItemParticipantModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ChargeItemParticipantModel]:" + "\n");
-     builder.append("role" + "->" + this.role + "\n"); 
-     builder.append("actor" + "->" + this.actor + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The findings and interpretation of diagnostic  tests performed on patients, groups of patients, devices, and locations, and/or specimens derived from these. The report includes clinical context such as requesting and provider information, and some mix of atomic results, images, textual and coded interpretations, and formatted representation of diagnostic reports."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="diagnosticreportperformer")
 public class DiagnosticReportPerformerModel  implements Serializable {
-	private static final long serialVersionUID = 151967883230533834L;
+	private static final long serialVersionUID = 153159210232888636L;
   /**
   * Description: "Describes the type of participation (e.g.  a responsible party, author, or verifier)."
   */
@@ -174,8 +175,6 @@ public class DiagnosticReportPerformerModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[DiagnosticReportPerformerModel]:" + "\n");
-     builder.append("role" + "->" + this.role + "\n"); 
-     builder.append("actor" + "->" + this.actor + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

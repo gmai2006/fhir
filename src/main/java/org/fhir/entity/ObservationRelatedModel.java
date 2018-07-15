@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Measurements and simple assertions made about a patient, device or other subject."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="observationrelated")
 public class ObservationRelatedModel  implements Serializable {
-	private static final long serialVersionUID = 151967883220922037L;
+	private static final long serialVersionUID = 153159210222731742L;
   /**
   * Description: "A code specifying the kind of relationship that exists with the target resource."
   */
@@ -169,7 +170,6 @@ public class ObservationRelatedModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[ObservationRelatedModel]:" + "\n");
      builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("target" + "->" + this.target + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

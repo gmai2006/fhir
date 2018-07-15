@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A record of a request for diagnostic investigations, treatments, or operations to be performed."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlRootElement
@@ -588,6 +589,10 @@ public class ProcedureRequest  extends DomainResource  {
     return builder.toString();
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum ResourceTypeEnum {
   	ProcedureRequest,
   	UNKNOWN;

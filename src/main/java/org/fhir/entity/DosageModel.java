@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Indicates how the medication is/was taken or should be taken by the patient."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="dosage")
 public class DosageModel  implements Serializable {
-	private static final long serialVersionUID = 151967883228836355L;
+	private static final long serialVersionUID = 153159210230764382L;
   /**
   * Description: "Indicates the order in which the dosage instructions should be applied or interpreted."
   */
@@ -457,22 +458,13 @@ public class DosageModel  implements Serializable {
     builder.append("[DosageModel]:" + "\n");
      builder.append("sequence" + "->" + this.sequence + "\n"); 
      builder.append("text" + "->" + this.text + "\n"); 
-     builder.append("additionalInstruction" + "->" + this.additionalInstruction + "\n"); 
      builder.append("patientInstruction" + "->" + this.patientInstruction + "\n"); 
      builder.append("timing" + "->" + this.timing + "\n"); 
      builder.append("asNeededBoolean" + "->" + this.asNeededBoolean + "\n"); 
-     builder.append("asNeededCodeableConcept" + "->" + this.asNeededCodeableConcept + "\n"); 
-     builder.append("site" + "->" + this.site + "\n"); 
-     builder.append("route" + "->" + this.route + "\n"); 
-     builder.append("method" + "->" + this.method + "\n"); 
      builder.append("doseRange" + "->" + this.doseRange + "\n"); 
-     builder.append("doseSimpleQuantity" + "->" + this.doseSimpleQuantity + "\n"); 
      builder.append("maxDosePerPeriod" + "->" + this.maxDosePerPeriod + "\n"); 
-     builder.append("maxDosePerAdministration" + "->" + this.maxDosePerAdministration + "\n"); 
-     builder.append("maxDosePerLifetime" + "->" + this.maxDosePerLifetime + "\n"); 
      builder.append("rateRatio" + "->" + this.rateRatio + "\n"); 
      builder.append("rateRange" + "->" + this.rateRange + "\n"); 
-     builder.append("rateSimpleQuantity" + "->" + this.rateSimpleQuantity + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;

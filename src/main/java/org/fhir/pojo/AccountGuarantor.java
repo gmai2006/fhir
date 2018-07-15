@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A financial tool for tracking value accrued for a particular purpose.  In the healthcare field, used to track charges for a patient, cost centers, etc."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlRootElement

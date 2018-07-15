@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.EpisodeOfCareDiagnosisModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class EpisodeOfCareDiagnosisHelper {
 	public static java.util.List<EpisodeOfCareDiagnosis> fromArray2Array(java.util.List<EpisodeOfCareDiagnosisModel> list) {
     return

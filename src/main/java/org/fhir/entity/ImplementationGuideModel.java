@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A set of rules of how FHIR is used to solve a particular problem. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="implementationguide")
 public class ImplementationGuideModel  implements Serializable {
-	private static final long serialVersionUID = 151967883197237355L;
+	private static final long serialVersionUID = 153159210199722267L;
   /**
   * Description: "This is a ImplementationGuide resource"
   */
@@ -550,23 +551,15 @@ public class ImplementationGuideModel  implements Serializable {
      builder.append("experimental" + "->" + this.experimental + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("publisher" + "->" + this.publisher + "\n"); 
-     builder.append("contact" + "->" + this.contact + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("useContext" + "->" + this.useContext + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("copyright" + "->" + this.copyright + "\n"); 
      builder.append("fhirVersion" + "->" + this.fhirVersion + "\n"); 
-     builder.append("dependency" + "->" + this.dependency + "\n"); 
-     builder.append("FHIRpackage" + "->" + this.FHIRpackage + "\n"); 
-     builder.append("global" + "->" + this.global + "\n"); 
      builder.append("binary" + "->" + this.binary + "\n"); 
      builder.append("page" + "->" + this.page + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Measurements and simple assertions made about a patient, device or other subject."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="observationreferencerange")
 public class ObservationReferenceRangeModel  implements Serializable {
-	private static final long serialVersionUID = 151967883219954139L;
+	private static final long serialVersionUID = 15315921022184813L;
   /**
   * Description: "The value of the low bound of the reference range.  The low bound of the reference range endpoint is inclusive of the value (e.g.  reference range is >=5 - <=9).   If the low bound is omitted,  it is assumed to be meaningless (e.g. reference range is <=2.3)."
   */
@@ -250,10 +251,6 @@ public class ObservationReferenceRangeModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ObservationReferenceRangeModel]:" + "\n");
-     builder.append("low" + "->" + this.low + "\n"); 
-     builder.append("high" + "->" + this.high + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("appliesTo" + "->" + this.appliesTo + "\n"); 
      builder.append("age" + "->" + this.age + "\n"); 
      builder.append("text" + "->" + this.text + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

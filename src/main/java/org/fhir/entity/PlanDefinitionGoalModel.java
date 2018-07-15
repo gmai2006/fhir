@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="plandefinitiongoal")
 public class PlanDefinitionGoalModel  implements Serializable {
-	private static final long serialVersionUID = 151967883207812089L;
+	private static final long serialVersionUID = 153159210209453901L;
   /**
   * Description: "Indicates a category the goal falls within."
   */
@@ -279,13 +280,6 @@ public class PlanDefinitionGoalModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[PlanDefinitionGoalModel]:" + "\n");
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("priority" + "->" + this.priority + "\n"); 
-     builder.append("start" + "->" + this.start + "\n"); 
-     builder.append("addresses" + "->" + this.addresses + "\n"); 
-     builder.append("documentation" + "->" + this.documentation + "\n"); 
-     builder.append("target" + "->" + this.target + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

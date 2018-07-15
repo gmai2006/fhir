@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A set of rules of how FHIR is used to solve a particular problem. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="implementationguidedependency")
 public class ImplementationGuideDependencyModel  implements Serializable {
-	private static final long serialVersionUID = 151967883157314816L;
+	private static final long serialVersionUID = 153159210160096347L;
   /**
   * Description: "How the dependency is represented when the guide is published."
   */

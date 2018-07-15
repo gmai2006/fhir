@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The header for a message exchange that is either requesting or responding to an action.  The reference(s) that are the subject of the action as well as other information related to the action are typically transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="messageheaderresponse")
 public class MessageHeaderResponseModel  implements Serializable {
-	private static final long serialVersionUID = 151967883209046375L;
+	private static final long serialVersionUID = 153159210210611009L;
   /**
   * Description: "The MessageHeader.id of the message to which this message is a response."
   */
@@ -186,7 +187,6 @@ public class MessageHeaderResponseModel  implements Serializable {
     builder.append("[MessageHeaderResponseModel]:" + "\n");
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("details" + "->" + this.details + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

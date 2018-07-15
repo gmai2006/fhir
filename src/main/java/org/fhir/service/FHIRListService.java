@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.FHIRList;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface FHIRListService {
 	public FHIRList find(String id);
   public List<FHIRList> select(int maxResult);

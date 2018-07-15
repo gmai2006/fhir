@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.FamilyMemberHistoryModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class FamilyMemberHistoryHelper {
 	public static java.util.List<FamilyMemberHistory> fromArray2Array(java.util.List<FamilyMemberHistoryModel> list) {
     return

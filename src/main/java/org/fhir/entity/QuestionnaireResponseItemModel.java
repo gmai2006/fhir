@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A structured set of questions and their answers. The questions are ordered and grouped into coherent subsets, corresponding to the structure of the grouping of the questionnaire being responded to."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="questionnaireresponseitem")
 public class QuestionnaireResponseItemModel  implements Serializable {
-	private static final long serialVersionUID = 151967883186927599L;
+	private static final long serialVersionUID = 153159210190328513L;
   /**
   * Description: "The item from the Questionnaire that corresponds to this item in the QuestionnaireResponse resource."
   */
@@ -243,9 +244,6 @@ public class QuestionnaireResponseItemModel  implements Serializable {
      builder.append("linkId" + "->" + this.linkId + "\n"); 
      builder.append("definition" + "->" + this.definition + "\n"); 
      builder.append("text" + "->" + this.text + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
-     builder.append("answer" + "->" + this.answer + "\n"); 
-     builder.append("item" + "->" + this.item + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

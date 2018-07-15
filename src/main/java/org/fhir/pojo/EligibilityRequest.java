@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The EligibilityRequest provides patient and insurance coverage information to an insurer for them to respond, in the form of an EligibilityResponse, with information regarding whether the stated coverage is valid and in-force and optionally to provide the insurance details of the policy."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlRootElement
@@ -357,6 +358,10 @@ public class EligibilityRequest  extends DomainResource  {
     return builder.toString();
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum ResourceTypeEnum {
   	EligibilityRequest,
   	UNKNOWN;

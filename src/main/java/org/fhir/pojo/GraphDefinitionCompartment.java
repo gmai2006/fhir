@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A formal computable definition of a graph of resources - that is, a coherent set of resources that form a graph by following references. The Graph Definition resource defines a set and makes rules about the set."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlRootElement
@@ -161,6 +162,10 @@ public class GraphDefinitionCompartment  extends BackboneElement  {
     return builder.toString();
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum RuleEnum {
   	identical,
   	matching,

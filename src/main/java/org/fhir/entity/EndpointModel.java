@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The technical details of an endpoint that can be used for electronic services, such as for web services providing XDS.b or a REST endpoint for another FHIR server. This may include any security context information."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="endpoint")
 public class EndpointModel  implements Serializable {
-	private static final long serialVersionUID = 151967883160131057L;
+	private static final long serialVersionUID = 153159210163452503L;
   /**
   * Description: "This is a Endpoint resource"
   */
@@ -428,21 +429,16 @@ public class EndpointModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("connectionType" + "->" + this.connectionType + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
-     builder.append("managingOrganization" + "->" + this.managingOrganization + "\n"); 
      builder.append("contact" + "->" + this.contact + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
-     builder.append("payloadType" + "->" + this.payloadType + "\n"); 
      builder.append("payloadMimeType" + "->" + this.payloadMimeType + "\n"); 
      builder.append("address" + "->" + this.address + "\n"); 
      builder.append("header" + "->" + this.header + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

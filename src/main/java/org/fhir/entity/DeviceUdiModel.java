@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource identifies an instance or a type of a manufactured item that is used in the provision of healthcare without being substantially changed through that activity. The device may be a medical or non-medical device.  Medical devices include durable (reusable) medical equipment, implantable devices, as well as disposable equipment used for diagnostic, treatment, and research for healthcare and public health.  Non-medical devices may include items such as a machine, cellphone, computer, application, etc."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="deviceudi")
 public class DeviceUdiModel  implements Serializable {
-	private static final long serialVersionUID = 151967883189873187L;
+	private static final long serialVersionUID = 153159210192792933L;
   /**
   * Description: "The device identifier (DI) is a mandatory, fixed portion of a UDI that identifies the labeler and the specific version or model of a device."
   */

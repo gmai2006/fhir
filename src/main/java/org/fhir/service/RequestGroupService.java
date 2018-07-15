@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.RequestGroup;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface RequestGroupService {
 	public RequestGroup find(String id);
   public List<RequestGroup> select(int maxResult);

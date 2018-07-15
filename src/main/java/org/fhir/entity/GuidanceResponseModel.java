@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A guidance response is the formal response to a guidance request, including any output parameters returned by the evaluation, as well as the description of any proposed actions to be taken."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="guidanceresponse")
 public class GuidanceResponseModel  implements Serializable {
-	private static final long serialVersionUID = 151967883223821854L;
+	private static final long serialVersionUID = 153159210225682067L;
   /**
   * Description: "This is a GuidanceResponse resource"
   */
@@ -528,25 +529,13 @@ public class GuidanceResponseModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("requestId" + "->" + this.requestId + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("module" + "->" + this.module + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
-     builder.append("context" + "->" + this.context + "\n"); 
      builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime + "\n"); 
-     builder.append("performer" + "->" + this.performer + "\n"); 
-     builder.append("reasonCodeableConcept" + "->" + this.reasonCodeableConcept + "\n"); 
-     builder.append("reasonReference" + "->" + this.reasonReference + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
-     builder.append("evaluationMessage" + "->" + this.evaluationMessage + "\n"); 
-     builder.append("outputParameters" + "->" + this.outputParameters + "\n"); 
-     builder.append("result" + "->" + this.result + "\n"); 
-     builder.append("dataRequirement" + "->" + this.dataRequirement + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

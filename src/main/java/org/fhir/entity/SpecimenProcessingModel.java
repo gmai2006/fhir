@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A sample to be used for analysis."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="specimenprocessing")
 public class SpecimenProcessingModel  implements Serializable {
-	private static final long serialVersionUID = 151967883224542794L;
+	private static final long serialVersionUID = 153159210226238533L;
   /**
   * Description: "Textual description of procedure."
   */
@@ -225,8 +226,6 @@ public class SpecimenProcessingModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[SpecimenProcessingModel]:" + "\n");
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("procedure" + "->" + this.procedure + "\n"); 
-     builder.append("additive" + "->" + this.additive + "\n"); 
      builder.append("timeDateTime" + "->" + this.timeDateTime + "\n"); 
      builder.append("timePeriod" + "->" + this.timePeriod + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

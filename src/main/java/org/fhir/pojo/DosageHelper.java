@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.DosageModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class DosageHelper {
 	public static java.util.List<Dosage> fromArray2Array(java.util.List<DosageModel> list) {
     return

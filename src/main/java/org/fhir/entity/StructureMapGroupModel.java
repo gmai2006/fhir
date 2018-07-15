@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A Map of relationships between 2 structures that can be used to transform data."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="structuremapgroup")
 public class StructureMapGroupModel  implements Serializable {
-	private static final long serialVersionUID = 151967883202987629L;
+	private static final long serialVersionUID = 153159210204759534L;
   /**
   * Description: "A unique name for the group for the convenience of human readers."
   */
@@ -240,8 +241,6 @@ public class StructureMapGroupModel  implements Serializable {
      builder.append("FHIRextends" + "->" + this.FHIRextends + "\n"); 
      builder.append("typeMode" + "->" + this.typeMode + "\n"); 
      builder.append("documentation" + "->" + this.documentation + "\n"); 
-     builder.append("input" + "->" + this.input + "\n"); 
-     builder.append("rule" + "->" + this.rule + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

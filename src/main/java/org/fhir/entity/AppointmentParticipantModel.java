@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A booking of a healthcare event among patient(s), practitioner(s), related person(s) and/or device(s) for a specific date/time. This may result in one or more Encounter(s)."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="appointmentparticipant")
 public class AppointmentParticipantModel  implements Serializable {
-	private static final long serialVersionUID = 15196788316488448L;
+	private static final long serialVersionUID = 153159210169086182L;
   /**
   * Description: "Role of participant in the appointment."
   */
@@ -204,8 +205,6 @@ public class AppointmentParticipantModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[AppointmentParticipantModel]:" + "\n");
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("actor" + "->" + this.actor + "\n"); 
      builder.append("required" + "->" + this.required + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ExplanationOfBenefitDetailModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ExplanationOfBenefitDetailHelper {
 	public static java.util.List<ExplanationOfBenefitDetail> fromArray2Array(java.util.List<ExplanationOfBenefitDetailModel> list) {
     return

@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Raw data describing a biological sequence."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlRootElement
@@ -343,6 +344,10 @@ public class Sequence  extends DomainResource  {
     return builder.toString();
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum ResourceTypeEnum {
   	Sequence,
   	UNKNOWN;
@@ -355,6 +360,10 @@ public class Sequence  extends DomainResource  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum TypeEnum {
   	aa,
   	dna,

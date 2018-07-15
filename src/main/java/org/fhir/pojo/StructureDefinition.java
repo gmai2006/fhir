@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A definition of a FHIR structure. This resource is used to describe the underlying resources, data types defined in FHIR, and also for describing extensions and constraints on resources and data types."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlRootElement
@@ -727,6 +728,10 @@ public class StructureDefinition  extends DomainResource  {
     return builder.toString();
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum ResourceTypeEnum {
   	StructureDefinition,
   	UNKNOWN;
@@ -739,6 +744,10 @@ public class StructureDefinition  extends DomainResource  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum StatusEnum {
   	draft,
   	active,
@@ -757,6 +766,10 @@ public class StructureDefinition  extends DomainResource  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum KindEnum {
   	primitivetype,
   	complextype,
@@ -775,6 +788,10 @@ public class StructureDefinition  extends DomainResource  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum ContextTypeEnum {
   	resource,
   	datatype,
@@ -791,6 +808,10 @@ public class StructureDefinition  extends DomainResource  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum DerivationEnum {
   	specialization,
   	constraint,

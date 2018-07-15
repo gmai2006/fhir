@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.BundleEntryModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class BundleEntryHelper {
 	public static java.util.List<BundleEntry> fromArray2Array(java.util.List<BundleEntryModel> list) {
     return

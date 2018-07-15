@@ -28,6 +28,7 @@ package org.fhir.dao;
 
 import static java.util.Objects.requireNonNull;
 import java.util.List;
+import java.util.logging.Logger;
 import org.fhir.entity.*;
 import javax.inject.Inject;
 import com.google.inject.persist.Transactional;
@@ -39,9 +40,13 @@ import org.fhir.entity.ImmunizationModel;
 import org.fhir.pojo.Immunization;
 import org.fhir.pojo.ImmunizationHelper;
 import org.fhir.utils.QueryBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/12/2018
+ */
 public class ImmunizationDaoImpl implements ImmunizationDao {
-    private final Provider<EntityManager> entityManagerProvider;
+	private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private final Provider<EntityManager> entityManagerProvider;
 
   @Inject
   public ImmunizationDaoImpl (final Provider<EntityManager> entityManagerProvider) {
@@ -191,6 +196,7 @@ public class ImmunizationDaoImpl implements ImmunizationDao {
   public List<Immunization> findByField(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from ImmunizationModel a " + queryBuilder.getWhereClause();
+  	logger.info(queryStr);
     return findByQuery(queryBuilder, queryStr);
   }
 

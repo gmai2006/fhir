@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Describes the intended objective(s) for a patient, group or organization care, for example, weight loss, restoring an activity of daily living, obtaining herd immunity via immunization, meeting a process improvement objective, etc."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="goaltarget")
 public class GoalTargetModel  implements Serializable {
-	private static final long serialVersionUID = 151967883214712593L;
+	private static final long serialVersionUID = 153159210216539516L;
   /**
   * Description: "The parameter whose value is being tracked, e.g. body weight, blood pressure, or hemoglobin A1c level."
   */
@@ -249,10 +250,7 @@ public class GoalTargetModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[GoalTargetModel]:" + "\n");
-     builder.append("measure" + "->" + this.measure + "\n"); 
-     builder.append("detailQuantity" + "->" + this.detailQuantity + "\n"); 
      builder.append("detailRange" + "->" + this.detailRange + "\n"); 
-     builder.append("detailCodeableConcept" + "->" + this.detailCodeableConcept + "\n"); 
      builder.append("dueDate" + "->" + this.dueDate + "\n"); 
      builder.append("dueDuration" + "->" + this.dueDuration + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

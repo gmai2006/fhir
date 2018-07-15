@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A Map of relationships between 2 structures that can be used to transform data."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="structuremaptarget")
 public class StructureMapTargetModel  implements Serializable {
-	private static final long serialVersionUID = 151967883166197173L;
+	private static final long serialVersionUID = 153159210170232412L;
   /**
   * Description: "Type or variable this rule applies to."
   */
@@ -268,7 +269,6 @@ public class StructureMapTargetModel  implements Serializable {
      builder.append("listMode" + "->" + this.listMode + "\n"); 
      builder.append("listRuleId" + "->" + this.listRuleId + "\n"); 
      builder.append("transform" + "->" + this.transform + "\n"); 
-     builder.append("parameter" + "->" + this.parameter + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

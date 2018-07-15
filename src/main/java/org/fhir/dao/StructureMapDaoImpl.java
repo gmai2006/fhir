@@ -28,6 +28,7 @@ package org.fhir.dao;
 
 import static java.util.Objects.requireNonNull;
 import java.util.List;
+import java.util.logging.Logger;
 import org.fhir.entity.*;
 import javax.inject.Inject;
 import com.google.inject.persist.Transactional;
@@ -39,9 +40,13 @@ import org.fhir.entity.StructureMapModel;
 import org.fhir.pojo.StructureMap;
 import org.fhir.pojo.StructureMapHelper;
 import org.fhir.utils.QueryBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/12/2018
+ */
 public class StructureMapDaoImpl implements StructureMapDao {
-    private final Provider<EntityManager> entityManagerProvider;
+	private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private final Provider<EntityManager> entityManagerProvider;
 
   @Inject
   public StructureMapDaoImpl (final Provider<EntityManager> entityManagerProvider) {
@@ -143,6 +148,7 @@ public class StructureMapDaoImpl implements StructureMapDao {
   public List<StructureMap> findByField(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from StructureMapModel a " + queryBuilder.getWhereClause();
+  	logger.info(queryStr);
     return findByQuery(queryBuilder, queryStr);
   }
 

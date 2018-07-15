@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Resource;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface ResourceService {
 	public Resource find(String id);
   public List<Resource> select(int maxResult);

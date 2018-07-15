@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.NutritionOrderTextureModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class NutritionOrderTextureHelper {
 	public static java.util.List<NutritionOrderTexture> fromArray2Array(java.util.List<NutritionOrderTextureModel> list) {
     return

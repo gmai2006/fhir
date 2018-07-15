@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.LinkageItemModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class LinkageItemHelper {
 	public static java.util.List<LinkageItem> fromArray2Array(java.util.List<LinkageItemModel> list) {
     return

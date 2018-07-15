@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Actual or  potential/avoided event causing unintended physical injury resulting from or contributed to by medical care, a research study or other healthcare setting factors that requires additional monitoring, treatment, or hospitalization, or that results in death."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="adverseevent")
 public class AdverseEventModel  implements Serializable {
-	private static final long serialVersionUID = 151967883229945123L;
+	private static final long serialVersionUID = 153159210232139111L;
   /**
   * Description: "This is a AdverseEvent resource"
   */
@@ -550,26 +551,12 @@ public class AdverseEventModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
-     builder.append("reaction" + "->" + this.reaction + "\n"); 
-     builder.append("location" + "->" + this.location + "\n"); 
-     builder.append("seriousness" + "->" + this.seriousness + "\n"); 
-     builder.append("outcome" + "->" + this.outcome + "\n"); 
-     builder.append("recorder" + "->" + this.recorder + "\n"); 
-     builder.append("eventParticipant" + "->" + this.eventParticipant + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("suspectEntity" + "->" + this.suspectEntity + "\n"); 
-     builder.append("subjectMedicalHistory" + "->" + this.subjectMedicalHistory + "\n"); 
-     builder.append("referenceDocument" + "->" + this.referenceDocument + "\n"); 
-     builder.append("study" + "->" + this.study + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

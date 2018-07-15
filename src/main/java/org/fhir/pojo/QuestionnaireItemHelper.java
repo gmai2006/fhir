@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.QuestionnaireItemModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class QuestionnaireItemHelper {
 	public static java.util.List<QuestionnaireItem> fromArray2Array(java.util.List<QuestionnaireItemModel> list) {
     return

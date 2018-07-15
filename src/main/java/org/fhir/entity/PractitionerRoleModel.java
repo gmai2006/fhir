@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="practitionerrole")
 public class PractitionerRoleModel  implements Serializable {
-	private static final long serialVersionUID = 151967883221689064L;
+	private static final long serialVersionUID = 153159210223523628L;
   /**
   * Description: "This is a PractitionerRole resource"
   */
@@ -510,23 +511,12 @@ public class PractitionerRoleModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("active" + "->" + this.active + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
-     builder.append("practitioner" + "->" + this.practitioner + "\n"); 
-     builder.append("organization" + "->" + this.organization + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("specialty" + "->" + this.specialty + "\n"); 
-     builder.append("location" + "->" + this.location + "\n"); 
-     builder.append("healthcareService" + "->" + this.healthcareService + "\n"); 
      builder.append("telecom" + "->" + this.telecom + "\n"); 
-     builder.append("availableTime" + "->" + this.availableTime + "\n"); 
-     builder.append("notAvailable" + "->" + this.notAvailable + "\n"); 
      builder.append("availabilityExceptions" + "->" + this.availabilityExceptions + "\n"); 
-     builder.append("endpoint" + "->" + this.endpoint + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

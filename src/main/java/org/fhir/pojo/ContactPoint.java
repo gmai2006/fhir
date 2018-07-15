@@ -29,6 +29,7 @@ import com.google.gson.GsonBuilder;
 import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "Details for all kinds of technology mediated contact points for a person or organization, including telephone, email, etc."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ContactPoint  extends Element  {
@@ -151,6 +152,10 @@ public class ContactPoint  extends Element  {
     return builder.toString();
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum SystemEnum {
   	phone,
   	fax,
@@ -173,7 +178,11 @@ public class ContactPoint  extends Element  {
   			throw new IllegalArgumentException("Unknown resource type ["+ strVal + "]");
   		}
   	}
-  }public enum UseEnum {
+  }/**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
+  public enum UseEnum {
   	home,
   	work,
   	temp,

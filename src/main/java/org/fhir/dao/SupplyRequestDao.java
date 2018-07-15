@@ -26,9 +26,13 @@
 
 package org.fhir.dao;
 import java.util.List;
+import java.util.logging.Logger;
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.SupplyRequest;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/12/2018
+ */
 public interface SupplyRequestDao {
   public SupplyRequest find(String id);
 

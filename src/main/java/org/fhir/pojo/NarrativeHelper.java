@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.NarrativeModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class NarrativeHelper {
 	public static java.util.List<Narrative> fromArray2Array(java.util.List<NarrativeModel> list) {
     return

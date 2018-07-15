@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides the adjudication details from the processing of a Claim resource."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="claimresponseinsurance")
 public class ClaimResponseInsuranceModel  implements Serializable {
-	private static final long serialVersionUID = 151967883183472057L;
+	private static final long serialVersionUID = 153159210186549983L;
   /**
   * Description: "A service line item."
   */
@@ -237,10 +238,8 @@ public class ClaimResponseInsuranceModel  implements Serializable {
     builder.append("[ClaimResponseInsuranceModel]:" + "\n");
      builder.append("sequence" + "->" + this.sequence + "\n"); 
      builder.append("focal" + "->" + this.focal + "\n"); 
-     builder.append("coverage" + "->" + this.coverage + "\n"); 
      builder.append("businessArrangement" + "->" + this.businessArrangement + "\n"); 
      builder.append("preAuthRef" + "->" + this.preAuthRef + "\n"); 
-     builder.append("claimResponse" + "->" + this.claimResponse + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

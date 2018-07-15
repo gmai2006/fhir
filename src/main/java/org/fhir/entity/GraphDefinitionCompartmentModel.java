@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A formal computable definition of a graph of resources - that is, a coherent set of resources that form a graph by following references. The Graph Definition resource defines a set and makes rules about the set."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="graphdefinitioncompartment")
 public class GraphDefinitionCompartmentModel  implements Serializable {
-	private static final long serialVersionUID = 15196788319983061L;
+	private static final long serialVersionUID = 153159210202214002L;
   /**
   * Description: "Identifies the compartment."
   */

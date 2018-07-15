@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A summary of information based on the results of executing a TestScript."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="testreportteardown")
 public class TestReportTeardownModel  implements Serializable {
-	private static final long serialVersionUID = 151967883158819710L;
+	private static final long serialVersionUID = 153159210161920741L;
   /**
   * Description: "The teardown action will only contain an operation."
   */
@@ -153,7 +154,6 @@ public class TestReportTeardownModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[TestReportTeardownModel]:" + "\n");
-     builder.append("action" + "->" + this.action + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

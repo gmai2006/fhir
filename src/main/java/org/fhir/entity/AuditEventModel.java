@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="auditevent")
 public class AuditEventModel  implements Serializable {
-	private static final long serialVersionUID = 151967883167680792L;
+	private static final long serialVersionUID = 153159210171565156L;
   /**
   * Description: "This is a AuditEvent resource"
   */
@@ -417,22 +418,14 @@ public class AuditEventModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[AuditEventModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("subtype" + "->" + this.subtype + "\n"); 
      builder.append("action" + "->" + this.action + "\n"); 
      builder.append("recorded" + "->" + this.recorded + "\n"); 
      builder.append("outcome" + "->" + this.outcome + "\n"); 
      builder.append("outcomeDesc" + "->" + this.outcomeDesc + "\n"); 
-     builder.append("purposeOfEvent" + "->" + this.purposeOfEvent + "\n"); 
-     builder.append("agent" + "->" + this.agent + "\n"); 
-     builder.append("source" + "->" + this.source + "\n"); 
-     builder.append("entity" + "->" + this.entity + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

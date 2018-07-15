@@ -39,8 +39,9 @@ import org.fhir.entity.*;
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Goal;
 /**
-* auto generated from SQL files
-*/
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class GoalServiceImpl implements GoalService {
 private final Logger logger = Logger.getLogger(this.getClass().getName());
 

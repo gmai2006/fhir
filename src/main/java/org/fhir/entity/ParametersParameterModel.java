@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This special resource type is used to represent an operation request and response (operations.html). It has no other use, and there is no RESTful endpoint associated with it."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="parametersparameter")
 public class ParametersParameterModel  implements Serializable {
-	private static final long serialVersionUID = 15196788317518276L;
+	private static final long serialVersionUID = 153159210178186798L;
   /**
   * Description: "The name of the parameter (reference to the operation definition)."
   */
@@ -1192,41 +1193,23 @@ public class ParametersParameterModel  implements Serializable {
      builder.append("valueElement" + "->" + this.valueElement + "\n"); 
      builder.append("valueExtension" + "->" + this.valueExtension + "\n"); 
      builder.append("valueBackboneElement" + "->" + this.valueBackboneElement + "\n"); 
-     builder.append("valueNarrative" + "->" + this.valueNarrative + "\n"); 
      builder.append("valueAnnotation" + "->" + this.valueAnnotation + "\n"); 
      builder.append("valueAttachment" + "->" + this.valueAttachment + "\n"); 
      builder.append("valueIdentifier" + "->" + this.valueIdentifier + "\n"); 
-     builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept + "\n"); 
-     builder.append("valueCoding" + "->" + this.valueCoding + "\n"); 
-     builder.append("valueQuantity" + "->" + this.valueQuantity + "\n"); 
      builder.append("valueDuration" + "->" + this.valueDuration + "\n"); 
-     builder.append("valueSimpleQuantity" + "->" + this.valueSimpleQuantity + "\n"); 
-     builder.append("valueDistance" + "->" + this.valueDistance + "\n"); 
      builder.append("valueCount" + "->" + this.valueCount + "\n"); 
-     builder.append("valueMoney" + "->" + this.valueMoney + "\n"); 
      builder.append("valueAge" + "->" + this.valueAge + "\n"); 
      builder.append("valueRange" + "->" + this.valueRange + "\n"); 
      builder.append("valuePeriod" + "->" + this.valuePeriod + "\n"); 
      builder.append("valueRatio" + "->" + this.valueRatio + "\n"); 
-     builder.append("valueReference" + "->" + this.valueReference + "\n"); 
      builder.append("valueSampledData" + "->" + this.valueSampledData + "\n"); 
      builder.append("valueSignature" + "->" + this.valueSignature + "\n"); 
      builder.append("valueHumanName" + "->" + this.valueHumanName + "\n"); 
-     builder.append("valueAddress" + "->" + this.valueAddress + "\n"); 
      builder.append("valueContactPoint" + "->" + this.valueContactPoint + "\n"); 
      builder.append("valueTiming" + "->" + this.valueTiming + "\n"); 
-     builder.append("valueMeta" + "->" + this.valueMeta + "\n"); 
      builder.append("valueElementDefinition" + "->" + this.valueElementDefinition + "\n"); 
-     builder.append("valueContactDetail" + "->" + this.valueContactDetail + "\n"); 
-     builder.append("valueContributor" + "->" + this.valueContributor + "\n"); 
-     builder.append("valueDosage" + "->" + this.valueDosage + "\n"); 
-     builder.append("valueRelatedArtifact" + "->" + this.valueRelatedArtifact + "\n"); 
-     builder.append("valueUsageContext" + "->" + this.valueUsageContext + "\n"); 
-     builder.append("valueDataRequirement" + "->" + this.valueDataRequirement + "\n"); 
      builder.append("valueParameterDefinition" + "->" + this.valueParameterDefinition + "\n"); 
-     builder.append("valueTriggerDefinition" + "->" + this.valueTriggerDefinition + "\n"); 
      builder.append("resource" + "->" + this.resource + "\n"); 
-     builder.append("part" + "->" + this.part + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

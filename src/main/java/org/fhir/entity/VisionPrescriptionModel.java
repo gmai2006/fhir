@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "An authorization for the supply of glasses and/or contact lenses to a patient."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="visionprescription")
 public class VisionPrescriptionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883229788192L;
+	private static final long serialVersionUID = 153159210231893093L;
   /**
   * Description: "This is a VisionPrescription resource"
   */
@@ -410,19 +411,11 @@ public class VisionPrescriptionModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("patient" + "->" + this.patient + "\n"); 
-     builder.append("encounter" + "->" + this.encounter + "\n"); 
      builder.append("dateWritten" + "->" + this.dateWritten + "\n"); 
-     builder.append("prescriber" + "->" + this.prescriber + "\n"); 
-     builder.append("reasonCodeableConcept" + "->" + this.reasonCodeableConcept + "\n"); 
-     builder.append("reasonReference" + "->" + this.reasonReference + "\n"); 
-     builder.append("dispense" + "->" + this.dispense + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

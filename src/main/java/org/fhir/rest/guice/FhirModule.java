@@ -33,6 +33,10 @@ import com.google.inject.persist.PersistFilter;
 import com.google.inject.persist.jpa.JpaPersistModule;
 import com.google.inject.servlet.ServletModule;
 import com.google.inject.Singleton;
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class FhirModule extends ServletModule {
 	@Override
 	protected void configureServlets() {

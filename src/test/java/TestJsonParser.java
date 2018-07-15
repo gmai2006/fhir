@@ -18,7 +18,7 @@ public class TestJsonParser {
 	private final static Logger logger = Logger.getLogger(TestJsonParser.class.getName());
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		JsonObject o = parseJson(Paths.get("/media/paul/workspace/fhir-data/definitions.json/fhir.schema.json/Account.schema.json"));
+		JsonObject o = parseJson(Paths.get("./testfiles/Account.schema.json"));
 		JsonObject definitions = o.getAsJsonObject("definitions");
 		definitions.entrySet().forEach(x -> {
 			JsonObject clazz = x.getValue().getAsJsonObject();

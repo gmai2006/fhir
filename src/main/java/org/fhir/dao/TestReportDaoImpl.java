@@ -28,6 +28,7 @@ package org.fhir.dao;
 
 import static java.util.Objects.requireNonNull;
 import java.util.List;
+import java.util.logging.Logger;
 import org.fhir.entity.*;
 import javax.inject.Inject;
 import com.google.inject.persist.Transactional;
@@ -39,9 +40,13 @@ import org.fhir.entity.TestReportModel;
 import org.fhir.pojo.TestReport;
 import org.fhir.pojo.TestReportHelper;
 import org.fhir.utils.QueryBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/12/2018
+ */
 public class TestReportDaoImpl implements TestReportDao {
-    private final Provider<EntityManager> entityManagerProvider;
+	private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private final Provider<EntityManager> entityManagerProvider;
 
   @Inject
   public TestReportDaoImpl (final Provider<EntityManager> entityManagerProvider) {
@@ -143,6 +148,7 @@ public class TestReportDaoImpl implements TestReportDao {
   public List<TestReport> findByField(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from TestReportModel a " + queryBuilder.getWhereClause();
+  	logger.info(queryStr);
     return findByQuery(queryBuilder, queryStr);
   }
 

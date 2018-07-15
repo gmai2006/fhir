@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Details and position information for a physical place where services are provided  and resources and participants may be stored, found, contained or accommodated."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="locationposition")
 public class LocationPositionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883222289888L;
+	private static final long serialVersionUID = 153159210224047791L;
   /**
   * Description: "Longitude. The value domain and the interpretation are the same as for the text of the longitude element in KML (see notes below)."
   */

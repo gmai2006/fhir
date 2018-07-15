@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A length - a value with a unit that is a physical distance."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="distance")
 public class DistanceModel  implements Serializable {
-	private static final long serialVersionUID = 151967883178477313L;
+	private static final long serialVersionUID = 153159210180817852L;
   /**
   * Description: "The value of the measured amount. The value includes an implicit precision in the presentation of the value."
    derived from Quantity

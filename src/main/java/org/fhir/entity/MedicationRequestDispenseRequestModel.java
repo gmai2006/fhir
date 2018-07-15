@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "An order or request for both supply of the medication and the instructions for administration of the medication to a patient. The resource is called \"MedicationRequest\" rather than \"MedicationPrescription\" or \"MedicationOrder\" to generalize the use across inpatient and outpatient settings, including care plans, etc., and to harmonize with workflow patterns."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="medicationrequestdispenserequest")
 public class MedicationRequestDispenseRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151967883146754687L;
+	private static final long serialVersionUID = 153159210148373473L;
   /**
   * Description: "This indicates the validity period of a prescription (stale dating the Prescription)."
   * Actual type: String;
@@ -230,9 +231,7 @@ public class MedicationRequestDispenseRequestModel  implements Serializable {
     builder.append("[MedicationRequestDispenseRequestModel]:" + "\n");
      builder.append("validityPeriod" + "->" + this.validityPeriod + "\n"); 
      builder.append("numberOfRepeatsAllowed" + "->" + this.numberOfRepeatsAllowed + "\n"); 
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
      builder.append("expectedSupplyDuration" + "->" + this.expectedSupplyDuration + "\n"); 
-     builder.append("performer" + "->" + this.performer + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

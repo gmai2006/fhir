@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A Map of relationships between 2 structures that can be used to transform data."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="structuremapsource")
 public class StructureMapSourceModel  implements Serializable {
-	private static final long serialVersionUID = 151967883196280834L;
+	private static final long serialVersionUID = 15315921019876246L;
   /**
   * Description: "Type or variable this rule applies to."
   */
@@ -1278,39 +1279,22 @@ public class StructureMapSourceModel  implements Serializable {
      builder.append("defaultValueElement" + "->" + this.defaultValueElement + "\n"); 
      builder.append("defaultValueExtension" + "->" + this.defaultValueExtension + "\n"); 
      builder.append("defaultValueBackboneElement" + "->" + this.defaultValueBackboneElement + "\n"); 
-     builder.append("defaultValueNarrative" + "->" + this.defaultValueNarrative + "\n"); 
      builder.append("defaultValueAnnotation" + "->" + this.defaultValueAnnotation + "\n"); 
      builder.append("defaultValueAttachment" + "->" + this.defaultValueAttachment + "\n"); 
      builder.append("defaultValueIdentifier" + "->" + this.defaultValueIdentifier + "\n"); 
-     builder.append("defaultValueCodeableConcept" + "->" + this.defaultValueCodeableConcept + "\n"); 
-     builder.append("defaultValueCoding" + "->" + this.defaultValueCoding + "\n"); 
-     builder.append("defaultValueQuantity" + "->" + this.defaultValueQuantity + "\n"); 
      builder.append("defaultValueDuration" + "->" + this.defaultValueDuration + "\n"); 
-     builder.append("defaultValueSimpleQuantity" + "->" + this.defaultValueSimpleQuantity + "\n"); 
-     builder.append("defaultValueDistance" + "->" + this.defaultValueDistance + "\n"); 
      builder.append("defaultValueCount" + "->" + this.defaultValueCount + "\n"); 
-     builder.append("defaultValueMoney" + "->" + this.defaultValueMoney + "\n"); 
      builder.append("defaultValueAge" + "->" + this.defaultValueAge + "\n"); 
      builder.append("defaultValueRange" + "->" + this.defaultValueRange + "\n"); 
      builder.append("defaultValuePeriod" + "->" + this.defaultValuePeriod + "\n"); 
      builder.append("defaultValueRatio" + "->" + this.defaultValueRatio + "\n"); 
-     builder.append("defaultValueReference" + "->" + this.defaultValueReference + "\n"); 
      builder.append("defaultValueSampledData" + "->" + this.defaultValueSampledData + "\n"); 
      builder.append("defaultValueSignature" + "->" + this.defaultValueSignature + "\n"); 
      builder.append("defaultValueHumanName" + "->" + this.defaultValueHumanName + "\n"); 
-     builder.append("defaultValueAddress" + "->" + this.defaultValueAddress + "\n"); 
      builder.append("defaultValueContactPoint" + "->" + this.defaultValueContactPoint + "\n"); 
      builder.append("defaultValueTiming" + "->" + this.defaultValueTiming + "\n"); 
-     builder.append("defaultValueMeta" + "->" + this.defaultValueMeta + "\n"); 
      builder.append("defaultValueElementDefinition" + "->" + this.defaultValueElementDefinition + "\n"); 
-     builder.append("defaultValueContactDetail" + "->" + this.defaultValueContactDetail + "\n"); 
-     builder.append("defaultValueContributor" + "->" + this.defaultValueContributor + "\n"); 
-     builder.append("defaultValueDosage" + "->" + this.defaultValueDosage + "\n"); 
-     builder.append("defaultValueRelatedArtifact" + "->" + this.defaultValueRelatedArtifact + "\n"); 
-     builder.append("defaultValueUsageContext" + "->" + this.defaultValueUsageContext + "\n"); 
-     builder.append("defaultValueDataRequirement" + "->" + this.defaultValueDataRequirement + "\n"); 
      builder.append("defaultValueParameterDefinition" + "->" + this.defaultValueParameterDefinition + "\n"); 
-     builder.append("defaultValueTriggerDefinition" + "->" + this.defaultValueTriggerDefinition + "\n"); 
      builder.append("element" + "->" + this.element + "\n"); 
      builder.append("listMode" + "->" + this.listMode + "\n"); 
      builder.append("variable" + "->" + this.variable + "\n"); 

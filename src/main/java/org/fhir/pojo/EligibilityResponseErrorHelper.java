@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.EligibilityResponseErrorModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class EligibilityResponseErrorHelper {
 	public static java.util.List<EligibilityResponseError> fromArray2Array(java.util.List<EligibilityResponseErrorModel> list) {
     return

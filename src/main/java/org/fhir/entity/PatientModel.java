@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Demographics and other administrative information about an individual or animal receiving care or other health-related services."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="patient")
 public class PatientModel  implements Serializable {
-	private static final long serialVersionUID = 151967883200127925L;
+	private static final long serialVersionUID = 153159210202431330L;
   /**
   * Description: "This is a Patient resource"
   */
@@ -591,23 +592,13 @@ public class PatientModel  implements Serializable {
      builder.append("birthDate" + "->" + this.birthDate + "\n"); 
      builder.append("deceasedBoolean" + "->" + this.deceasedBoolean + "\n"); 
      builder.append("deceasedDateTime" + "->" + this.deceasedDateTime + "\n"); 
-     builder.append("address" + "->" + this.address + "\n"); 
-     builder.append("maritalStatus" + "->" + this.maritalStatus + "\n"); 
      builder.append("multipleBirthBoolean" + "->" + this.multipleBirthBoolean + "\n"); 
      builder.append("multipleBirthInteger" + "->" + this.multipleBirthInteger + "\n"); 
      builder.append("photo" + "->" + this.photo + "\n"); 
-     builder.append("contact" + "->" + this.contact + "\n"); 
-     builder.append("animal" + "->" + this.animal + "\n"); 
-     builder.append("communication" + "->" + this.communication + "\n"); 
-     builder.append("generalPractitioner" + "->" + this.generalPractitioner + "\n"); 
-     builder.append("managingOrganization" + "->" + this.managingOrganization + "\n"); 
-     builder.append("link" + "->" + this.link + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

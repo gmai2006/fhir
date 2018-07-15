@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The characteristics, operational status and capabilities of a medical-related component of a medical device."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlRootElement
@@ -242,6 +243,10 @@ public class DeviceComponent  extends DomainResource  {
     return builder.toString();
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum ResourceTypeEnum {
   	DeviceComponent,
   	UNKNOWN;
@@ -254,6 +259,10 @@ public class DeviceComponent  extends DomainResource  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum MeasurementPrincipleEnum {
   	other,
   	chemical,

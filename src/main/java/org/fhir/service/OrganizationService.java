@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Organization;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface OrganizationService {
 	public Organization find(String id);
   public List<Organization> select(int maxResult);

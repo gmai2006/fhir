@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Endpoint;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface EndpointService {
 	public Endpoint find(String id);
   public List<Endpoint> select(int maxResult);

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A homogeneous material with a definite composition."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="substance")
 public class SubstanceModel  implements Serializable {
-	private static final long serialVersionUID = 151967883191996769L;
+	private static final long serialVersionUID = 153159210194772978L;
   /**
   * Description: "This is a Substance resource"
   */
@@ -366,17 +367,11 @@ public class SubstanceModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("instance" + "->" + this.instance + "\n"); 
-     builder.append("ingredient" + "->" + this.ingredient + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

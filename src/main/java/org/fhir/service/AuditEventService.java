@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.AuditEvent;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface AuditEventService {
 	public AuditEvent find(String id);
   public List<AuditEvent> select(int maxResult);

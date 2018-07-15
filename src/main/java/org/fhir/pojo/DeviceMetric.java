@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Describes a measurement, calculation or setting capability of a medical device."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlRootElement
@@ -252,6 +253,10 @@ public class DeviceMetric  extends DomainResource  {
     return builder.toString();
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum ResourceTypeEnum {
   	DeviceMetric,
   	UNKNOWN;
@@ -264,6 +269,10 @@ public class DeviceMetric  extends DomainResource  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum OperationalStatusEnum {
   	on,
   	off,
@@ -282,6 +291,10 @@ public class DeviceMetric  extends DomainResource  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum ColorEnum {
   	black,
   	red,
@@ -308,6 +321,10 @@ public class DeviceMetric  extends DomainResource  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum CategoryEnum {
   	measurement,
   	setting,

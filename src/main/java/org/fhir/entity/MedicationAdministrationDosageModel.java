@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Describes the event of a patient consuming or otherwise being administered a medication.  This may be as simple as swallowing a tablet or it may be a long running infusion.  Related resources tie this event to the authorizing prescription, and the specific encounter between patient and health care practitioner."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="medicationadministrationdosage")
 public class MedicationAdministrationDosageModel  implements Serializable {
-	private static final long serialVersionUID = 151967883190612507L;
+	private static final long serialVersionUID = 153159210193513133L;
   /**
   * Description: "Free text dosage can be used for cases where the dosage administered is too complex to code. When coded dosage is present, the free text dosage may still be present for display to humans.\r\rThe dosage instructions should reflect the dosage of the medication that was administered."
   */
@@ -272,12 +273,7 @@ public class MedicationAdministrationDosageModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[MedicationAdministrationDosageModel]:" + "\n");
      builder.append("text" + "->" + this.text + "\n"); 
-     builder.append("site" + "->" + this.site + "\n"); 
-     builder.append("route" + "->" + this.route + "\n"); 
-     builder.append("method" + "->" + this.method + "\n"); 
-     builder.append("dose" + "->" + this.dose + "\n"); 
      builder.append("rateRatio" + "->" + this.rateRatio + "\n"); 
-     builder.append("rateSimpleQuantity" + "->" + this.rateSimpleQuantity + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

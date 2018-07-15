@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A formal agreement between parties regarding the conduct of business, exchange of information or other matters."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="contractagent")
 public class ContractAgentModel  implements Serializable {
-	private static final long serialVersionUID = 151967883177090065L;
+	private static final long serialVersionUID = 153159210179451082L;
   /**
   * Description: "Who or what parties are assigned roles in this Contract."
   */
@@ -174,8 +175,6 @@ public class ContractAgentModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ContractAgentModel]:" + "\n");
-     builder.append("actor" + "->" + this.actor + "\n"); 
-     builder.append("role" + "->" + this.role + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

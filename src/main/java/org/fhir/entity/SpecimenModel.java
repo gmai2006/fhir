@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A sample to be used for analysis."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="specimen")
 public class SpecimenModel  implements Serializable {
-	private static final long serialVersionUID = 15196788320306247L;
+	private static final long serialVersionUID = 153159210204872785L;
   /**
   * Description: "This is a Specimen resource"
   */
@@ -469,21 +470,12 @@ public class SpecimenModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("accessionIdentifier" + "->" + this.accessionIdentifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
      builder.append("receivedTime" + "->" + this.receivedTime + "\n"); 
-     builder.append("parent" + "->" + this.parent + "\n"); 
-     builder.append("request" + "->" + this.request + "\n"); 
-     builder.append("collection" + "->" + this.collection + "\n"); 
-     builder.append("processing" + "->" + this.processing + "\n"); 
-     builder.append("container" + "->" + this.container + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.QuestionnaireEnableWhenModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class QuestionnaireEnableWhenHelper {
 	public static java.util.List<QuestionnaireEnableWhen> fromArray2Array(java.util.List<QuestionnaireEnableWhenModel> list) {
     return

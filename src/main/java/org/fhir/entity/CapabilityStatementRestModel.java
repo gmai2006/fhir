@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="capabilitystatementrest")
 public class CapabilityStatementRestModel  implements Serializable {
-	private static final long serialVersionUID = 15196788321517104L;
+	private static final long serialVersionUID = 153159210216813351L;
   /**
   * Description: "Identifies whether this portion of the statement is describing the ability to initiate or receive restful operations."
   */
@@ -284,11 +285,6 @@ public class CapabilityStatementRestModel  implements Serializable {
     builder.append("[CapabilityStatementRestModel]:" + "\n");
      builder.append("mode" + "->" + this.mode + "\n"); 
      builder.append("documentation" + "->" + this.documentation + "\n"); 
-     builder.append("security" + "->" + this.security + "\n"); 
-     builder.append("resource" + "->" + this.resource + "\n"); 
-     builder.append("interaction" + "->" + this.interaction + "\n"); 
-     builder.append("searchParam" + "->" + this.searchParam + "\n"); 
-     builder.append("operation" + "->" + this.operation + "\n"); 
      builder.append("compartment" + "->" + this.compartment + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

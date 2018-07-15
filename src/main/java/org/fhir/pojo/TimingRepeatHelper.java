@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.TimingRepeatModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class TimingRepeatHelper {
 	public static java.util.List<TimingRepeat> fromArray2Array(java.util.List<TimingRepeatModel> list) {
     return

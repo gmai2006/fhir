@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Financial instrument which may be used to reimburse or pay for health care products and services."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="coveragegrouping")
 public class CoverageGroupingModel  implements Serializable {
-	private static final long serialVersionUID = 151967883226193122L;
+	private static final long serialVersionUID = 153159210228028855L;
   /**
   * Description: "Identifies a style or collective of coverage issued by the underwriter, for example may be used to identify an employer group. May also be referred to as a Policy or Group ID."
   */

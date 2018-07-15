@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.StructureMapSourceModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class StructureMapSourceHelper {
 	public static java.util.List<StructureMapSource> fromArray2Array(java.util.List<StructureMapSourceModel> list) {
     return

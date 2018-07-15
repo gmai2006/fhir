@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A search parameter that defines a named search item that can be used to search/filter on a resource."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="searchparametercomponent")
 public class SearchParameterComponentModel  implements Serializable {
-	private static final long serialVersionUID = 151967883214486969L;
+	private static final long serialVersionUID = 153159210216184948L;
   /**
   * Description: "The definition of the search parameter that describes this part."
   */
@@ -168,7 +169,6 @@ public class SearchParameterComponentModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[SearchParameterComponentModel]:" + "\n");
-     builder.append("definition" + "->" + this.definition + "\n"); 
      builder.append("expression" + "->" + this.expression + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A measured amount (or an amount that can potentially be measured). Note that measured amounts include amounts that are not precisely quantified, including amounts involving arbitrary units and floating currencies."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="quantity")
 public class QuantityModel  implements Serializable {
-	private static final long serialVersionUID = 151967883179282880L;
+	private static final long serialVersionUID = 15315921018165366L;
   /**
   * Description: "The value of the measured amount. The value includes an implicit precision in the presentation of the value."
   */

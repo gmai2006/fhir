@@ -29,6 +29,7 @@ import com.google.gson.GsonBuilder;
 import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A digital signature along with supporting context. The signature may be electronic/cryptographic in nature, or a graphical image representing a hand-written signature, or a signature process. Different signature approaches have different utilities."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Signature  extends Element  {

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Raw data describing a biological sequence."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="sequencevariant")
 public class SequenceVariantModel  implements Serializable {
-	private static final long serialVersionUID = 151967883171832297L;
+	private static final long serialVersionUID = 15315921017523415L;
   /**
   * Description: "Start position of the variant on the  reference sequence.If the coordinate system is either 0-based or 1-based, then start position is inclusive."
   */
@@ -235,7 +236,6 @@ public class SequenceVariantModel  implements Serializable {
      builder.append("observedAllele" + "->" + this.observedAllele + "\n"); 
      builder.append("referenceAllele" + "->" + this.referenceAllele + "\n"); 
      builder.append("cigar" + "->" + this.cigar + "\n"); 
-     builder.append("variantPointer" + "->" + this.variantPointer + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

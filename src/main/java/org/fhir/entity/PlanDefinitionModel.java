@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="plandefinition")
 public class PlanDefinitionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883177921115L;
+	private static final long serialVersionUID = 153159210180219105L;
   /**
   * Description: "This is a PlanDefinition resource"
   */
@@ -697,7 +698,6 @@ public class PlanDefinitionModel  implements Serializable {
      builder.append("version" + "->" + this.version + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("title" + "->" + this.title + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("experimental" + "->" + this.experimental + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
@@ -708,22 +708,11 @@ public class PlanDefinitionModel  implements Serializable {
      builder.append("approvalDate" + "->" + this.approvalDate + "\n"); 
      builder.append("lastReviewDate" + "->" + this.lastReviewDate + "\n"); 
      builder.append("effectivePeriod" + "->" + this.effectivePeriod + "\n"); 
-     builder.append("useContext" + "->" + this.useContext + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
-     builder.append("topic" + "->" + this.topic + "\n"); 
-     builder.append("contributor" + "->" + this.contributor + "\n"); 
-     builder.append("contact" + "->" + this.contact + "\n"); 
      builder.append("copyright" + "->" + this.copyright + "\n"); 
-     builder.append("relatedArtifact" + "->" + this.relatedArtifact + "\n"); 
-     builder.append("library" + "->" + this.library + "\n"); 
-     builder.append("goal" + "->" + this.goal + "\n"); 
-     builder.append("action" + "->" + this.action + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

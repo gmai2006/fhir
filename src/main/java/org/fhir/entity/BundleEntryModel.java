@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A container for a collection of resources."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="bundleentry")
 public class BundleEntryModel  implements Serializable {
-	private static final long serialVersionUID = 151967883201487359L;
+	private static final long serialVersionUID = 153159210203454423L;
   /**
   * Description: "A series of links that provide context to this entry."
   */
@@ -250,12 +251,8 @@ public class BundleEntryModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[BundleEntryModel]:" + "\n");
-     builder.append("link" + "->" + this.link + "\n"); 
      builder.append("fullUrl" + "->" + this.fullUrl + "\n"); 
      builder.append("resource" + "->" + this.resource + "\n"); 
-     builder.append("search" + "->" + this.search + "\n"); 
-     builder.append("request" + "->" + this.request + "\n"); 
-     builder.append("response" + "->" + this.response + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

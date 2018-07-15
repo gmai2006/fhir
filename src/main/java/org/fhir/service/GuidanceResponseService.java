@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.GuidanceResponse;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface GuidanceResponseService {
 	public GuidanceResponse find(String id);
   public List<GuidanceResponse> select(int maxResult);

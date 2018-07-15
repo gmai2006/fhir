@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Represents a request for a patient to employ a medical device. The device may be an implantable device, or an external assistive device, such as a walker."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="devicerequestrequester")
 public class DeviceRequestRequesterModel  implements Serializable {
-	private static final long serialVersionUID = 151967883167411932L;
+	private static final long serialVersionUID = 153159210171419837L;
   /**
   * Description: "The device, practitioner, etc. who initiated the request."
   */
@@ -174,8 +175,6 @@ public class DeviceRequestRequesterModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[DeviceRequestRequesterModel]:" + "\n");
-     builder.append("agent" + "->" + this.agent + "\n"); 
-     builder.append("onBehalfOf" + "->" + this.onBehalfOf + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

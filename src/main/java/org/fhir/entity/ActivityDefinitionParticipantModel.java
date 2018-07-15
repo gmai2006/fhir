@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource allows for the definition of some activity to be performed, independent of a particular patient, practitioner, or other performance context."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="activitydefinitionparticipant")
 public class ActivityDefinitionParticipantModel  implements Serializable {
-	private static final long serialVersionUID = 151967883200471768L;
+	private static final long serialVersionUID = 153159210202792283L;
   /**
   * Description: "The type of participant in the action."
   */
@@ -170,7 +171,6 @@ public class ActivityDefinitionParticipantModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[ActivityDefinitionParticipantModel]:" + "\n");
      builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("role" + "->" + this.role + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

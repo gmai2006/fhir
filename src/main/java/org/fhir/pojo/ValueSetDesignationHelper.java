@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ValueSetDesignationModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ValueSetDesignationHelper {
 	public static java.util.List<ValueSetDesignation> fromArray2Array(java.util.List<ValueSetDesignationModel> list) {
     return

@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.TestReportActionModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class TestReportActionHelper {
 	public static java.util.List<TestReportAction> fromArray2Array(java.util.List<TestReportActionModel> list) {
     return

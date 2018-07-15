@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A record of a medication that is being consumed by a patient.   A MedicationStatement may indicate that the patient may be taking the medication now, or has taken the medication in the past or will be taking the medication in the future.  The source of this information can be the patient, significant other (such as a family member or spouse), or a clinician.  A common scenario where this information is captured is during the history taking process during a patient visit or stay.   The medication information may come from sources such as the patient's memory, from a prescription bottle,  or from a list of medications the patient, clinician or other party maintains \r\rThe primary difference between a medication statement and a medication administration is that the medication administration has complete administration information and is based on actual administration information from the person who administered the medication.  A medication statement is often, if not always, less specific.  There is no required date/time when the medication was administered, in fact we only know that a source has reported the patient is taking this medication, where details such as time, quantity, or rate or even medication product may be incomplete or missing or less precise.  As stated earlier, the medication statement information may come from the patient's memory, from a prescription bottle or from a list of medications the patient, clinician or other party maintains.  Medication administration is more formal and is not missing detailed information."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="medicationstatement")
 public class MedicationStatementModel  implements Serializable {
-	private static final long serialVersionUID = 151967883165684790L;
+	private static final long serialVersionUID = 153159210169871399L;
   /**
   * Description: "This is a MedicationStatement resource"
   */
@@ -624,31 +625,16 @@ public class MedicationStatementModel  implements Serializable {
     builder.append("[MedicationStatementModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("basedOn" + "->" + this.basedOn + "\n"); 
-     builder.append("partOf" + "->" + this.partOf + "\n"); 
-     builder.append("context" + "->" + this.context + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("medicationCodeableConcept" + "->" + this.medicationCodeableConcept + "\n"); 
-     builder.append("medicationReference" + "->" + this.medicationReference + "\n"); 
      builder.append("effectiveDateTime" + "->" + this.effectiveDateTime + "\n"); 
      builder.append("effectivePeriod" + "->" + this.effectivePeriod + "\n"); 
      builder.append("dateAsserted" + "->" + this.dateAsserted + "\n"); 
-     builder.append("informationSource" + "->" + this.informationSource + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
-     builder.append("derivedFrom" + "->" + this.derivedFrom + "\n"); 
      builder.append("taken" + "->" + this.taken + "\n"); 
-     builder.append("reasonNotTaken" + "->" + this.reasonNotTaken + "\n"); 
-     builder.append("reasonCode" + "->" + this.reasonCode + "\n"); 
-     builder.append("reasonReference" + "->" + this.reasonReference + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
-     builder.append("dosage" + "->" + this.dosage + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

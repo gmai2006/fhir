@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A concept that may be defined by a formal reference to a terminology or ontology or may be provided by text."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="codeableconcept")
 public class CodeableConceptModel  implements Serializable {
-	private static final long serialVersionUID = 151967883211793051L;
+	private static final long serialVersionUID = 153159210213538313L;
   /**
   * Description: "A reference to a code defined by a terminology system."
   */
@@ -146,7 +147,6 @@ public class CodeableConceptModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[CodeableConceptModel]:" + "\n");
-     builder.append("coding" + "->" + this.coding + "\n"); 
      builder.append("text" + "->" + this.text + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

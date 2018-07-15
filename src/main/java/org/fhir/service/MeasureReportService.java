@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.MeasureReport;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface MeasureReportService {
 	public MeasureReport find(String id);
   public List<MeasureReport> select(int maxResult);

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A clinical condition, problem, diagnosis, or other event, situation, issue, or clinical concept that has risen to a level of concern."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="conditionevidence")
 public class ConditionEvidenceModel  implements Serializable {
-	private static final long serialVersionUID = 151967883224315038L;
+	private static final long serialVersionUID = 153159210226132158L;
   /**
   * Description: "A manifestation or symptom that led to the recording of this condition."
   */
@@ -174,8 +175,6 @@ public class ConditionEvidenceModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ConditionEvidenceModel]:" + "\n");
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("detail" + "->" + this.detail + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "An occurrence of information being transmitted; e.g. an alert that was sent to a responsible provider, a public health agency was notified about a reportable condition."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="communication")
 public class CommunicationModel  implements Serializable {
-	private static final long serialVersionUID = 151967883179491456L;
+	private static final long serialVersionUID = 153159210181985876L;
   /**
   * Description: "This is a Communication resource"
   */
@@ -627,31 +628,15 @@ public class CommunicationModel  implements Serializable {
     builder.append("[CommunicationModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("definition" + "->" + this.definition + "\n"); 
-     builder.append("basedOn" + "->" + this.basedOn + "\n"); 
-     builder.append("partOf" + "->" + this.partOf + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("notDone" + "->" + this.notDone + "\n"); 
-     builder.append("notDoneReason" + "->" + this.notDoneReason + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("medium" + "->" + this.medium + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
-     builder.append("recipient" + "->" + this.recipient + "\n"); 
-     builder.append("topic" + "->" + this.topic + "\n"); 
-     builder.append("context" + "->" + this.context + "\n"); 
      builder.append("sent" + "->" + this.sent + "\n"); 
      builder.append("received" + "->" + this.received + "\n"); 
-     builder.append("sender" + "->" + this.sender + "\n"); 
-     builder.append("reasonCode" + "->" + this.reasonCode + "\n"); 
-     builder.append("reasonReference" + "->" + this.reasonReference + "\n"); 
-     builder.append("payload" + "->" + this.payload + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

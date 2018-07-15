@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DetectedIssue;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface DetectedIssueService {
 	public DetectedIssue find(String id);
   public List<DetectedIssue> select(int maxResult);

@@ -28,6 +28,7 @@ package org.fhir.dao;
 
 import static java.util.Objects.requireNonNull;
 import java.util.List;
+import java.util.logging.Logger;
 import org.fhir.entity.*;
 import javax.inject.Inject;
 import com.google.inject.persist.Transactional;
@@ -39,9 +40,13 @@ import org.fhir.entity.CoverageModel;
 import org.fhir.pojo.Coverage;
 import org.fhir.pojo.CoverageHelper;
 import org.fhir.utils.QueryBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/12/2018
+ */
 public class CoverageDaoImpl implements CoverageDao {
-    private final Provider<EntityManager> entityManagerProvider;
+	private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private final Provider<EntityManager> entityManagerProvider;
 
   @Inject
   public CoverageDaoImpl (final Provider<EntityManager> entityManagerProvider) {
@@ -161,6 +166,7 @@ public class CoverageDaoImpl implements CoverageDao {
   public List<Coverage> findByField(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from CoverageModel a " + queryBuilder.getWhereClause();
+  	logger.info(queryStr);
     return findByQuery(queryBuilder, queryStr);
   }
 

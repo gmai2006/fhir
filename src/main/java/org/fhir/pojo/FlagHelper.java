@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.FlagModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class FlagHelper {
 	public static java.util.List<Flag> fromArray2Array(java.util.List<FlagModel> list) {
     return

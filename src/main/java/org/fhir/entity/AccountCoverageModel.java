@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A financial tool for tracking value accrued for a particular purpose.  In the healthcare field, used to track charges for a patient, cost centers, etc."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="accountcoverage")
 public class AccountCoverageModel  implements Serializable {
-	private static final long serialVersionUID = 151967883228768428L;
+	private static final long serialVersionUID = 15315921023062031L;
   /**
   * Description: "The party(s) that are responsible for payment (or part of) of charges applied to this account (including self-pay).\n\nA coverage may only be resposible for specific types of charges, and the sequence of the coverages in the account could be important when processing billing."
   */
@@ -169,7 +170,6 @@ public class AccountCoverageModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[AccountCoverageModel]:" + "\n");
-     builder.append("coverage" + "->" + this.coverage + "\n"); 
      builder.append("priority" + "->" + this.priority + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

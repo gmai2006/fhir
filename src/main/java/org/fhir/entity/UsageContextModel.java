@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Specifies clinical/business/etc metadata that can be used to retrieve, index and/or categorize an artifact. This metadata can either be specific to the applicable population (e.g., age category, DRG) or the specific context of care (e.g., venue, care setting, provider of care)."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="usagecontext")
 public class UsageContextModel  implements Serializable {
-	private static final long serialVersionUID = 151967883193841948L;
+	private static final long serialVersionUID = 153159210196632890L;
   /**
   * Description: "A code that identifies the type of context being specified by this usage context."
   */
@@ -192,9 +193,6 @@ public class UsageContextModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[UsageContextModel]:" + "\n");
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept + "\n"); 
-     builder.append("valueQuantity" + "->" + this.valueQuantity + "\n"); 
      builder.append("valueRange" + "->" + this.valueRange + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

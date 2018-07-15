@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge.  This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques.  A ResearchStudy involves the gathering of information about human or animal subjects."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="researchstudyarm")
 public class ResearchStudyArmModel  implements Serializable {
-	private static final long serialVersionUID = 151967883210594079L;
+	private static final long serialVersionUID = 153159210212498227L;
   /**
   * Description: "Unique, human-readable label for this arm of the study."
   */
@@ -184,7 +185,6 @@ public class ResearchStudyArmModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[ResearchStudyArmModel]:" + "\n");
      builder.append("name" + "->" + this.name + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ClaimDiagnosisModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ClaimDiagnosisHelper {
 	public static java.util.List<ClaimDiagnosis> fromArray2Array(java.util.List<ClaimDiagnosisModel> list) {
     return

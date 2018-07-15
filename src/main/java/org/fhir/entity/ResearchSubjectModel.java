@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge.  This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques.  A ResearchStudy involves the gathering of information about human or animal subjects."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="researchsubject")
 public class ResearchSubjectModel  implements Serializable {
-	private static final long serialVersionUID = 151967883170397492L;
+	private static final long serialVersionUID = 153159210174043337L;
   /**
   * Description: "This is a ResearchSubject resource"
   */
@@ -380,17 +381,12 @@ public class ResearchSubjectModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
-     builder.append("study" + "->" + this.study + "\n"); 
-     builder.append("individual" + "->" + this.individual + "\n"); 
      builder.append("assignedArm" + "->" + this.assignedArm + "\n"); 
      builder.append("actualArm" + "->" + this.actualArm + "\n"); 
-     builder.append("consent" + "->" + this.consent + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

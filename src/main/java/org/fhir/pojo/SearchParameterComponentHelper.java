@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.SearchParameterComponentModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class SearchParameterComponentHelper {
 	public static java.util.List<SearchParameterComponent> fromArray2Array(java.util.List<SearchParameterComponentModel> list) {
     return

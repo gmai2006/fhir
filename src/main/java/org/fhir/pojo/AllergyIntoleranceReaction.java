@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Risk of harmful or undesirable, physiological response which is unique to an individual and associated with exposure to a substance."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlRootElement
@@ -195,6 +196,10 @@ public class AllergyIntoleranceReaction  extends BackboneElement  {
     return builder.toString();
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum SeverityEnum {
   	mild,
   	moderate,

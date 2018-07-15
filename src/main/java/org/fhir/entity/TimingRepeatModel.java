@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Specifies an event that may occur multiple times. Timing schedules are used to record when things are planned, expected or requested to occur. The most common usage is in dosage instructions for medications. They are also used when planning care of various kinds, and may be used for reporting the schedule to which past regular activities were carried out."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="timingrepeat")
 public class TimingRepeatModel  implements Serializable {
-	private static final long serialVersionUID = 151967883225191764L;
+	private static final long serialVersionUID = 153159210226857016L;
   /**
   * Description: "Either a duration for the length of the timing schedule, a range of possible length, or outer bounds for start and/or end limits of the timing schedule."
   * Actual type: String;

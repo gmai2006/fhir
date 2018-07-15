@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Describes the intention of how one or more practitioners intend to deliver care for a particular patient, group or community for a period of time, possibly limited to care for a specific condition or set of conditions."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="careplanactivity")
 public class CarePlanActivityModel  implements Serializable {
-	private static final long serialVersionUID = 15196788320355986L;
+	private static final long serialVersionUID = 153159210205264762L;
   /**
   * Description: "Identifies the outcome at the point when the status of the activity is assessed.  For example, the outcome of an education activity could be patient understands (or not)."
   */
@@ -235,11 +236,7 @@ public class CarePlanActivityModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[CarePlanActivityModel]:" + "\n");
-     builder.append("outcomeCodeableConcept" + "->" + this.outcomeCodeableConcept + "\n"); 
-     builder.append("outcomeReference" + "->" + this.outcomeReference + "\n"); 
      builder.append("progress" + "->" + this.progress + "\n"); 
-     builder.append("reference" + "->" + this.reference + "\n"); 
-     builder.append("detail" + "->" + this.detail + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

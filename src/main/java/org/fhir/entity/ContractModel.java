@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A formal agreement between parties regarding the conduct of business, exchange of information or other matters."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="contract")
 public class ContractModel  implements Serializable {
-	private static final long serialVersionUID = 151967883159525440L;
+	private static final long serialVersionUID = 153159210162697086L;
   /**
   * Description: "This is a Contract resource"
   */
@@ -723,32 +724,11 @@ public class ContractModel  implements Serializable {
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("issued" + "->" + this.issued + "\n"); 
      builder.append("applies" + "->" + this.applies + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
-     builder.append("topic" + "->" + this.topic + "\n"); 
-     builder.append("authority" + "->" + this.authority + "\n"); 
-     builder.append("domain" + "->" + this.domain + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("subType" + "->" + this.subType + "\n"); 
-     builder.append("action" + "->" + this.action + "\n"); 
-     builder.append("actionReason" + "->" + this.actionReason + "\n"); 
-     builder.append("decisionType" + "->" + this.decisionType + "\n"); 
-     builder.append("contentDerivative" + "->" + this.contentDerivative + "\n"); 
-     builder.append("securityLabel" + "->" + this.securityLabel + "\n"); 
-     builder.append("agent" + "->" + this.agent + "\n"); 
-     builder.append("signer" + "->" + this.signer + "\n"); 
-     builder.append("valuedItem" + "->" + this.valuedItem + "\n"); 
-     builder.append("term" + "->" + this.term + "\n"); 
      builder.append("bindingAttachment" + "->" + this.bindingAttachment + "\n"); 
-     builder.append("bindingReference" + "->" + this.bindingReference + "\n"); 
-     builder.append("friendly" + "->" + this.friendly + "\n"); 
-     builder.append("legal" + "->" + this.legal + "\n"); 
-     builder.append("rule" + "->" + this.rule + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

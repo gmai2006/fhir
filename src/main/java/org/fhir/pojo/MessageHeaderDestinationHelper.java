@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.MessageHeaderDestinationModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class MessageHeaderDestinationHelper {
 	public static java.util.List<MessageHeaderDestination> fromArray2Array(java.util.List<MessageHeaderDestinationModel> list) {
     return

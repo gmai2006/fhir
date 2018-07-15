@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="auditeventsource")
 public class AuditEventSourceModel  implements Serializable {
-	private static final long serialVersionUID = 151967883194788955L;
+	private static final long serialVersionUID = 153159210197447860L;
   /**
   * Description: "Logical source location within the healthcare enterprise network.  For example, a hospital or other provider location within a multi-entity provider group."
   */
@@ -190,7 +191,6 @@ public class AuditEventSourceModel  implements Serializable {
     builder.append("[AuditEventSourceModel]:" + "\n");
      builder.append("site" + "->" + this.site + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

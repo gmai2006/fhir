@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.AppointmentResponse;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface AppointmentResponseService {
 	public AppointmentResponse find(String id);
   public List<AppointmentResponse> select(int maxResult);

@@ -1,23 +1,12 @@
 package org.fhir.dataloader;
 
-import static org.junit.Assert.assertEquals;
-
 import java.nio.charset.Charset;
-import java.util.List;
 
 import org.fhir.GoogleGuiceTest;
-import org.fhir.dao.AccountDao;
-import org.fhir.dao.AccountDaoImpl;
 import org.fhir.dao.QuestionnaireDao;
 import org.fhir.dao.QuestionnaireDaoImpl;
-import org.fhir.entity.AccountModel;
-import org.fhir.pojo.Account;
-import org.fhir.pojo.AccountHelper;
-import org.fhir.pojo.Coding;
 import org.fhir.pojo.Questionnaire;
 import org.fhir.pojo.QuestionnaireHelper;
-import org.fhir.service.AccountService;
-import org.fhir.service.AccountServiceImpl;
 import org.fhir.utils.FileUtils;
 import org.junit.Test;
 
@@ -25,6 +14,12 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.Module;
 
+/**
+ * A sample hand written code and will be served as blueprint
+ * for code generation
+ * @author paul
+ *
+ */
 public class TestLoadingQuestionnaire extends GoogleGuiceTest {
 	String inputFile;
   String json;
@@ -47,7 +42,7 @@ public class TestLoadingQuestionnaire extends GoogleGuiceTest {
 	
 	@Test
 	public void test() throws Exception {
-		inputFile = "../../fhir-data/examples-json/testreport-questionnaire.json";
+		inputFile = "./test/examples-json/testreport-questionnaire.json";
  	 json = FileUtils.readFile2String(inputFile, Charset.defaultCharset());
  	 result = QuestionnaireHelper.fromJson(json);
  	 count++;
@@ -59,9 +54,9 @@ public class TestLoadingQuestionnaire extends GoogleGuiceTest {
  	 }
  	 try {
  		 questionnaireDao.create((Questionnaire)result);
- 	 } catch (Exception ex) { System.err.println("Cannot save Questionnaire : ../../fhir-data/examples-json/testreport-questionnaire.json due to " + ex.getMessage()); }
+ 	 } catch (Exception ex) { System.err.println("Cannot save Questionnaire : ./test/examples-json/testreport-questionnaire.json due to " + ex.getMessage()); }
  	 
- 	inputFile = "../../fhir-data/examples-json/endpoint-questionnaire.json";
+ 	inputFile = "./test/examples-json/endpoint-questionnaire.json";
 	 json = FileUtils.readFile2String(inputFile, Charset.defaultCharset());
 	 result = QuestionnaireHelper.fromJson(json);
 	 count++;
@@ -75,7 +70,7 @@ public class TestLoadingQuestionnaire extends GoogleGuiceTest {
 		 questionnaireDao.create((Questionnaire)result);
 	 } catch (Exception ex) { ex.printStackTrace(); }
 	 
-	 inputFile = "../../fhir-data/examples-json/linkage-questionnaire.json";
+	 inputFile = "./test/examples-json/linkage-questionnaire.json";
 	 json = FileUtils.readFile2String(inputFile, Charset.defaultCharset());
 	 result = QuestionnaireHelper.fromJson(json);
 	 count++;
@@ -89,7 +84,7 @@ public class TestLoadingQuestionnaire extends GoogleGuiceTest {
 		 questionnaireDao.create((Questionnaire)result);
 	 } catch (Exception ex) { ex.printStackTrace(); }
 	 
-	 inputFile = "../../fhir-data/examples-json/medicationrequest-questionnaire.json";
+	 inputFile = "./test/examples-json/medicationrequest-questionnaire.json";
 	 json = FileUtils.readFile2String(inputFile, Charset.defaultCharset());
 	 result = QuestionnaireHelper.fromJson(json);
 	 count++;
@@ -103,7 +98,7 @@ public class TestLoadingQuestionnaire extends GoogleGuiceTest {
 		 questionnaireDao.create((Questionnaire)result);
 	 } catch (Exception ex) { ex.printStackTrace(); }
 
-	 inputFile = "../../fhir-data/examples-json/processresponse-questionnaire.json";
+	 inputFile = "./test/examples-json/processresponse-questionnaire.json";
 	 json = FileUtils.readFile2String(inputFile, Charset.defaultCharset());
 	 result = QuestionnaireHelper.fromJson(json);
 	 count++;

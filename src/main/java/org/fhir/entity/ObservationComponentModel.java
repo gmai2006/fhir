@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Measurements and simple assertions made about a patient, device or other subject."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="observationcomponent")
 public class ObservationComponentModel  implements Serializable {
-	private static final long serialVersionUID = 151967883163373448L;
+	private static final long serialVersionUID = 153159210167382832L;
   /**
   * Description: "Describes what was observed. Sometimes this is called the observation \"code\"."
   */
@@ -400,9 +401,6 @@ public class ObservationComponentModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ObservationComponentModel]:" + "\n");
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("valueQuantity" + "->" + this.valueQuantity + "\n"); 
-     builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept + "\n"); 
      builder.append("valueString" + "->" + this.valueString + "\n"); 
      builder.append("valueRange" + "->" + this.valueRange + "\n"); 
      builder.append("valueRatio" + "->" + this.valueRatio + "\n"); 
@@ -411,9 +409,6 @@ public class ObservationComponentModel  implements Serializable {
      builder.append("valueTime" + "->" + this.valueTime + "\n"); 
      builder.append("valueDateTime" + "->" + this.valueDateTime + "\n"); 
      builder.append("valuePeriod" + "->" + this.valuePeriod + "\n"); 
-     builder.append("dataAbsentReason" + "->" + this.dataAbsentReason + "\n"); 
-     builder.append("interpretation" + "->" + this.interpretation + "\n"); 
-     builder.append("referenceRange" + "->" + this.referenceRange + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

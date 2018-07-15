@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ExpansionProfileDesignation1Model;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ExpansionProfileDesignation1Helper {
 	public static java.util.List<ExpansionProfileDesignation1> fromArray2Array(java.util.List<ExpansionProfileDesignation1Model> list) {
     return

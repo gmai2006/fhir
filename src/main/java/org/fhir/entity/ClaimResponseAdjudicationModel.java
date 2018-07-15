@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides the adjudication details from the processing of a Claim resource."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="claimresponseadjudication")
 public class ClaimResponseAdjudicationModel  implements Serializable {
-	private static final long serialVersionUID = 151967883203939521L;
+	private static final long serialVersionUID = 153159210205790497L;
   /**
   * Description: "Code indicating: Co-Pay, deductible, eligible, benefit, tax, etc."
   */
@@ -211,9 +212,6 @@ public class ClaimResponseAdjudicationModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ClaimResponseAdjudicationModel]:" + "\n");
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("reason" + "->" + this.reason + "\n"); 
-     builder.append("amount" + "->" + this.amount + "\n"); 
      builder.append("value" + "->" + this.value + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

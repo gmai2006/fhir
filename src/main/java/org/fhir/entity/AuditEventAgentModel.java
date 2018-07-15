@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="auditeventagent")
 public class AuditEventAgentModel  implements Serializable {
-	private static final long serialVersionUID = 151967883166737458L;
+	private static final long serialVersionUID = 153159210170760962L;
   /**
   * Description: "The security role that the user was acting under, that come from local codes defined by the access control security system (e.g. RBAC, ABAC) used in the local context."
   */
@@ -337,17 +338,11 @@ public class AuditEventAgentModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[AuditEventAgentModel]:" + "\n");
-     builder.append("role" + "->" + this.role + "\n"); 
-     builder.append("reference" + "->" + this.reference + "\n"); 
      builder.append("userId" + "->" + this.userId + "\n"); 
      builder.append("altId" + "->" + this.altId + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("requestor" + "->" + this.requestor + "\n"); 
-     builder.append("location" + "->" + this.location + "\n"); 
      builder.append("policy" + "->" + this.policy + "\n"); 
-     builder.append("media" + "->" + this.media + "\n"); 
-     builder.append("network" + "->" + this.network + "\n"); 
-     builder.append("purposeOfUse" + "->" + this.purposeOfUse + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

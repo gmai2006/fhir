@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A record of a request for a medication, substance or device used in the healthcare setting."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="supplyrequestrequester")
 public class SupplyRequestRequesterModel  implements Serializable {
-	private static final long serialVersionUID = 151967883158685772L;
+	private static final long serialVersionUID = 153159210161653024L;
   /**
   * Description: "The device, practitioner, etc. who initiated the request."
   */
@@ -174,8 +175,6 @@ public class SupplyRequestRequesterModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[SupplyRequestRequesterModel]:" + "\n");
-     builder.append("agent" + "->" + this.agent + "\n"); 
-     builder.append("onBehalfOf" + "->" + this.onBehalfOf + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="explanationofbenefit")
 public class ExplanationOfBenefitModel  implements Serializable {
-	private static final long serialVersionUID = 151967883201659605L;
+	private static final long serialVersionUID = 153159210203567579L;
   /**
   * Description: "This is a ExplanationOfBenefit resource"
   */
@@ -1022,49 +1023,16 @@ public class ExplanationOfBenefitModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("subType" + "->" + this.subType + "\n"); 
-     builder.append("patient" + "->" + this.patient + "\n"); 
      builder.append("billablePeriod" + "->" + this.billablePeriod + "\n"); 
      builder.append("created" + "->" + this.created + "\n"); 
-     builder.append("enterer" + "->" + this.enterer + "\n"); 
-     builder.append("insurer" + "->" + this.insurer + "\n"); 
-     builder.append("provider" + "->" + this.provider + "\n"); 
-     builder.append("organization" + "->" + this.organization + "\n"); 
-     builder.append("referral" + "->" + this.referral + "\n"); 
-     builder.append("facility" + "->" + this.facility + "\n"); 
-     builder.append("claim" + "->" + this.claim + "\n"); 
-     builder.append("claimResponse" + "->" + this.claimResponse + "\n"); 
-     builder.append("outcome" + "->" + this.outcome + "\n"); 
      builder.append("disposition" + "->" + this.disposition + "\n"); 
-     builder.append("related" + "->" + this.related + "\n"); 
-     builder.append("prescription" + "->" + this.prescription + "\n"); 
-     builder.append("originalPrescription" + "->" + this.originalPrescription + "\n"); 
-     builder.append("payee" + "->" + this.payee + "\n"); 
-     builder.append("information" + "->" + this.information + "\n"); 
-     builder.append("careTeam" + "->" + this.careTeam + "\n"); 
-     builder.append("diagnosis" + "->" + this.diagnosis + "\n"); 
-     builder.append("procedure" + "->" + this.procedure + "\n"); 
      builder.append("precedence" + "->" + this.precedence + "\n"); 
-     builder.append("insurance" + "->" + this.insurance + "\n"); 
-     builder.append("accident" + "->" + this.accident + "\n"); 
      builder.append("employmentImpacted" + "->" + this.employmentImpacted + "\n"); 
      builder.append("hospitalization" + "->" + this.hospitalization + "\n"); 
-     builder.append("item" + "->" + this.item + "\n"); 
-     builder.append("addItem" + "->" + this.addItem + "\n"); 
-     builder.append("totalCost" + "->" + this.totalCost + "\n"); 
-     builder.append("unallocDeductable" + "->" + this.unallocDeductable + "\n"); 
-     builder.append("totalBenefit" + "->" + this.totalBenefit + "\n"); 
-     builder.append("payment" + "->" + this.payment + "\n"); 
-     builder.append("form" + "->" + this.form + "\n"); 
-     builder.append("processNote" + "->" + this.processNote + "\n"); 
-     builder.append("benefitBalance" + "->" + this.benefitBalance + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The characteristics, operational status and capabilities of a medical-related component of a medical device."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="devicecomponentproductionspecification")
 public class DeviceComponentProductionSpecificationModel  implements Serializable {
-	private static final long serialVersionUID = 151967883166398735L;
+	private static final long serialVersionUID = 153159210170478315L;
   /**
   * Description: "The specification type, such as, serial number, part number, hardware revision, software revision, etc."
   */
@@ -187,7 +188,6 @@ public class DeviceComponentProductionSpecificationModel  implements Serializabl
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[DeviceComponentProductionSpecificationModel]:" + "\n");
-     builder.append("specType" + "->" + this.specType + "\n"); 
      builder.append("componentId" + "->" + this.componentId + "\n"); 
      builder.append("productionSpec" + "->" + this.productionSpec + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

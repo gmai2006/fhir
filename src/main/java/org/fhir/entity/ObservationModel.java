@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Measurements and simple assertions made about a patient, device or other subject."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="observation")
 public class ObservationModel  implements Serializable {
-	private static final long serialVersionUID = 151967883185686487L;
+	private static final long serialVersionUID = 153159210189090856L;
   /**
   * Description: "This is a Observation resource"
   */
@@ -845,18 +846,10 @@ public class ObservationModel  implements Serializable {
     builder.append("[ObservationModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("basedOn" + "->" + this.basedOn + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
-     builder.append("context" + "->" + this.context + "\n"); 
      builder.append("effectiveDateTime" + "->" + this.effectiveDateTime + "\n"); 
      builder.append("effectivePeriod" + "->" + this.effectivePeriod + "\n"); 
      builder.append("issued" + "->" + this.issued + "\n"); 
-     builder.append("performer" + "->" + this.performer + "\n"); 
-     builder.append("valueQuantity" + "->" + this.valueQuantity + "\n"); 
-     builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept + "\n"); 
      builder.append("valueString" + "->" + this.valueString + "\n"); 
      builder.append("valueBoolean" + "->" + this.valueBoolean + "\n"); 
      builder.append("valueRange" + "->" + this.valueRange + "\n"); 
@@ -866,22 +859,11 @@ public class ObservationModel  implements Serializable {
      builder.append("valueTime" + "->" + this.valueTime + "\n"); 
      builder.append("valueDateTime" + "->" + this.valueDateTime + "\n"); 
      builder.append("valuePeriod" + "->" + this.valuePeriod + "\n"); 
-     builder.append("dataAbsentReason" + "->" + this.dataAbsentReason + "\n"); 
-     builder.append("interpretation" + "->" + this.interpretation + "\n"); 
      builder.append("comment" + "->" + this.comment + "\n"); 
-     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
-     builder.append("method" + "->" + this.method + "\n"); 
-     builder.append("specimen" + "->" + this.specimen + "\n"); 
-     builder.append("device" + "->" + this.device + "\n"); 
-     builder.append("referenceRange" + "->" + this.referenceRange + "\n"); 
-     builder.append("related" + "->" + this.related + "\n"); 
-     builder.append("component" + "->" + this.component + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

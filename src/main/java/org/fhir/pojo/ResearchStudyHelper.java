@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ResearchStudyModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ResearchStudyHelper {
 	public static java.util.List<ResearchStudy> fromArray2Array(java.util.List<ResearchStudyModel> list) {
     return

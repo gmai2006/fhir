@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The EligibilityRequest provides patient and insurance coverage information to an insurer for them to respond, in the form of an EligibilityResponse, with information regarding whether the stated coverage is valid and in-force and optionally to provide the insurance details of the policy."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="eligibilityrequest")
 public class EligibilityRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151967883222343879L;
+	private static final long serialVersionUID = 153159210224145042L;
   /**
   * Description: "This is a EligibilityRequest resource"
   */
@@ -544,26 +545,14 @@ public class EligibilityRequestModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("priority" + "->" + this.priority + "\n"); 
-     builder.append("patient" + "->" + this.patient + "\n"); 
      builder.append("servicedDate" + "->" + this.servicedDate + "\n"); 
      builder.append("servicedPeriod" + "->" + this.servicedPeriod + "\n"); 
      builder.append("created" + "->" + this.created + "\n"); 
-     builder.append("enterer" + "->" + this.enterer + "\n"); 
-     builder.append("provider" + "->" + this.provider + "\n"); 
-     builder.append("organization" + "->" + this.organization + "\n"); 
-     builder.append("insurer" + "->" + this.insurer + "\n"); 
-     builder.append("facility" + "->" + this.facility + "\n"); 
-     builder.append("coverage" + "->" + this.coverage + "\n"); 
      builder.append("businessArrangement" + "->" + this.businessArrangement + "\n"); 
-     builder.append("benefitCategory" + "->" + this.benefitCategory + "\n"); 
-     builder.append("benefitSubCategory" + "->" + this.benefitSubCategory + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

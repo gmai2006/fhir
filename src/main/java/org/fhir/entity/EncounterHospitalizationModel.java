@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="encounterhospitalization")
 public class EncounterHospitalizationModel  implements Serializable {
-	private static final long serialVersionUID = 151967883205919222L;
+	private static final long serialVersionUID = 153159210207981671L;
   /**
   * Description: "Pre-admission identifier."
   * Actual type: String;
@@ -320,14 +321,6 @@ public class EncounterHospitalizationModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[EncounterHospitalizationModel]:" + "\n");
      builder.append("preAdmissionIdentifier" + "->" + this.preAdmissionIdentifier + "\n"); 
-     builder.append("origin" + "->" + this.origin + "\n"); 
-     builder.append("admitSource" + "->" + this.admitSource + "\n"); 
-     builder.append("reAdmission" + "->" + this.reAdmission + "\n"); 
-     builder.append("dietPreference" + "->" + this.dietPreference + "\n"); 
-     builder.append("specialCourtesy" + "->" + this.specialCourtesy + "\n"); 
-     builder.append("specialArrangement" + "->" + this.specialArrangement + "\n"); 
-     builder.append("destination" + "->" + this.destination + "\n"); 
-     builder.append("dischargeDisposition" + "->" + this.dischargeDisposition + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

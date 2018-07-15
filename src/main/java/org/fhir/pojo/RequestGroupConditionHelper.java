@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.RequestGroupConditionModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class RequestGroupConditionHelper {
 	public static java.util.List<RequestGroupCondition> fromArray2Array(java.util.List<RequestGroupConditionModel> list) {
     return

@@ -29,6 +29,7 @@ import com.google.gson.GsonBuilder;
 import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "For referring to data content defined in other formats."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Attachment  extends Element  {

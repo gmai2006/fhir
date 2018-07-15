@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.AuditEventModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class AuditEventHelper {
 	public static java.util.List<AuditEvent> fromArray2Array(java.util.List<AuditEventModel> list) {
     return

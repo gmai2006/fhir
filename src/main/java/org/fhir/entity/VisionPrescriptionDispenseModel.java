@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "An authorization for the supply of glasses and/or contact lenses to a patient."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="visionprescriptiondispense")
 public class VisionPrescriptionDispenseModel  implements Serializable {
-	private static final long serialVersionUID = 151967883224964065L;
+	private static final long serialVersionUID = 153159210226740962L;
   /**
   * Description: "Identifies the type of vision correction product which is required for the patient."
   */
@@ -381,7 +382,6 @@ public class VisionPrescriptionDispenseModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[VisionPrescriptionDispenseModel]:" + "\n");
-     builder.append("product" + "->" + this.product + "\n"); 
      builder.append("eye" + "->" + this.eye + "\n"); 
      builder.append("sphere" + "->" + this.sphere + "\n"); 
      builder.append("cylinder" + "->" + this.cylinder + "\n"); 
@@ -392,7 +392,6 @@ public class VisionPrescriptionDispenseModel  implements Serializable {
      builder.append("power" + "->" + this.power + "\n"); 
      builder.append("backCurve" + "->" + this.backCurve + "\n"); 
      builder.append("diameter" + "->" + this.diameter + "\n"); 
-     builder.append("duration" + "->" + this.duration + "\n"); 
      builder.append("color" + "->" + this.color + "\n"); 
      builder.append("brand" + "->" + this.brand + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 

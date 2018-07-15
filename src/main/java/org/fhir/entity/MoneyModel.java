@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "An amount of economic utility in some recognized currency."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="money")
 public class MoneyModel  implements Serializable {
-	private static final long serialVersionUID = 151967883208774523L;
+	private static final long serialVersionUID = 153159210210335303L;
   /**
   * Description: "The value of the measured amount. The value includes an implicit precision in the presentation of the value."
    derived from Quantity

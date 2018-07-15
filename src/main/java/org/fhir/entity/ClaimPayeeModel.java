@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="claimpayee")
 public class ClaimPayeeModel  implements Serializable {
-	private static final long serialVersionUID = 151967883182050482L;
+	private static final long serialVersionUID = 153159210184963396L;
   /**
   * Description: "Type of Party to be reimbursed: Subscriber, provider, other."
   */
@@ -195,9 +196,6 @@ public class ClaimPayeeModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ClaimPayeeModel]:" + "\n");
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
-     builder.append("party" + "->" + this.party + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

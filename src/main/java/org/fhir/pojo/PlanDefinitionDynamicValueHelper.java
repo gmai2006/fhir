@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.PlanDefinitionDynamicValueModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class PlanDefinitionDynamicValueHelper {
 	public static java.util.List<PlanDefinitionDynamicValue> fromArray2Array(java.util.List<PlanDefinitionDynamicValueModel> list) {
     return

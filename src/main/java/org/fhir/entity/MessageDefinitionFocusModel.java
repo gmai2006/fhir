@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Defines the characteristics of a message that can be shared between systems, including the type of event that initiates the message, the content to be transmitted and what response(s), if any, are permitted."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="messagedefinitionfocus")
 public class MessageDefinitionFocusModel  implements Serializable {
-	private static final long serialVersionUID = 151967883215355029L;
+	private static final long serialVersionUID = 153159210217088009L;
   /**
   * Description: "The kind of resource that must be the focus for this message."
   */
@@ -201,7 +202,6 @@ public class MessageDefinitionFocusModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[MessageDefinitionFocusModel]:" + "\n");
      builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("profile" + "->" + this.profile + "\n"); 
      builder.append("min" + "->" + this.min + "\n"); 
      builder.append("max" + "->" + this.max + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

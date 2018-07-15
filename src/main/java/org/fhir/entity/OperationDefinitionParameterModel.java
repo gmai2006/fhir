@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A formal computable definition of an operation (on the RESTful interface) or a named query (using the search interaction)."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="operationdefinitionparameter")
 public class OperationDefinitionParameterModel  implements Serializable {
-	private static final long serialVersionUID = 151967883191313370L;
+	private static final long serialVersionUID = 153159210194265351L;
   /**
   * Description: "The name of used to identify the parameter."
   */
@@ -310,9 +311,6 @@ public class OperationDefinitionParameterModel  implements Serializable {
      builder.append("documentation" + "->" + this.documentation + "\n"); 
      builder.append("type" + "->" + this.type + "\n"); 
      builder.append("searchType" + "->" + this.searchType + "\n"); 
-     builder.append("profile" + "->" + this.profile + "\n"); 
-     builder.append("binding" + "->" + this.binding + "\n"); 
-     builder.append("part" + "->" + this.part + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A task to be performed."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="taskrestriction")
 public class TaskRestrictionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883161012393L;
+	private static final long serialVersionUID = 153159210164554571L;
   /**
   * Description: "Indicates the number of times the requested action should occur."
   */
@@ -190,7 +191,6 @@ public class TaskRestrictionModel  implements Serializable {
     builder.append("[TaskRestrictionModel]:" + "\n");
      builder.append("repetitions" + "->" + this.repetitions + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
-     builder.append("recipient" + "->" + this.recipient + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

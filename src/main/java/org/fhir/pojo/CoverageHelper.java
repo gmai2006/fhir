@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.CoverageModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class CoverageHelper {
 	public static java.util.List<Coverage> fromArray2Array(java.util.List<CoverageModel> list) {
     return

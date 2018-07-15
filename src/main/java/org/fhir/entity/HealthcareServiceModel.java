@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The details of a healthcare service available at a location."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="healthcareservice")
 public class HealthcareServiceModel  implements Serializable {
-	private static final long serialVersionUID = 151967883152266517L;
+	private static final long serialVersionUID = 153159210154435268L;
   /**
   * Description: "This is a HealthcareService resource"
   */
@@ -683,34 +684,19 @@ public class HealthcareServiceModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("active" + "->" + this.active + "\n"); 
-     builder.append("providedBy" + "->" + this.providedBy + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("specialty" + "->" + this.specialty + "\n"); 
-     builder.append("location" + "->" + this.location + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("comment" + "->" + this.comment + "\n"); 
      builder.append("extraDetails" + "->" + this.extraDetails + "\n"); 
      builder.append("photo" + "->" + this.photo + "\n"); 
      builder.append("telecom" + "->" + this.telecom + "\n"); 
-     builder.append("coverageArea" + "->" + this.coverageArea + "\n"); 
-     builder.append("serviceProvisionCode" + "->" + this.serviceProvisionCode + "\n"); 
-     builder.append("eligibility" + "->" + this.eligibility + "\n"); 
      builder.append("eligibilityNote" + "->" + this.eligibilityNote + "\n"); 
      builder.append("programName" + "->" + this.programName + "\n"); 
-     builder.append("characteristic" + "->" + this.characteristic + "\n"); 
-     builder.append("referralMethod" + "->" + this.referralMethod + "\n"); 
      builder.append("appointmentRequired" + "->" + this.appointmentRequired + "\n"); 
-     builder.append("availableTime" + "->" + this.availableTime + "\n"); 
-     builder.append("notAvailable" + "->" + this.notAvailable + "\n"); 
      builder.append("availabilityExceptions" + "->" + this.availabilityExceptions + "\n"); 
-     builder.append("endpoint" + "->" + this.endpoint + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

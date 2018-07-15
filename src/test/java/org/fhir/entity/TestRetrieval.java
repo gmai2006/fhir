@@ -26,6 +26,7 @@ import org.fhir.dao.*;
  * Auto generated from the FHIR samples-json
  * Test read json from json file and convert to coresponding Java class
  * testing data are extracted from the json files
+ * generated on 07/12/2018
  */
 public class TestRetrieval {
 	static Injector injector;

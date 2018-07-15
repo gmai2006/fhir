@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A summary of information based on the results of executing a TestScript."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="testreportassert")
 public class TestReportAssertModel  implements Serializable {
-	private static final long serialVersionUID = 151967883196050792L;
+	private static final long serialVersionUID = 153159210198572690L;
   /**
   * Description: "The result of this assertion."
   */

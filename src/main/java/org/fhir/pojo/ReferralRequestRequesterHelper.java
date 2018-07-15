@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ReferralRequestRequesterModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ReferralRequestRequesterHelper {
 	public static java.util.List<ReferralRequestRequester> fromArray2Array(java.util.List<ReferralRequestRequesterModel> list) {
     return

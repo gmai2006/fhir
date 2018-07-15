@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.MedicationDispense;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface MedicationDispenseService {
 	public MedicationDispense find(String id);
   public List<MedicationDispense> select(int maxResult);

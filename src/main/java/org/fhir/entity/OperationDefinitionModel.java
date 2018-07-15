@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A formal computable definition of an operation (on the RESTful interface) or a named query (using the search interaction)."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="operationdefinition")
 public class OperationDefinitionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883209523402L;
+	private static final long serialVersionUID = 153159210211151576L;
   /**
   * Description: "This is a OperationDefinition resource"
   */
@@ -622,27 +623,19 @@ public class OperationDefinitionModel  implements Serializable {
      builder.append("experimental" + "->" + this.experimental + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("publisher" + "->" + this.publisher + "\n"); 
-     builder.append("contact" + "->" + this.contact + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("useContext" + "->" + this.useContext + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("purpose" + "->" + this.purpose + "\n"); 
      builder.append("idempotent" + "->" + this.idempotent + "\n"); 
      builder.append("code" + "->" + this.code + "\n"); 
      builder.append("comment" + "->" + this.comment + "\n"); 
-     builder.append("base" + "->" + this.base + "\n"); 
      builder.append("resource" + "->" + this.resource + "\n"); 
      builder.append("system" + "->" + this.system + "\n"); 
      builder.append("type" + "->" + this.type + "\n"); 
      builder.append("instance" + "->" + this.instance + "\n"); 
-     builder.append("parameter" + "->" + this.parameter + "\n"); 
-     builder.append("overload" + "->" + this.overload + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

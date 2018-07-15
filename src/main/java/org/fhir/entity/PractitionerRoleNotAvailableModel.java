@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="practitionerrolenotavailable")
 public class PractitionerRoleNotAvailableModel  implements Serializable {
-	private static final long serialVersionUID = 15196788320884230L;
+	private static final long serialVersionUID = 153159210210457696L;
   /**
   * Description: "The reason that can be presented to the user as to why this time is not available."
   */

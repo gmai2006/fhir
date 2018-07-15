@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="encounterdiagnosis")
 public class EncounterDiagnosisModel  implements Serializable {
-	private static final long serialVersionUID = 15196788321498159L;
+	private static final long serialVersionUID = 153159210216695098L;
   /**
   * Description: "Reason the encounter takes place, as specified using information from another resource. For admissions, this is the admission diagnosis. The indication will typically be a Condition (with other resources referenced in the evidence.detail), or a Procedure."
   */
@@ -190,8 +191,6 @@ public class EncounterDiagnosisModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[EncounterDiagnosisModel]:" + "\n");
-     builder.append("condition" + "->" + this.condition + "\n"); 
-     builder.append("role" + "->" + this.role + "\n"); 
      builder.append("rank" + "->" + this.rank + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

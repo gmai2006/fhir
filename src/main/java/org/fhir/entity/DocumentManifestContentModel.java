@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A collection of documents compiled for a purpose together with metadata that applies to the collection."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="documentmanifestcontent")
 public class DocumentManifestContentModel  implements Serializable {
-	private static final long serialVersionUID = 151967883190188346L;
+	private static final long serialVersionUID = 153159210193057194L;
   /**
   * Description: "The list of references to document content, or Attachment that consist of the parts of this document manifest. Usually, these would be document references, but direct references to Media or Attachments are also allowed."
   * Actual type: String;
@@ -173,7 +174,6 @@ public class DocumentManifestContentModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[DocumentManifestContentModel]:" + "\n");
      builder.append("pAttachment" + "->" + this.pAttachment + "\n"); 
-     builder.append("pReference" + "->" + this.pReference + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

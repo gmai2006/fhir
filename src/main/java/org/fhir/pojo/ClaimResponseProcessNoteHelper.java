@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ClaimResponseProcessNoteModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ClaimResponseProcessNoteHelper {
 	public static java.util.List<ClaimResponseProcessNote> fromArray2Array(java.util.List<ClaimResponseProcessNoteModel> list) {
     return

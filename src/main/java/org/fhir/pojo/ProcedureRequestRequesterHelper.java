@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ProcedureRequestRequesterModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ProcedureRequestRequesterHelper {
 	public static java.util.List<ProcedureRequestRequester> fromArray2Array(java.util.List<ProcedureRequestRequesterModel> list) {
     return

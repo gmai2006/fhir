@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A collection of error, warning or information messages that result from a system action."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlRootElement
@@ -202,6 +203,10 @@ public class OperationOutcomeIssue  extends BackboneElement  {
     return builder.toString();
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum SeverityEnum {
   	fatal,
   	error,
@@ -220,6 +225,10 @@ public class OperationOutcomeIssue  extends BackboneElement  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum CodeEnum {
   	invalid,
   	structure,

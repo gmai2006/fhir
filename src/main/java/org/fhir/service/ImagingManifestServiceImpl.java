@@ -39,8 +39,9 @@ import org.fhir.entity.*;
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ImagingManifest;
 /**
-* auto generated from SQL files
-*/
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ImagingManifestServiceImpl implements ImagingManifestService {
 private final Logger logger = Logger.getLogger(this.getClass().getName());
 

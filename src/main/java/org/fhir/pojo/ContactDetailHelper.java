@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ContactDetailModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ContactDetailHelper {
 	public static java.util.List<ContactDetail> fromArray2Array(java.util.List<ContactDetailModel> list) {
     return

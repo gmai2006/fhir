@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A value set specifies a set of codes drawn from one or more code systems."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="valuesetexpansion")
 public class ValueSetExpansionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883211137135L;
+	private static final long serialVersionUID = 153159210212941236L;
   /**
   * Description: "An identifier that uniquely identifies this expansion of the valueset. Systems may re-use the same identifier as long as the expansion and the definition remain the same, but are not required to do so."
   */
@@ -241,8 +242,6 @@ public class ValueSetExpansionModel  implements Serializable {
      builder.append("timestamp" + "->" + this.timestamp + "\n"); 
      builder.append("total" + "->" + this.total + "\n"); 
      builder.append("offset" + "->" + this.offset + "\n"); 
-     builder.append("parameter" + "->" + this.parameter + "\n"); 
-     builder.append("contains" + "->" + this.contains + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

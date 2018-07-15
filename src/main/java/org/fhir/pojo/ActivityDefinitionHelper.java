@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ActivityDefinitionModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ActivityDefinitionHelper {
 	public static java.util.List<ActivityDefinition> fromArray2Array(java.util.List<ActivityDefinitionModel> list) {
     return

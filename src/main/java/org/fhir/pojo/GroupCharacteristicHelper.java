@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.GroupCharacteristicModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class GroupCharacteristicHelper {
 	public static java.util.List<GroupCharacteristic> fromArray2Array(java.util.List<GroupCharacteristicModel> list) {
     return

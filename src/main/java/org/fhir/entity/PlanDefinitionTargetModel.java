@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="plandefinitiontarget")
 public class PlanDefinitionTargetModel  implements Serializable {
-	private static final long serialVersionUID = 151967883213275857L;
+	private static final long serialVersionUID = 153159210214923985L;
   /**
   * Description: "The parameter whose value is to be tracked, e.g. body weigth, blood pressure, or hemoglobin A1c level."
   */
@@ -233,10 +234,7 @@ public class PlanDefinitionTargetModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[PlanDefinitionTargetModel]:" + "\n");
-     builder.append("measure" + "->" + this.measure + "\n"); 
-     builder.append("detailQuantity" + "->" + this.detailQuantity + "\n"); 
      builder.append("detailRange" + "->" + this.detailRange + "\n"); 
-     builder.append("detailCodeableConcept" + "->" + this.detailCodeableConcept + "\n"); 
      builder.append("due" + "->" + this.due + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The Library resource is a general-purpose container for knowledge asset definitions. It can be used to describe and expose existing knowledge assets such as logic libraries and information model descriptions, as well as to describe a collection of knowledge assets."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="library")
 public class LibraryModel  implements Serializable {
-	private static final long serialVersionUID = 151967883197753899L;
+	private static final long serialVersionUID = 153159210200183979L;
   /**
   * Description: "This is a Library resource"
   */
@@ -695,7 +696,6 @@ public class LibraryModel  implements Serializable {
      builder.append("title" + "->" + this.title + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("experimental" + "->" + this.experimental + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("publisher" + "->" + this.publisher + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
@@ -704,22 +704,13 @@ public class LibraryModel  implements Serializable {
      builder.append("approvalDate" + "->" + this.approvalDate + "\n"); 
      builder.append("lastReviewDate" + "->" + this.lastReviewDate + "\n"); 
      builder.append("effectivePeriod" + "->" + this.effectivePeriod + "\n"); 
-     builder.append("useContext" + "->" + this.useContext + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
-     builder.append("topic" + "->" + this.topic + "\n"); 
-     builder.append("contributor" + "->" + this.contributor + "\n"); 
-     builder.append("contact" + "->" + this.contact + "\n"); 
      builder.append("copyright" + "->" + this.copyright + "\n"); 
-     builder.append("relatedArtifact" + "->" + this.relatedArtifact + "\n"); 
      builder.append("parameter" + "->" + this.parameter + "\n"); 
-     builder.append("dataRequirement" + "->" + this.dataRequirement + "\n"); 
      builder.append("content" + "->" + this.content + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

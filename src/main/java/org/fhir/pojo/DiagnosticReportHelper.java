@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.DiagnosticReportModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class DiagnosticReportHelper {
 	public static java.util.List<DiagnosticReport> fromArray2Array(java.util.List<DiagnosticReportModel> list) {
     return

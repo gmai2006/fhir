@@ -29,6 +29,7 @@ import com.google.gson.GsonBuilder;
 import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "Captures constraints on each element within the resource, profile, or extension."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ElementDefinitionSlicing  extends BackboneElement  {
@@ -126,6 +127,10 @@ public class ElementDefinitionSlicing  extends BackboneElement  {
     return builder.toString();
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum RulesEnum {
   	closed,
   	open,

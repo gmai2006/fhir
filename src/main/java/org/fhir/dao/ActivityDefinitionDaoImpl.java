@@ -28,6 +28,7 @@ package org.fhir.dao;
 
 import static java.util.Objects.requireNonNull;
 import java.util.List;
+import java.util.logging.Logger;
 import org.fhir.entity.*;
 import javax.inject.Inject;
 import com.google.inject.persist.Transactional;
@@ -39,9 +40,13 @@ import org.fhir.entity.ActivityDefinitionModel;
 import org.fhir.pojo.ActivityDefinition;
 import org.fhir.pojo.ActivityDefinitionHelper;
 import org.fhir.utils.QueryBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/12/2018
+ */
 public class ActivityDefinitionDaoImpl implements ActivityDefinitionDao {
-    private final Provider<EntityManager> entityManagerProvider;
+	private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private final Provider<EntityManager> entityManagerProvider;
 
   @Inject
   public ActivityDefinitionDaoImpl (final Provider<EntityManager> entityManagerProvider) {
@@ -215,6 +220,7 @@ public class ActivityDefinitionDaoImpl implements ActivityDefinitionDao {
   public List<ActivityDefinition> findByField(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from ActivityDefinitionModel a " + queryBuilder.getWhereClause();
+  	logger.info(queryStr);
     return findByQuery(queryBuilder, queryStr);
   }
 

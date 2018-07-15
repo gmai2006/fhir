@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="auditeventdetail")
 public class AuditEventDetailModel  implements Serializable {
-	private static final long serialVersionUID = 151967883171259974L;
+	private static final long serialVersionUID = 15315921017482404L;
   /**
   * Description: "The type of extra detail provided in the value."
   */

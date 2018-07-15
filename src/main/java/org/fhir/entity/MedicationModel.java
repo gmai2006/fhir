@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource is primarily used for the identification and definition of a medication. It covers the ingredients and the packaging for a medication."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="medication")
 public class MedicationModel  implements Serializable {
-	private static final long serialVersionUID = 151967883225615870L;
+	private static final long serialVersionUID = 153159210227485298L;
   /**
   * Description: "This is a Medication resource"
   */
@@ -400,21 +401,14 @@ public class MedicationModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[MedicationModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("isBrand" + "->" + this.isBrand + "\n"); 
      builder.append("isOverTheCounter" + "->" + this.isOverTheCounter + "\n"); 
-     builder.append("manufacturer" + "->" + this.manufacturer + "\n"); 
-     builder.append("form" + "->" + this.form + "\n"); 
-     builder.append("ingredient" + "->" + this.ingredient + "\n"); 
-     builder.append("FHIRpackage" + "->" + this.FHIRpackage + "\n"); 
      builder.append("image" + "->" + this.image + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

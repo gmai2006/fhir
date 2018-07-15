@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides processing status, errors and notes from the processing of a resource."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="processresponse")
 public class ProcessResponseModel  implements Serializable {
-	private static final long serialVersionUID = 151967883188945969L;
+	private static final long serialVersionUID = 153159210192169306L;
   /**
   * Description: "This is a ProcessResponse resource"
   */
@@ -489,22 +490,11 @@ public class ProcessResponseModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("created" + "->" + this.created + "\n"); 
-     builder.append("organization" + "->" + this.organization + "\n"); 
-     builder.append("request" + "->" + this.request + "\n"); 
-     builder.append("outcome" + "->" + this.outcome + "\n"); 
      builder.append("disposition" + "->" + this.disposition + "\n"); 
-     builder.append("requestProvider" + "->" + this.requestProvider + "\n"); 
-     builder.append("requestOrganization" + "->" + this.requestOrganization + "\n"); 
-     builder.append("form" + "->" + this.form + "\n"); 
-     builder.append("processNote" + "->" + this.processNote + "\n"); 
-     builder.append("error" + "->" + this.error + "\n"); 
-     builder.append("communicationRequest" + "->" + this.communicationRequest + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlRootElement
@@ -423,6 +424,10 @@ public class CapabilityStatementResource  extends BackboneElement  {
     return builder.toString();
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum VersioningEnum {
   	noversion,
   	versioned,
@@ -439,6 +444,10 @@ public class CapabilityStatementResource  extends BackboneElement  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum ConditionalReadEnum {
   	notsupported,
   	modifiedsince,
@@ -457,6 +466,10 @@ public class CapabilityStatementResource  extends BackboneElement  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum ConditionalDeleteEnum {
   	notsupported,
   	single,
@@ -473,6 +486,10 @@ public class CapabilityStatementResource  extends BackboneElement  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum ReferencePolicyEnum {
   	literal,
   	logical,

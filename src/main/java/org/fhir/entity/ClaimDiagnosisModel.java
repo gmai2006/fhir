@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="claimdiagnosis")
 public class ClaimDiagnosisModel  implements Serializable {
-	private static final long serialVersionUID = 151967883218399879L;
+	private static final long serialVersionUID = 153159210220266480L;
   /**
   * Description: "Sequence of diagnosis which serves to provide a link."
   */
@@ -233,10 +234,6 @@ public class ClaimDiagnosisModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[ClaimDiagnosisModel]:" + "\n");
      builder.append("sequence" + "->" + this.sequence + "\n"); 
-     builder.append("diagnosisCodeableConcept" + "->" + this.diagnosisCodeableConcept + "\n"); 
-     builder.append("diagnosisReference" + "->" + this.diagnosisReference + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("packageCode" + "->" + this.packageCode + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

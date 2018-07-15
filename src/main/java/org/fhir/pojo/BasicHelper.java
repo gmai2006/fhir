@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.BasicModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class BasicHelper {
 	public static java.util.List<Basic> fromArray2Array(java.util.List<BasicModel> list) {
     return

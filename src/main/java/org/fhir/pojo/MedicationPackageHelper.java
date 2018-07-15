@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.MedicationPackageModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class MedicationPackageHelper {
 	public static java.util.List<MedicationPackage> fromArray2Array(java.util.List<MedicationPackageModel> list) {
     return

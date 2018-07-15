@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.SubscriptionModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class SubscriptionHelper {
 	public static java.util.List<Subscription> fromArray2Array(java.util.List<SubscriptionModel> list) {
     return

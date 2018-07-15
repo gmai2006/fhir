@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Identifies two or more records (resource instances) that are referring to the same real-world \"occurrence\"."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="linkageitem")
 public class LinkageItemModel  implements Serializable {
-	private static final long serialVersionUID = 151967883205153835L;
+	private static final long serialVersionUID = 15315921020705559L;
   /**
   * Description: "Distinguishes which item is \"source of truth\" (if any) and which items are no longer considered to be current representations."
   */
@@ -169,7 +170,6 @@ public class LinkageItemModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[LinkageItemModel]:" + "\n");
      builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("resource" + "->" + this.resource + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

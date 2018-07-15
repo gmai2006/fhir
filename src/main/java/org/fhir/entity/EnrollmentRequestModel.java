@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides the insurance enrollment details to the insurer regarding a specified coverage."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="enrollmentrequest")
 public class EnrollmentRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151967883227123286L;
+	private static final long serialVersionUID = 153159210229014832L;
   /**
   * Description: "This is a EnrollmentRequest resource"
   */
@@ -390,17 +391,10 @@ public class EnrollmentRequestModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("created" + "->" + this.created + "\n"); 
-     builder.append("insurer" + "->" + this.insurer + "\n"); 
-     builder.append("provider" + "->" + this.provider + "\n"); 
-     builder.append("organization" + "->" + this.organization + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
-     builder.append("coverage" + "->" + this.coverage + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

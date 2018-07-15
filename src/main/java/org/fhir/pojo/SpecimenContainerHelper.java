@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.SpecimenContainerModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class SpecimenContainerHelper {
 	public static java.util.List<SpecimenContainer> fromArray2Array(java.util.List<SpecimenContainerModel> list) {
     return

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A code system resource specifies a set of codes drawn from one or more code systems."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="codesystemconcept")
 public class CodeSystemConceptModel  implements Serializable {
-	private static final long serialVersionUID = 151967883204863837L;
+	private static final long serialVersionUID = 153159210206650070L;
   /**
   * Description: "A code - a text symbol - that uniquely identifies the concept within the code system."
   */
@@ -244,9 +245,6 @@ public class CodeSystemConceptModel  implements Serializable {
      builder.append("code" + "->" + this.code + "\n"); 
      builder.append("display" + "->" + this.display + "\n"); 
      builder.append("definition" + "->" + this.definition + "\n"); 
-     builder.append("designation" + "->" + this.designation + "\n"); 
-     builder.append("property" + "->" + this.property + "\n"); 
-     builder.append("concept" + "->" + this.concept + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

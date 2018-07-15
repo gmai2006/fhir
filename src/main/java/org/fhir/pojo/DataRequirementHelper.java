@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.DataRequirementModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class DataRequirementHelper {
 	public static java.util.List<DataRequirement> fromArray2Array(java.util.List<DataRequirementModel> list) {
     return

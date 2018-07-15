@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="capabilitystatementinteraction1")
 public class CapabilityStatementInteraction1Model  implements Serializable {
-	private static final long serialVersionUID = 151967883196163025L;
+	private static final long serialVersionUID = 153159210198647509L;
   /**
   * Description: "A coded identifier of the operation, supported by the system."
   */

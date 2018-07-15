@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "An address expressed using postal conventions (as opposed to GPS or other location definition formats).  This data type may be used to convey addresses for use in delivering mail as well as for visiting locations which might not be valid for mail delivery.  There are a variety of postal address formats defined around the world."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="address")
 public class AddressModel  implements Serializable {
-	private static final long serialVersionUID = 151967883185322862L;
+	private static final long serialVersionUID = 153159210188617800L;
   /**
   * Description: "The purpose of this address."
   */

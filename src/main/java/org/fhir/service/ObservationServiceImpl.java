@@ -39,8 +39,9 @@ import org.fhir.entity.*;
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Observation;
 /**
-* auto generated from SQL files
-*/
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ObservationServiceImpl implements ObservationService {
 private final Logger logger = Logger.getLogger(this.getClass().getName());
 

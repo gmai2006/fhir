@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.MeasureSupplementalDataModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class MeasureSupplementalDataHelper {
 	public static java.util.List<MeasureSupplementalData> fromArray2Array(java.util.List<MeasureSupplementalDataModel> list) {
     return

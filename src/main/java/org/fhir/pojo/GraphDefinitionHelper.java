@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.GraphDefinitionModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class GraphDefinitionHelper {
 	public static java.util.List<GraphDefinition> fromArray2Array(java.util.List<GraphDefinitionModel> list) {
     return

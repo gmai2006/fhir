@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides the target, request and response, and action details for an action to be performed by the target on or about existing resources."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="processrequestitem")
 public class ProcessRequestItemModel  implements Serializable {
-	private static final long serialVersionUID = 15196788322851668L;
+	private static final long serialVersionUID = 153159210230532005L;
   /**
   * Description: "A service line number."
   */

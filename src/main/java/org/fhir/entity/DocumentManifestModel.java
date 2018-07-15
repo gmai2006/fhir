@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A collection of documents compiled for a purpose together with metadata that applies to the collection."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="documentmanifest")
 public class DocumentManifestModel  implements Serializable {
-	private static final long serialVersionUID = 15196788319705053L;
+	private static final long serialVersionUID = 15315921019956901L;
   /**
   * Description: "This is a DocumentManifest resource"
   */
@@ -459,21 +460,13 @@ public class DocumentManifestModel  implements Serializable {
      builder.append("masterIdentifier" + "->" + this.masterIdentifier + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
      builder.append("created" + "->" + this.created + "\n"); 
-     builder.append("author" + "->" + this.author + "\n"); 
-     builder.append("recipient" + "->" + this.recipient + "\n"); 
      builder.append("source" + "->" + this.source + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("content" + "->" + this.content + "\n"); 
-     builder.append("related" + "->" + this.related + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

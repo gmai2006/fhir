@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A record of a healthcare consumer’s policy choices, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="consent")
 public class ConsentModel  implements Serializable {
-	private static final long serialVersionUID = 15196788318364319L;
+	private static final long serialVersionUID = 153159210186762493L;
   /**
   * Description: "This is a Consent resource"
   */
@@ -626,30 +627,16 @@ public class ConsentModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("patient" + "->" + this.patient + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("dateTime" + "->" + this.dateTime + "\n"); 
-     builder.append("consentingParty" + "->" + this.consentingParty + "\n"); 
-     builder.append("actor" + "->" + this.actor + "\n"); 
-     builder.append("action" + "->" + this.action + "\n"); 
-     builder.append("organization" + "->" + this.organization + "\n"); 
      builder.append("sourceAttachment" + "->" + this.sourceAttachment + "\n"); 
      builder.append("sourceIdentifier" + "->" + this.sourceIdentifier + "\n"); 
-     builder.append("sourceReference" + "->" + this.sourceReference + "\n"); 
-     builder.append("policy" + "->" + this.policy + "\n"); 
      builder.append("policyRule" + "->" + this.policyRule + "\n"); 
-     builder.append("securityLabel" + "->" + this.securityLabel + "\n"); 
-     builder.append("purpose" + "->" + this.purpose + "\n"); 
      builder.append("dataPeriod" + "->" + this.dataPeriod + "\n"); 
-     builder.append("data" + "->" + this.data + "\n"); 
-     builder.append("except" + "->" + this.except + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

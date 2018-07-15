@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "An association between a patient and an organization / healthcare provider(s) during which time encounters may occur. The managing organization assumes a level of responsibility for the patient during this time."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="episodeofcare")
 public class EpisodeOfCareModel  implements Serializable {
-	private static final long serialVersionUID = 151967883158022799L;
+	private static final long serialVersionUID = 153159210160782501L;
   /**
   * Description: "This is a EpisodeOfCare resource"
   */
@@ -475,22 +476,11 @@ public class EpisodeOfCareModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("statusHistory" + "->" + this.statusHistory + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("diagnosis" + "->" + this.diagnosis + "\n"); 
-     builder.append("patient" + "->" + this.patient + "\n"); 
-     builder.append("managingOrganization" + "->" + this.managingOrganization + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
-     builder.append("referralRequest" + "->" + this.referralRequest + "\n"); 
-     builder.append("careManager" + "->" + this.careManager + "\n"); 
-     builder.append("team" + "->" + this.team + "\n"); 
-     builder.append("account" + "->" + this.account + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A search parameter that defines a named search item that can be used to search/filter on a resource."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="searchparameter")
 public class SearchParameterModel  implements Serializable {
-	private static final long serialVersionUID = 15196788321684217L;
+	private static final long serialVersionUID = 153159210218770032L;
   /**
   * Description: "This is a SearchParameter resource"
   */
@@ -624,9 +625,6 @@ public class SearchParameterModel  implements Serializable {
      builder.append("experimental" + "->" + this.experimental + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("publisher" + "->" + this.publisher + "\n"); 
-     builder.append("contact" + "->" + this.contact + "\n"); 
-     builder.append("useContext" + "->" + this.useContext + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("purpose" + "->" + this.purpose + "\n"); 
      builder.append("code" + "->" + this.code + "\n"); 
      builder.append("base" + "->" + this.base + "\n"); 
@@ -640,13 +638,10 @@ public class SearchParameterModel  implements Serializable {
      builder.append("comparator" + "->" + this.comparator + "\n"); 
      builder.append("modifier" + "->" + this.modifier + "\n"); 
      builder.append("chain" + "->" + this.chain + "\n"); 
-     builder.append("component" + "->" + this.component + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

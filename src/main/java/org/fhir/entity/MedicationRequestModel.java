@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "An order or request for both supply of the medication and the instructions for administration of the medication to a patient. The resource is called \"MedicationRequest\" rather than \"MedicationPrescription\" or \"MedicationOrder\" to generalize the use across inpatient and outpatient settings, including care plans, etc., and to harmonize with workflow patterns."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="medicationrequest")
 public class MedicationRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151967883211486334L;
+	private static final long serialVersionUID = 153159210213288296L;
   /**
   * Description: "This is a MedicationRequest resource"
   */
@@ -728,36 +729,16 @@ public class MedicationRequestModel  implements Serializable {
     builder.append("[MedicationRequestModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("definition" + "->" + this.definition + "\n"); 
-     builder.append("basedOn" + "->" + this.basedOn + "\n"); 
      builder.append("groupIdentifier" + "->" + this.groupIdentifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("intent" + "->" + this.intent + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
      builder.append("priority" + "->" + this.priority + "\n"); 
-     builder.append("medicationCodeableConcept" + "->" + this.medicationCodeableConcept + "\n"); 
-     builder.append("medicationReference" + "->" + this.medicationReference + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
-     builder.append("context" + "->" + this.context + "\n"); 
-     builder.append("supportingInformation" + "->" + this.supportingInformation + "\n"); 
      builder.append("authoredOn" + "->" + this.authoredOn + "\n"); 
-     builder.append("requester" + "->" + this.requester + "\n"); 
-     builder.append("recorder" + "->" + this.recorder + "\n"); 
-     builder.append("reasonCode" + "->" + this.reasonCode + "\n"); 
-     builder.append("reasonReference" + "->" + this.reasonReference + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
-     builder.append("dosageInstruction" + "->" + this.dosageInstruction + "\n"); 
-     builder.append("dispenseRequest" + "->" + this.dispenseRequest + "\n"); 
-     builder.append("substitution" + "->" + this.substitution + "\n"); 
-     builder.append("priorPrescription" + "->" + this.priorPrescription + "\n"); 
-     builder.append("detectedIssue" + "->" + this.detectedIssue + "\n"); 
-     builder.append("eventHistory" + "->" + this.eventHistory + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

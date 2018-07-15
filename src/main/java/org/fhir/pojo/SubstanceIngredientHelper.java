@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.SubstanceIngredientModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class SubstanceIngredientHelper {
 	public static java.util.List<SubstanceIngredient> fromArray2Array(java.util.List<SubstanceIngredientModel> list) {
     return

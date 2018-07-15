@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.OperationDefinition;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface OperationDefinitionService {
 	public OperationDefinition find(String id);
   public List<OperationDefinition> select(int maxResult);

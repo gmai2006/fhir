@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "An action that is or was performed on a patient. This can be a physical intervention like an operation, or less invasive like counseling or hypnotherapy."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="procedureperformer")
 public class ProcedurePerformerModel  implements Serializable {
-	private static final long serialVersionUID = 151967883192323117L;
+	private static final long serialVersionUID = 15315921019523006L;
   /**
   * Description: "For example: surgeon, anaethetist, endoscopist."
   */
@@ -195,9 +196,6 @@ public class ProcedurePerformerModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ProcedurePerformerModel]:" + "\n");
-     builder.append("role" + "->" + this.role + "\n"); 
-     builder.append("actor" + "->" + this.actor + "\n"); 
-     builder.append("onBehalfOf" + "->" + this.onBehalfOf + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

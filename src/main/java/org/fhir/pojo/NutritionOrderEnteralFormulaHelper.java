@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.NutritionOrderEnteralFormulaModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class NutritionOrderEnteralFormulaHelper {
 	public static java.util.List<NutritionOrderEnteralFormula> fromArray2Array(java.util.List<NutritionOrderEnteralFormulaModel> list) {
     return

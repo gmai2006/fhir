@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Risk of harmful or undesirable, physiological response which is unique to an individual and associated with exposure to a substance."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlRootElement
@@ -459,6 +460,10 @@ public class AllergyIntolerance  extends DomainResource  {
     return builder.toString();
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum ResourceTypeEnum {
   	AllergyIntolerance,
   	UNKNOWN;
@@ -471,6 +476,10 @@ public class AllergyIntolerance  extends DomainResource  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum ClinicalStatusEnum {
   	active,
   	inactive,
@@ -487,6 +496,10 @@ public class AllergyIntolerance  extends DomainResource  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum VerificationStatusEnum {
   	unconfirmed,
   	confirmed,
@@ -505,6 +518,10 @@ public class AllergyIntolerance  extends DomainResource  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum TypeEnum {
   	allergy,
   	intolerance,
@@ -519,6 +536,10 @@ public class AllergyIntolerance  extends DomainResource  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum CategoryEnum {
   	food,
   	medication,
@@ -541,6 +562,10 @@ public class AllergyIntolerance  extends DomainResource  {
   	  	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum CriticalityEnum {
   	low,
   	high,

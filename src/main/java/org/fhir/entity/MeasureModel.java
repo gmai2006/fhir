@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The Measure resource provides the definition of a quality measure."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="measure")
 public class MeasureModel  implements Serializable {
-	private static final long serialVersionUID = 151967883142089332L;
+	private static final long serialVersionUID = 153159210142939538L;
   /**
   * Description: "This is a Measure resource"
   */
@@ -884,18 +885,8 @@ public class MeasureModel  implements Serializable {
      builder.append("approvalDate" + "->" + this.approvalDate + "\n"); 
      builder.append("lastReviewDate" + "->" + this.lastReviewDate + "\n"); 
      builder.append("effectivePeriod" + "->" + this.effectivePeriod + "\n"); 
-     builder.append("useContext" + "->" + this.useContext + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
-     builder.append("topic" + "->" + this.topic + "\n"); 
-     builder.append("contributor" + "->" + this.contributor + "\n"); 
-     builder.append("contact" + "->" + this.contact + "\n"); 
      builder.append("copyright" + "->" + this.copyright + "\n"); 
-     builder.append("relatedArtifact" + "->" + this.relatedArtifact + "\n"); 
-     builder.append("library" + "->" + this.library + "\n"); 
      builder.append("disclaimer" + "->" + this.disclaimer + "\n"); 
-     builder.append("scoring" + "->" + this.scoring + "\n"); 
-     builder.append("compositeScoring" + "->" + this.compositeScoring + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("riskAdjustment" + "->" + this.riskAdjustment + "\n"); 
      builder.append("rateAggregation" + "->" + this.rateAggregation + "\n"); 
      builder.append("rationale" + "->" + this.rationale + "\n"); 
@@ -904,14 +895,10 @@ public class MeasureModel  implements Serializable {
      builder.append("definition" + "->" + this.definition + "\n"); 
      builder.append("guidance" + "->" + this.guidance + "\n"); 
      builder.append("set" + "->" + this.set + "\n"); 
-     builder.append("group" + "->" + this.group + "\n"); 
-     builder.append("supplementalData" + "->" + this.supplementalData + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

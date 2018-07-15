@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A formal agreement between parties regarding the conduct of business, exchange of information or other matters."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="contractfriendly")
 public class ContractFriendlyModel  implements Serializable {
-	private static final long serialVersionUID = 151967883175737387L;
+	private static final long serialVersionUID = 153159210178733295L;
   /**
   * Description: "Human readable rendering of this Contract in a format and representation intended to enhance comprehension and ensure understandability."
   * Actual type: String;
@@ -173,7 +174,6 @@ public class ContractFriendlyModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[ContractFriendlyModel]:" + "\n");
      builder.append("contentAttachment" + "->" + this.contentAttachment + "\n"); 
-     builder.append("contentReference" + "->" + this.contentReference + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

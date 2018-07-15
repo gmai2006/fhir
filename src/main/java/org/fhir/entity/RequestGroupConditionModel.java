@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A group of related requests that can be used to capture intended activities that have inter-dependencies such as \"give this medication after that one\"."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="requestgroupcondition")
 public class RequestGroupConditionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883221893935L;
+	private static final long serialVersionUID = 153159210223787529L;
   /**
   * Description: "The kind of condition."
   */

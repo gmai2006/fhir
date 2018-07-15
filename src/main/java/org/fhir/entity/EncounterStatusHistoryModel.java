@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="encounterstatushistory")
 public class EncounterStatusHistoryModel  implements Serializable {
-	private static final long serialVersionUID = 151967883195494717L;
+	private static final long serialVersionUID = 153159210197923477L;
   /**
   * Description: "planned | arrived | triaged | in-progress | onleave | finished | cancelled +."
   */

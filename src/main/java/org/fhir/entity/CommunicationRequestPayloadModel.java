@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A request to convey information; e.g. the CDS system proposes that an alert be sent to a responsible provider, the CDS system proposes that the public health agency be notified about a reportable condition."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="communicationrequestpayload")
 public class CommunicationRequestPayloadModel  implements Serializable {
-	private static final long serialVersionUID = 151967883178986539L;
+	private static final long serialVersionUID = 153159210181583417L;
   /**
   * Description: "The communicated content (or for multi-part communications, one portion of the communication)."
   */
@@ -189,7 +190,6 @@ public class CommunicationRequestPayloadModel  implements Serializable {
     builder.append("[CommunicationRequestPayloadModel]:" + "\n");
      builder.append("contentString" + "->" + this.contentString + "\n"); 
      builder.append("contentAttachment" + "->" + this.contentAttachment + "\n"); 
-     builder.append("contentReference" + "->" + this.contentReference + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

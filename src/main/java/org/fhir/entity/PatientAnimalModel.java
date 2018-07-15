@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Demographics and other administrative information about an individual or animal receiving care or other health-related services."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="patientanimal")
 public class PatientAnimalModel  implements Serializable {
-	private static final long serialVersionUID = 151967883177477152L;
+	private static final long serialVersionUID = 153159210179858614L;
   /**
   * Description: "Identifies the high level taxonomic categorization of the kind of animal."
   */
@@ -195,9 +196,6 @@ public class PatientAnimalModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[PatientAnimalModel]:" + "\n");
-     builder.append("species" + "->" + this.species + "\n"); 
-     builder.append("breed" + "->" + this.breed + "\n"); 
-     builder.append("genderStatus" + "->" + this.genderStatus + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

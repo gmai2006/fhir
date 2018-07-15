@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A sample to be used for analysis."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="specimencontainer")
 public class SpecimenContainerModel  implements Serializable {
-	private static final long serialVersionUID = 151967883209762077L;
+	private static final long serialVersionUID = 153159210211667457L;
   /**
   * Description: "Id for container. There may be multiple; a manufacturer's bar code, lab assigned identifier, etc. The container ID may differ from the specimen id in some circumstances."
   * Actual type: List<String>;
@@ -273,11 +274,6 @@ public class SpecimenContainerModel  implements Serializable {
     builder.append("[SpecimenContainerModel]:" + "\n");
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("capacity" + "->" + this.capacity + "\n"); 
-     builder.append("specimenQuantity" + "->" + this.specimenQuantity + "\n"); 
-     builder.append("additiveCodeableConcept" + "->" + this.additiveCodeableConcept + "\n"); 
-     builder.append("additiveReference" + "->" + this.additiveReference + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

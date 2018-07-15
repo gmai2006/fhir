@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.DataElementModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class DataElementHelper {
 	public static java.util.List<DataElement> fromArray2Array(java.util.List<DataElementModel> list) {
     return

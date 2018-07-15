@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.CodeSystem;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface CodeSystemService {
 	public CodeSystem find(String id);
   public List<CodeSystem> select(int maxResult);

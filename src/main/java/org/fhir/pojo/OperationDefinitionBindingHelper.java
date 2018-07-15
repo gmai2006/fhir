@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.OperationDefinitionBindingModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class OperationDefinitionBindingHelper {
 	public static java.util.List<OperationDefinitionBinding> fromArray2Array(java.util.List<OperationDefinitionBindingModel> list) {
     return

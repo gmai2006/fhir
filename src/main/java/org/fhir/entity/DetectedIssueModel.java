@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Indicates an actual or potential clinical issue with or between one or more active or proposed clinical actions for a patient; e.g. Drug-drug interaction, Ineffective treatment frequency, Procedure-condition conflict, etc."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="detectedissue")
 public class DetectedIssueModel  implements Serializable {
-	private static final long serialVersionUID = 15196788321784426L;
+	private static final long serialVersionUID = 153159210219652204L;
   /**
   * Description: "This is a DetectedIssue resource"
   */
@@ -434,21 +435,14 @@ public class DetectedIssueModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
      builder.append("severity" + "->" + this.severity + "\n"); 
-     builder.append("patient" + "->" + this.patient + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
-     builder.append("author" + "->" + this.author + "\n"); 
-     builder.append("implicated" + "->" + this.implicated + "\n"); 
      builder.append("detail" + "->" + this.detail + "\n"); 
      builder.append("reference" + "->" + this.reference + "\n"); 
-     builder.append("mitigation" + "->" + this.mitigation + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

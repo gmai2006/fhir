@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Describes a required data item for evaluation in terms of the type of data, and optional code or date-based filters of the data."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="datarequirement")
 public class DataRequirementModel  implements Serializable {
-	private static final long serialVersionUID = 151967883188660262L;
+	private static final long serialVersionUID = 153159210191813718L;
   /**
   * Description: "The type of the required data, specified as the type name of a resource. For profiles, this value is set to the type of the base resource of the profile."
   */
@@ -201,8 +202,6 @@ public class DataRequirementModel  implements Serializable {
      builder.append("type" + "->" + this.type + "\n"); 
      builder.append("profile" + "->" + this.profile + "\n"); 
      builder.append("mustSupport" + "->" + this.mustSupport + "\n"); 
-     builder.append("codeFilter" + "->" + this.codeFilter + "\n"); 
-     builder.append("dateFilter" + "->" + this.dateFilter + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;

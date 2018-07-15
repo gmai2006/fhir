@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Specifies contact information for a person or organization."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="contactdetail")
 public class ContactDetailModel  implements Serializable {
-	private static final long serialVersionUID = 151967883209471883L;
+	private static final long serialVersionUID = 153159210211056991L;
   /**
   * Description: "The name of an individual to contact."
   */

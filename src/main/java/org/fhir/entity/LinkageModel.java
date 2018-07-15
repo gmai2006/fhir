@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Identifies two or more records (resource instances) that are referring to the same real-world \"occurrence\"."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="linkage")
 public class LinkageModel  implements Serializable {
-	private static final long serialVersionUID = 151967883182311076L;
+	private static final long serialVersionUID = 153159210185477016L;
   /**
   * Description: "This is a Linkage resource"
   */
@@ -289,14 +290,10 @@ public class LinkageModel  implements Serializable {
     builder.append("[LinkageModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("active" + "->" + this.active + "\n"); 
-     builder.append("author" + "->" + this.author + "\n"); 
-     builder.append("item" + "->" + this.item + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.MessageHeaderResponseModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class MessageHeaderResponseHelper {
 	public static java.util.List<MessageHeaderResponse> fromArray2Array(java.util.List<MessageHeaderResponseModel> list) {
     return

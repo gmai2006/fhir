@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.HealthcareServiceModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class HealthcareServiceHelper {
 	public static java.util.List<HealthcareService> fromArray2Array(java.util.List<HealthcareServiceModel> list) {
     return

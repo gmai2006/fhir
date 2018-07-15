@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This is the base resource type for everything."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="resource")
 public class ResourceModel  implements Serializable {
-	private static final long serialVersionUID = 15196788320859437L;
+	private static final long serialVersionUID = 153159210210127300L;
   /**
   * Description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
   */
@@ -125,7 +126,6 @@ public class ResourceModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[ResourceModel]:" + "\n");
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

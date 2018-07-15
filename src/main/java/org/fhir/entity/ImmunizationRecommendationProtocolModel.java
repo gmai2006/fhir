@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A patient's point-in-time immunization and recommendation (i.e. forecasting a patient's immunization eligibility according to a published schedule) with optional supporting justification."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="immunizationrecommendationprotocol")
 public class ImmunizationRecommendationProtocolModel  implements Serializable {
-	private static final long serialVersionUID = 1519678831861647L;
+	private static final long serialVersionUID = 153159210189464400L;
   /**
   * Description: "Indicates the nominal position in a series of the next dose.  This is the recommended dose number as per a specified protocol."
   */
@@ -201,7 +202,6 @@ public class ImmunizationRecommendationProtocolModel  implements Serializable {
     builder.append("[ImmunizationRecommendationProtocolModel]:" + "\n");
      builder.append("doseSequence" + "->" + this.doseSequence + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("authority" + "->" + this.authority + "\n"); 
      builder.append("series" + "->" + this.series + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

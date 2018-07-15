@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A homogeneous material with a definite composition."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="substanceinstance")
 public class SubstanceInstanceModel  implements Serializable {
-	private static final long serialVersionUID = 151967883219829935L;
+	private static final long serialVersionUID = 153159210221785504L;
   /**
   * Description: "Identifier associated with the package/container (usually a label affixed directly)."
   * Actual type: String;
@@ -190,7 +191,6 @@ public class SubstanceInstanceModel  implements Serializable {
     builder.append("[SubstanceInstanceModel]:" + "\n");
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("expiry" + "->" + this.expiry + "\n"); 
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

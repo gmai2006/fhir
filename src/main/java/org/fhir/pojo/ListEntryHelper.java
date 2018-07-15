@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ListEntryModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ListEntryHelper {
 	public static java.util.List<ListEntry> fromArray2Array(java.util.List<ListEntryModel> list) {
     return

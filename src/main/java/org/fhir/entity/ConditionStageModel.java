@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A clinical condition, problem, diagnosis, or other event, situation, issue, or clinical concept that has risen to a level of concern."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="conditionstage")
 public class ConditionStageModel  implements Serializable {
-	private static final long serialVersionUID = 151967883212263198L;
+	private static final long serialVersionUID = 153159210214069675L;
   /**
   * Description: "A simple summary of the stage such as \"Stage 3\". The determination of the stage is disease-specific."
   */
@@ -174,8 +175,6 @@ public class ConditionStageModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ConditionStageModel]:" + "\n");
-     builder.append("summary" + "->" + this.summary + "\n"); 
-     builder.append("assessment" + "->" + this.assessment + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

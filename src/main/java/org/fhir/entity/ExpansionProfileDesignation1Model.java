@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Resource to define constraints on the Expansion of a FHIR ValueSet."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="expansionprofiledesignation1")
 public class ExpansionProfileDesignation1Model  implements Serializable {
-	private static final long serialVersionUID = 1519678831706639L;
+	private static final long serialVersionUID = 153159210174365486L;
   /**
   * Description: "The language this designation is defined for."
   */
@@ -170,7 +171,6 @@ public class ExpansionProfileDesignation1Model  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[ExpansionProfileDesignation1Model]:" + "\n");
      builder.append("language" + "->" + this.language + "\n"); 
-     builder.append("use" + "->" + this.use + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.TaskRestrictionModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class TaskRestrictionHelper {
 	public static java.util.List<TaskRestriction> fromArray2Array(java.util.List<TaskRestrictionModel> list) {
     return

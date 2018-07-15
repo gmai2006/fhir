@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.SupplyDeliverySuppliedItemModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class SupplyDeliverySuppliedItemHelper {
 	public static java.util.List<SupplyDeliverySuppliedItem> fromArray2Array(java.util.List<SupplyDeliverySuppliedItemModel> list) {
     return

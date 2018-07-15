@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Raw data describing a biological sequence."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="sequence")
 public class SequenceModel  implements Serializable {
-	private static final long serialVersionUID = 151967883210251054L;
+	private static final long serialVersionUID = 153159210212061178L;
   /**
   * Description: "This is a Sequence resource"
   */
@@ -525,24 +526,12 @@ public class SequenceModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("type" + "->" + this.type + "\n"); 
      builder.append("coordinateSystem" + "->" + this.coordinateSystem + "\n"); 
-     builder.append("patient" + "->" + this.patient + "\n"); 
-     builder.append("specimen" + "->" + this.specimen + "\n"); 
-     builder.append("device" + "->" + this.device + "\n"); 
-     builder.append("performer" + "->" + this.performer + "\n"); 
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
-     builder.append("referenceSeq" + "->" + this.referenceSeq + "\n"); 
-     builder.append("variant" + "->" + this.variant + "\n"); 
      builder.append("observedSeq" + "->" + this.observedSeq + "\n"); 
-     builder.append("quality" + "->" + this.quality + "\n"); 
      builder.append("readCoverage" + "->" + this.readCoverage + "\n"); 
-     builder.append("repository" + "->" + this.repository + "\n"); 
-     builder.append("pointer" + "->" + this.pointer + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

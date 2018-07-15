@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ImmunizationRecommendationDateCriterionModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ImmunizationRecommendationDateCriterionHelper {
 	public static java.util.List<ImmunizationRecommendationDateCriterion> fromArray2Array(java.util.List<ImmunizationRecommendationDateCriterionModel> list) {
     return

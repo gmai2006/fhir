@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A binary resource can contain any content, whether text, image, pdf, zip archive, etc."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="fhirbinary")
 public class BinaryModel  implements Serializable {
-	private static final long serialVersionUID = 151967883164339354L;
+	private static final long serialVersionUID = 15315921016851367L;
   /**
   * Description: "This is a Binary resource"
   */
@@ -198,10 +199,8 @@ public class BinaryModel  implements Serializable {
     builder.append("[BinaryModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("contentType" + "->" + this.contentType + "\n"); 
-     builder.append("securityContext" + "->" + this.securityContext + "\n"); 
      builder.append("content" + "->" + this.content + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

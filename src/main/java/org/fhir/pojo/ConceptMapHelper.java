@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ConceptMapModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ConceptMapHelper {
 	public static java.util.List<ConceptMap> fromArray2Array(java.util.List<ConceptMapModel> list) {
     return

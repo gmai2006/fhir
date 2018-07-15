@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A record of a healthcare consumer’s policy choices, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="consentactor1")
 public class ConsentActor1Model  implements Serializable {
-	private static final long serialVersionUID = 151967883172862416L;
+	private static final long serialVersionUID = 153159210176142332L;
   /**
   * Description: "How the individual is involved in the resources content that is described in the exception."
   */
@@ -174,8 +175,6 @@ public class ConsentActor1Model  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ConsentActor1Model]:" + "\n");
-     builder.append("role" + "->" + this.role + "\n"); 
-     builder.append("reference" + "->" + this.reference + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

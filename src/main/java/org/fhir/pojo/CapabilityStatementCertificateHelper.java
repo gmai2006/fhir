@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.CapabilityStatementCertificateModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class CapabilityStatementCertificateHelper {
 	public static java.util.List<CapabilityStatementCertificate> fromArray2Array(java.util.List<CapabilityStatementCertificateModel> list) {
     return

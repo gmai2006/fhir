@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Describes a measurement, calculation or setting capability of a medical device."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="devicemetriccalibration")
 public class DeviceMetricCalibrationModel  implements Serializable {
-	private static final long serialVersionUID = 151967883151283108L;
+	private static final long serialVersionUID = 153159210153396013L;
   /**
   * Description: "Describes the type of the calibration method."
   */

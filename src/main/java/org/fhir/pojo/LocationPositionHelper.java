@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.LocationPositionModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class LocationPositionHelper {
 	public static java.util.List<LocationPosition> fromArray2Array(java.util.List<LocationPositionModel> list) {
     return

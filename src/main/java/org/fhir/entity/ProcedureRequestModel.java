@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A record of a request for diagnostic investigations, treatments, or operations to be performed."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="procedurerequest")
 public class ProcedureRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151967883220539744L;
+	private static final long serialVersionUID = 153159210222449254L;
   /**
   * Description: "This is a ProcedureRequest resource"
   */
@@ -794,40 +795,21 @@ public class ProcedureRequestModel  implements Serializable {
     builder.append("[ProcedureRequestModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("definition" + "->" + this.definition + "\n"); 
-     builder.append("basedOn" + "->" + this.basedOn + "\n"); 
-     builder.append("replaces" + "->" + this.replaces + "\n"); 
      builder.append("requisition" + "->" + this.requisition + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("intent" + "->" + this.intent + "\n"); 
      builder.append("priority" + "->" + this.priority + "\n"); 
      builder.append("doNotPerform" + "->" + this.doNotPerform + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
-     builder.append("context" + "->" + this.context + "\n"); 
      builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime + "\n"); 
      builder.append("occurrencePeriod" + "->" + this.occurrencePeriod + "\n"); 
      builder.append("occurrenceTiming" + "->" + this.occurrenceTiming + "\n"); 
      builder.append("asNeededBoolean" + "->" + this.asNeededBoolean + "\n"); 
-     builder.append("asNeededCodeableConcept" + "->" + this.asNeededCodeableConcept + "\n"); 
      builder.append("authoredOn" + "->" + this.authoredOn + "\n"); 
-     builder.append("requester" + "->" + this.requester + "\n"); 
-     builder.append("performerType" + "->" + this.performerType + "\n"); 
-     builder.append("performer" + "->" + this.performer + "\n"); 
-     builder.append("reasonCode" + "->" + this.reasonCode + "\n"); 
-     builder.append("reasonReference" + "->" + this.reasonReference + "\n"); 
-     builder.append("supportingInfo" + "->" + this.supportingInfo + "\n"); 
-     builder.append("specimen" + "->" + this.specimen + "\n"); 
-     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
-     builder.append("relevantHistory" + "->" + this.relevantHistory + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A code system resource specifies a set of codes drawn from one or more code systems."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="codesystem")
 public class CodeSystemModel  implements Serializable {
-	private static final long serialVersionUID = 151967883192050642L;
+	private static final long serialVersionUID = 15315921019494308L;
   /**
   * Description: "This is a CodeSystem resource"
   */
@@ -657,10 +658,7 @@ public class CodeSystemModel  implements Serializable {
      builder.append("experimental" + "->" + this.experimental + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("publisher" + "->" + this.publisher + "\n"); 
-     builder.append("contact" + "->" + this.contact + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("useContext" + "->" + this.useContext + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("purpose" + "->" + this.purpose + "\n"); 
      builder.append("copyright" + "->" + this.copyright + "\n"); 
      builder.append("caseSensitive" + "->" + this.caseSensitive + "\n"); 
@@ -670,15 +668,10 @@ public class CodeSystemModel  implements Serializable {
      builder.append("versionNeeded" + "->" + this.versionNeeded + "\n"); 
      builder.append("content" + "->" + this.content + "\n"); 
      builder.append("count" + "->" + this.count + "\n"); 
-     builder.append("filter" + "->" + this.filter + "\n"); 
-     builder.append("property" + "->" + this.property + "\n"); 
-     builder.append("concept" + "->" + this.concept + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

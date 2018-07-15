@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="nutritionorderenteralformula")
 public class NutritionOrderEnteralFormulaModel  implements Serializable {
-	private static final long serialVersionUID = 151967883206960559L;
+	private static final long serialVersionUID = 153159210208590067L;
   /**
   * Description: "The type of enteral or infant formula such as an adult standard formula with fiber or a soy-based infant formula."
   */
@@ -303,14 +304,8 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[NutritionOrderEnteralFormulaModel]:" + "\n");
-     builder.append("baseFormulaType" + "->" + this.baseFormulaType + "\n"); 
      builder.append("baseFormulaProductName" + "->" + this.baseFormulaProductName + "\n"); 
-     builder.append("additiveType" + "->" + this.additiveType + "\n"); 
      builder.append("additiveProductName" + "->" + this.additiveProductName + "\n"); 
-     builder.append("caloricDensity" + "->" + this.caloricDensity + "\n"); 
-     builder.append("routeofAdministration" + "->" + this.routeofAdministration + "\n"); 
-     builder.append("administration" + "->" + this.administration + "\n"); 
-     builder.append("maxVolumeToDeliver" + "->" + this.maxVolumeToDeliver + "\n"); 
      builder.append("administrationInstruction" + "->" + this.administrationInstruction + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

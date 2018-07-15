@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.CommunicationRequestRequesterModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class CommunicationRequestRequesterHelper {
 	public static java.util.List<CommunicationRequestRequester> fromArray2Array(java.util.List<CommunicationRequestRequesterModel> list) {
     return

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A formal computable definition of a graph of resources - that is, a coherent set of resources that form a graph by following references. The Graph Definition resource defines a set and makes rules about the set."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="graphdefinitionlink")
 public class GraphDefinitionLinkModel  implements Serializable {
-	private static final long serialVersionUID = 151967883188515659L;
+	private static final long serialVersionUID = 153159210191721718L;
   /**
   * Description: "Path in the resource that contains the link."
   */
@@ -234,7 +235,6 @@ public class GraphDefinitionLinkModel  implements Serializable {
      builder.append("min" + "->" + this.min + "\n"); 
      builder.append("max" + "->" + this.max + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("target" + "->" + this.target + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

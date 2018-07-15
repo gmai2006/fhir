@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ProvenanceEntityModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ProvenanceEntityHelper {
 	public static java.util.List<ProvenanceEntity> fromArray2Array(java.util.List<ProvenanceEntityModel> list) {
     return

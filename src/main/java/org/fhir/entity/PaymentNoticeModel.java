@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides the status of the payment for goods and services rendered, and the request and response resource references."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="paymentnotice")
 public class PaymentNoticeModel  implements Serializable {
-	private static final long serialVersionUID = 151967883168876196L;
+	private static final long serialVersionUID = 15315921017297248L;
   /**
   * Description: "This is a PaymentNotice resource"
   */
@@ -426,20 +427,12 @@ public class PaymentNoticeModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("request" + "->" + this.request + "\n"); 
-     builder.append("response" + "->" + this.response + "\n"); 
      builder.append("statusDate" + "->" + this.statusDate + "\n"); 
      builder.append("created" + "->" + this.created + "\n"); 
-     builder.append("target" + "->" + this.target + "\n"); 
-     builder.append("provider" + "->" + this.provider + "\n"); 
-     builder.append("organization" + "->" + this.organization + "\n"); 
-     builder.append("paymentStatus" + "->" + this.paymentStatus + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

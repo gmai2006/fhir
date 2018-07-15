@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.SupplyRequest;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface SupplyRequestService {
 	public SupplyRequest find(String id);
   public List<SupplyRequest> select(int maxResult);

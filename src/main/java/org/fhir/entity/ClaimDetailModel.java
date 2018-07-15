@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="claimdetail")
 public class ClaimDetailModel  implements Serializable {
-	private static final long serialVersionUID = 151967883204962396L;
+	private static final long serialVersionUID = 153159210206838435L;
   /**
   * Description: "A service line number."
   */
@@ -375,17 +376,7 @@ public class ClaimDetailModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[ClaimDetailModel]:" + "\n");
      builder.append("sequence" + "->" + this.sequence + "\n"); 
-     builder.append("revenue" + "->" + this.revenue + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("service" + "->" + this.service + "\n"); 
-     builder.append("modifier" + "->" + this.modifier + "\n"); 
-     builder.append("programCode" + "->" + this.programCode + "\n"); 
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
-     builder.append("unitPrice" + "->" + this.unitPrice + "\n"); 
      builder.append("factor" + "->" + this.factor + "\n"); 
-     builder.append("net" + "->" + this.net + "\n"); 
-     builder.append("udi" + "->" + this.udi + "\n"); 
-     builder.append("subDetail" + "->" + this.subDetail + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

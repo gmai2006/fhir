@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.MedicationRequestRequesterModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class MedicationRequestRequesterHelper {
 	public static java.util.List<MedicationRequestRequester> fromArray2Array(java.util.List<MedicationRequestRequesterModel> list) {
     return

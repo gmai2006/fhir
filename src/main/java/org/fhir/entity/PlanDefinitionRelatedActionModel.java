@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="plandefinitionrelatedaction")
 public class PlanDefinitionRelatedActionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883219432098L;
+	private static final long serialVersionUID = 153159210221343507L;
   /**
   * Description: "The element id of the related action."
   */

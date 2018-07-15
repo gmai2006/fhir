@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A formal computable definition of an operation (on the RESTful interface) or a named query (using the search interaction)."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="operationdefinitionbinding")
 public class OperationDefinitionBindingModel  implements Serializable {
-	private static final long serialVersionUID = 151967883181418528L;
+	private static final long serialVersionUID = 153159210184267904L;
   /**
   * Description: "Indicates the degree of conformance expectations associated with this binding - that is, the degree to which the provided value set must be adhered to in the instances."
   */
@@ -185,7 +186,6 @@ public class OperationDefinitionBindingModel  implements Serializable {
     builder.append("[OperationDefinitionBindingModel]:" + "\n");
      builder.append("strength" + "->" + this.strength + "\n"); 
      builder.append("valueSetUri" + "->" + this.valueSetUri + "\n"); 
-     builder.append("valueSetReference" + "->" + this.valueSetReference + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "An action that is or was performed on a patient. This can be a physical intervention like an operation, or less invasive like counseling or hypnotherapy."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="procedurefocaldevice")
 public class ProcedureFocalDeviceModel  implements Serializable {
-	private static final long serialVersionUID = 151967883226898792L;
+	private static final long serialVersionUID = 153159210228728573L;
   /**
   * Description: "The kind of change that happened to the device during the procedure."
   */
@@ -174,8 +175,6 @@ public class ProcedureFocalDeviceModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ProcedureFocalDeviceModel]:" + "\n");
-     builder.append("action" + "->" + this.action + "\n"); 
-     builder.append("manipulated" + "->" + this.manipulated + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The subscription resource is used to define a push based subscription from a server to another system. Once a subscription is registered with the server, the server checks every resource that is created or updated, and if the resource matches the given criteria, it sends a message on the defined \"channel\" so that another system is able to take an appropriate action."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="subscription")
 public class SubscriptionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883180027565L;
+	private static final long serialVersionUID = 153159210182569073L;
   /**
   * Description: "This is a Subscription resource"
   */
@@ -373,14 +374,10 @@ public class SubscriptionModel  implements Serializable {
      builder.append("reason" + "->" + this.reason + "\n"); 
      builder.append("criteria" + "->" + this.criteria + "\n"); 
      builder.append("error" + "->" + this.error + "\n"); 
-     builder.append("channel" + "->" + this.channel + "\n"); 
-     builder.append("tag" + "->" + this.tag + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

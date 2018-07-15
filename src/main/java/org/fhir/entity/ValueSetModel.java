@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A value set specifies a set of codes drawn from one or more code systems."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="valueset")
 public class ValueSetModel  implements Serializable {
-	private static final long serialVersionUID = 151967883227389856L;
+	private static final long serialVersionUID = 153159210229391353L;
   /**
   * Description: "This is a ValueSet resource"
   */
@@ -560,22 +561,15 @@ public class ValueSetModel  implements Serializable {
      builder.append("experimental" + "->" + this.experimental + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("publisher" + "->" + this.publisher + "\n"); 
-     builder.append("contact" + "->" + this.contact + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("useContext" + "->" + this.useContext + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("immutable" + "->" + this.immutable + "\n"); 
      builder.append("purpose" + "->" + this.purpose + "\n"); 
      builder.append("copyright" + "->" + this.copyright + "\n"); 
      builder.append("extensible" + "->" + this.extensible + "\n"); 
-     builder.append("compose" + "->" + this.compose + "\n"); 
-     builder.append("expansion" + "->" + this.expansion + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

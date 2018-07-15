@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.AccountModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class AccountHelper {
 	public static java.util.List<Account> fromArray2Array(java.util.List<AccountModel> list) {
     return

@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.CodeSystemConceptModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class CodeSystemConceptHelper {
 	public static java.util.List<CodeSystemConcept> fromArray2Array(java.util.List<CodeSystemConceptModel> list) {
     return

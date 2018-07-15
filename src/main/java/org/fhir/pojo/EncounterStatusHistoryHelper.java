@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.EncounterStatusHistoryModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class EncounterStatusHistoryHelper {
 	public static java.util.List<EncounterStatusHistory> fromArray2Array(java.util.List<EncounterStatusHistoryModel> list) {
     return

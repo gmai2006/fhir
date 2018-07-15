@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A collection of documents compiled for a purpose together with metadata that applies to the collection."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="documentmanifestrelated")
 public class DocumentManifestRelatedModel  implements Serializable {
-	private static final long serialVersionUID = 151967883190539871L;
+	private static final long serialVersionUID = 153159210193484068L;
   /**
   * Description: "Related identifier to this DocumentManifest.  For example, Order numbers, accession numbers, XDW workflow numbers."
   * Actual type: String;
@@ -173,7 +174,6 @@ public class DocumentManifestRelatedModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[DocumentManifestRelatedModel]:" + "\n");
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("ref" + "->" + this.ref + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

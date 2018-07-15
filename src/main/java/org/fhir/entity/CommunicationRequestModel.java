@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A request to convey information; e.g. the CDS system proposes that an alert be sent to a responsible provider, the CDS system proposes that the public health agency be notified about a reportable condition."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="communicationrequest")
 public class CommunicationRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151967883168436990L;
+	private static final long serialVersionUID = 153159210172530443L;
   /**
   * Description: "This is a CommunicationRequest resource"
   */
@@ -645,32 +646,17 @@ public class CommunicationRequestModel  implements Serializable {
     builder.append("[CommunicationRequestModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("basedOn" + "->" + this.basedOn + "\n"); 
-     builder.append("replaces" + "->" + this.replaces + "\n"); 
      builder.append("groupIdentifier" + "->" + this.groupIdentifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
      builder.append("priority" + "->" + this.priority + "\n"); 
-     builder.append("medium" + "->" + this.medium + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
-     builder.append("recipient" + "->" + this.recipient + "\n"); 
-     builder.append("topic" + "->" + this.topic + "\n"); 
-     builder.append("context" + "->" + this.context + "\n"); 
-     builder.append("payload" + "->" + this.payload + "\n"); 
      builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime + "\n"); 
      builder.append("occurrencePeriod" + "->" + this.occurrencePeriod + "\n"); 
      builder.append("authoredOn" + "->" + this.authoredOn + "\n"); 
-     builder.append("sender" + "->" + this.sender + "\n"); 
-     builder.append("requester" + "->" + this.requester + "\n"); 
-     builder.append("reasonCode" + "->" + this.reasonCode + "\n"); 
-     builder.append("reasonReference" + "->" + this.reasonReference + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

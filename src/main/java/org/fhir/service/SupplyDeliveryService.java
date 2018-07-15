@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.SupplyDelivery;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface SupplyDeliveryService {
 	public SupplyDelivery find(String id);
   public List<SupplyDelivery> select(int maxResult);

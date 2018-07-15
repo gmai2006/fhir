@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.RelatedArtifactModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class RelatedArtifactHelper {
 	public static java.util.List<RelatedArtifact> fromArray2Array(java.util.List<RelatedArtifactModel> list) {
     return

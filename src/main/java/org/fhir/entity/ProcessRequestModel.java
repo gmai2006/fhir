@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides the target, request and response, and action details for an action to be performed by the target on or about existing resources."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="processrequest")
 public class ProcessRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151967883217135330L;
+	private static final long serialVersionUID = 153159210218911464L;
   /**
   * Description: "This is a ProcessRequest resource"
   */
@@ -505,24 +506,16 @@ public class ProcessRequestModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("action" + "->" + this.action + "\n"); 
-     builder.append("target" + "->" + this.target + "\n"); 
      builder.append("created" + "->" + this.created + "\n"); 
-     builder.append("provider" + "->" + this.provider + "\n"); 
-     builder.append("organization" + "->" + this.organization + "\n"); 
-     builder.append("request" + "->" + this.request + "\n"); 
-     builder.append("response" + "->" + this.response + "\n"); 
      builder.append("nullify" + "->" + this.nullify + "\n"); 
      builder.append("reference" + "->" + this.reference + "\n"); 
-     builder.append("item" + "->" + this.item + "\n"); 
      builder.append("include" + "->" + this.include + "\n"); 
      builder.append("exclude" + "->" + this.exclude + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

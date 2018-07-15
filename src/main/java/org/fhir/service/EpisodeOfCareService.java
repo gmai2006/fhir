@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.EpisodeOfCare;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface EpisodeOfCareService {
 	public EpisodeOfCare find(String id);
   public List<EpisodeOfCare> select(int maxResult);

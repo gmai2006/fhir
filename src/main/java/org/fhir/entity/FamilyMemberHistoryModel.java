@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Significant health events and conditions for a person related to the patient relevant in the context of care for the patient."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="familymemberhistory")
 public class FamilyMemberHistoryModel  implements Serializable {
-	private static final long serialVersionUID = 151967883201092387L;
+	private static final long serialVersionUID = 153159210203134944L;
   /**
   * Description: "This is a FamilyMemberHistory resource"
   */
@@ -695,14 +696,10 @@ public class FamilyMemberHistoryModel  implements Serializable {
     builder.append("[FamilyMemberHistoryModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("definition" + "->" + this.definition + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("notDone" + "->" + this.notDone + "\n"); 
-     builder.append("notDoneReason" + "->" + this.notDoneReason + "\n"); 
-     builder.append("patient" + "->" + this.patient + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
-     builder.append("relationship" + "->" + this.relationship + "\n"); 
      builder.append("gender" + "->" + this.gender + "\n"); 
      builder.append("bornPeriod" + "->" + this.bornPeriod + "\n"); 
      builder.append("bornDate" + "->" + this.bornDate + "\n"); 
@@ -716,16 +713,11 @@ public class FamilyMemberHistoryModel  implements Serializable {
      builder.append("deceasedRange" + "->" + this.deceasedRange + "\n"); 
      builder.append("deceasedDate" + "->" + this.deceasedDate + "\n"); 
      builder.append("deceasedString" + "->" + this.deceasedString + "\n"); 
-     builder.append("reasonCode" + "->" + this.reasonCode + "\n"); 
-     builder.append("reasonReference" + "->" + this.reasonReference + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
-     builder.append("condition" + "->" + this.condition + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ImmunizationRecommendationProtocolModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ImmunizationRecommendationProtocolHelper {
 	public static java.util.List<ImmunizationRecommendationProtocol> fromArray2Array(java.util.List<ImmunizationRecommendationProtocolModel> list) {
     return

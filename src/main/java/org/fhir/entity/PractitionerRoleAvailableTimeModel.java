@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="practitionerroleavailabletime")
 public class PractitionerRoleAvailableTimeModel  implements Serializable {
-	private static final long serialVersionUID = 151967883209224415L;
+	private static final long serialVersionUID = 15315921021087343L;
   /**
   * Description: "Indicates which days of the week are available between the start and end Times."
   */

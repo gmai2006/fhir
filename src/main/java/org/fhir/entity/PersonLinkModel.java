@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Demographics and administrative information about a person independent of a specific health-related context."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="personlink")
 public class PersonLinkModel  implements Serializable {
-	private static final long serialVersionUID = 151967883174951321L;
+	private static final long serialVersionUID = 153159210177943486L;
   /**
   * Description: "The resource to which this actual person is associated."
   */
@@ -168,7 +169,6 @@ public class PersonLinkModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[PersonLinkModel]:" + "\n");
-     builder.append("target" + "->" + this.target + "\n"); 
      builder.append("assurance" + "->" + this.assurance + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

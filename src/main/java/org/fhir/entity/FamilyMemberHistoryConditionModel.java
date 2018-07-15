@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Significant health events and conditions for a person related to the patient relevant in the context of care for the patient."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="familymemberhistorycondition")
 public class FamilyMemberHistoryConditionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883200743285L;
+	private static final long serialVersionUID = 153159210203060017L;
   /**
   * Description: "The actual condition specified. Could be a coded condition (like MI or Diabetes) or a less specific string like 'cancer' depending on how much is known about the condition and the capabilities of the creating system."
   */
@@ -265,8 +266,6 @@ public class FamilyMemberHistoryConditionModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[FamilyMemberHistoryConditionModel]:" + "\n");
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("outcome" + "->" + this.outcome + "\n"); 
      builder.append("onsetAge" + "->" + this.onsetAge + "\n"); 
      builder.append("onsetRange" + "->" + this.onsetRange + "\n"); 
      builder.append("onsetPeriod" + "->" + this.onsetPeriod + "\n"); 

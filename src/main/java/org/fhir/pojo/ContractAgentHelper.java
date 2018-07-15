@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ContractAgentModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ContractAgentHelper {
 	public static java.util.List<ContractAgent> fromArray2Array(java.util.List<ContractAgentModel> list) {
     return

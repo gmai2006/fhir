@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The formal description of a single piece of information that can be gathered and reported."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="dataelement")
 public class DataElementModel  implements Serializable {
-	private static final long serialVersionUID = 151967883227663620L;
+	private static final long serialVersionUID = 153159210229691806L;
   /**
   * Description: "This is a DataElement resource"
   */
@@ -514,19 +515,13 @@ public class DataElementModel  implements Serializable {
      builder.append("publisher" + "->" + this.publisher + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("title" + "->" + this.title + "\n"); 
-     builder.append("contact" + "->" + this.contact + "\n"); 
-     builder.append("useContext" + "->" + this.useContext + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("copyright" + "->" + this.copyright + "\n"); 
      builder.append("stringency" + "->" + this.stringency + "\n"); 
-     builder.append("mapping" + "->" + this.mapping + "\n"); 
      builder.append("element" + "->" + this.element + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

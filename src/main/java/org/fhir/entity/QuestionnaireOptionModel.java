@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A structured set of questions intended to guide the collection of answers from end-users. Questionnaires provide detailed control over order, presentation, phraseology and grouping to allow coherent, consistent data collection."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="questionnaireoption")
 public class QuestionnaireOptionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883190713728L;
+	private static final long serialVersionUID = 153159210193696818L;
   /**
   * Description: "A potential answer that's allowed as the answer to this question."
   */
@@ -220,7 +221,6 @@ public class QuestionnaireOptionModel  implements Serializable {
      builder.append("valueDate" + "->" + this.valueDate + "\n"); 
      builder.append("valueTime" + "->" + this.valueTime + "\n"); 
      builder.append("valueString" + "->" + this.valueString + "\n"); 
-     builder.append("valueCoding" + "->" + this.valueCoding + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

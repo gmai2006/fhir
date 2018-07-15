@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The Care Team includes all the people and organizations who plan to participate in the coordination and delivery of care for a patient."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="careteamparticipant")
 public class CareTeamParticipantModel  implements Serializable {
-	private static final long serialVersionUID = 151967883215498390L;
+	private static final long serialVersionUID = 153159210217123266L;
   /**
   * Description: "Indicates specific responsibility of an individual within the care team, such as \"Primary care physician\", \"Trained social worker counselor\", \"Caregiver\", etc."
   */
@@ -214,9 +215,6 @@ public class CareTeamParticipantModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[CareTeamParticipantModel]:" + "\n");
-     builder.append("role" + "->" + this.role + "\n"); 
-     builder.append("member" + "->" + this.member + "\n"); 
-     builder.append("onBehalfOf" + "->" + this.onBehalfOf + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

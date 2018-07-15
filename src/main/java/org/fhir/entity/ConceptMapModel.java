@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A statement of relationships from one set of concepts to one or more other concepts - either code systems or data elements, or classes in class models."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="conceptmap")
 public class ConceptMapModel  implements Serializable {
-	private static final long serialVersionUID = 151967883154732826L;
+	private static final long serialVersionUID = 153159210156824094L;
   /**
   * Description: "This is a ConceptMap resource"
   */
@@ -581,23 +582,15 @@ public class ConceptMapModel  implements Serializable {
      builder.append("experimental" + "->" + this.experimental + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("publisher" + "->" + this.publisher + "\n"); 
-     builder.append("contact" + "->" + this.contact + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("useContext" + "->" + this.useContext + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("purpose" + "->" + this.purpose + "\n"); 
      builder.append("copyright" + "->" + this.copyright + "\n"); 
      builder.append("sourceUri" + "->" + this.sourceUri + "\n"); 
-     builder.append("sourceReference" + "->" + this.sourceReference + "\n"); 
      builder.append("targetUri" + "->" + this.targetUri + "\n"); 
-     builder.append("targetReference" + "->" + this.targetReference + "\n"); 
-     builder.append("group" + "->" + this.group + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

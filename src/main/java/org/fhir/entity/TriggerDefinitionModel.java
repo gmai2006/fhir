@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A description of a triggering event."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="triggerdefinition")
 public class TriggerDefinitionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883196959491L;
+	private static final long serialVersionUID = 15315921019945274L;
   /**
   * Description: "The type of triggering event."
   */
@@ -236,10 +237,8 @@ public class TriggerDefinitionModel  implements Serializable {
      builder.append("type" + "->" + this.type + "\n"); 
      builder.append("eventName" + "->" + this.eventName + "\n"); 
      builder.append("eventTimingTiming" + "->" + this.eventTimingTiming + "\n"); 
-     builder.append("eventTimingReference" + "->" + this.eventTimingReference + "\n"); 
      builder.append("eventTimingDate" + "->" + this.eventTimingDate + "\n"); 
      builder.append("eventTimingDateTime" + "->" + this.eventTimingDateTime + "\n"); 
-     builder.append("eventData" + "->" + this.eventData + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;

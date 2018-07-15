@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.HealthcareServiceNotAvailableModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class HealthcareServiceNotAvailableHelper {
 	public static java.util.List<HealthcareServiceNotAvailable> fromArray2Array(java.util.List<HealthcareServiceNotAvailableModel> list) {
     return

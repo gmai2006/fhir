@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A patient's point-in-time immunization and recommendation (i.e. forecasting a patient's immunization eligibility according to a published schedule) with optional supporting justification."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="immunizationrecommendationrecommendation")
 public class ImmunizationRecommendationRecommendationModel  implements Serializable {
-	private static final long serialVersionUID = 15196788321046511L;
+	private static final long serialVersionUID = 153159210212216103L;
   /**
   * Description: "The date the immunization recommendation was created."
   */
@@ -312,14 +313,7 @@ public class ImmunizationRecommendationRecommendationModel  implements Serializa
     StringBuilder builder = new StringBuilder();
     builder.append("[ImmunizationRecommendationRecommendationModel]:" + "\n");
      builder.append("date" + "->" + this.date + "\n"); 
-     builder.append("vaccineCode" + "->" + this.vaccineCode + "\n"); 
-     builder.append("targetDisease" + "->" + this.targetDisease + "\n"); 
      builder.append("doseNumber" + "->" + this.doseNumber + "\n"); 
-     builder.append("forecastStatus" + "->" + this.forecastStatus + "\n"); 
-     builder.append("dateCriterion" + "->" + this.dateCriterion + "\n"); 
-     builder.append("protocol" + "->" + this.protocol + "\n"); 
-     builder.append("supportingImmunization" + "->" + this.supportingImmunization + "\n"); 
-     builder.append("supportingPatientInformation" + "->" + this.supportingPatientInformation + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

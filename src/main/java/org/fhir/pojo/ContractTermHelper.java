@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ContractTermModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ContractTermHelper {
 	public static java.util.List<ContractTerm> fromArray2Array(java.util.List<ContractTermModel> list) {
     return

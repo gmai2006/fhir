@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A set of information summarized from a list of other resources."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="listentry")
 public class ListEntryModel  implements Serializable {
-	private static final long serialVersionUID = 151967883208825241L;
+	private static final long serialVersionUID = 153159210210452426L;
   /**
   * Description: "The flag allows the system constructing the list to indicate the role and significance of the item in the list."
   */
@@ -205,10 +206,8 @@ public class ListEntryModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ListEntryModel]:" + "\n");
-     builder.append("flag" + "->" + this.flag + "\n"); 
      builder.append("deleted" + "->" + this.deleted + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
-     builder.append("item" + "->" + this.item + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

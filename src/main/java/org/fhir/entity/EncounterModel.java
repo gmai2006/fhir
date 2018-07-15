@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="encounter")
 public class EncounterModel  implements Serializable {
-	private static final long serialVersionUID = 151967883192679402L;
+	private static final long serialVersionUID = 153159210195419963L;
   /**
   * Description: "This is a Encounter resource"
   */
@@ -662,31 +663,12 @@ public class EncounterModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("statusHistory" + "->" + this.statusHistory + "\n"); 
-     builder.append("FHIRclass" + "->" + this.FHIRclass + "\n"); 
-     builder.append("classHistory" + "->" + this.classHistory + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("priority" + "->" + this.priority + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
-     builder.append("episodeOfCare" + "->" + this.episodeOfCare + "\n"); 
-     builder.append("incomingReferral" + "->" + this.incomingReferral + "\n"); 
-     builder.append("participant" + "->" + this.participant + "\n"); 
-     builder.append("appointment" + "->" + this.appointment + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("length" + "->" + this.length + "\n"); 
-     builder.append("reason" + "->" + this.reason + "\n"); 
-     builder.append("diagnosis" + "->" + this.diagnosis + "\n"); 
-     builder.append("account" + "->" + this.account + "\n"); 
-     builder.append("hospitalization" + "->" + this.hospitalization + "\n"); 
-     builder.append("location" + "->" + this.location + "\n"); 
-     builder.append("serviceProvider" + "->" + this.serviceProvider + "\n"); 
-     builder.append("partOf" + "->" + this.partOf + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

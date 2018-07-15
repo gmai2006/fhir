@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "An action that is or was performed on a patient. This can be a physical intervention like an operation, or less invasive like counseling or hypnotherapy."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="fhirprocedure")
 public class ProcedureModel  implements Serializable {
-	private static final long serialVersionUID = 151967883225397184L;
+	private static final long serialVersionUID = 153159210227114867L;
   /**
   * Description: "This is a Procedure resource"
   */
@@ -777,38 +778,15 @@ public class ProcedureModel  implements Serializable {
     builder.append("[ProcedureModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("definition" + "->" + this.definition + "\n"); 
-     builder.append("basedOn" + "->" + this.basedOn + "\n"); 
-     builder.append("partOf" + "->" + this.partOf + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("notDone" + "->" + this.notDone + "\n"); 
-     builder.append("notDoneReason" + "->" + this.notDoneReason + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
-     builder.append("context" + "->" + this.context + "\n"); 
      builder.append("performedDateTime" + "->" + this.performedDateTime + "\n"); 
      builder.append("performedPeriod" + "->" + this.performedPeriod + "\n"); 
-     builder.append("performer" + "->" + this.performer + "\n"); 
-     builder.append("location" + "->" + this.location + "\n"); 
-     builder.append("reasonCode" + "->" + this.reasonCode + "\n"); 
-     builder.append("reasonReference" + "->" + this.reasonReference + "\n"); 
-     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
-     builder.append("outcome" + "->" + this.outcome + "\n"); 
-     builder.append("report" + "->" + this.report + "\n"); 
-     builder.append("complication" + "->" + this.complication + "\n"); 
-     builder.append("complicationDetail" + "->" + this.complicationDetail + "\n"); 
-     builder.append("followUp" + "->" + this.followUp + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
-     builder.append("focalDevice" + "->" + this.focalDevice + "\n"); 
-     builder.append("usedReference" + "->" + this.usedReference + "\n"); 
-     builder.append("usedCode" + "->" + this.usedCode + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A container for a collection of resources."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="bundleresponse")
 public class BundleResponseModel  implements Serializable {
-	private static final long serialVersionUID = 151967883208250424L;
+	private static final long serialVersionUID = 153159210209845416L;
   /**
   * Description: "The status code returned by processing this entry. The status SHALL start with a 3 digit HTTP code (e.g. 404) and may contain the standard HTTP description associated with the status code."
   */

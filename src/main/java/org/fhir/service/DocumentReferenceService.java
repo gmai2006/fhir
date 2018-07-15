@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DocumentReference;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface DocumentReferenceService {
 	public DocumentReference find(String id);
   public List<DocumentReference> select(int maxResult);

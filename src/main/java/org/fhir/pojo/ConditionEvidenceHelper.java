@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ConditionEvidenceModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ConditionEvidenceHelper {
 	public static java.util.List<ConditionEvidence> fromArray2Array(java.util.List<ConditionEvidenceModel> list) {
     return

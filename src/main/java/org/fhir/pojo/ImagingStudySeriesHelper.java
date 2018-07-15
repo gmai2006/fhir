@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ImagingStudySeriesModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ImagingStudySeriesHelper {
 	public static java.util.List<ImagingStudySeries> fromArray2Array(java.util.List<ImagingStudySeriesModel> list) {
     return

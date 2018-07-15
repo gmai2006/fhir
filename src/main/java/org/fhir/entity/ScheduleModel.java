@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A container for slots of time that may be available for booking appointments."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="schedule")
 public class ScheduleModel  implements Serializable {
-	private static final long serialVersionUID = 151967883206539837L;
+	private static final long serialVersionUID = 153159210208167250L;
   /**
   * Description: "This is a Schedule resource"
   */
@@ -385,18 +386,12 @@ public class ScheduleModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("active" + "->" + this.active + "\n"); 
-     builder.append("serviceCategory" + "->" + this.serviceCategory + "\n"); 
-     builder.append("serviceType" + "->" + this.serviceType + "\n"); 
-     builder.append("specialty" + "->" + this.specialty + "\n"); 
-     builder.append("actor" + "->" + this.actor + "\n"); 
      builder.append("planningHorizon" + "->" + this.planningHorizon + "\n"); 
      builder.append("comment" + "->" + this.comment + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The header for a message exchange that is either requesting or responding to an action.  The reference(s) that are the subject of the action as well as other information related to the action are typically transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="messageheader")
 public class MessageHeaderModel  implements Serializable {
-	private static final long serialVersionUID = 151967883207273532L;
+	private static final long serialVersionUID = 153159210208834113L;
   /**
   * Description: "This is a MessageHeader resource"
   */
@@ -477,24 +478,11 @@ public class MessageHeaderModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[MessageHeaderModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
-     builder.append("event" + "->" + this.event + "\n"); 
-     builder.append("destination" + "->" + this.destination + "\n"); 
-     builder.append("receiver" + "->" + this.receiver + "\n"); 
-     builder.append("sender" + "->" + this.sender + "\n"); 
      builder.append("timestamp" + "->" + this.timestamp + "\n"); 
-     builder.append("enterer" + "->" + this.enterer + "\n"); 
-     builder.append("author" + "->" + this.author + "\n"); 
-     builder.append("source" + "->" + this.source + "\n"); 
-     builder.append("responsible" + "->" + this.responsible + "\n"); 
-     builder.append("reason" + "->" + this.reason + "\n"); 
-     builder.append("response" + "->" + this.response + "\n"); 
-     builder.append("focus" + "->" + this.focus + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

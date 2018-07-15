@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DeviceComponent;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface DeviceComponentService {
 	public DeviceComponent find(String id);
   public List<DeviceComponent> select(int maxResult);

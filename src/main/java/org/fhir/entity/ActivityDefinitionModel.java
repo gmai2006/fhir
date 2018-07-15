@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource allows for the definition of some activity to be performed, independent of a particular patient, practitioner, or other performance context."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="activitydefinition")
 public class ActivityDefinitionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883223158236L;
+	private static final long serialVersionUID = 153159210224998371L;
   /**
   * Description: "This is a ActivityDefinition resource"
   */
@@ -943,35 +944,16 @@ public class ActivityDefinitionModel  implements Serializable {
      builder.append("approvalDate" + "->" + this.approvalDate + "\n"); 
      builder.append("lastReviewDate" + "->" + this.lastReviewDate + "\n"); 
      builder.append("effectivePeriod" + "->" + this.effectivePeriod + "\n"); 
-     builder.append("useContext" + "->" + this.useContext + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
-     builder.append("topic" + "->" + this.topic + "\n"); 
-     builder.append("contributor" + "->" + this.contributor + "\n"); 
-     builder.append("contact" + "->" + this.contact + "\n"); 
      builder.append("copyright" + "->" + this.copyright + "\n"); 
-     builder.append("relatedArtifact" + "->" + this.relatedArtifact + "\n"); 
-     builder.append("library" + "->" + this.library + "\n"); 
      builder.append("kind" + "->" + this.kind + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("timingTiming" + "->" + this.timingTiming + "\n"); 
      builder.append("timingDateTime" + "->" + this.timingDateTime + "\n"); 
      builder.append("timingPeriod" + "->" + this.timingPeriod + "\n"); 
      builder.append("timingRange" + "->" + this.timingRange + "\n"); 
-     builder.append("location" + "->" + this.location + "\n"); 
-     builder.append("participant" + "->" + this.participant + "\n"); 
-     builder.append("productReference" + "->" + this.productReference + "\n"); 
-     builder.append("productCodeableConcept" + "->" + this.productCodeableConcept + "\n"); 
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
-     builder.append("dosage" + "->" + this.dosage + "\n"); 
-     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
-     builder.append("transform" + "->" + this.transform + "\n"); 
-     builder.append("dynamicValue" + "->" + this.dynamicValue + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Provenance of a resource is a record that describes entities and processes involved in producing and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility. Provenance assertions are a form of contextual metadata and can themselves become important records with their own provenance. Provenance statement indicates clinical significance in terms of confidence in authenticity, reliability, and trustworthiness, integrity, and stage in lifecycle (e.g. Document Completion - has the artifact been legally authenticated), all of which may impact security, privacy, and trust policies."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="provenanceentity")
 public class ProvenanceEntityModel  implements Serializable {
-	private static final long serialVersionUID = 151967883217527777L;
+	private static final long serialVersionUID = 15315921021943555L;
   /**
   * Description: "How the entity was used during the activity."
   */
@@ -225,9 +226,7 @@ public class ProvenanceEntityModel  implements Serializable {
     builder.append("[ProvenanceEntityModel]:" + "\n");
      builder.append("role" + "->" + this.role + "\n"); 
      builder.append("whatUri" + "->" + this.whatUri + "\n"); 
-     builder.append("whatReference" + "->" + this.whatReference + "\n"); 
      builder.append("whatIdentifier" + "->" + this.whatIdentifier + "\n"); 
-     builder.append("agent" + "->" + this.agent + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

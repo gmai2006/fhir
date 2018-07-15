@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.NutritionOrderAdministrationModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class NutritionOrderAdministrationHelper {
 	public static java.util.List<NutritionOrderAdministration> fromArray2Array(java.util.List<NutritionOrderAdministrationModel> list) {
     return

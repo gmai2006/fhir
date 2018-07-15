@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Describes a required data item for evaluation in terms of the type of data, and optional code or date-based filters of the data."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="datarequirementcodefilter")
 public class DataRequirementCodeFilterModel  implements Serializable {
-	private static final long serialVersionUID = 151967883185024821L;
+	private static final long serialVersionUID = 153159210188278449L;
   /**
   * Description: "The code-valued attribute of the filter. The specified path must be resolvable from the type of the required data. The path is allowed to contain qualifiers (.) to traverse sub-elements, as well as indexers ([x]) to traverse multiple-cardinality sub-elements. Note that the index must be an integer constant. The path must resolve to an element of type code, Coding, or CodeableConcept."
   */
@@ -242,10 +243,7 @@ public class DataRequirementCodeFilterModel  implements Serializable {
     builder.append("[DataRequirementCodeFilterModel]:" + "\n");
      builder.append("path" + "->" + this.path + "\n"); 
      builder.append("valueSetString" + "->" + this.valueSetString + "\n"); 
-     builder.append("valueSetReference" + "->" + this.valueSetReference + "\n"); 
      builder.append("valueCode" + "->" + this.valueCode + "\n"); 
-     builder.append("valueCoding" + "->" + this.valueCoding + "\n"); 
-     builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively and are not formally or legally recognized; i.e. a collection of entities that isn't an Organization."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="fhirgroup")
 public class GroupModel  implements Serializable {
-	private static final long serialVersionUID = 151967883200525020L;
+	private static final long serialVersionUID = 153159210202840335L;
   /**
   * Description: "This is a Group resource"
   */
@@ -393,17 +394,12 @@ public class GroupModel  implements Serializable {
      builder.append("active" + "->" + this.active + "\n"); 
      builder.append("type" + "->" + this.type + "\n"); 
      builder.append("actual" + "->" + this.actual + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("quantity" + "->" + this.quantity + "\n"); 
-     builder.append("characteristic" + "->" + this.characteristic + "\n"); 
-     builder.append("member" + "->" + this.member + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

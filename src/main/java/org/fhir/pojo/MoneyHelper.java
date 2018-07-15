@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.MoneyModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class MoneyHelper {
 	public static java.util.List<Money> fromArray2Array(java.util.List<MoneyModel> list) {
     return

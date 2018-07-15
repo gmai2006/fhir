@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A value set specifies a set of codes drawn from one or more code systems."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="valuesetconcept")
 public class ValueSetConceptModel  implements Serializable {
-	private static final long serialVersionUID = 15196788317837922L;
+	private static final long serialVersionUID = 153159210180649882L;
   /**
   * Description: "Specifies a code for the concept to be included or excluded."
   */
@@ -186,7 +187,6 @@ public class ValueSetConceptModel  implements Serializable {
     builder.append("[ValueSetConceptModel]:" + "\n");
      builder.append("code" + "->" + this.code + "\n"); 
      builder.append("display" + "->" + this.display + "\n"); 
-     builder.append("designation" + "->" + this.designation + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

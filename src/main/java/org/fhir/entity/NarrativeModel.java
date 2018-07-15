@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A human-readable formatted text, including images."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="narrative")
 public class NarrativeModel  implements Serializable {
-	private static final long serialVersionUID = 151967883172244351L;
+	private static final long serialVersionUID = 153159210175693716L;
   /**
   * Description: "The status of the narrative - whether it's entirely generated (from just the defined data or the extensions too), or whether a human authored it and it may contain additional data."
   */

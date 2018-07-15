@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A photo, video, or audio recording acquired or used in healthcare. The actual content may be inline or provided by direct reference."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="media")
 public class MediaModel  implements Serializable {
-	private static final long serialVersionUID = 151967883180328827L;
+	private static final long serialVersionUID = 153159210182778858L;
   /**
   * Description: "This is a Media resource"
   */
@@ -593,30 +594,19 @@ public class MediaModel  implements Serializable {
     builder.append("[MediaModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("basedOn" + "->" + this.basedOn + "\n"); 
      builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("subtype" + "->" + this.subtype + "\n"); 
-     builder.append("view" + "->" + this.view + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
-     builder.append("context" + "->" + this.context + "\n"); 
      builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime + "\n"); 
      builder.append("occurrencePeriod" + "->" + this.occurrencePeriod + "\n"); 
-     builder.append("operator" + "->" + this.operator + "\n"); 
-     builder.append("reasonCode" + "->" + this.reasonCode + "\n"); 
-     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
-     builder.append("device" + "->" + this.device + "\n"); 
      builder.append("height" + "->" + this.height + "\n"); 
      builder.append("width" + "->" + this.width + "\n"); 
      builder.append("frames" + "->" + this.frames + "\n"); 
      builder.append("duration" + "->" + this.duration + "\n"); 
      builder.append("content" + "->" + this.content + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

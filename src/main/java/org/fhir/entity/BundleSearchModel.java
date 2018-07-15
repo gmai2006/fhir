@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A container for a collection of resources."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="bundlesearch")
 public class BundleSearchModel  implements Serializable {
-	private static final long serialVersionUID = 151967883187374747L;
+	private static final long serialVersionUID = 153159210190867675L;
   /**
   * Description: "Why this entry is in the result set - whether it's included as a match or because of an _include requirement."
   */

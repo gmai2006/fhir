@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ActivityDefinitionDynamicValueModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ActivityDefinitionDynamicValueHelper {
 	public static java.util.List<ActivityDefinitionDynamicValue> fromArray2Array(java.util.List<ActivityDefinitionDynamicValueModel> list) {
     return

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The Measure resource provides the definition of a quality measure."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="measurepopulation")
 public class MeasurePopulationModel  implements Serializable {
-	private static final long serialVersionUID = 151967883226516147L;
+	private static final long serialVersionUID = 153159210228436782L;
   /**
   * Description: "A unique identifier for the population criteria. This identifier is used to report data against this criteria within the measure report."
   * Actual type: String;
@@ -218,7 +219,6 @@ public class MeasurePopulationModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[MeasurePopulationModel]:" + "\n");
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("criteria" + "->" + this.criteria + "\n"); 

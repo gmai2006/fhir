@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Record details about the anatomical location of a specimen or body part.  This resource may be used when a coded concept does not provide the necessary detail needed for the use case."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="bodysite")
 public class BodySiteModel  implements Serializable {
-	private static final long serialVersionUID = 151967883171439807L;
+	private static final long serialVersionUID = 153159210175045773L;
   /**
   * Description: "This is a BodySite resource"
   */
@@ -364,17 +365,12 @@ public class BodySiteModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("active" + "->" + this.active + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("qualifier" + "->" + this.qualifier + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("image" + "->" + this.image + "\n"); 
-     builder.append("patient" + "->" + this.patient + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.MedicationRequest;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface MedicationRequestService {
 	public MedicationRequest find(String id);
   public List<MedicationRequest> select(int maxResult);

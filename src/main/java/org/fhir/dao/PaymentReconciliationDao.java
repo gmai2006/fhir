@@ -26,9 +26,13 @@
 
 package org.fhir.dao;
 import java.util.List;
+import java.util.logging.Logger;
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.PaymentReconciliation;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/12/2018
+ */
 public interface PaymentReconciliationDao {
   public PaymentReconciliation find(String id);
 

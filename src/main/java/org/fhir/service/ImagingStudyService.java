@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ImagingStudy;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface ImagingStudyService {
 	public ImagingStudy find(String id);
   public List<ImagingStudy> select(int maxResult);

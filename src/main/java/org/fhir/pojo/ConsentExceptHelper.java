@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ConsentExceptModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ConsentExceptHelper {
 	public static java.util.List<ConsentExcept> fromArray2Array(java.util.List<ConsentExceptModel> list) {
     return

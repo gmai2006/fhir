@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ScheduleModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ScheduleHelper {
 	public static java.util.List<Schedule> fromArray2Array(java.util.List<ScheduleModel> list) {
     return

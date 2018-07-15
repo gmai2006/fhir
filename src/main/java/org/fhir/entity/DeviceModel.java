@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource identifies an instance or a type of a manufactured item that is used in the provision of healthcare without being substantially changed through that activity. The device may be a medical or non-medical device.  Medical devices include durable (reusable) medical equipment, implantable devices, as well as disposable equipment used for diagnostic, treatment, and research for healthcare and public health.  Non-medical devices may include items such as a machine, cellphone, computer, application, etc."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="device")
 public class DeviceModel  implements Serializable {
-	private static final long serialVersionUID = 151967883189196259L;
+	private static final long serialVersionUID = 153159210192335487L;
   /**
   * Description: "This is a Device resource"
   */
@@ -537,28 +538,20 @@ public class DeviceModel  implements Serializable {
     builder.append("[DeviceModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("udi" + "->" + this.udi + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("lotNumber" + "->" + this.lotNumber + "\n"); 
      builder.append("manufacturer" + "->" + this.manufacturer + "\n"); 
      builder.append("manufactureDate" + "->" + this.manufactureDate + "\n"); 
      builder.append("expirationDate" + "->" + this.expirationDate + "\n"); 
      builder.append("model" + "->" + this.model + "\n"); 
      builder.append("version" + "->" + this.version + "\n"); 
-     builder.append("patient" + "->" + this.patient + "\n"); 
-     builder.append("owner" + "->" + this.owner + "\n"); 
      builder.append("contact" + "->" + this.contact + "\n"); 
-     builder.append("location" + "->" + this.location + "\n"); 
      builder.append("url" + "->" + this.url + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
-     builder.append("safety" + "->" + this.safety + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

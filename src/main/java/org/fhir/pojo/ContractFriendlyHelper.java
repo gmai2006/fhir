@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ContractFriendlyModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ContractFriendlyHelper {
 	public static java.util.List<ContractFriendly> fromArray2Array(java.util.List<ContractFriendlyModel> list) {
     return

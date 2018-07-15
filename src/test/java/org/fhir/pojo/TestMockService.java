@@ -1,9 +1,6 @@
 package org.fhir.pojo;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.nio.charset.Charset;
@@ -11,8 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.fhir.dao.AccountDao;
-import org.fhir.dao.AccountDaoImpl;
-import org.fhir.service.AccountService;
 import org.fhir.service.AccountServiceImpl;
 import org.fhir.utils.FileUtils;
 import org.junit.Before;
@@ -22,6 +17,12 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+/**
+ * a hand written code to serve as a blueprint
+ * for code generation
+ * @author paul
+ *
+ */
 public class TestMockService {
 
 	  @Rule

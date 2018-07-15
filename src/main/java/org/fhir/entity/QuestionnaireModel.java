@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A structured set of questions intended to guide the collection of answers from end-users. Questionnaires provide detailed control over order, presentation, phraseology and grouping to allow coherent, consistent data collection."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="questionnaire")
 public class QuestionnaireModel  implements Serializable {
-	private static final long serialVersionUID = 151967883221927325L;
+	private static final long serialVersionUID = 153159210223840573L;
   /**
   * Description: "This is a Questionnaire resource"
   */
@@ -601,19 +602,12 @@ public class QuestionnaireModel  implements Serializable {
      builder.append("approvalDate" + "->" + this.approvalDate + "\n"); 
      builder.append("lastReviewDate" + "->" + this.lastReviewDate + "\n"); 
      builder.append("effectivePeriod" + "->" + this.effectivePeriod + "\n"); 
-     builder.append("useContext" + "->" + this.useContext + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
-     builder.append("contact" + "->" + this.contact + "\n"); 
      builder.append("copyright" + "->" + this.copyright + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("subjectType" + "->" + this.subjectType + "\n"); 
-     builder.append("item" + "->" + this.item + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

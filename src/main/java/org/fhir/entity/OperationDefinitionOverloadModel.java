@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A formal computable definition of an operation (on the RESTful interface) or a named query (using the search interaction)."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="operationdefinitionoverload")
 public class OperationDefinitionOverloadModel  implements Serializable {
-	private static final long serialVersionUID = 151967883195538147L;
+	private static final long serialVersionUID = 153159210198054941L;
   /**
   * Description: "Name of parameter to include in overload."
   */

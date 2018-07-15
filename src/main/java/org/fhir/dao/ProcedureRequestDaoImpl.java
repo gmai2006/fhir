@@ -28,6 +28,7 @@ package org.fhir.dao;
 
 import static java.util.Objects.requireNonNull;
 import java.util.List;
+import java.util.logging.Logger;
 import org.fhir.entity.*;
 import javax.inject.Inject;
 import com.google.inject.persist.Transactional;
@@ -39,9 +40,13 @@ import org.fhir.entity.ProcedureRequestModel;
 import org.fhir.pojo.ProcedureRequest;
 import org.fhir.pojo.ProcedureRequestHelper;
 import org.fhir.utils.QueryBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/12/2018
+ */
 public class ProcedureRequestDaoImpl implements ProcedureRequestDao {
-    private final Provider<EntityManager> entityManagerProvider;
+	private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private final Provider<EntityManager> entityManagerProvider;
 
   @Inject
   public ProcedureRequestDaoImpl (final Provider<EntityManager> entityManagerProvider) {
@@ -215,6 +220,7 @@ public class ProcedureRequestDaoImpl implements ProcedureRequestDao {
   public List<ProcedureRequest> findByField(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from ProcedureRequestModel a " + queryBuilder.getWhereClause();
+  	logger.info(queryStr);
     return findByQuery(queryBuilder, queryStr);
   }
 

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A record of a request for a medication, substance or device used in the healthcare setting."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="supplyrequest")
 public class SupplyRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151967883224717885L;
+	private static final long serialVersionUID = 15315921022659138L;
   /**
   * Description: "This is a SupplyRequest resource"
   */
@@ -521,25 +522,15 @@ public class SupplyRequestModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
      builder.append("priority" + "->" + this.priority + "\n"); 
-     builder.append("orderedItem" + "->" + this.orderedItem + "\n"); 
      builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime + "\n"); 
      builder.append("occurrencePeriod" + "->" + this.occurrencePeriod + "\n"); 
      builder.append("occurrenceTiming" + "->" + this.occurrenceTiming + "\n"); 
      builder.append("authoredOn" + "->" + this.authoredOn + "\n"); 
-     builder.append("requester" + "->" + this.requester + "\n"); 
-     builder.append("supplier" + "->" + this.supplier + "\n"); 
-     builder.append("reasonCodeableConcept" + "->" + this.reasonCodeableConcept + "\n"); 
-     builder.append("reasonReference" + "->" + this.reasonReference + "\n"); 
-     builder.append("deliverFrom" + "->" + this.deliverFrom + "\n"); 
-     builder.append("deliverTo" + "->" + this.deliverTo + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

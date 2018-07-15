@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ClinicalImpression;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface ClinicalImpressionService {
 	public ClinicalImpression find(String id);
   public List<ClinicalImpression> select(int maxResult);

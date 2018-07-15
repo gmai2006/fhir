@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A search parameter that defines a named search item that can be used to search/filter on a resource."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlRootElement
@@ -670,6 +671,10 @@ public class SearchParameter  extends DomainResource  {
     return builder.toString();
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum ResourceTypeEnum {
   	SearchParameter,
   	UNKNOWN;
@@ -682,6 +687,10 @@ public class SearchParameter  extends DomainResource  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum StatusEnum {
   	draft,
   	active,
@@ -700,6 +709,10 @@ public class SearchParameter  extends DomainResource  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum TypeEnum {
   	number,
   	date,
@@ -726,6 +739,10 @@ public class SearchParameter  extends DomainResource  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum XpathUsageEnum {
   	normal,
   	phonetic,
@@ -746,6 +763,10 @@ public class SearchParameter  extends DomainResource  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum ComparatorEnum {
   	eq,
   	ne,
@@ -778,6 +799,10 @@ public class SearchParameter  extends DomainResource  {
   	  	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum ModifierEnum {
   	missing,
   	exact,

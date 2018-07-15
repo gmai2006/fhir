@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The Measure resource provides the definition of a quality measure."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="measuresupplementaldata")
 public class MeasureSupplementalDataModel  implements Serializable {
-	private static final long serialVersionUID = 151967883216340570L;
+	private static final long serialVersionUID = 153159210218058024L;
   /**
   * Description: "An identifier for the supplemental data."
   * Actual type: String;
@@ -203,7 +204,6 @@ public class MeasureSupplementalDataModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[MeasureSupplementalDataModel]:" + "\n");
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("usage" + "->" + this.usage + "\n"); 
      builder.append("criteria" + "->" + this.criteria + "\n"); 
      builder.append("path" + "->" + this.path + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

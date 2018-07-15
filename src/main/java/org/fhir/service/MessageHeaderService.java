@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.MessageHeader;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface MessageHeaderService {
 	public MessageHeader find(String id);
   public List<MessageHeader> select(int maxResult);

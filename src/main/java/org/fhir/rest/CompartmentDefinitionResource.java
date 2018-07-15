@@ -28,6 +28,7 @@ package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
 
+
 import java.util.List;
 
 import java.util.logging.Logger;
@@ -59,7 +60,8 @@ import org.fhir.utils.FhirConstant;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces({MediaType.APPLICATION_JSON})
 /**
- * Auto generated RESTful class
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
  */
 public class CompartmentDefinitionResource {
   private final Logger logger = Logger.getLogger(this.getClass().getName());

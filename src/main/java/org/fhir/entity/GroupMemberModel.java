@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively and are not formally or legally recognized; i.e. a collection of entities that isn't an Organization."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="groupmember")
 public class GroupMemberModel  implements Serializable {
-	private static final long serialVersionUID = 151967883222514744L;
+	private static final long serialVersionUID = 153159210224439549L;
   /**
   * Description: "A reference to the entity that is a member of the group. Must be consistent with Group.type."
   */
@@ -187,7 +188,6 @@ public class GroupMemberModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[GroupMemberModel]:" + "\n");
-     builder.append("entity" + "->" + this.entity + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("inactive" + "->" + this.inactive + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.NutritionOrder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface NutritionOrderService {
 	public NutritionOrder find(String id);
   public List<NutritionOrder> select(int maxResult);

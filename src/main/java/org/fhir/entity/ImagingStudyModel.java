@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study may have multiple series of different modalities."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="imagingstudy")
 public class ImagingStudyModel  implements Serializable {
-	private static final long serialVersionUID = 15196788317613220L;
+	private static final long serialVersionUID = 153159210179023639L;
   /**
   * Description: "This is a ImagingStudy resource"
   */
@@ -598,27 +599,14 @@ public class ImagingStudyModel  implements Serializable {
      builder.append("accession" + "->" + this.accession + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("availability" + "->" + this.availability + "\n"); 
-     builder.append("modalityList" + "->" + this.modalityList + "\n"); 
-     builder.append("patient" + "->" + this.patient + "\n"); 
-     builder.append("context" + "->" + this.context + "\n"); 
      builder.append("started" + "->" + this.started + "\n"); 
-     builder.append("basedOn" + "->" + this.basedOn + "\n"); 
-     builder.append("referrer" + "->" + this.referrer + "\n"); 
-     builder.append("interpreter" + "->" + this.interpreter + "\n"); 
-     builder.append("endpoint" + "->" + this.endpoint + "\n"); 
      builder.append("numberOfSeries" + "->" + this.numberOfSeries + "\n"); 
      builder.append("numberOfInstances" + "->" + this.numberOfInstances + "\n"); 
-     builder.append("procedureReference" + "->" + this.procedureReference + "\n"); 
-     builder.append("procedureCode" + "->" + this.procedureCode + "\n"); 
-     builder.append("reason" + "->" + this.reason + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("series" + "->" + this.series + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

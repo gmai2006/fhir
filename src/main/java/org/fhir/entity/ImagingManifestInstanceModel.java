@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A text description of the DICOM SOP instances selected in the ImagingManifest; or the reason for, or significance of, the selection."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="imagingmanifestinstance")
 public class ImagingManifestInstanceModel  implements Serializable {
-	private static final long serialVersionUID = 151967883196729657L;
+	private static final long serialVersionUID = 153159210199215140L;
   /**
   * Description: "SOP class UID of the selected instance."
   */

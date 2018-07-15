@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A summary of information based on the results of executing a TestScript."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="testreportsetup")
 public class TestReportSetupModel  implements Serializable {
-	private static final long serialVersionUID = 151967883216229125L;
+	private static final long serialVersionUID = 153159210217927050L;
   /**
   * Description: "Action would contain either an operation or an assertion."
   */
@@ -153,7 +154,6 @@ public class TestReportSetupModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[TestReportSetupModel]:" + "\n");
-     builder.append("action" + "->" + this.action + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

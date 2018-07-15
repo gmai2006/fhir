@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively and are not formally or legally recognized; i.e. a collection of entities that isn't an Organization."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="groupcharacteristic")
 public class GroupCharacteristicModel  implements Serializable {
-	private static final long serialVersionUID = 151967883185469800L;
+	private static final long serialVersionUID = 153159210188860437L;
   /**
   * Description: "A code that identifies the kind of trait being asserted."
   */
@@ -263,10 +264,7 @@ public class GroupCharacteristicModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[GroupCharacteristicModel]:" + "\n");
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept + "\n"); 
      builder.append("valueBoolean" + "->" + this.valueBoolean + "\n"); 
-     builder.append("valueQuantity" + "->" + this.valueQuantity + "\n"); 
      builder.append("valueRange" + "->" + this.valueRange + "\n"); 
      builder.append("exclude" + "->" + this.exclude + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 

@@ -25,7 +25,10 @@
  */
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ElementDefinitionSlicingHelper {
 
   public static ElementDefinitionSlicing fromJson(String json) {

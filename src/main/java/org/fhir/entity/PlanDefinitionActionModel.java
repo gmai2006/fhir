@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="plandefinitionaction")
 public class PlanDefinitionActionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883137254545L;
+	private static final long serialVersionUID = 153159210137432570L;
   /**
   * Description: "A user-visible label for the action."
   */
@@ -672,31 +673,17 @@ public class PlanDefinitionActionModel  implements Serializable {
      builder.append("title" + "->" + this.title + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("textEquivalent" + "->" + this.textEquivalent + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("reason" + "->" + this.reason + "\n"); 
-     builder.append("documentation" + "->" + this.documentation + "\n"); 
      builder.append("goalId" + "->" + this.goalId + "\n"); 
-     builder.append("triggerDefinition" + "->" + this.triggerDefinition + "\n"); 
-     builder.append("condition" + "->" + this.condition + "\n"); 
-     builder.append("input" + "->" + this.input + "\n"); 
-     builder.append("output" + "->" + this.output + "\n"); 
-     builder.append("relatedAction" + "->" + this.relatedAction + "\n"); 
      builder.append("timingDateTime" + "->" + this.timingDateTime + "\n"); 
      builder.append("timingPeriod" + "->" + this.timingPeriod + "\n"); 
      builder.append("timingDuration" + "->" + this.timingDuration + "\n"); 
      builder.append("timingRange" + "->" + this.timingRange + "\n"); 
      builder.append("timingTiming" + "->" + this.timingTiming + "\n"); 
-     builder.append("participant" + "->" + this.participant + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("groupingBehavior" + "->" + this.groupingBehavior + "\n"); 
      builder.append("selectionBehavior" + "->" + this.selectionBehavior + "\n"); 
      builder.append("requiredBehavior" + "->" + this.requiredBehavior + "\n"); 
      builder.append("precheckBehavior" + "->" + this.precheckBehavior + "\n"); 
      builder.append("cardinalityBehavior" + "->" + this.cardinalityBehavior + "\n"); 
-     builder.append("definition" + "->" + this.definition + "\n"); 
-     builder.append("transform" + "->" + this.transform + "\n"); 
-     builder.append("dynamicValue" + "->" + this.dynamicValue + "\n"); 
-     builder.append("action" + "->" + this.action + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

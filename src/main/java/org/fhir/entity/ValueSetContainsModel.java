@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A value set specifies a set of codes drawn from one or more code systems."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="valuesetcontains")
 public class ValueSetContainsModel  implements Serializable {
-	private static final long serialVersionUID = 151967883210680273L;
+	private static final long serialVersionUID = 153159210212545091L;
   /**
   * Description: "An absolute URI which is the code system in which the code for this item in the expansion is defined."
   */
@@ -271,8 +272,6 @@ public class ValueSetContainsModel  implements Serializable {
      builder.append("version" + "->" + this.version + "\n"); 
      builder.append("code" + "->" + this.code + "\n"); 
      builder.append("display" + "->" + this.display + "\n"); 
-     builder.append("designation" + "->" + this.designation + "\n"); 
-     builder.append("contains" + "->" + this.contains + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

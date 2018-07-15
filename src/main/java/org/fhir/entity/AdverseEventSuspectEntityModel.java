@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Actual or  potential/avoided event causing unintended physical injury resulting from or contributed to by medical care, a research study or other healthcare setting factors that requires additional monitoring, treatment, or hospitalization, or that results in death."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="adverseeventsuspectentity")
 public class AdverseEventSuspectEntityModel  implements Serializable {
-	private static final long serialVersionUID = 151967883192432647L;
+	private static final long serialVersionUID = 153159210195346845L;
   /**
   * Description: "Identifies the actual instance of what caused the adverse event.  May be a substance, medication, medication administration, medication statement or a device."
   */
@@ -267,13 +268,8 @@ public class AdverseEventSuspectEntityModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[AdverseEventSuspectEntityModel]:" + "\n");
-     builder.append("instance" + "->" + this.instance + "\n"); 
      builder.append("causality" + "->" + this.causality + "\n"); 
-     builder.append("causalityAssessment" + "->" + this.causalityAssessment + "\n"); 
      builder.append("causalityProductRelatedness" + "->" + this.causalityProductRelatedness + "\n"); 
-     builder.append("causalityMethod" + "->" + this.causalityMethod + "\n"); 
-     builder.append("causalityAuthor" + "->" + this.causalityAuthor + "\n"); 
-     builder.append("causalityResult" + "->" + this.causalityResult + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

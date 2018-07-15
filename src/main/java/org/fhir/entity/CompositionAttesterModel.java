@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. While a Composition defines the structure, it does not actually contain the content: rather the full content of a document is contained in a Bundle, of which the Composition is the first resource contained."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="compositionattester")
 public class CompositionAttesterModel  implements Serializable {
-	private static final long serialVersionUID = 151967883166512367L;
+	private static final long serialVersionUID = 153159210170650167L;
   /**
   * Description: "The type of attestation the authenticator offers."
   */
@@ -186,7 +187,6 @@ public class CompositionAttesterModel  implements Serializable {
     builder.append("[CompositionAttesterModel]:" + "\n");
      builder.append("mode" + "->" + this.mode + "\n"); 
      builder.append("time" + "->" + this.time + "\n"); 
-     builder.append("party" + "->" + this.party + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A group of related requests that can be used to capture intended activities that have inter-dependencies such as \"give this medication after that one\"."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="requestgrouprelatedaction")
 public class RequestGroupRelatedActionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883170856843L;
+	private static final long serialVersionUID = 153159210174412429L;
   /**
   * Description: "The element id of the action this is related to."
   */

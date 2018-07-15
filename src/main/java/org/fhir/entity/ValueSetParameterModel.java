@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A value set specifies a set of codes drawn from one or more code systems."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="valuesetparameter")
 public class ValueSetParameterModel  implements Serializable {
-	private static final long serialVersionUID = 151967883216133991L;
+	private static final long serialVersionUID = 153159210217887900L;
   /**
   * Description: "The name of the parameter."
   */

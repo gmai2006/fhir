@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A structured set of questions intended to guide the collection of answers from end-users. Questionnaires provide detailed control over order, presentation, phraseology and grouping to allow coherent, consistent data collection."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="questionnaireitem")
 public class QuestionnaireItemModel  implements Serializable {
-	private static final long serialVersionUID = 151967883203237658L;
+	private static final long serialVersionUID = 153159210205066363L;
   /**
   * Description: "An identifier that is unique within the Questionnaire allowing linkage to the equivalent item in a QuestionnaireResponse resource."
   */
@@ -582,17 +583,13 @@ public class QuestionnaireItemModel  implements Serializable {
     builder.append("[QuestionnaireItemModel]:" + "\n");
      builder.append("linkId" + "->" + this.linkId + "\n"); 
      builder.append("definition" + "->" + this.definition + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("prefix" + "->" + this.prefix + "\n"); 
      builder.append("text" + "->" + this.text + "\n"); 
      builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("enableWhen" + "->" + this.enableWhen + "\n"); 
      builder.append("required" + "->" + this.required + "\n"); 
      builder.append("repeats" + "->" + this.repeats + "\n"); 
      builder.append("readOnly" + "->" + this.readOnly + "\n"); 
      builder.append("maxLength" + "->" + this.maxLength + "\n"); 
-     builder.append("options" + "->" + this.options + "\n"); 
-     builder.append("option" + "->" + this.option + "\n"); 
      builder.append("initialBoolean" + "->" + this.initialBoolean + "\n"); 
      builder.append("initialDecimal" + "->" + this.initialDecimal + "\n"); 
      builder.append("initialInteger" + "->" + this.initialInteger + "\n"); 
@@ -602,10 +599,6 @@ public class QuestionnaireItemModel  implements Serializable {
      builder.append("initialString" + "->" + this.initialString + "\n"); 
      builder.append("initialUri" + "->" + this.initialUri + "\n"); 
      builder.append("initialAttachment" + "->" + this.initialAttachment + "\n"); 
-     builder.append("initialCoding" + "->" + this.initialCoding + "\n"); 
-     builder.append("initialQuantity" + "->" + this.initialQuantity + "\n"); 
-     builder.append("initialReference" + "->" + this.initialReference + "\n"); 
-     builder.append("item" + "->" + this.item + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

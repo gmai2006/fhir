@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.StructureDefinition;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface StructureDefinitionService {
 	public StructureDefinition find(String id);
   public List<StructureDefinition> select(int maxResult);

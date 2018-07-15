@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A patient's point-in-time immunization and recommendation (i.e. forecasting a patient's immunization eligibility according to a published schedule) with optional supporting justification."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="immunizationrecommendationdatecriterion")
 public class ImmunizationRecommendationDateCriterionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883224452862L;
+	private static final long serialVersionUID = 153159210226297968L;
   /**
   * Description: "Date classification of recommendation.  For example, earliest date to give, latest date to give, etc."
   */
@@ -169,7 +170,6 @@ public class ImmunizationRecommendationDateCriterionModel  implements Serializab
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ImmunizationRecommendationDateCriterionModel]:" + "\n");
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("value" + "->" + this.value + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

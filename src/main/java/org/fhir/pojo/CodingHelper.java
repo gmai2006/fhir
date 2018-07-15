@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.CodingModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class CodingHelper {
 	public static java.util.List<Coding> fromArray2Array(java.util.List<CodingModel> list) {
     return

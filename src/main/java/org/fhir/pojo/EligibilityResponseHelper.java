@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.EligibilityResponseModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class EligibilityResponseHelper {
 	public static java.util.List<EligibilityResponse> fromArray2Array(java.util.List<EligibilityResponseModel> list) {
     return

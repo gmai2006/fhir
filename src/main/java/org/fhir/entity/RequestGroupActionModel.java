@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A group of related requests that can be used to capture intended activities that have inter-dependencies such as \"give this medication after that one\"."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="requestgroupaction")
 public class RequestGroupActionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883183145129L;
+	private static final long serialVersionUID = 153159210186210763L;
   /**
   * Description: "A user-visible label for the action."
   */
@@ -536,24 +537,16 @@ public class RequestGroupActionModel  implements Serializable {
      builder.append("title" + "->" + this.title + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("textEquivalent" + "->" + this.textEquivalent + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("documentation" + "->" + this.documentation + "\n"); 
-     builder.append("condition" + "->" + this.condition + "\n"); 
-     builder.append("relatedAction" + "->" + this.relatedAction + "\n"); 
      builder.append("timingDateTime" + "->" + this.timingDateTime + "\n"); 
      builder.append("timingPeriod" + "->" + this.timingPeriod + "\n"); 
      builder.append("timingDuration" + "->" + this.timingDuration + "\n"); 
      builder.append("timingRange" + "->" + this.timingRange + "\n"); 
      builder.append("timingTiming" + "->" + this.timingTiming + "\n"); 
-     builder.append("participant" + "->" + this.participant + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("groupingBehavior" + "->" + this.groupingBehavior + "\n"); 
      builder.append("selectionBehavior" + "->" + this.selectionBehavior + "\n"); 
      builder.append("requiredBehavior" + "->" + this.requiredBehavior + "\n"); 
      builder.append("precheckBehavior" + "->" + this.precheckBehavior + "\n"); 
      builder.append("cardinalityBehavior" + "->" + this.cardinalityBehavior + "\n"); 
-     builder.append("resource" + "->" + this.resource + "\n"); 
-     builder.append("action" + "->" + this.action + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

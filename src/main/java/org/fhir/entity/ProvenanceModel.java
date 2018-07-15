@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Provenance of a resource is a record that describes entities and processes involved in producing and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility. Provenance assertions are a form of contextual metadata and can themselves become important records with their own provenance. Provenance statement indicates clinical significance in terms of confidence in authenticity, reliability, and trustworthiness, integrity, and stage in lifecycle (e.g. Document Completion - has the artifact been legally authenticated), all of which may impact security, privacy, and trust policies."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="provenance")
 public class ProvenanceModel  implements Serializable {
-	private static final long serialVersionUID = 151967883217488948L;
+	private static final long serialVersionUID = 153159210219222538L;
   /**
   * Description: "This is a Provenance resource"
   */
@@ -425,22 +426,14 @@ public class ProvenanceModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[ProvenanceModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
-     builder.append("target" + "->" + this.target + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("recorded" + "->" + this.recorded + "\n"); 
      builder.append("policy" + "->" + this.policy + "\n"); 
-     builder.append("location" + "->" + this.location + "\n"); 
-     builder.append("reason" + "->" + this.reason + "\n"); 
-     builder.append("activity" + "->" + this.activity + "\n"); 
-     builder.append("agent" + "->" + this.agent + "\n"); 
-     builder.append("entity" + "->" + this.entity + "\n"); 
      builder.append("signature" + "->" + this.signature + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

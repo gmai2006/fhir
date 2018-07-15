@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The MeasureReport resource contains the results of evaluating a measure."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="measurereportpopulation1")
 public class MeasureReportPopulation1Model  implements Serializable {
-	private static final long serialVersionUID = 151967883217799215L;
+	private static final long serialVersionUID = 153159210219594694L;
   /**
   * Description: "The identifier of the population being reported, as defined by the population element of the measure."
   * Actual type: String;
@@ -210,9 +211,7 @@ public class MeasureReportPopulation1Model  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[MeasureReportPopulation1Model]:" + "\n");
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("count" + "->" + this.count + "\n"); 
-     builder.append("patients" + "->" + this.patients + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

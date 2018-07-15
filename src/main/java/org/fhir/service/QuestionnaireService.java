@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Questionnaire;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface QuestionnaireService {
 	public Questionnaire find(String id);
   public List<Questionnaire> select(int maxResult);

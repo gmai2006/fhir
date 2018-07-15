@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A structured set of tests against a FHIR server implementation to determine compliance against the FHIR specification."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="testscript")
 public class TestScriptModel  implements Serializable {
-	private static final long serialVersionUID = 151967883191580700L;
+	private static final long serialVersionUID = 153159210194416499L;
   /**
   * Description: "This is a TestScript resource"
   */
@@ -699,29 +700,23 @@ public class TestScriptModel  implements Serializable {
      builder.append("experimental" + "->" + this.experimental + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("publisher" + "->" + this.publisher + "\n"); 
-     builder.append("contact" + "->" + this.contact + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("useContext" + "->" + this.useContext + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("purpose" + "->" + this.purpose + "\n"); 
      builder.append("copyright" + "->" + this.copyright + "\n"); 
      builder.append("origin" + "->" + this.origin + "\n"); 
      builder.append("destination" + "->" + this.destination + "\n"); 
      builder.append("metadata" + "->" + this.metadata + "\n"); 
      builder.append("fixture" + "->" + this.fixture + "\n"); 
-     builder.append("profile" + "->" + this.profile + "\n"); 
      builder.append("variable" + "->" + this.variable + "\n"); 
      builder.append("rule" + "->" + this.rule + "\n"); 
      builder.append("ruleset" + "->" + this.ruleset + "\n"); 
      builder.append("setup" + "->" + this.setup + "\n"); 
      builder.append("test" + "->" + this.test + "\n"); 
      builder.append("teardown" + "->" + this.teardown + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

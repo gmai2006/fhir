@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A person who is directly or indirectly involved in the provisioning of healthcare."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="practitionerqualification")
 public class PractitionerQualificationModel  implements Serializable {
-	private static final long serialVersionUID = 151967883143232409L;
+	private static final long serialVersionUID = 15315921014431877L;
   /**
   * Description: "An identifier that applies to this person's qualification in this role."
   * Actual type: List<String>;
@@ -213,9 +214,7 @@ public class PractitionerQualificationModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[PractitionerQualificationModel]:" + "\n");
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
-     builder.append("issuer" + "->" + this.issuer + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

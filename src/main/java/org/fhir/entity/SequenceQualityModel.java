@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Raw data describing a biological sequence."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="sequencequality")
 public class SequenceQualityModel  implements Serializable {
-	private static final long serialVersionUID = 151967883211070862L;
+	private static final long serialVersionUID = 153159210212867043L;
   /**
   * Description: "INDEL / SNP / Undefined variant."
   */
@@ -371,11 +372,8 @@ public class SequenceQualityModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[SequenceQualityModel]:" + "\n");
      builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("standardSequence" + "->" + this.standardSequence + "\n"); 
      builder.append("start" + "->" + this.start + "\n"); 
      builder.append("end" + "->" + this.end + "\n"); 
-     builder.append("score" + "->" + this.score + "\n"); 
-     builder.append("method" + "->" + this.method + "\n"); 
      builder.append("truthTP" + "->" + this.truthTP + "\n"); 
      builder.append("queryTP" + "->" + this.queryTP + "\n"); 
      builder.append("truthFN" + "->" + this.truthFN + "\n"); 

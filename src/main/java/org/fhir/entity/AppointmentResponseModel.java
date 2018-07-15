@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A reply to an appointment request for a patient and/or practitioner(s), such as a confirmation or rejection."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="appointmentresponse")
 public class AppointmentResponseModel  implements Serializable {
-	private static final long serialVersionUID = 151967883223535556L;
+	private static final long serialVersionUID = 153159210225367466L;
   /**
   * Description: "This is a AppointmentResponse resource"
   */
@@ -375,19 +376,14 @@ public class AppointmentResponseModel  implements Serializable {
     builder.append("[AppointmentResponseModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("appointment" + "->" + this.appointment + "\n"); 
      builder.append("start" + "->" + this.start + "\n"); 
      builder.append("end" + "->" + this.end + "\n"); 
-     builder.append("participantType" + "->" + this.participantType + "\n"); 
-     builder.append("actor" + "->" + this.actor + "\n"); 
      builder.append("participantStatus" + "->" + this.participantStatus + "\n"); 
      builder.append("comment" + "->" + this.comment + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

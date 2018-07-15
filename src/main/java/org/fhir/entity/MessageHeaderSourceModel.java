@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The header for a message exchange that is either requesting or responding to an action.  The reference(s) that are the subject of the action as well as other information related to the action are typically transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="messageheadersource")
 public class MessageHeaderSourceModel  implements Serializable {
-	private static final long serialVersionUID = 151967883199549424L;
+	private static final long serialVersionUID = 153159210201888179L;
   /**
   * Description: "Human-readable name for the source system."
   */

@@ -29,6 +29,7 @@ import com.google.gson.GsonBuilder;
 import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A structured set of tests against a FHIR server implementation to determine compliance against the FHIR specification."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TestScriptAssert  extends BackboneElement  {
@@ -597,6 +598,10 @@ public class TestScriptAssert  extends BackboneElement  {
     return builder.toString();
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum DirectionEnum {
   	response,
   	request,
@@ -609,7 +614,11 @@ public class TestScriptAssert  extends BackboneElement  {
   			throw new IllegalArgumentException("Unknown resource type ["+ strVal + "]");
   		}
   	}
-  }public enum ContentTypeEnum {
+  }/**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
+  public enum ContentTypeEnum {
   	xml,
   	json,
   	ttl,
@@ -625,7 +634,11 @@ public class TestScriptAssert  extends BackboneElement  {
   			throw new IllegalArgumentException("Unknown resource type ["+ strVal + "]");
   		}
   	}
-  }public enum OperatorEnum {
+  }/**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
+  public enum OperatorEnum {
   	equals,
   	notEquals,
   	in,
@@ -655,7 +668,11 @@ public class TestScriptAssert  extends BackboneElement  {
   			throw new IllegalArgumentException("Unknown resource type ["+ strVal + "]");
   		}
   	}
-  }public enum RequestMethodEnum {
+  }/**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
+  public enum RequestMethodEnum {
   	delete,
   	get,
   	options,
@@ -675,7 +692,11 @@ public class TestScriptAssert  extends BackboneElement  {
   			throw new IllegalArgumentException("Unknown resource type ["+ strVal + "]");
   		}
   	}
-  }public enum ResponseEnum {
+  }/**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
+  public enum ResponseEnum {
   	okay,
   	created,
   	noContent,

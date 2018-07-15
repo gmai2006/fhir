@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Raw data describing a biological sequence."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="sequencerepository")
 public class SequenceRepositoryModel  implements Serializable {
-	private static final long serialVersionUID = 151967883213652713L;
+	private static final long serialVersionUID = 153159210215314729L;
   /**
   * Description: "Click and see / RESTful API / Need login to see / RESTful API with authentication / Other ways to see resource."
   */

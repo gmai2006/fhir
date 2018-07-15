@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The formal description of a single piece of information that can be gathered and reported."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="dataelementmapping")
 public class DataElementMappingModel  implements Serializable {
-	private static final long serialVersionUID = 151967883184016391L;
+	private static final long serialVersionUID = 153159210187369151L;
   /**
   * Description: "An internal id that is used to identify this mapping set when specific mappings are made on a per-element basis."
   */

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The MeasureReport resource contains the results of evaluating a measure."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="measurereport")
 public class MeasureReportModel  implements Serializable {
-	private static final long serialVersionUID = 151967883143694678L;
+	private static final long serialVersionUID = 153159210144950615L;
   /**
   * Description: "This is a MeasureReport resource"
   */
@@ -424,19 +425,12 @@ public class MeasureReportModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("measure" + "->" + this.measure + "\n"); 
-     builder.append("patient" + "->" + this.patient + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
-     builder.append("reportingOrganization" + "->" + this.reportingOrganization + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
-     builder.append("group" + "->" + this.group + "\n"); 
-     builder.append("evaluatedResources" + "->" + this.evaluatedResources + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Record of delivery of what is supplied."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="supplydeliverysupplieditem")
 public class SupplyDeliverySuppliedItemModel  implements Serializable {
-	private static final long serialVersionUID = 151967883167267093L;
+	private static final long serialVersionUID = 153159210171289745L;
   /**
   * Description: "The amount of supply that has been dispensed. Includes unit of measure."
   */
@@ -195,9 +196,6 @@ public class SupplyDeliverySuppliedItemModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[SupplyDeliverySuppliedItemModel]:" + "\n");
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
-     builder.append("itemCodeableConcept" + "->" + this.itemCodeableConcept + "\n"); 
-     builder.append("itemReference" + "->" + this.itemReference + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

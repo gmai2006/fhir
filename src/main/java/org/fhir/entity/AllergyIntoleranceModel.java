@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Risk of harmful or undesirable, physiological response which is unique to an individual and associated with exposure to a substance."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="allergyintolerance")
 public class AllergyIntoleranceModel  implements Serializable {
-	private static final long serialVersionUID = 151967883202290080L;
+	private static final long serialVersionUID = 153159210204182987L;
   /**
   * Description: "This is a AllergyIntolerance resource"
   */
@@ -575,25 +576,18 @@ public class AllergyIntoleranceModel  implements Serializable {
      builder.append("type" + "->" + this.type + "\n"); 
      builder.append("category" + "->" + this.category + "\n"); 
      builder.append("criticality" + "->" + this.criticality + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("patient" + "->" + this.patient + "\n"); 
      builder.append("onsetDateTime" + "->" + this.onsetDateTime + "\n"); 
      builder.append("onsetAge" + "->" + this.onsetAge + "\n"); 
      builder.append("onsetPeriod" + "->" + this.onsetPeriod + "\n"); 
      builder.append("onsetRange" + "->" + this.onsetRange + "\n"); 
      builder.append("onsetString" + "->" + this.onsetString + "\n"); 
      builder.append("assertedDate" + "->" + this.assertedDate + "\n"); 
-     builder.append("recorder" + "->" + this.recorder + "\n"); 
-     builder.append("asserter" + "->" + this.asserter + "\n"); 
      builder.append("lastOccurrence" + "->" + this.lastOccurrence + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
-     builder.append("reaction" + "->" + this.reaction + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

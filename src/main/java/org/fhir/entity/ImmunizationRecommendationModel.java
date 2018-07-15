@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A patient's point-in-time immunization and recommendation (i.e. forecasting a patient's immunization eligibility according to a published schedule) with optional supporting justification."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="immunizationrecommendation")
 public class ImmunizationRecommendationModel  implements Serializable {
-	private static final long serialVersionUID = 15196788318494749L;
+	private static final long serialVersionUID = 153159210188058953L;
   /**
   * Description: "This is a ImmunizationRecommendation resource"
   */
@@ -293,14 +294,10 @@ public class ImmunizationRecommendationModel  implements Serializable {
     builder.append("[ImmunizationRecommendationModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("patient" + "->" + this.patient + "\n"); 
-     builder.append("recommendation" + "->" + this.recommendation + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

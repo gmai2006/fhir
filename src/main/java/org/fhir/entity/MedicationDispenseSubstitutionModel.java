@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Indicates that a medication product is to be or has been dispensed for a named person/patient.  This includes a description of the medication product (supply) provided and the instructions for administering the medication.  The medication dispense is the result of a pharmacy system responding to a medication order."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="medicationdispensesubstitution")
 public class MedicationDispenseSubstitutionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883138877055L;
+	private static final long serialVersionUID = 15315921013889891L;
   /**
   * Description: "True if the dispenser dispensed a different drug or product from what was prescribed."
   */
@@ -211,9 +212,6 @@ public class MedicationDispenseSubstitutionModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[MedicationDispenseSubstitutionModel]:" + "\n");
      builder.append("wasSubstituted" + "->" + this.wasSubstituted + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("reason" + "->" + this.reason + "\n"); 
-     builder.append("responsibleParty" + "->" + this.responsibleParty + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

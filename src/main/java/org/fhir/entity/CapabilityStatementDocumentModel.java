@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="capabilitystatementdocument")
 public class CapabilityStatementDocumentModel  implements Serializable {
-	private static final long serialVersionUID = 151967883193729577L;
+	private static final long serialVersionUID = 153159210196571684L;
   /**
   * Description: "Mode of this document declaration - whether an application is a producer or consumer."
   */
@@ -185,7 +186,6 @@ public class CapabilityStatementDocumentModel  implements Serializable {
     builder.append("[CapabilityStatementDocumentModel]:" + "\n");
      builder.append("mode" + "->" + this.mode + "\n"); 
      builder.append("documentation" + "->" + this.documentation + "\n"); 
-     builder.append("profile" + "->" + this.profile + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.TaskModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class TaskHelper {
 	public static java.util.List<Task> fromArray2Array(java.util.List<TaskModel> list) {
     return

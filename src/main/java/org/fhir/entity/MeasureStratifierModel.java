@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The Measure resource provides the definition of a quality measure."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="measurestratifier")
 public class MeasureStratifierModel  implements Serializable {
-	private static final long serialVersionUID = 151967883221360318L;
+	private static final long serialVersionUID = 153159210223244400L;
   /**
   * Description: "The identifier for the stratifier used to coordinate the reported data back to this stratifier."
   * Actual type: String;

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The findings and interpretation of diagnostic  tests performed on patients, groups of patients, devices, and locations, and/or specimens derived from these. The report includes clinical context such as requesting and provider information, and some mix of atomic results, images, textual and coded interpretations, and formatted representation of diagnostic reports."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="diagnosticreportimage")
 public class DiagnosticReportImageModel  implements Serializable {
-	private static final long serialVersionUID = 15196788318778377L;
+	private static final long serialVersionUID = 15315921019123269L;
   /**
   * Description: "A comment about the image. Typically, this is used to provide an explanation for why the image is included, or to draw the viewer's attention to important features."
   */
@@ -169,7 +170,6 @@ public class DiagnosticReportImageModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[DiagnosticReportImageModel]:" + "\n");
      builder.append("comment" + "->" + this.comment + "\n"); 
-     builder.append("link" + "->" + this.link + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

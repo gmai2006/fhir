@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study may have multiple series of different modalities."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="imagingstudyseries")
 public class ImagingStudySeriesModel  implements Serializable {
-	private static final long serialVersionUID = 15196788316535642L;
+	private static final long serialVersionUID = 15315921016965501L;
   /**
   * Description: "Formal identifier for this series."
   */
@@ -354,16 +355,10 @@ public class ImagingStudySeriesModel  implements Serializable {
     builder.append("[ImagingStudySeriesModel]:" + "\n");
      builder.append("uid" + "->" + this.uid + "\n"); 
      builder.append("number" + "->" + this.number + "\n"); 
-     builder.append("modality" + "->" + this.modality + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("numberOfInstances" + "->" + this.numberOfInstances + "\n"); 
      builder.append("availability" + "->" + this.availability + "\n"); 
-     builder.append("endpoint" + "->" + this.endpoint + "\n"); 
-     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
-     builder.append("laterality" + "->" + this.laterality + "\n"); 
      builder.append("started" + "->" + this.started + "\n"); 
-     builder.append("performer" + "->" + this.performer + "\n"); 
-     builder.append("instance" + "->" + this.instance + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

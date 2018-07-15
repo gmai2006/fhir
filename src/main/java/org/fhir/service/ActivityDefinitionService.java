@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ActivityDefinition;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface ActivityDefinitionService {
 	public ActivityDefinition find(String id);
   public List<ActivityDefinition> select(int maxResult);

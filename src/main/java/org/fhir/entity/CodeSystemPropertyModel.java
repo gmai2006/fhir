@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A code system resource specifies a set of codes drawn from one or more code systems."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="codesystemproperty")
 public class CodeSystemPropertyModel  implements Serializable {
-	private static final long serialVersionUID = 151967883209920643L;
+	private static final long serialVersionUID = 153159210211725053L;
   /**
   * Description: "A code that is used to identify the property. The code is used internally (in CodeSystem.concept.property.code) and also externally, such as in property filters."
   */

@@ -29,6 +29,12 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.Module;
 
+/**
+ * this class is hand written and will be served as a blueprint
+ * for code generation
+ * @author paul
+ *
+ */
 public class TestAccount extends GoogleGuiceTest {
 	@Inject
 	AccountService service;
@@ -71,7 +77,7 @@ public class TestAccount extends GoogleGuiceTest {
 	
 	@Test 
 	public void testContract() throws Exception {
-		String inputFile = "../../fhir-data/examples-json/pcd-example-notThem.json";
+		String inputFile = "./test/examples-json/pcd-example-notThem.json";
   	String json = FileUtils.readFile2String(inputFile, Charset.defaultCharset());
   	Object local = ContractHelper.fromJson(json);
   	Object result = contractDao.find(((Contract)local).getId());
@@ -85,7 +91,7 @@ public class TestAccount extends GoogleGuiceTest {
 	
 	@Test
 	public void testQuestionnair() throws Exception {
-		String inputFile = "../../fhir-data/examples-json/immunization-questionnaire.json";
+		String inputFile = "./test/examples-json/immunization-questionnaire.json";
 		String json = FileUtils.readFile2String(inputFile, Charset.defaultCharset());
   	Object local = QuestionnaireHelper.fromJson(json);
   	System.out.println("testing Questionnaire ");

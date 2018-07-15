@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Significant health events and conditions for a person related to the patient relevant in the context of care for the patient."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlRootElement
@@ -597,6 +598,10 @@ public class FamilyMemberHistory  extends DomainResource  {
     return builder.toString();
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum ResourceTypeEnum {
   	FamilyMemberHistory,
   	UNKNOWN;
@@ -609,6 +614,10 @@ public class FamilyMemberHistory  extends DomainResource  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum StatusEnum {
   	partial,
   	completed,
@@ -627,6 +636,10 @@ public class FamilyMemberHistory  extends DomainResource  {
   	}
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum GenderEnum {
   	male,
   	female,

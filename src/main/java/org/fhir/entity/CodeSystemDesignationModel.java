@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A code system resource specifies a set of codes drawn from one or more code systems."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="codesystemdesignation")
 public class CodeSystemDesignationModel  implements Serializable {
-	private static final long serialVersionUID = 15196788318527657L;
+	private static final long serialVersionUID = 153159210188432616L;
   /**
   * Description: "The language this designation is defined for."
   */
@@ -185,7 +186,6 @@ public class CodeSystemDesignationModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[CodeSystemDesignationModel]:" + "\n");
      builder.append("language" + "->" + this.language + "\n"); 
-     builder.append("use" + "->" + this.use + "\n"); 
      builder.append("value" + "->" + this.value + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

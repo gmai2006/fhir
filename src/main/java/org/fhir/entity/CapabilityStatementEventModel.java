@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="capabilitystatementevent")
 public class CapabilityStatementEventModel  implements Serializable {
-	private static final long serialVersionUID = 151967883225930663L;
+	private static final long serialVersionUID = 153159210227898181L;
   /**
   * Description: "A coded identifier of a supported messaging event."
   */
@@ -256,12 +257,9 @@ public class CapabilityStatementEventModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[CapabilityStatementEventModel]:" + "\n");
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("category" + "->" + this.category + "\n"); 
      builder.append("mode" + "->" + this.mode + "\n"); 
      builder.append("focus" + "->" + this.focus + "\n"); 
-     builder.append("request" + "->" + this.request + "\n"); 
-     builder.append("response" + "->" + this.response + "\n"); 
      builder.append("documentation" + "->" + this.documentation + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

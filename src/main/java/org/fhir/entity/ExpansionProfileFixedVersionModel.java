@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Resource to define constraints on the Expansion of a FHIR ValueSet."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="expansionprofilefixedversion")
 public class ExpansionProfileFixedVersionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883189387775L;
+	private static final long serialVersionUID = 153159210192582515L;
   /**
   * Description: "The specific system for which to fix the version."
   */

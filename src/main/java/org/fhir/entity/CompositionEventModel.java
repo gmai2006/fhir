@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. While a Composition defines the structure, it does not actually contain the content: rather the full content of a document is contained in a Bundle, of which the Composition is the first resource contained."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="compositionevent")
 public class CompositionEventModel  implements Serializable {
-	private static final long serialVersionUID = 151967883225281040L;
+	private static final long serialVersionUID = 153159210227038591L;
   /**
   * Description: "This list of codes represents the main clinical acts, such as a colonoscopy or an appendectomy, being documented. In some cases, the event is inherent in the typeCode, such as a \"History and Physical Report\" in which the procedure being documented is necessarily a \"History and Physical\" act."
   */
@@ -193,9 +194,7 @@ public class CompositionEventModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[CompositionEventModel]:" + "\n");
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
-     builder.append("detail" + "->" + this.detail + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

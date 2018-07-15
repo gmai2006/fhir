@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A task to be performed."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="taskrequester")
 public class TaskRequesterModel  implements Serializable {
-	private static final long serialVersionUID = 151967883215094931L;
+	private static final long serialVersionUID = 153159210216726889L;
   /**
   * Description: "The device, practitioner, etc. who initiated the task."
   */
@@ -174,8 +175,6 @@ public class TaskRequesterModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[TaskRequesterModel]:" + "\n");
-     builder.append("agent" + "->" + this.agent + "\n"); 
-     builder.append("onBehalfOf" + "->" + this.onBehalfOf + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

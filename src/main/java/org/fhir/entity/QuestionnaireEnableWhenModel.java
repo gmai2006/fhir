@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A structured set of questions intended to guide the collection of answers from end-users. Questionnaires provide detailed control over order, presentation, phraseology and grouping to allow coherent, consistent data collection."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="questionnaireenablewhen")
 public class QuestionnaireEnableWhenModel  implements Serializable {
-	private static final long serialVersionUID = 151967883226655076L;
+	private static final long serialVersionUID = 153159210228550006L;
   /**
   * Description: "The linkId for the question whose answer (or lack of answer) governs whether this item is enabled."
   */
@@ -380,9 +381,6 @@ public class QuestionnaireEnableWhenModel  implements Serializable {
      builder.append("answerString" + "->" + this.answerString + "\n"); 
      builder.append("answerUri" + "->" + this.answerUri + "\n"); 
      builder.append("answerAttachment" + "->" + this.answerAttachment + "\n"); 
-     builder.append("answerCoding" + "->" + this.answerCoding + "\n"); 
-     builder.append("answerQuantity" + "->" + this.answerQuantity + "\n"); 
-     builder.append("answerReference" + "->" + this.answerReference + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

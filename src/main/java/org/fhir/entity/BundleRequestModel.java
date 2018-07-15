@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A container for a collection of resources."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="bundlerequest")
 public class BundleRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151967883189914037L;
+	private static final long serialVersionUID = 153159210192967361L;
   /**
   * Description: "The HTTP verb for this entry in either a change history, or a transaction/ transaction response."
   */

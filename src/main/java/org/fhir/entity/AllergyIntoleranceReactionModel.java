@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Risk of harmful or undesirable, physiological response which is unique to an individual and associated with exposure to a substance."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="allergyintolerancereaction")
 public class AllergyIntoleranceReactionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883199922351L;
+	private static final long serialVersionUID = 153159210202395855L;
   /**
   * Description: "Identification of the specific substance (or pharmaceutical product) considered to be responsible for the Adverse Reaction event. Note: the substance for a specific reaction may be different from the substance identified as the cause of the risk, but it must be consistent with it. For instance, it may be a more specific substance (e.g. a brand medication) or a composite product that includes the identified substance. It must be clinically safe to only process the 'code' and ignore the 'reaction.substance'."
   */
@@ -260,12 +261,9 @@ public class AllergyIntoleranceReactionModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[AllergyIntoleranceReactionModel]:" + "\n");
-     builder.append("substance" + "->" + this.substance + "\n"); 
-     builder.append("manifestation" + "->" + this.manifestation + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("onset" + "->" + this.onset + "\n"); 
      builder.append("severity" + "->" + this.severity + "\n"); 
-     builder.append("exposureRoute" + "->" + this.exposureRoute + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

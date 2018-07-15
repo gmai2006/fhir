@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Resource to define constraints on the Expansion of a FHIR ValueSet."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="expansionprofiledesignation")
 public class ExpansionProfileDesignationModel  implements Serializable {
-	private static final long serialVersionUID = 151967883171018375L;
+	private static final long serialVersionUID = 15315921017466791L;
   /**
   * Description: "Designations to be included."
   */
@@ -174,8 +175,6 @@ public class ExpansionProfileDesignationModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ExpansionProfileDesignationModel]:" + "\n");
-     builder.append("include" + "->" + this.include + "\n"); 
-     builder.append("exclude" + "->" + this.exclude + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

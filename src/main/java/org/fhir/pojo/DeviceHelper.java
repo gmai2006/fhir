@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.DeviceModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class DeviceHelper {
 	public static java.util.List<Device> fromArray2Array(java.util.List<DeviceModel> list) {
     return

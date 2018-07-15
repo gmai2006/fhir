@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="capabilitystatementsecurity")
 public class CapabilityStatementSecurityModel  implements Serializable {
-	private static final long serialVersionUID = 151967883226317779L;
+	private static final long serialVersionUID = 153159210228278081L;
   /**
   * Description: "Server adds CORS headers when responding to requests - this enables javascript applications to use the server."
   */
@@ -205,9 +206,7 @@ public class CapabilityStatementSecurityModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[CapabilityStatementSecurityModel]:" + "\n");
      builder.append("cors" + "->" + this.cors + "\n"); 
-     builder.append("service" + "->" + this.service + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("certificate" + "->" + this.certificate + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.RiskAssessmentModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class RiskAssessmentHelper {
 	public static java.util.List<RiskAssessment> fromArray2Array(java.util.List<RiskAssessmentModel> list) {
     return

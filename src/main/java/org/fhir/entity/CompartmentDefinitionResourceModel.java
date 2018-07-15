@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A compartment definition that defines how resources are accessed on a server."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="compartmentdefinitionresource")
 public class CompartmentDefinitionResourceModel  implements Serializable {
-	private static final long serialVersionUID = 151967883219076806L;
+	private static final long serialVersionUID = 153159210220946575L;
   /**
   * Description: "The name of a resource supported by the server."
   */

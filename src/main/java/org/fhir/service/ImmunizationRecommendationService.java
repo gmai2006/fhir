@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ImmunizationRecommendation;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface ImmunizationRecommendationService {
 	public ImmunizationRecommendation find(String id);
   public List<ImmunizationRecommendation> select(int maxResult);

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Describes the event of a patient being administered a vaccination or a record of a vaccination as reported by a patient, a clinician or another party and may include vaccine reaction information and what vaccination protocol was followed."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="immunizationexplanation")
 public class ImmunizationExplanationModel  implements Serializable {
-	private static final long serialVersionUID = 151967883214089476L;
+	private static final long serialVersionUID = 15315921021586584L;
   /**
   * Description: "Reasons why a vaccine was administered."
   */
@@ -174,8 +175,6 @@ public class ImmunizationExplanationModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ImmunizationExplanationModel]:" + "\n");
-     builder.append("reason" + "->" + this.reason + "\n"); 
-     builder.append("reasonNotGiven" + "->" + this.reasonNotGiven + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

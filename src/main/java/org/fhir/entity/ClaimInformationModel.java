@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="claiminformation")
 public class ClaimInformationModel  implements Serializable {
-	private static final long serialVersionUID = 1519678832058822L;
+	private static final long serialVersionUID = 153159210207796701L;
   /**
   * Description: "Sequence of the information element which serves to provide a link."
   */
@@ -323,15 +324,10 @@ public class ClaimInformationModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[ClaimInformationModel]:" + "\n");
      builder.append("sequence" + "->" + this.sequence + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("timingDate" + "->" + this.timingDate + "\n"); 
      builder.append("timingPeriod" + "->" + this.timingPeriod + "\n"); 
      builder.append("valueString" + "->" + this.valueString + "\n"); 
-     builder.append("valueQuantity" + "->" + this.valueQuantity + "\n"); 
      builder.append("valueAttachment" + "->" + this.valueAttachment + "\n"); 
-     builder.append("valueReference" + "->" + this.valueReference + "\n"); 
-     builder.append("reason" + "->" + this.reason + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

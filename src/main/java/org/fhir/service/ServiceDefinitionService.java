@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ServiceDefinition;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface ServiceDefinitionService {
 	public ServiceDefinition find(String id);
   public List<ServiceDefinition> select(int maxResult);

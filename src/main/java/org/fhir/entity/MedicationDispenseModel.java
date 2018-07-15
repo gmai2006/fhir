@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Indicates that a medication product is to be or has been dispensed for a named person/patient.  This includes a description of the medication product (supply) provided and the instructions for administering the medication.  The medication dispense is the result of a pharmacy system responding to a medication order."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="medicationdispense")
 public class MedicationDispenseModel  implements Serializable {
-	private static final long serialVersionUID = 151967883169795378L;
+	private static final long serialVersionUID = 153159210173665088L;
   /**
   * Description: "This is a MedicationDispense resource"
   */
@@ -752,37 +753,15 @@ public class MedicationDispenseModel  implements Serializable {
     builder.append("[MedicationDispenseModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("partOf" + "->" + this.partOf + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("medicationCodeableConcept" + "->" + this.medicationCodeableConcept + "\n"); 
-     builder.append("medicationReference" + "->" + this.medicationReference + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
-     builder.append("context" + "->" + this.context + "\n"); 
-     builder.append("supportingInformation" + "->" + this.supportingInformation + "\n"); 
-     builder.append("performer" + "->" + this.performer + "\n"); 
-     builder.append("authorizingPrescription" + "->" + this.authorizingPrescription + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
-     builder.append("daysSupply" + "->" + this.daysSupply + "\n"); 
      builder.append("whenPrepared" + "->" + this.whenPrepared + "\n"); 
      builder.append("whenHandedOver" + "->" + this.whenHandedOver + "\n"); 
-     builder.append("destination" + "->" + this.destination + "\n"); 
-     builder.append("receiver" + "->" + this.receiver + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
-     builder.append("dosageInstruction" + "->" + this.dosageInstruction + "\n"); 
-     builder.append("substitution" + "->" + this.substitution + "\n"); 
-     builder.append("detectedIssue" + "->" + this.detectedIssue + "\n"); 
      builder.append("notDone" + "->" + this.notDone + "\n"); 
-     builder.append("notDoneReasonCodeableConcept" + "->" + this.notDoneReasonCodeableConcept + "\n"); 
-     builder.append("notDoneReasonReference" + "->" + this.notDoneReasonReference + "\n"); 
-     builder.append("eventHistory" + "->" + this.eventHistory + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

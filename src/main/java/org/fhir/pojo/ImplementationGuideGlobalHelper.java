@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ImplementationGuideGlobalModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ImplementationGuideGlobalHelper {
 	public static java.util.List<ImplementationGuideGlobal> fromArray2Array(java.util.List<ImplementationGuideGlobalModel> list) {
     return

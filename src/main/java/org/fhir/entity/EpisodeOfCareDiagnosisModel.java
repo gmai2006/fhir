@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "An association between a patient and an organization / healthcare provider(s) during which time encounters may occur. The managing organization assumes a level of responsibility for the patient during this time."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="episodeofcarediagnosis")
 public class EpisodeOfCareDiagnosisModel  implements Serializable {
-	private static final long serialVersionUID = 15196788321082253L;
+	private static final long serialVersionUID = 1531592102126831L;
   /**
   * Description: "A list of conditions/problems/diagnoses that this episode of care is intended to be providing care for."
   */
@@ -190,8 +191,6 @@ public class EpisodeOfCareDiagnosisModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[EpisodeOfCareDiagnosisModel]:" + "\n");
-     builder.append("condition" + "->" + this.condition + "\n"); 
-     builder.append("role" + "->" + this.role + "\n"); 
      builder.append("rank" + "->" + this.rank + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.FamilyMemberHistoryConditionModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class FamilyMemberHistoryConditionHelper {
 	public static java.util.List<FamilyMemberHistoryCondition> fromArray2Array(java.util.List<FamilyMemberHistoryConditionModel> list) {
     return

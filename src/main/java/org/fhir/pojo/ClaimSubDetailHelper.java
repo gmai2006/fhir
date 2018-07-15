@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ClaimSubDetailModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ClaimSubDetailHelper {
 	public static java.util.List<ClaimSubDetail> fromArray2Array(java.util.List<ClaimSubDetailModel> list) {
     return

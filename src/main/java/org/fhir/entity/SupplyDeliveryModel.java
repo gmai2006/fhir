@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Record of delivery of what is supplied."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="supplydelivery")
 public class SupplyDeliveryModel  implements Serializable {
-	private static final long serialVersionUID = 151967883212882753L;
+	private static final long serialVersionUID = 153159210214572026L;
   /**
   * Description: "This is a SupplyDelivery resource"
   */
@@ -488,24 +489,14 @@ public class SupplyDeliveryModel  implements Serializable {
     builder.append("[SupplyDeliveryModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("basedOn" + "->" + this.basedOn + "\n"); 
-     builder.append("partOf" + "->" + this.partOf + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("patient" + "->" + this.patient + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("suppliedItem" + "->" + this.suppliedItem + "\n"); 
      builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime + "\n"); 
      builder.append("occurrencePeriod" + "->" + this.occurrencePeriod + "\n"); 
      builder.append("occurrenceTiming" + "->" + this.occurrenceTiming + "\n"); 
-     builder.append("supplier" + "->" + this.supplier + "\n"); 
-     builder.append("destination" + "->" + this.destination + "\n"); 
-     builder.append("receiver" + "->" + this.receiver + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

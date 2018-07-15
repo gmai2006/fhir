@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ValueSetConceptModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ValueSetConceptHelper {
 	public static java.util.List<ValueSetConcept> fromArray2Array(java.util.List<ValueSetConceptModel> list) {
     return

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="capabilitystatementresource")
 public class CapabilityStatementResourceModel  implements Serializable {
-	private static final long serialVersionUID = 15196788321123787L;
+	private static final long serialVersionUID = 153159210213191381L;
   /**
   * Description: "A type of resource exposed via the restful interface."
   */
@@ -377,9 +378,7 @@ public class CapabilityStatementResourceModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[CapabilityStatementResourceModel]:" + "\n");
      builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("profile" + "->" + this.profile + "\n"); 
      builder.append("documentation" + "->" + this.documentation + "\n"); 
-     builder.append("interaction" + "->" + this.interaction + "\n"); 
      builder.append("versioning" + "->" + this.versioning + "\n"); 
      builder.append("readHistory" + "->" + this.readHistory + "\n"); 
      builder.append("updateCreate" + "->" + this.updateCreate + "\n"); 
@@ -390,7 +389,6 @@ public class CapabilityStatementResourceModel  implements Serializable {
      builder.append("referencePolicy" + "->" + this.referencePolicy + "\n"); 
      builder.append("searchInclude" + "->" + this.searchInclude + "\n"); 
      builder.append("searchRevInclude" + "->" + this.searchRevInclude + "\n"); 
-     builder.append("searchParam" + "->" + this.searchParam + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

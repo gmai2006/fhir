@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Indicates an actual or potential clinical issue with or between one or more active or proposed clinical actions for a patient; e.g. Drug-drug interaction, Ineffective treatment frequency, Procedure-condition conflict, etc."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="detectedissuemitigation")
 public class DetectedIssueMitigationModel  implements Serializable {
-	private static final long serialVersionUID = 151967883220227794L;
+	private static final long serialVersionUID = 15315921022214661L;
   /**
   * Description: "Describes the action that was taken or the observation that was made that reduces/eliminates the risk associated with the identified issue."
   */
@@ -190,9 +191,7 @@ public class DetectedIssueMitigationModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[DetectedIssueMitigationModel]:" + "\n");
-     builder.append("action" + "->" + this.action + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
-     builder.append("author" + "->" + this.author + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

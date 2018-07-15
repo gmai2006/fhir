@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="explanationofbenefitbenefitbalance")
 public class ExplanationOfBenefitBenefitBalanceModel  implements Serializable {
-	private static final long serialVersionUID = 151967883147048049L;
+	private static final long serialVersionUID = 153159210148834498L;
   /**
   * Description: "Dental, Vision, Medical, Pharmacy, Rehab etc."
   */
@@ -303,15 +304,9 @@ public class ExplanationOfBenefitBenefitBalanceModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ExplanationOfBenefitBenefitBalanceModel]:" + "\n");
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("subCategory" + "->" + this.subCategory + "\n"); 
      builder.append("excluded" + "->" + this.excluded + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("network" + "->" + this.network + "\n"); 
-     builder.append("unit" + "->" + this.unit + "\n"); 
-     builder.append("term" + "->" + this.term + "\n"); 
-     builder.append("financial" + "->" + this.financial + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

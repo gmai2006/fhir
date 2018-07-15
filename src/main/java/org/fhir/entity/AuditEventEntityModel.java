@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="auditevententity")
 public class AuditEventEntityModel  implements Serializable {
-	private static final long serialVersionUID = 151967883149936137L;
+	private static final long serialVersionUID = 153159210152091517L;
   /**
   * Description: "Identifies a specific instance of the entity. The reference should always be version specific."
   * Actual type: String;
@@ -323,15 +324,9 @@ public class AuditEventEntityModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[AuditEventEntityModel]:" + "\n");
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("reference" + "->" + this.reference + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("role" + "->" + this.role + "\n"); 
-     builder.append("lifecycle" + "->" + this.lifecycle + "\n"); 
-     builder.append("securityLabel" + "->" + this.securityLabel + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("query" + "->" + this.query + "\n"); 
-     builder.append("detail" + "->" + this.detail + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A Map of relationships between 2 structures that can be used to transform data."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="structuremapinput")
 public class StructureMapInputModel  implements Serializable {
-	private static final long serialVersionUID = 151967883206199131L;
+	private static final long serialVersionUID = 153159210208095379L;
   /**
   * Description: "Name for this instance of data."
   */

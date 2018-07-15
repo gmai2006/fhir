@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge.  This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques.  A ResearchStudy involves the gathering of information about human or animal subjects."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="researchstudy")
 public class ResearchStudyModel  implements Serializable {
-	private static final long serialVersionUID = 151967883218513372L;
+	private static final long serialVersionUID = 153159210220488578L;
   /**
   * Description: "This is a ResearchStudy resource"
   */
@@ -629,30 +630,14 @@ public class ResearchStudyModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("title" + "->" + this.title + "\n"); 
-     builder.append("protocol" + "->" + this.protocol + "\n"); 
-     builder.append("partOf" + "->" + this.partOf + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("focus" + "->" + this.focus + "\n"); 
-     builder.append("contact" + "->" + this.contact + "\n"); 
-     builder.append("relatedArtifact" + "->" + this.relatedArtifact + "\n"); 
-     builder.append("keyword" + "->" + this.keyword + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("enrollment" + "->" + this.enrollment + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
-     builder.append("sponsor" + "->" + this.sponsor + "\n"); 
-     builder.append("principalInvestigator" + "->" + this.principalInvestigator + "\n"); 
-     builder.append("site" + "->" + this.site + "\n"); 
-     builder.append("reasonStopped" + "->" + this.reasonStopped + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
-     builder.append("arm" + "->" + this.arm + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

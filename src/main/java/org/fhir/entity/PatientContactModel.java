@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Demographics and other administrative information about an individual or animal receiving care or other health-related services."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="patientcontact")
 public class PatientContactModel  implements Serializable {
-	private static final long serialVersionUID = 151967883204053615L;
+	private static final long serialVersionUID = 153159210205877572L;
   /**
   * Description: "The nature of the relationship between the patient and the contact person."
   */
@@ -267,12 +268,9 @@ public class PatientContactModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[PatientContactModel]:" + "\n");
-     builder.append("relationship" + "->" + this.relationship + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("telecom" + "->" + this.telecom + "\n"); 
-     builder.append("address" + "->" + this.address + "\n"); 
      builder.append("gender" + "->" + this.gender + "\n"); 
-     builder.append("organization" + "->" + this.organization + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

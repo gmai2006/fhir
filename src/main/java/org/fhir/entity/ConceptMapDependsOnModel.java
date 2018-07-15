@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A statement of relationships from one set of concepts to one or more other concepts - either code systems or data elements, or classes in class models."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="conceptmapdependson")
 public class ConceptMapDependsOnModel  implements Serializable {
-	private static final long serialVersionUID = 151967883155384030L;
+	private static final long serialVersionUID = 153159210157440818L;
   /**
   * Description: "A reference to an element that holds a coded value that corresponds to a code system property. The idea is that the information model carries an element somwhere that is labeled to correspond with a code system property."
   */

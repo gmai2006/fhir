@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "An occurrence of information being transmitted; e.g. an alert that was sent to a responsible provider, a public health agency was notified about a reportable condition."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="communicationpayload")
 public class CommunicationPayloadModel  implements Serializable {
-	private static final long serialVersionUID = 151967883204392426L;
+	private static final long serialVersionUID = 153159210206291921L;
   /**
   * Description: "A communicated content (or for multi-part communications, one portion of the communication)."
   */
@@ -189,7 +190,6 @@ public class CommunicationPayloadModel  implements Serializable {
     builder.append("[CommunicationPayloadModel]:" + "\n");
      builder.append("contentString" + "->" + this.contentString + "\n"); 
      builder.append("contentAttachment" + "->" + this.contentAttachment + "\n"); 
-     builder.append("contentReference" + "->" + this.contentReference + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

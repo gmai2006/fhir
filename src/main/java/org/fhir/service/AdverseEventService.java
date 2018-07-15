@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.AdverseEvent;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface AdverseEventService {
 	public AdverseEvent find(String id);
   public List<AdverseEvent> select(int maxResult);

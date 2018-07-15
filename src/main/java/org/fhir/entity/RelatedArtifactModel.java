@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Related artifacts such as additional documentation, justification, or bibliographic references."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="relatedartifact")
 public class RelatedArtifactModel  implements Serializable {
-	private static final long serialVersionUID = 151967883216670436L;
+	private static final long serialVersionUID = 153159210218447635L;
   /**
   * Description: "The type of relationship to the related artifact."
   */
@@ -215,7 +216,6 @@ public class RelatedArtifactModel  implements Serializable {
      builder.append("citation" + "->" + this.citation + "\n"); 
      builder.append("url" + "->" + this.url + "\n"); 
      builder.append("document" + "->" + this.document + "\n"); 
-     builder.append("resource" + "->" + this.resource + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;

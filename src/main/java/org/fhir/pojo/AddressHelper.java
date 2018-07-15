@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.AddressModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class AddressHelper {
 	public static java.util.List<Address> fromArray2Array(java.util.List<AddressModel> list) {
     return

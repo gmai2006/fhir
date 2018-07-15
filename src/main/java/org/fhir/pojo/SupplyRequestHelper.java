@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.SupplyRequestModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class SupplyRequestHelper {
 	public static java.util.List<SupplyRequest> fromArray2Array(java.util.List<SupplyRequestModel> list) {
     return

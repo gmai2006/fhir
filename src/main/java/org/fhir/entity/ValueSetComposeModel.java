@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A value set specifies a set of codes drawn from one or more code systems."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="valuesetcompose")
 public class ValueSetComposeModel  implements Serializable {
-	private static final long serialVersionUID = 151967883199328444L;
+	private static final long serialVersionUID = 153159210201692663L;
   /**
   * Description: "If a locked date is defined, then the Content Logical Definition must be evaluated using the current version as of the locked date for referenced code system(s) and value set instances where ValueSet.compose.include.version is not defined."
   */
@@ -207,8 +208,6 @@ public class ValueSetComposeModel  implements Serializable {
     builder.append("[ValueSetComposeModel]:" + "\n");
      builder.append("lockedDate" + "->" + this.lockedDate + "\n"); 
      builder.append("inactive" + "->" + this.inactive + "\n"); 
-     builder.append("include" + "->" + this.include + "\n"); 
-     builder.append("exclude" + "->" + this.exclude + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

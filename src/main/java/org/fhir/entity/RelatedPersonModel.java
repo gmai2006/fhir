@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Information about a person that is involved in the care for a patient, but who is not the target of healthcare, nor has a formal responsibility in the care process."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="relatedperson")
 public class RelatedPersonModel  implements Serializable {
-	private static final long serialVersionUID = 151967883174049019L;
+	private static final long serialVersionUID = 153159210177122746L;
   /**
   * Description: "This is a RelatedPerson resource"
   */
@@ -437,21 +438,16 @@ public class RelatedPersonModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("active" + "->" + this.active + "\n"); 
-     builder.append("patient" + "->" + this.patient + "\n"); 
-     builder.append("relationship" + "->" + this.relationship + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("telecom" + "->" + this.telecom + "\n"); 
      builder.append("gender" + "->" + this.gender + "\n"); 
      builder.append("birthDate" + "->" + this.birthDate + "\n"); 
-     builder.append("address" + "->" + this.address + "\n"); 
      builder.append("photo" + "->" + this.photo + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

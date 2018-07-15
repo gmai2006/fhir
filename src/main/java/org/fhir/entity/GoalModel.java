@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Describes the intended objective(s) for a patient, group or organization care, for example, weight loss, restoring an activity of daily living, obtaining herd immunity via immunization, meeting a process improvement objective, etc."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="goal")
 public class GoalModel  implements Serializable {
-	private static final long serialVersionUID = 151967883207443305L;
+	private static final long serialVersionUID = 153159210209037279L;
   /**
   * Description: "This is a Goal resource"
   */
@@ -543,26 +544,14 @@ public class GoalModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("priority" + "->" + this.priority + "\n"); 
-     builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
      builder.append("startDate" + "->" + this.startDate + "\n"); 
-     builder.append("startCodeableConcept" + "->" + this.startCodeableConcept + "\n"); 
-     builder.append("target" + "->" + this.target + "\n"); 
      builder.append("statusDate" + "->" + this.statusDate + "\n"); 
      builder.append("statusReason" + "->" + this.statusReason + "\n"); 
-     builder.append("expressedBy" + "->" + this.expressedBy + "\n"); 
-     builder.append("addresses" + "->" + this.addresses + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
-     builder.append("outcomeCode" + "->" + this.outcomeCode + "\n"); 
-     builder.append("outcomeReference" + "->" + this.outcomeReference + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

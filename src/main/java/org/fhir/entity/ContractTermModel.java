@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A formal agreement between parties regarding the conduct of business, exchange of information or other matters."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="contractterm")
 public class ContractTermModel  implements Serializable {
-	private static final long serialVersionUID = 15196788319458687L;
+	private static final long serialVersionUID = 153159210197310204L;
   /**
   * Description: "Unique identifier for this particular Contract Provision."
   * Actual type: String;
@@ -393,16 +394,7 @@ public class ContractTermModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("issued" + "->" + this.issued + "\n"); 
      builder.append("applies" + "->" + this.applies + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("subType" + "->" + this.subType + "\n"); 
-     builder.append("topic" + "->" + this.topic + "\n"); 
-     builder.append("action" + "->" + this.action + "\n"); 
-     builder.append("actionReason" + "->" + this.actionReason + "\n"); 
-     builder.append("securityLabel" + "->" + this.securityLabel + "\n"); 
-     builder.append("agent" + "->" + this.agent + "\n"); 
      builder.append("text" + "->" + this.text + "\n"); 
-     builder.append("valuedItem" + "->" + this.valuedItem + "\n"); 
-     builder.append("group" + "->" + this.group + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. While a Composition defines the structure, it does not actually contain the content: rather the full content of a document is contained in a Bundle, of which the Composition is the first resource contained."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="compositionrelatesto")
 public class CompositionRelatesToModel  implements Serializable {
-	private static final long serialVersionUID = 151967883162436933L;
+	private static final long serialVersionUID = 15315921016618411L;
   /**
   * Description: "The type of relationship that this composition has with anther composition or document."
   */
@@ -190,7 +191,6 @@ public class CompositionRelatesToModel  implements Serializable {
     builder.append("[CompositionRelatesToModel]:" + "\n");
      builder.append("code" + "->" + this.code + "\n"); 
      builder.append("targetIdentifier" + "->" + this.targetIdentifier + "\n"); 
-     builder.append("targetReference" + "->" + this.targetReference + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

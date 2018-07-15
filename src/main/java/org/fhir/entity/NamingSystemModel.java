@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A curated namespace that issues unique symbols within that namespace for the identification of concepts, people, devices, etc.  Represents a \"System\" used within the Identifier and Coding data types."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="namingsystem")
 public class NamingSystemModel  implements Serializable {
-	private static final long serialVersionUID = 151967883204174906L;
+	private static final long serialVersionUID = 153159210205947841L;
   /**
   * Description: "This is a NamingSystem resource"
   */
@@ -483,21 +484,13 @@ public class NamingSystemModel  implements Serializable {
      builder.append("kind" + "->" + this.kind + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("publisher" + "->" + this.publisher + "\n"); 
-     builder.append("contact" + "->" + this.contact + "\n"); 
      builder.append("responsible" + "->" + this.responsible + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("useContext" + "->" + this.useContext + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("usage" + "->" + this.usage + "\n"); 
-     builder.append("uniqueId" + "->" + this.uniqueId + "\n"); 
-     builder.append("replacedBy" + "->" + this.replacedBy + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ClaimResponseDetail1Model;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ClaimResponseDetail1Helper {
 	public static java.util.List<ClaimResponseDetail1> fromArray2Array(java.util.List<ClaimResponseDetail1Model> list) {
     return

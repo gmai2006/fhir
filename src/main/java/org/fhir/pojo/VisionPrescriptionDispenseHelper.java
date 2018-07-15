@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.VisionPrescriptionDispenseModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class VisionPrescriptionDispenseHelper {
 	public static java.util.List<VisionPrescriptionDispense> fromArray2Array(java.util.List<VisionPrescriptionDispenseModel> list) {
     return

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Prospective warnings of potential issues when providing care to the patient."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="flag")
 public class FlagModel  implements Serializable {
-	private static final long serialVersionUID = 151967883167082931L;
+	private static final long serialVersionUID = 153159210171093407L;
   /**
   * Description: "This is a Flag resource"
   */
@@ -391,18 +392,11 @@ public class FlagModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
-     builder.append("encounter" + "->" + this.encounter + "\n"); 
-     builder.append("author" + "->" + this.author + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

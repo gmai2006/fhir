@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A container for a collection of resources."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="bundlelink")
 public class BundleLinkModel  implements Serializable {
-	private static final long serialVersionUID = 151967883181741740L;
+	private static final long serialVersionUID = 153159210184690787L;
   /**
   * Description: "A name which details the functional use for this link - see [http://www.iana.org/assignments/link-relations/link-relations.xhtml#link-relations-1](http://www.iana.org/assignments/link-relations/link-relations.xhtml#link-relations-1)."
   */

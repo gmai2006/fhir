@@ -1,26 +1,24 @@
 package org.fhir;
 
 
-	import java.util.Arrays;
-	import java.util.List;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 
+import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
-import com.google.inject.Inject;
 import com.google.inject.Injector;
-	import com.google.inject.Module;
-	import com.google.inject.persist.PersistService;
-	import com.google.inject.persist.jpa.JpaPersistModule;
-	import com.google.inject.AbstractModule;
+import com.google.inject.Module;
+import com.google.inject.persist.PersistService;
+import com.google.inject.persist.jpa.JpaPersistModule;
 	/**
 	 * Base class for test cases that need to use Guice injection.
+	 * this class is hand written - a framework class
 	 */
 	
-	public abstract class GoogleGuiceTest {
+public abstract class GoogleGuiceTest {
     protected Injector injector;
     protected PersistService service;
 

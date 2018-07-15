@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="capabilitystatement")
 public class CapabilityStatementModel  implements Serializable {
-	private static final long serialVersionUID = 151967883195038779L;
+	private static final long serialVersionUID = 153159210197646609L;
   /**
   * Description: "This is a CapabilityStatement resource"
   */
@@ -700,31 +701,20 @@ public class CapabilityStatementModel  implements Serializable {
      builder.append("experimental" + "->" + this.experimental + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("publisher" + "->" + this.publisher + "\n"); 
-     builder.append("contact" + "->" + this.contact + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("useContext" + "->" + this.useContext + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("purpose" + "->" + this.purpose + "\n"); 
      builder.append("copyright" + "->" + this.copyright + "\n"); 
      builder.append("kind" + "->" + this.kind + "\n"); 
      builder.append("instantiates" + "->" + this.instantiates + "\n"); 
-     builder.append("software" + "->" + this.software + "\n"); 
-     builder.append("implementation" + "->" + this.implementation + "\n"); 
      builder.append("fhirVersion" + "->" + this.fhirVersion + "\n"); 
      builder.append("acceptUnknown" + "->" + this.acceptUnknown + "\n"); 
      builder.append("format" + "->" + this.format + "\n"); 
      builder.append("patchFormat" + "->" + this.patchFormat + "\n"); 
      builder.append("implementationGuide" + "->" + this.implementationGuide + "\n"); 
-     builder.append("profile" + "->" + this.profile + "\n"); 
-     builder.append("rest" + "->" + this.rest + "\n"); 
-     builder.append("messaging" + "->" + this.messaging + "\n"); 
-     builder.append("document" + "->" + this.document + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

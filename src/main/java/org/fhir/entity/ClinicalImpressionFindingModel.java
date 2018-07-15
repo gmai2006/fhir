@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A record of a clinical assessment performed to determine what problem(s) may affect the patient and before planning the treatments or management strategies that are best to manage a patient's condition. Assessments are often 1:1 with a clinical consultation / encounter,  but this varies greatly depending on the clinical workflow. This resource is called \"ClinicalImpression\" rather than \"ClinicalAssessment\" to avoid confusion with the recording of assessment tools such as Apgar score."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="clinicalimpressionfinding")
 public class ClinicalImpressionFindingModel  implements Serializable {
-	private static final long serialVersionUID = 15196788315779741L;
+	private static final long serialVersionUID = 153159210160340178L;
   /**
   * Description: "Specific text, code or reference for finding or diagnosis, which may include ruled-out or resolved conditions."
   */
@@ -189,8 +190,6 @@ public class ClinicalImpressionFindingModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ClinicalImpressionFindingModel]:" + "\n");
-     builder.append("itemCodeableConcept" + "->" + this.itemCodeableConcept + "\n"); 
-     builder.append("itemReference" + "->" + this.itemReference + "\n"); 
      builder.append("basis" + "->" + this.basis + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

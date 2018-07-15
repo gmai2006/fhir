@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.AllergyIntoleranceModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class AllergyIntoleranceHelper {
 	public static java.util.List<AllergyIntolerance> fromArray2Array(java.util.List<AllergyIntoleranceModel> list) {
     return

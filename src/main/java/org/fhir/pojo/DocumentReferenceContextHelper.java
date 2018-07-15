@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.DocumentReferenceContextModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class DocumentReferenceContextHelper {
 	public static java.util.List<DocumentReferenceContext> fromArray2Array(java.util.List<DocumentReferenceContextModel> list) {
     return

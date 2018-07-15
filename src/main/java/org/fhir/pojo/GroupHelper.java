@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.GroupModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class GroupHelper {
 	public static java.util.List<Group> fromArray2Array(java.util.List<GroupModel> list) {
     return

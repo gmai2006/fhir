@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.CareTeamParticipantModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class CareTeamParticipantHelper {
 	public static java.util.List<CareTeamParticipant> fromArray2Array(java.util.List<CareTeamParticipantModel> list) {
     return

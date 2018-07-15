@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Resource to define constraints on the Expansion of a FHIR ValueSet."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="expansionprofile")
 public class ExpansionProfileModel  implements Serializable {
-	private static final long serialVersionUID = 151967883224131759L;
+	private static final long serialVersionUID = 153159210225866998L;
   /**
   * Description: "This is a ExpansionProfile resource"
   */
@@ -626,14 +627,8 @@ public class ExpansionProfileModel  implements Serializable {
      builder.append("experimental" + "->" + this.experimental + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("publisher" + "->" + this.publisher + "\n"); 
-     builder.append("contact" + "->" + this.contact + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("useContext" + "->" + this.useContext + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
-     builder.append("fixedVersion" + "->" + this.fixedVersion + "\n"); 
-     builder.append("excludedSystem" + "->" + this.excludedSystem + "\n"); 
      builder.append("includeDesignations" + "->" + this.includeDesignations + "\n"); 
-     builder.append("designation" + "->" + this.designation + "\n"); 
      builder.append("includeDefinition" + "->" + this.includeDefinition + "\n"); 
      builder.append("activeOnly" + "->" + this.activeOnly + "\n"); 
      builder.append("excludeNested" + "->" + this.excludeNested + "\n"); 
@@ -641,12 +636,10 @@ public class ExpansionProfileModel  implements Serializable {
      builder.append("excludePostCoordinated" + "->" + this.excludePostCoordinated + "\n"); 
      builder.append("displayLanguage" + "->" + this.displayLanguage + "\n"); 
      builder.append("limitedExpansion" + "->" + this.limitedExpansion + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

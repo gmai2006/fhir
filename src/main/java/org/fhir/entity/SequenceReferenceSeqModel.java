@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Raw data describing a biological sequence."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="sequencereferenceseq")
 public class SequenceReferenceSeqModel  implements Serializable {
-	private static final long serialVersionUID = 151967883206729967L;
+	private static final long serialVersionUID = 153159210208412498L;
   /**
   * Description: "Structural unit composed of a nucleic acid molecule which controls its own replication through the interaction of specific proteins at one or more origins of replication ([SO:0000340](http://www.sequenceontology.org/browser/current_svn/term/SO:0000340))."
   */
@@ -273,10 +274,7 @@ public class SequenceReferenceSeqModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[SequenceReferenceSeqModel]:" + "\n");
-     builder.append("chromosome" + "->" + this.chromosome + "\n"); 
      builder.append("genomeBuild" + "->" + this.genomeBuild + "\n"); 
-     builder.append("referenceSeqId" + "->" + this.referenceSeqId + "\n"); 
-     builder.append("referenceSeqPointer" + "->" + this.referenceSeqPointer + "\n"); 
      builder.append("referenceSeqString" + "->" + this.referenceSeqString + "\n"); 
      builder.append("strand" + "->" + this.strand + "\n"); 
      builder.append("windowStart" + "->" + this.windowStart + "\n"); 

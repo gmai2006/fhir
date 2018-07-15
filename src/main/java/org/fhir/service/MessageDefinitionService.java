@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.MessageDefinition;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface MessageDefinitionService {
 	public MessageDefinition find(String id);
   public List<MessageDefinition> select(int maxResult);

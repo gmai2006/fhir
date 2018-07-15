@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A summary of information based on the results of executing a TestScript."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="testreport")
 public class TestReportModel  implements Serializable {
-	private static final long serialVersionUID = 151967883218943986L;
+	private static final long serialVersionUID = 153159210220720599L;
   /**
   * Description: "This is a TestReport resource"
   */
@@ -450,21 +451,14 @@ public class TestReportModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("testScript" + "->" + this.testScript + "\n"); 
      builder.append("result" + "->" + this.result + "\n"); 
      builder.append("score" + "->" + this.score + "\n"); 
      builder.append("tester" + "->" + this.tester + "\n"); 
      builder.append("issued" + "->" + this.issued + "\n"); 
-     builder.append("participant" + "->" + this.participant + "\n"); 
-     builder.append("setup" + "->" + this.setup + "\n"); 
-     builder.append("test" + "->" + this.test + "\n"); 
-     builder.append("teardown" + "->" + this.teardown + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

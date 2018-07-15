@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Describes the intention of how one or more practitioners intend to deliver care for a particular patient, group or community for a period of time, possibly limited to care for a specific condition or set of conditions."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="careplandetail")
 public class CarePlanDetailModel  implements Serializable {
-	private static final long serialVersionUID = 151967883218058229L;
+	private static final long serialVersionUID = 1531592102198157L;
   /**
   * Description: "High-level categorization of the type of activity in a care plan."
   */
@@ -497,24 +498,12 @@ public class CarePlanDetailModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[CarePlanDetailModel]:" + "\n");
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("definition" + "->" + this.definition + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("reasonCode" + "->" + this.reasonCode + "\n"); 
-     builder.append("reasonReference" + "->" + this.reasonReference + "\n"); 
-     builder.append("goal" + "->" + this.goal + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("statusReason" + "->" + this.statusReason + "\n"); 
      builder.append("prohibited" + "->" + this.prohibited + "\n"); 
      builder.append("scheduledTiming" + "->" + this.scheduledTiming + "\n"); 
      builder.append("scheduledPeriod" + "->" + this.scheduledPeriod + "\n"); 
      builder.append("scheduledString" + "->" + this.scheduledString + "\n"); 
-     builder.append("location" + "->" + this.location + "\n"); 
-     builder.append("performer" + "->" + this.performer + "\n"); 
-     builder.append("productCodeableConcept" + "->" + this.productCodeableConcept + "\n"); 
-     builder.append("productReference" + "->" + this.productReference + "\n"); 
-     builder.append("dailyAmount" + "->" + this.dailyAmount + "\n"); 
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

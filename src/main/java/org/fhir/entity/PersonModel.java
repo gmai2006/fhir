@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Demographics and administrative information about a person independent of a specific health-related context."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="person")
 public class PersonModel  implements Serializable {
-	private static final long serialVersionUID = 15196788320276810L;
+	private static final long serialVersionUID = 153159210204523066L;
   /**
   * Description: "This is a Person resource"
   */
@@ -421,17 +422,12 @@ public class PersonModel  implements Serializable {
      builder.append("telecom" + "->" + this.telecom + "\n"); 
      builder.append("gender" + "->" + this.gender + "\n"); 
      builder.append("birthDate" + "->" + this.birthDate + "\n"); 
-     builder.append("address" + "->" + this.address + "\n"); 
      builder.append("photo" + "->" + this.photo + "\n"); 
-     builder.append("managingOrganization" + "->" + this.managingOrganization + "\n"); 
      builder.append("active" + "->" + this.active + "\n"); 
-     builder.append("link" + "->" + this.link + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

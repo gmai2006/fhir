@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The characteristics, operational status and capabilities of a medical-related component of a medical device."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="devicecomponent")
 public class DeviceComponentModel  implements Serializable {
-	private static final long serialVersionUID = 151967883178652831L;
+	private static final long serialVersionUID = 153159210181095949L;
   /**
   * Description: "This is a DeviceComponent resource"
   */
@@ -429,21 +430,12 @@ public class DeviceComponentModel  implements Serializable {
     builder.append("[DeviceComponentModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("lastSystemChange" + "->" + this.lastSystemChange + "\n"); 
-     builder.append("source" + "->" + this.source + "\n"); 
-     builder.append("parent" + "->" + this.parent + "\n"); 
-     builder.append("operationalStatus" + "->" + this.operationalStatus + "\n"); 
-     builder.append("parameterGroup" + "->" + this.parameterGroup + "\n"); 
      builder.append("measurementPrinciple" + "->" + this.measurementPrinciple + "\n"); 
-     builder.append("productionSpecification" + "->" + this.productionSpecification + "\n"); 
-     builder.append("languageCode" + "->" + this.languageCode + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

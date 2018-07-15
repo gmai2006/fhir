@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A record of a healthcare consumer’s policy choices, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="consentexcept")
 public class ConsentExceptModel  implements Serializable {
-	private static final long serialVersionUID = 151967883191038103L;
+	private static final long serialVersionUID = 153159210193953963L;
   /**
   * Description: "Action  to take - permit or deny - when the exception conditions are met."
   */
@@ -334,14 +335,7 @@ public class ConsentExceptModel  implements Serializable {
     builder.append("[ConsentExceptModel]:" + "\n");
      builder.append("type" + "->" + this.type + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
-     builder.append("actor" + "->" + this.actor + "\n"); 
-     builder.append("action" + "->" + this.action + "\n"); 
-     builder.append("securityLabel" + "->" + this.securityLabel + "\n"); 
-     builder.append("purpose" + "->" + this.purpose + "\n"); 
-     builder.append("FHIRclass" + "->" + this.FHIRclass + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("dataPeriod" + "->" + this.dataPeriod + "\n"); 
-     builder.append("data" + "->" + this.data + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

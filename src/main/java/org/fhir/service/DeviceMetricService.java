@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DeviceMetric;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface DeviceMetricService {
 	public DeviceMetric find(String id);
   public List<DeviceMetric> select(int maxResult);

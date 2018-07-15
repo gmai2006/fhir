@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Describes the event of a patient being administered a vaccination or a record of a vaccination as reported by a patient, a clinician or another party and may include vaccine reaction information and what vaccination protocol was followed."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="immunizationreaction")
 public class ImmunizationReactionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883173043479L;
+	private static final long serialVersionUID = 1531592101763506L;
   /**
   * Description: "Date of reaction to the immunization."
   */
@@ -185,7 +186,6 @@ public class ImmunizationReactionModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[ImmunizationReactionModel]:" + "\n");
      builder.append("date" + "->" + this.date + "\n"); 
-     builder.append("detail" + "->" + this.detail + "\n"); 
      builder.append("reported" + "->" + this.reported + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A record of a healthcare consumer’s policy choices, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="consentpolicy")
 public class ConsentPolicyModel  implements Serializable {
-	private static final long serialVersionUID = 151967883229383316L;
+	private static final long serialVersionUID = 15315921023133652L;
   /**
   * Description: "Entity or Organization having regulatory jurisdiction or accountability for  enforcing policies pertaining to Consent Directives."
   */

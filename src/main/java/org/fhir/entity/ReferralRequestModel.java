@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Used to record and send details about a request for referral service or transfer of a patient to the care of another provider or provider organization."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="referralrequest")
 public class ReferralRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151967883198654141L;
+	private static final long serialVersionUID = 153159210200935163L;
   /**
   * Description: "This is a ReferralRequest resource"
   */
@@ -697,35 +698,19 @@ public class ReferralRequestModel  implements Serializable {
     builder.append("[ReferralRequestModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("definition" + "->" + this.definition + "\n"); 
-     builder.append("basedOn" + "->" + this.basedOn + "\n"); 
-     builder.append("replaces" + "->" + this.replaces + "\n"); 
      builder.append("groupIdentifier" + "->" + this.groupIdentifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("intent" + "->" + this.intent + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("priority" + "->" + this.priority + "\n"); 
-     builder.append("serviceRequested" + "->" + this.serviceRequested + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
-     builder.append("context" + "->" + this.context + "\n"); 
      builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime + "\n"); 
      builder.append("occurrencePeriod" + "->" + this.occurrencePeriod + "\n"); 
      builder.append("authoredOn" + "->" + this.authoredOn + "\n"); 
-     builder.append("requester" + "->" + this.requester + "\n"); 
-     builder.append("specialty" + "->" + this.specialty + "\n"); 
-     builder.append("recipient" + "->" + this.recipient + "\n"); 
-     builder.append("reasonCode" + "->" + this.reasonCode + "\n"); 
-     builder.append("reasonReference" + "->" + this.reasonReference + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("supportingInfo" + "->" + this.supportingInfo + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
-     builder.append("relevantHistory" + "->" + this.relevantHistory + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

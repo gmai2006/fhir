@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.GoalTargetModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class GoalTargetHelper {
 	public static java.util.List<GoalTarget> fromArray2Array(java.util.List<GoalTargetModel> list) {
     return

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Describes the event of a patient being administered a vaccination or a record of a vaccination as reported by a patient, a clinician or another party and may include vaccine reaction information and what vaccination protocol was followed."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="immunization")
 public class ImmunizationModel  implements Serializable {
-	private static final long serialVersionUID = 151967883198393896L;
+	private static final long serialVersionUID = 153159210200777967L;
   /**
   * Description: "This is a Immunization resource"
   */
@@ -638,30 +639,15 @@ public class ImmunizationModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("notGiven" + "->" + this.notGiven + "\n"); 
-     builder.append("vaccineCode" + "->" + this.vaccineCode + "\n"); 
-     builder.append("patient" + "->" + this.patient + "\n"); 
-     builder.append("encounter" + "->" + this.encounter + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("primarySource" + "->" + this.primarySource + "\n"); 
-     builder.append("reportOrigin" + "->" + this.reportOrigin + "\n"); 
-     builder.append("location" + "->" + this.location + "\n"); 
-     builder.append("manufacturer" + "->" + this.manufacturer + "\n"); 
      builder.append("lotNumber" + "->" + this.lotNumber + "\n"); 
      builder.append("expirationDate" + "->" + this.expirationDate + "\n"); 
-     builder.append("site" + "->" + this.site + "\n"); 
-     builder.append("route" + "->" + this.route + "\n"); 
-     builder.append("doseQuantity" + "->" + this.doseQuantity + "\n"); 
-     builder.append("practitioner" + "->" + this.practitioner + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
-     builder.append("explanation" + "->" + this.explanation + "\n"); 
-     builder.append("reaction" + "->" + this.reaction + "\n"); 
-     builder.append("vaccinationProtocol" + "->" + this.vaccinationProtocol + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

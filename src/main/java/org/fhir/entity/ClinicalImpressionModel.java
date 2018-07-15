@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A record of a clinical assessment performed to determine what problem(s) may affect the patient and before planning the treatments or management strategies that are best to manage a patient's condition. Assessments are often 1:1 with a clinical consultation / encounter,  but this varies greatly depending on the clinical workflow. This resource is called \"ClinicalImpression\" rather than \"ClinicalAssessment\" to avoid confusion with the recording of assessment tools such as Apgar score."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="clinicalimpression")
 public class ClinicalImpressionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883160460343L;
+	private static final long serialVersionUID = 153159210163935905L;
   /**
   * Description: "This is a ClinicalImpression resource"
   */
@@ -613,30 +614,17 @@ public class ClinicalImpressionModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
-     builder.append("context" + "->" + this.context + "\n"); 
      builder.append("effectiveDateTime" + "->" + this.effectiveDateTime + "\n"); 
      builder.append("effectivePeriod" + "->" + this.effectivePeriod + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
-     builder.append("assessor" + "->" + this.assessor + "\n"); 
-     builder.append("previous" + "->" + this.previous + "\n"); 
-     builder.append("problem" + "->" + this.problem + "\n"); 
-     builder.append("investigation" + "->" + this.investigation + "\n"); 
      builder.append("protocol" + "->" + this.protocol + "\n"); 
      builder.append("summary" + "->" + this.summary + "\n"); 
-     builder.append("finding" + "->" + this.finding + "\n"); 
-     builder.append("prognosisCodeableConcept" + "->" + this.prognosisCodeableConcept + "\n"); 
-     builder.append("prognosisReference" + "->" + this.prognosisReference + "\n"); 
-     builder.append("action" + "->" + this.action + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

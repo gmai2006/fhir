@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The details of a healthcare service available at a location."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="healthcareservicenotavailable")
 public class HealthcareServiceNotAvailableModel  implements Serializable {
-	private static final long serialVersionUID = 151967883175989462L;
+	private static final long serialVersionUID = 153159210178844625L;
   /**
   * Description: "The reason that can be presented to the user as to why this time is not available."
   */

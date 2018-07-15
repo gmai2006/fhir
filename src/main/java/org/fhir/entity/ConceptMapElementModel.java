@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A statement of relationships from one set of concepts to one or more other concepts - either code systems or data elements, or classes in class models."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="conceptmapelement")
 public class ConceptMapElementModel  implements Serializable {
-	private static final long serialVersionUID = 151967883184591932L;
+	private static final long serialVersionUID = 153159210187734095L;
   /**
   * Description: "Identity (code or path) or the element/item being mapped."
   */
@@ -186,7 +187,6 @@ public class ConceptMapElementModel  implements Serializable {
     builder.append("[ConceptMapElementModel]:" + "\n");
      builder.append("code" + "->" + this.code + "\n"); 
      builder.append("display" + "->" + this.display + "\n"); 
-     builder.append("target" + "->" + this.target + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

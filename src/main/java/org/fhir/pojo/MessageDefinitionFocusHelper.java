@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.MessageDefinitionFocusModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class MessageDefinitionFocusHelper {
 	public static java.util.List<MessageDefinitionFocus> fromArray2Array(java.util.List<MessageDefinitionFocusModel> list) {
     return

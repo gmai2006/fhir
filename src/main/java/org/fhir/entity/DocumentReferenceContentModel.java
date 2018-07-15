@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A reference to a document."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="documentreferencecontent")
 public class DocumentReferenceContentModel  implements Serializable {
-	private static final long serialVersionUID = 151967883207083574L;
+	private static final long serialVersionUID = 15315921020873679L;
   /**
   * Description: "The document or URL of the document along with critical metadata to prove content has integrity."
   * Actual type: String;
@@ -174,7 +175,6 @@ public class DocumentReferenceContentModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[DocumentReferenceContentModel]:" + "\n");
      builder.append("attachment" + "->" + this.attachment + "\n"); 
-     builder.append("format" + "->" + this.format + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

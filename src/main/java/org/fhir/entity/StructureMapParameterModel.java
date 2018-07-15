@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A Map of relationships between 2 structures that can be used to transform data."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="structuremapparameter")
 public class StructureMapParameterModel  implements Serializable {
-	private static final long serialVersionUID = 15196788322705305L;
+	private static final long serialVersionUID = 153159210228919372L;
   /**
   * Description: "Parameter value - variable or literal."
   */

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Resource to define constraints on the Expansion of a FHIR ValueSet."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="expansionprofileexcludedsystem")
 public class ExpansionProfileExcludedSystemModel  implements Serializable {
-	private static final long serialVersionUID = 151967883221483141L;
+	private static final long serialVersionUID = 15315921022332465L;
   /**
   * Description: "An absolute URI which is the code system to be excluded."
   */

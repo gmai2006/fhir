@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.AppointmentParticipantModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class AppointmentParticipantHelper {
 	public static java.util.List<AppointmentParticipant> fromArray2Array(java.util.List<AppointmentParticipantModel> list) {
     return

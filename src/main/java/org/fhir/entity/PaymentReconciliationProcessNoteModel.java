@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides payment details and claim references supporting a bulk payment."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="paymentreconciliationprocessnote")
 public class PaymentReconciliationProcessNoteModel  implements Serializable {
-	private static final long serialVersionUID = 151967883229062786L;
+	private static final long serialVersionUID = 153159210231047241L;
   /**
   * Description: "The note purpose: Print/Display."
   */
@@ -168,7 +169,6 @@ public class PaymentReconciliationProcessNoteModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[PaymentReconciliationProcessNoteModel]:" + "\n");
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("text" + "->" + this.text + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

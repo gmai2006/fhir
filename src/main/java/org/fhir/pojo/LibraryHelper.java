@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.LibraryModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class LibraryHelper {
 	public static java.util.List<Library> fromArray2Array(java.util.List<LibraryModel> list) {
     return

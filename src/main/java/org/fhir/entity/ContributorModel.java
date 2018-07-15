@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A contributor to the content of a knowledge asset, including authors, editors, reviewers, and endorsers."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="contributor")
 public class ContributorModel  implements Serializable {
-	private static final long serialVersionUID = 151967883196863647L;
+	private static final long serialVersionUID = 153159210199322789L;
   /**
   * Description: "The type of contributor."
   */
@@ -163,7 +164,6 @@ public class ContributorModel  implements Serializable {
     builder.append("[ContributorModel]:" + "\n");
      builder.append("type" + "->" + this.type + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
-     builder.append("contact" + "->" + this.contact + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("db_container_id" + "->" + this.db_container_id + "\n"); ;

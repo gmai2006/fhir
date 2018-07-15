@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "An assessment of the likely outcome(s) for a patient or other subject as well as the likelihood of each outcome."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="riskassessmentprediction")
 public class RiskAssessmentPredictionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883210037427L;
+	private static final long serialVersionUID = 153159210211814470L;
   /**
   * Description: "One of the potential outcomes for the patient (e.g. remission, death,  a particular condition)."
   */
@@ -278,10 +279,8 @@ public class RiskAssessmentPredictionModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[RiskAssessmentPredictionModel]:" + "\n");
-     builder.append("outcome" + "->" + this.outcome + "\n"); 
      builder.append("probabilityDecimal" + "->" + this.probabilityDecimal + "\n"); 
      builder.append("probabilityRange" + "->" + this.probabilityRange + "\n"); 
-     builder.append("qualitativeRisk" + "->" + this.qualitativeRisk + "\n"); 
      builder.append("relativeRisk" + "->" + this.relativeRisk + "\n"); 
      builder.append("whenPeriod" + "->" + this.whenPeriod + "\n"); 
      builder.append("whenRange" + "->" + this.whenRange + "\n"); 

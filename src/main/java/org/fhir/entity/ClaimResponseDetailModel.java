@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides the adjudication details from the processing of a Claim resource."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="claimresponsedetail")
 public class ClaimResponseDetailModel  implements Serializable {
-	private static final long serialVersionUID = 151967883159189379L;
+	private static final long serialVersionUID = 153159210162237261L;
   /**
   * Description: "A service line number."
   */
@@ -207,8 +208,6 @@ public class ClaimResponseDetailModel  implements Serializable {
     builder.append("[ClaimResponseDetailModel]:" + "\n");
      builder.append("sequenceLinkId" + "->" + this.sequenceLinkId + "\n"); 
      builder.append("noteNumber" + "->" + this.noteNumber + "\n"); 
-     builder.append("adjudication" + "->" + this.adjudication + "\n"); 
-     builder.append("subDetail" + "->" + this.subDetail + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

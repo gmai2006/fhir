@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ExplanationOfBenefit;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface ExplanationOfBenefitService {
 	public ExplanationOfBenefit find(String id);
   public List<ExplanationOfBenefit> select(int maxResult);

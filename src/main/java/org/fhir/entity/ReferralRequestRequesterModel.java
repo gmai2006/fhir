@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Used to record and send details about a request for referral service or transfer of a patient to the care of another provider or provider organization."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="referralrequestrequester")
 public class ReferralRequestRequesterModel  implements Serializable {
-	private static final long serialVersionUID = 151967883221243227L;
+	private static final long serialVersionUID = 153159210223174993L;
   /**
   * Description: "The device, practitioner, etc. who initiated the request."
   */
@@ -174,8 +175,6 @@ public class ReferralRequestRequesterModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ReferralRequestRequesterModel]:" + "\n");
-     builder.append("agent" + "->" + this.agent + "\n"); 
-     builder.append("onBehalfOf" + "->" + this.onBehalfOf + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

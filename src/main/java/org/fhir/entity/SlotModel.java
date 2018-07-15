@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A slot of time on a schedule that may be available for booking appointments."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="slot")
 public class SlotModel  implements Serializable {
-	private static final long serialVersionUID = 151967883197598759L;
+	private static final long serialVersionUID = 15315921019991175L;
   /**
   * Description: "This is a Slot resource"
   */
@@ -431,22 +432,15 @@ public class SlotModel  implements Serializable {
     builder.append("[SlotModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("serviceCategory" + "->" + this.serviceCategory + "\n"); 
-     builder.append("serviceType" + "->" + this.serviceType + "\n"); 
-     builder.append("specialty" + "->" + this.specialty + "\n"); 
-     builder.append("appointmentType" + "->" + this.appointmentType + "\n"); 
-     builder.append("schedule" + "->" + this.schedule + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("start" + "->" + this.start + "\n"); 
      builder.append("end" + "->" + this.end + "\n"); 
      builder.append("overbooked" + "->" + this.overbooked + "\n"); 
      builder.append("comment" + "->" + this.comment + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

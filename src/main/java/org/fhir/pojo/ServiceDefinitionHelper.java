@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ServiceDefinitionModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ServiceDefinitionHelper {
 	public static java.util.List<ServiceDefinition> fromArray2Array(java.util.List<ServiceDefinitionModel> list) {
     return

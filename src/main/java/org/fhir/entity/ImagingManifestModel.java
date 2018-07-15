@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A text description of the DICOM SOP instances selected in the ImagingManifest; or the reason for, or significance of, the selection."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="imagingmanifest")
 public class ImagingManifestModel  implements Serializable {
-	private static final long serialVersionUID = 151967883168119050L;
+	private static final long serialVersionUID = 153159210172091086L;
   /**
   * Description: "This is a ImagingManifest resource"
   */
@@ -345,17 +346,12 @@ public class ImagingManifestModel  implements Serializable {
     builder.append("[ImagingManifestModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("patient" + "->" + this.patient + "\n"); 
      builder.append("authoringTime" + "->" + this.authoringTime + "\n"); 
-     builder.append("author" + "->" + this.author + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("study" + "->" + this.study + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

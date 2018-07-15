@@ -1,22 +1,14 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'application'
-apply plugin: 'maven'
 apply plugin: 'war'
-apply plugin: 'ear'
 
-mainClassName = ' '
+
 
 war {
     archiveName 'FHIR.war'
     from  'src/main/webapp'
 }
 
-ear  {
-	deploymentDescriptor {  
-      webModule("lib/FHIR.war", "/")  
-    }
-}
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.13'
@@ -48,21 +40,21 @@ dependencies {
   compile group: 'com.google.inject', name: 'guice', version: '4.1.0'
   compile group: 'com.google.inject.extensions', name: 'guice-servlet', version: '4.1.0'
   compile group: 'com.google.inject.extensions', name: 'guice-persist', version: '4.1.0'
+  
   compile group: 'org.jboss.resteasy', name: 'resteasy-guice', version: '4.0.0.Beta3'
+  compile group: 'org.jboss.resteasy', name: 'resteasy-jackson-provider', version: '3.0.10.Final'
   compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.5'
   compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.5'
-  compile group: 'org.jboss.resteasy', name: 'resteasy-jaxrs', version: '2.3.5.Final'
+  compile group: 'org.jboss.resteasy', name: 'resteasy-jaxrs', version: '4.0.0.Beta3'
+
   compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
 
-	runtime group: 'org.codehaus.jackson', name: 'jackson-jaxrs', version: '1.9.13'
- 
   runtime group: 'mysql', name: 'mysql-connector-java', version: '6.0.3'
   
   runtime "log4j:log4j:1.2.17"
     
   testCompile group: 'org.mockito', name: 'mockito-core', version:'2.4.2'
   testCompile "junit:junit:4.11"
-
   testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.1.0'
 }
 
@@ -72,6 +64,7 @@ eclipse {
         defaultOutputDir = file('./src/main/webapp/WEB-INF/classes')
     }
 }
+
 
 task buildlibdir(type: Copy) {
     into "./src/main/webapp/WEB-INF/lib/"

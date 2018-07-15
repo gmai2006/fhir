@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A financial tool for tracking value accrued for a particular purpose.  In the healthcare field, used to track charges for a patient, cost centers, etc."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="account")
 public class AccountModel  implements Serializable {
-	private static final long serialVersionUID = 15196788322101749L;
+	private static final long serialVersionUID = 153159210222896617L;
   /**
   * Description: "This is a Account resource"
   */
@@ -461,22 +462,14 @@ public class AccountModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("active" + "->" + this.active + "\n"); 
-     builder.append("balance" + "->" + this.balance + "\n"); 
-     builder.append("coverage" + "->" + this.coverage + "\n"); 
-     builder.append("owner" + "->" + this.owner + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("guarantor" + "->" + this.guarantor + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource is primarily used for the identification and definition of a medication. It covers the ingredients and the packaging for a medication."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="medicationbatch")
 public class MedicationBatchModel  implements Serializable {
-	private static final long serialVersionUID = 151967883228487597L;
+	private static final long serialVersionUID = 153159210230370520L;
   /**
   * Description: "The assigned lot number of a batch of the specified product."
   */

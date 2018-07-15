@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource is primarily used for the identification and definition of a medication. It covers the ingredients and the packaging for a medication."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="medicationpackage")
 public class MedicationPackageModel  implements Serializable {
-	private static final long serialVersionUID = 15196788318108011L;
+	private static final long serialVersionUID = 153159210183810174L;
   /**
   * Description: "The kind of container that this package comes as."
   */
@@ -195,9 +196,6 @@ public class MedicationPackageModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[MedicationPackageModel]:" + "\n");
-     builder.append("container" + "->" + this.container + "\n"); 
-     builder.append("content" + "->" + this.content + "\n"); 
-     builder.append("batch" + "->" + this.batch + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

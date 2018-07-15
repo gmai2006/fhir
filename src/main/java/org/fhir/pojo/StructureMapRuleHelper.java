@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.StructureMapRuleModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class StructureMapRuleHelper {
 	public static java.util.List<StructureMapRule> fromArray2Array(java.util.List<StructureMapRuleModel> list) {
     return

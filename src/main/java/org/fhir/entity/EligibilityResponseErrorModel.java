@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides eligibility and plan details from the processing of an Eligibility resource."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="eligibilityresponseerror")
 public class EligibilityResponseErrorModel  implements Serializable {
-	private static final long serialVersionUID = 151967883194479238L;
+	private static final long serialVersionUID = 153159210197134298L;
   /**
   * Description: "An error code,from a specified code system, which details why the eligibility check could not be performed."
   */
@@ -153,7 +154,6 @@ public class EligibilityResponseErrorModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[EligibilityResponseErrorModel]:" + "\n");
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

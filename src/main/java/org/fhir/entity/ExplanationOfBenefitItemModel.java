@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="explanationofbenefititem")
 public class ExplanationOfBenefitItemModel  implements Serializable {
-	private static final long serialVersionUID = 151967883192932625L;
+	private static final long serialVersionUID = 153159210195711416L;
   /**
   * Description: "A service line number."
   */
@@ -636,27 +637,10 @@ public class ExplanationOfBenefitItemModel  implements Serializable {
      builder.append("diagnosisLinkId" + "->" + this.diagnosisLinkId + "\n"); 
      builder.append("procedureLinkId" + "->" + this.procedureLinkId + "\n"); 
      builder.append("informationLinkId" + "->" + this.informationLinkId + "\n"); 
-     builder.append("revenue" + "->" + this.revenue + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("service" + "->" + this.service + "\n"); 
-     builder.append("modifier" + "->" + this.modifier + "\n"); 
-     builder.append("programCode" + "->" + this.programCode + "\n"); 
      builder.append("servicedDate" + "->" + this.servicedDate + "\n"); 
      builder.append("servicedPeriod" + "->" + this.servicedPeriod + "\n"); 
-     builder.append("locationCodeableConcept" + "->" + this.locationCodeableConcept + "\n"); 
-     builder.append("locationAddress" + "->" + this.locationAddress + "\n"); 
-     builder.append("locationReference" + "->" + this.locationReference + "\n"); 
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
-     builder.append("unitPrice" + "->" + this.unitPrice + "\n"); 
      builder.append("factor" + "->" + this.factor + "\n"); 
-     builder.append("net" + "->" + this.net + "\n"); 
-     builder.append("udi" + "->" + this.udi + "\n"); 
-     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
-     builder.append("subSite" + "->" + this.subSite + "\n"); 
-     builder.append("encounter" + "->" + this.encounter + "\n"); 
      builder.append("noteNumber" + "->" + this.noteNumber + "\n"); 
-     builder.append("adjudication" + "->" + this.adjudication + "\n"); 
-     builder.append("detail" + "->" + this.detail + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

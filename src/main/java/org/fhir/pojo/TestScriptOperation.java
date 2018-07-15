@@ -29,6 +29,7 @@ import com.google.gson.GsonBuilder;
 import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A structured set of tests against a FHIR server implementation to determine compliance against the FHIR specification."
+* generated on 07/14/2018
 */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TestScriptOperation  extends BackboneElement  {
@@ -409,6 +410,10 @@ public class TestScriptOperation  extends BackboneElement  {
     return builder.toString();
   }
 
+  /**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
   public enum AcceptEnum {
   	xml,
   	json,
@@ -425,7 +430,11 @@ public class TestScriptOperation  extends BackboneElement  {
   			throw new IllegalArgumentException("Unknown resource type ["+ strVal + "]");
   		}
   	}
-  }public enum ContentTypeEnum {
+  }/**
+   * Auto generated from the FHIR specification
+   * generated on 07/14/2018
+   */
+  public enum ContentTypeEnum {
   	xml,
   	json,
   	ttl,

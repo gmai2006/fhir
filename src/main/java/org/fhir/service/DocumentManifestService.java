@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DocumentManifest;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface DocumentManifestService {
 	public DocumentManifest find(String id);
   public List<DocumentManifest> select(int maxResult);

@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.PractitionerModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class PractitionerHelper {
 	public static java.util.List<Practitioner> fromArray2Array(java.util.List<PractitionerModel> list) {
     return

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Demographics and other administrative information about an individual or animal receiving care or other health-related services."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="patientcommunication")
 public class PatientCommunicationModel  implements Serializable {
-	private static final long serialVersionUID = 151967883186769316L;
+	private static final long serialVersionUID = 153159210190289152L;
   /**
   * Description: "The ISO-639-1 alpha 2 code in lower case for the language, optionally followed by a hyphen and the ISO-3166-1 alpha 2 code for the region in upper case; e.g. \"en\" for English, or \"en-US\" for American English versus \"en-EN\" for England English."
   */
@@ -168,7 +169,6 @@ public class PatientCommunicationModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[PatientCommunicationModel]:" + "\n");
-     builder.append("language" + "->" + this.language + "\n"); 
      builder.append("preferred" + "->" + this.preferred + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The resource ChargeItem describes the provision of healthcare provider products for a certain patient, therefore referring not only to the product, but containing in addition details of the provision, like date, time, amounts and participating organizations and persons. Main Usage of the ChargeItem is to enable the billing process and internal cost allocation."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="chargeitem")
 public class ChargeItemModel  implements Serializable {
-	private static final long serialVersionUID = 151967883219681329L;
+	private static final long serialVersionUID = 153159210221456597L;
   /**
   * Description: "This is a ChargeItem resource"
   */
@@ -718,34 +719,17 @@ public class ChargeItemModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("definition" + "->" + this.definition + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("partOf" + "->" + this.partOf + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
-     builder.append("context" + "->" + this.context + "\n"); 
      builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime + "\n"); 
      builder.append("occurrencePeriod" + "->" + this.occurrencePeriod + "\n"); 
      builder.append("occurrenceTiming" + "->" + this.occurrenceTiming + "\n"); 
-     builder.append("participant" + "->" + this.participant + "\n"); 
-     builder.append("performingOrganization" + "->" + this.performingOrganization + "\n"); 
-     builder.append("requestingOrganization" + "->" + this.requestingOrganization + "\n"); 
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
-     builder.append("bodysite" + "->" + this.bodysite + "\n"); 
      builder.append("factorOverride" + "->" + this.factorOverride + "\n"); 
-     builder.append("priceOverride" + "->" + this.priceOverride + "\n"); 
      builder.append("overrideReason" + "->" + this.overrideReason + "\n"); 
-     builder.append("enterer" + "->" + this.enterer + "\n"); 
      builder.append("enteredDate" + "->" + this.enteredDate + "\n"); 
-     builder.append("reason" + "->" + this.reason + "\n"); 
-     builder.append("service" + "->" + this.service + "\n"); 
-     builder.append("account" + "->" + this.account + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
-     builder.append("supportingInformation" + "->" + this.supportingInformation + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

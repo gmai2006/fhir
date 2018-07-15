@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "An association between a patient and an organization / healthcare provider(s) during which time encounters may occur. The managing organization assumes a level of responsibility for the patient during this time."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="episodeofcarestatushistory")
 public class EpisodeOfCareStatusHistoryModel  implements Serializable {
-	private static final long serialVersionUID = 151967883199442764L;
+	private static final long serialVersionUID = 153159210201769155L;
   /**
   * Description: "planned | waitlist | active | onhold | finished | cancelled."
   */

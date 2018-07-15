@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A homogeneous material with a definite composition."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="substanceingredient")
 public class SubstanceIngredientModel  implements Serializable {
-	private static final long serialVersionUID = 151967883182612077L;
+	private static final long serialVersionUID = 15315921018577103L;
   /**
   * Description: "The amount of the ingredient in the substance - a concentration ratio."
   * Actual type: String;
@@ -194,8 +195,6 @@ public class SubstanceIngredientModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[SubstanceIngredientModel]:" + "\n");
      builder.append("quantity" + "->" + this.quantity + "\n"); 
-     builder.append("substanceCodeableConcept" + "->" + this.substanceCodeableConcept + "\n"); 
-     builder.append("substanceReference" + "->" + this.substanceReference + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

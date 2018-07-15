@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Basic is used for handling concepts not yet defined in FHIR, narrative-only resources that don't map to an existing resource, and custom resources not appropriate for inclusion in the FHIR specification."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="basic")
 public class BasicModel  implements Serializable {
-	private static final long serialVersionUID = 15196788316151311L;
+	private static final long serialVersionUID = 153159210165124259L;
   /**
   * Description: "This is a Basic resource"
   */
@@ -330,16 +331,11 @@ public class BasicModel  implements Serializable {
     builder.append("[BasicModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
      builder.append("created" + "->" + this.created + "\n"); 
-     builder.append("author" + "->" + this.author + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

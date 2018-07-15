@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ImmunizationReactionModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ImmunizationReactionHelper {
 	public static java.util.List<ImmunizationReaction> fromArray2Array(java.util.List<ImmunizationReactionModel> list) {
     return

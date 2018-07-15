@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="explanationofbenefitprocedure")
 public class ExplanationOfBenefitProcedureModel  implements Serializable {
-	private static final long serialVersionUID = 151967883218245835L;
+	private static final long serialVersionUID = 153159210220032511L;
   /**
   * Description: "Sequence of procedures which serves to order and provide a link."
   */
@@ -208,8 +209,6 @@ public class ExplanationOfBenefitProcedureModel  implements Serializable {
     builder.append("[ExplanationOfBenefitProcedureModel]:" + "\n");
      builder.append("sequence" + "->" + this.sequence + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
-     builder.append("procedureCodeableConcept" + "->" + this.procedureCodeableConcept + "\n"); 
-     builder.append("procedureReference" + "->" + this.procedureReference + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

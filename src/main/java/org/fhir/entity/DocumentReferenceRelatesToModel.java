@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A reference to a document."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="documentreferencerelatesto")
 public class DocumentReferenceRelatesToModel  implements Serializable {
-	private static final long serialVersionUID = 151967883221532971L;
+	private static final long serialVersionUID = 153159210223459160L;
   /**
   * Description: "The type of relationship that this document has with anther document."
   */
@@ -169,7 +170,6 @@ public class DocumentReferenceRelatesToModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[DocumentReferenceRelatesToModel]:" + "\n");
      builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("target" + "->" + this.target + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

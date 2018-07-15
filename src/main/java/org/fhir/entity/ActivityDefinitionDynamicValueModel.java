@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource allows for the definition of some activity to be performed, independent of a particular patient, practitioner, or other performance context."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="activitydefinitiondynamicvalue")
 public class ActivityDefinitionDynamicValueModel  implements Serializable {
-	private static final long serialVersionUID = 151967883217375772L;
+	private static final long serialVersionUID = 153159210219196670L;
   /**
   * Description: "A brief, natural language description of the intended semantics of the dynamic value."
   */

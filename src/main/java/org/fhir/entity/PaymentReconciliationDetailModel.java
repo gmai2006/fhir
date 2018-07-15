@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides payment details and claim references supporting a bulk payment."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="paymentreconciliationdetail")
 public class PaymentReconciliationDetailModel  implements Serializable {
-	private static final long serialVersionUID = 151967883225816979L;
+	private static final long serialVersionUID = 15315921022771006L;
   /**
   * Description: "Code to indicate the nature of the payment, adjustment, funds advance, etc."
   */
@@ -274,13 +275,7 @@ public class PaymentReconciliationDetailModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[PaymentReconciliationDetailModel]:" + "\n");
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("request" + "->" + this.request + "\n"); 
-     builder.append("response" + "->" + this.response + "\n"); 
-     builder.append("submitter" + "->" + this.submitter + "\n"); 
-     builder.append("payee" + "->" + this.payee + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
-     builder.append("amount" + "->" + this.amount + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

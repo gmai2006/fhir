@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.BundleResponseModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class BundleResponseHelper {
 	public static java.util.List<BundleResponse> fromArray2Array(java.util.List<BundleResponseModel> list) {
     return

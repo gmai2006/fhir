@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Describes a measurement, calculation or setting capability of a medical device."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="devicemetric")
 public class DeviceMetricModel  implements Serializable {
-	private static final long serialVersionUID = 151967883163972677L;
+	private static final long serialVersionUID = 153159210168046036L;
   /**
   * Description: "This is a DeviceMetric resource"
   */
@@ -421,21 +422,14 @@ public class DeviceMetricModel  implements Serializable {
     builder.append("[DeviceMetricModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("unit" + "->" + this.unit + "\n"); 
-     builder.append("source" + "->" + this.source + "\n"); 
-     builder.append("parent" + "->" + this.parent + "\n"); 
      builder.append("operationalStatus" + "->" + this.operationalStatus + "\n"); 
      builder.append("color" + "->" + this.color + "\n"); 
      builder.append("category" + "->" + this.category + "\n"); 
      builder.append("measurementPeriod" + "->" + this.measurementPeriod + "\n"); 
-     builder.append("calibration" + "->" + this.calibration + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

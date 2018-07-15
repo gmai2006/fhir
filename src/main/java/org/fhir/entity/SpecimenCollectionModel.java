@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A sample to be used for analysis."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="specimencollection")
 public class SpecimenCollectionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883162696644L;
+	private static final long serialVersionUID = 153159210166494421L;
   /**
   * Description: "Person who collected the specimen."
   */
@@ -251,12 +252,8 @@ public class SpecimenCollectionModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[SpecimenCollectionModel]:" + "\n");
-     builder.append("collector" + "->" + this.collector + "\n"); 
      builder.append("collectedDateTime" + "->" + this.collectedDateTime + "\n"); 
      builder.append("collectedPeriod" + "->" + this.collectedPeriod + "\n"); 
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
-     builder.append("method" + "->" + this.method + "\n"); 
-     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

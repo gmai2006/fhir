@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.AdverseEventSuspectEntityModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class AdverseEventSuspectEntityHelper {
 	public static java.util.List<AdverseEventSuspectEntity> fromArray2Array(java.util.List<AdverseEventSuspectEntityModel> list) {
     return

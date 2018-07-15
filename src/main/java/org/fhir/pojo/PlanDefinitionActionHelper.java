@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.PlanDefinitionActionModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class PlanDefinitionActionHelper {
 	public static java.util.List<PlanDefinitionAction> fromArray2Array(java.util.List<PlanDefinitionActionModel> list) {
     return

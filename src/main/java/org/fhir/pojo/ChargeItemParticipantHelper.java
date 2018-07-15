@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ChargeItemParticipantModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ChargeItemParticipantHelper {
 	public static java.util.List<ChargeItemParticipant> fromArray2Array(java.util.List<ChargeItemParticipantModel> list) {
     return

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="nutritionorderoraldiet")
 public class NutritionOrderOralDietModel  implements Serializable {
-	private static final long serialVersionUID = 151967883193940352L;
+	private static final long serialVersionUID = 153159210196782494L;
   /**
   * Description: "The kind of diet or dietary restriction such as fiber restricted diet or diabetic diet."
   */
@@ -250,11 +251,7 @@ public class NutritionOrderOralDietModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[NutritionOrderOralDietModel]:" + "\n");
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("schedule" + "->" + this.schedule + "\n"); 
-     builder.append("nutrient" + "->" + this.nutrient + "\n"); 
-     builder.append("texture" + "->" + this.texture + "\n"); 
-     builder.append("fluidConsistencyType" + "->" + this.fluidConsistencyType + "\n"); 
      builder.append("instruction" + "->" + this.instruction + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

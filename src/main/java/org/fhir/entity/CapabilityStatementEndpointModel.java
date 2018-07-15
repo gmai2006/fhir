@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="capabilitystatementendpoint")
 public class CapabilityStatementEndpointModel  implements Serializable {
-	private static final long serialVersionUID = 151967883230173689L;
+	private static final long serialVersionUID = 15315921023248601L;
   /**
   * Description: "A list of the messaging transport protocol(s) identifiers, supported by this endpoint."
   */
@@ -168,7 +169,6 @@ public class CapabilityStatementEndpointModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[CapabilityStatementEndpointModel]:" + "\n");
-     builder.append("protocol" + "->" + this.protocol + "\n"); 
      builder.append("address" + "->" + this.address + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

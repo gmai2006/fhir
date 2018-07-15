@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. While a Composition defines the structure, it does not actually contain the content: rather the full content of a document is contained in a Bundle, of which the Composition is the first resource contained."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="composition")
 public class CompositionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883213086715L;
+	private static final long serialVersionUID = 153159210214713110L;
   /**
   * Description: "This is a Composition resource"
   */
@@ -524,25 +525,13 @@ public class CompositionModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("FHIRclass" + "->" + this.FHIRclass + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
-     builder.append("encounter" + "->" + this.encounter + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
-     builder.append("author" + "->" + this.author + "\n"); 
      builder.append("title" + "->" + this.title + "\n"); 
      builder.append("confidentiality" + "->" + this.confidentiality + "\n"); 
-     builder.append("attester" + "->" + this.attester + "\n"); 
-     builder.append("custodian" + "->" + this.custodian + "\n"); 
-     builder.append("relatesTo" + "->" + this.relatesTo + "\n"); 
-     builder.append("event" + "->" + this.event + "\n"); 
-     builder.append("section" + "->" + this.section + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

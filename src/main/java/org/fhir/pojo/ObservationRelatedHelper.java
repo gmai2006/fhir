@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.ObservationRelatedModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class ObservationRelatedHelper {
 	public static java.util.List<ObservationRelated> fromArray2Array(java.util.List<ObservationRelatedModel> list) {
     return

@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A text description of the DICOM SOP instances selected in the ImagingManifest; or the reason for, or significance of, the selection."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="imagingmanifeststudy")
 public class ImagingManifestStudyModel  implements Serializable {
-	private static final long serialVersionUID = 151967883214116791L;
+	private static final long serialVersionUID = 153159210215926528L;
   /**
   * Description: "Study instance UID of the SOP instances in the selection."
   */
@@ -212,9 +213,6 @@ public class ImagingManifestStudyModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[ImagingManifestStudyModel]:" + "\n");
      builder.append("uid" + "->" + this.uid + "\n"); 
-     builder.append("imagingStudy" + "->" + this.imagingStudy + "\n"); 
-     builder.append("endpoint" + "->" + this.endpoint + "\n"); 
-     builder.append("series" + "->" + this.series + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

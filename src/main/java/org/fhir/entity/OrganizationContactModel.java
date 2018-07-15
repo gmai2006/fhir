@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, etc."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="organizationcontact")
 public class OrganizationContactModel  implements Serializable {
-	private static final long serialVersionUID = 151967883214531628L;
+	private static final long serialVersionUID = 153159210216335554L;
   /**
   * Description: "Indicates a purpose for which the contact can be reached."
   */
@@ -212,10 +213,8 @@ public class OrganizationContactModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[OrganizationContactModel]:" + "\n");
-     builder.append("purpose" + "->" + this.purpose + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("telecom" + "->" + this.telecom + "\n"); 
-     builder.append("address" + "->" + this.address + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

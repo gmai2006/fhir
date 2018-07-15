@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Defines the characteristics of a message that can be shared between systems, including the type of event that initiates the message, the content to be transmitted and what response(s), if any, are permitted."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="messagedefinitionallowedresponse")
 public class MessageDefinitionAllowedResponseModel  implements Serializable {
-	private static final long serialVersionUID = 151967883148478880L;
+	private static final long serialVersionUID = 153159210150382704L;
   /**
   * Description: "A reference to the message definition that must be adhered to by this supported response."
   */
@@ -168,7 +169,6 @@ public class MessageDefinitionAllowedResponseModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[MessageDefinitionAllowedResponseModel]:" + "\n");
-     builder.append("message" + "->" + this.message + "\n"); 
      builder.append("situation" + "->" + this.situation + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

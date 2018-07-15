@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A curated namespace that issues unique symbols within that namespace for the identification of concepts, people, devices, etc.  Represents a \"System\" used within the Identifier and Coding data types."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="namingsystemuniqueid")
 public class NamingSystemUniqueIdModel  implements Serializable {
-	private static final long serialVersionUID = 151967883134969305L;
+	private static final long serialVersionUID = 153159210134964187L;
   /**
   * Description: "Identifies the unique identifier scheme used for this particular identifier."
   */

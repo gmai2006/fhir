@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A reference to a code defined by a terminology system."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="coding")
 public class CodingModel  implements Serializable {
-	private static final long serialVersionUID = 151967883229588739L;
+	private static final long serialVersionUID = 153159210231660433L;
   /**
   * Description: "The identification of the code system that defines the meaning of the symbol in the code."
   */

@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.PersonLinkModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class PersonLinkHelper {
 	public static java.util.List<PersonLink> fromArray2Array(java.util.List<PersonLinkModel> list) {
     return

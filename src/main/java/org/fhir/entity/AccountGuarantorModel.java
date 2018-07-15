@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A financial tool for tracking value accrued for a particular purpose.  In the healthcare field, used to track charges for a patient, cost centers, etc."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="accountguarantor")
 public class AccountGuarantorModel  implements Serializable {
-	private static final long serialVersionUID = 151967883215843011L;
+	private static final long serialVersionUID = 153159210217673571L;
   /**
   * Description: "The entity who is responsible."
   */
@@ -187,7 +188,6 @@ public class AccountGuarantorModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[AccountGuarantorModel]:" + "\n");
-     builder.append("party" + "->" + this.party + "\n"); 
      builder.append("onHold" + "->" + this.onHold + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

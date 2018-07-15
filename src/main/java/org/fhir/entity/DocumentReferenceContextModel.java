@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A reference to a document."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="documentreferencecontext")
 public class DocumentReferenceContextModel  implements Serializable {
-	private static final long serialVersionUID = 151967883228271893L;
+	private static final long serialVersionUID = 153159210230172374L;
   /**
   * Description: "Describes the clinical encounter or type of care that the document content is associated with."
   */
@@ -277,13 +278,7 @@ public class DocumentReferenceContextModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[DocumentReferenceContextModel]:" + "\n");
-     builder.append("encounter" + "->" + this.encounter + "\n"); 
-     builder.append("event" + "->" + this.event + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
-     builder.append("facilityType" + "->" + this.facilityType + "\n"); 
-     builder.append("practiceSetting" + "->" + this.practiceSetting + "\n"); 
-     builder.append("sourcePatientInfo" + "->" + this.sourcePatientInfo + "\n"); 
-     builder.append("related" + "->" + this.related + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

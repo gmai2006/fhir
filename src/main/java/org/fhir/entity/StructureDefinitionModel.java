@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "A definition of a FHIR structure. This resource is used to describe the underlying resources, data types defined in FHIR, and also for describing extensions and constraints on resources and data types."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="structuredefinition")
 public class StructureDefinitionModel  implements Serializable {
-	private static final long serialVersionUID = 151967883195615094L;
+	private static final long serialVersionUID = 153159210198130476L;
   /**
   * Description: "This is a StructureDefinition resource"
   */
@@ -703,13 +704,9 @@ public class StructureDefinitionModel  implements Serializable {
      builder.append("experimental" + "->" + this.experimental + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("publisher" + "->" + this.publisher + "\n"); 
-     builder.append("contact" + "->" + this.contact + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("useContext" + "->" + this.useContext + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("purpose" + "->" + this.purpose + "\n"); 
      builder.append("copyright" + "->" + this.copyright + "\n"); 
-     builder.append("keyword" + "->" + this.keyword + "\n"); 
      builder.append("fhirVersion" + "->" + this.fhirVersion + "\n"); 
      builder.append("mapping" + "->" + this.mapping + "\n"); 
      builder.append("kind" + "->" + this.kind + "\n"); 
@@ -722,12 +719,10 @@ public class StructureDefinitionModel  implements Serializable {
      builder.append("derivation" + "->" + this.derivation + "\n"); 
      builder.append("snapshot" + "->" + this.snapshot + "\n"); 
      builder.append("differential" + "->" + this.differential + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

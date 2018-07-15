@@ -29,7 +29,10 @@ import java.util.List;
 
 import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ReferralRequest;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public interface ReferralRequestService {
 	public ReferralRequest find(String id);
   public List<ReferralRequest> select(int maxResult);

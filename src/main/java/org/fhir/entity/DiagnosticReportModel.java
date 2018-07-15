@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "The findings and interpretation of diagnostic  tests performed on patients, groups of patients, devices, and locations, and/or specimens derived from these. The report includes clinical context such as requesting and provider information, and some mix of atomic results, images, textual and coded interpretations, and formatted representation of diagnostic reports."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="diagnosticreport")
 public class DiagnosticReportModel  implements Serializable {
-	private static final long serialVersionUID = 151967883155695654L;
+	private static final long serialVersionUID = 153159210157847363L;
   /**
   * Description: "This is a DiagnosticReport resource"
   */
@@ -581,29 +582,16 @@ public class DiagnosticReportModel  implements Serializable {
     builder.append("[DiagnosticReportModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("basedOn" + "->" + this.basedOn + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("subject" + "->" + this.subject + "\n"); 
-     builder.append("context" + "->" + this.context + "\n"); 
      builder.append("effectiveDateTime" + "->" + this.effectiveDateTime + "\n"); 
      builder.append("effectivePeriod" + "->" + this.effectivePeriod + "\n"); 
      builder.append("issued" + "->" + this.issued + "\n"); 
-     builder.append("performer" + "->" + this.performer + "\n"); 
-     builder.append("specimen" + "->" + this.specimen + "\n"); 
-     builder.append("result" + "->" + this.result + "\n"); 
-     builder.append("imagingStudy" + "->" + this.imagingStudy + "\n"); 
-     builder.append("image" + "->" + this.image + "\n"); 
      builder.append("conclusion" + "->" + this.conclusion + "\n"); 
-     builder.append("codedDiagnosis" + "->" + this.codedDiagnosis + "\n"); 
      builder.append("presentedForm" + "->" + this.presentedForm + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

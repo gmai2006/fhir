@@ -28,6 +28,7 @@ package org.fhir.dao;
 
 import static java.util.Objects.requireNonNull;
 import java.util.List;
+import java.util.logging.Logger;
 import org.fhir.entity.*;
 import javax.inject.Inject;
 import com.google.inject.persist.Transactional;
@@ -39,9 +40,13 @@ import org.fhir.entity.CommunicationRequestModel;
 import org.fhir.pojo.CommunicationRequest;
 import org.fhir.pojo.CommunicationRequestHelper;
 import org.fhir.utils.QueryBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/12/2018
+ */
 public class CommunicationRequestDaoImpl implements CommunicationRequestDao {
-    private final Provider<EntityManager> entityManagerProvider;
+	private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private final Provider<EntityManager> entityManagerProvider;
 
   @Inject
   public CommunicationRequestDaoImpl (final Provider<EntityManager> entityManagerProvider) {
@@ -191,6 +196,7 @@ public class CommunicationRequestDaoImpl implements CommunicationRequestDao {
   public List<CommunicationRequest> findByField(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from CommunicationRequestModel a " + queryBuilder.getWhereClause();
+  	logger.info(queryStr);
     return findByQuery(queryBuilder, queryStr);
   }
 

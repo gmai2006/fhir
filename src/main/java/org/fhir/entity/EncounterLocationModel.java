@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="encounterlocation")
 public class EncounterLocationModel  implements Serializable {
-	private static final long serialVersionUID = 151967883203784497L;
+	private static final long serialVersionUID = 153159210205543257L;
   /**
   * Description: "The location where the encounter takes place."
   */
@@ -187,7 +188,6 @@ public class EncounterLocationModel  implements Serializable {
   public String debug() {
     StringBuilder builder = new StringBuilder();
     builder.append("[EncounterLocationModel]:" + "\n");
-     builder.append("location" + "->" + this.location + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

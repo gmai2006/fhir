@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "Describes the event of a patient being administered a vaccination or a record of a vaccination as reported by a patient, a clinician or another party and may include vaccine reaction information and what vaccination protocol was followed."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="immunizationvaccinationprotocol")
 public class ImmunizationVaccinationProtocolModel  implements Serializable {
-	private static final long serialVersionUID = 151967883141323913L;
+	private static final long serialVersionUID = 153159210142178770L;
   /**
   * Description: "Nominal position in a series."
   */
@@ -280,12 +281,8 @@ public class ImmunizationVaccinationProtocolModel  implements Serializable {
     builder.append("[ImmunizationVaccinationProtocolModel]:" + "\n");
      builder.append("doseSequence" + "->" + this.doseSequence + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("authority" + "->" + this.authority + "\n"); 
      builder.append("series" + "->" + this.series + "\n"); 
      builder.append("seriesDoses" + "->" + this.seriesDoses + "\n"); 
-     builder.append("targetDisease" + "->" + this.targetDisease + "\n"); 
-     builder.append("doseStatus" + "->" + this.doseStatus + "\n"); 
-     builder.append("doseStatusReason" + "->" + this.doseStatusReason + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

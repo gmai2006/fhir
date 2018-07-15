@@ -33,11 +33,12 @@ import java.io.Serializable;
 import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides payment details and claim references supporting a bulk payment."
+* generated on 07/14/2018
 */
 @Entity
 @Table(name="paymentreconciliation")
 public class PaymentReconciliationModel  implements Serializable {
-	private static final long serialVersionUID = 151967883156746917L;
+	private static final long serialVersionUID = 153159210159111078L;
   /**
   * Description: "This is a PaymentReconciliation resource"
   */
@@ -509,22 +510,11 @@ public class PaymentReconciliationModel  implements Serializable {
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("created" + "->" + this.created + "\n"); 
-     builder.append("organization" + "->" + this.organization + "\n"); 
-     builder.append("request" + "->" + this.request + "\n"); 
-     builder.append("outcome" + "->" + this.outcome + "\n"); 
      builder.append("disposition" + "->" + this.disposition + "\n"); 
-     builder.append("requestProvider" + "->" + this.requestProvider + "\n"); 
-     builder.append("requestOrganization" + "->" + this.requestOrganization + "\n"); 
-     builder.append("detail" + "->" + this.detail + "\n"); 
-     builder.append("form" + "->" + this.form + "\n"); 
-     builder.append("total" + "->" + this.total + "\n"); 
-     builder.append("processNote" + "->" + this.processNote + "\n"); 
-     builder.append("text" + "->" + this.text + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
-     builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
      builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();

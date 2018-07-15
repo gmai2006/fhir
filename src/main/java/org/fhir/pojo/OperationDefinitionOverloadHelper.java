@@ -26,7 +26,10 @@
 package org.fhir.pojo;
 import org.fhir.entity.OperationDefinitionOverloadModel;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Auto generated from the FHIR specification
+ * generated on 07/14/2018
+ */
 public class OperationDefinitionOverloadHelper {
 	public static java.util.List<OperationDefinitionOverload> fromArray2Array(java.util.List<OperationDefinitionOverloadModel> list) {
     return
