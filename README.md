@@ -1,5 +1,6 @@
 # [FHIR](www.FHIR.org) - BETA version
 
+An implementation of the Fast Healthcare Interoperability Resources - 100% auto generated from FHIR specification draft-04
 
 ## Instruction
 All instructions should be run in a terminal
